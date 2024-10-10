@@ -42,7 +42,7 @@ export const Footer = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center text-gray-400 text-sm"
         >
-          <p>&copy; {new Date().getFullYear()} Developers Club. All rights reserved.</p>
+          <div>&copy; {new Date().getFullYear()} Developers Club. All rights reserved.</div>
           <div className="flex justify-center space-x-4 mt-4">
             <Link href="#" className="hover:text-white transition-colors duration-300">
               Privacy Policy
