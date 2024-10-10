@@ -1,12 +1,12 @@
-import { motion } from 'framer-motion'
-import Image from 'next/image'
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const teamMembers = [
   { name: 'Alex Johnson', role: 'Club President', image: '/placeholder.svg' },
   { name: 'Jamie Lee', role: 'Lead Programmer', image: '/placeholder.svg' },
   { name: 'Taylor Smith', role: 'Project Coordinator', image: '/placeholder.svg' },
   { name: 'Jordan Kim', role: 'Community Manager', image: '/placeholder.svg' },
-]
+];
 
 export const MeetOurTeam = () => {
   return (
@@ -36,24 +36,42 @@ export const MeetOurTeam = () => {
         >
           Get to know the talented individuals who drive our club forward. Each member brings unique skills and passion.
         </motion.p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {teamMembers.map((member, index) => (
             <motion.div
               key={member.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-blue-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
+              whileHover={{ scale: 1.05 }}
+              className="relative bg-blue-50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 group"
             >
-              <Image src={member.image} alt={member.name} width={300} height={300} className="w-full h-64 object-cover" />
+              <motion.div
+                className="overflow-hidden"
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  width={300}
+                  height={300}
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </motion.div>
               <div className="p-4">
-                <h4 className="font-bold text-lg text-gray-800">{member.name}</h4>
-                <p className="text-blue-600">{member.role}</p>
+                <h4 className="font-bold text-lg text-gray-800 group-hover:text-blue-600 transition-colors duration-300">
+                  {member.name}
+                </h4>
+                <p className="text-blue-600 group-hover:text-gray-800 transition-colors duration-300">
+                  {member.role}
+                </p>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
