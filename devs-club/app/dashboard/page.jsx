@@ -1,5 +1,5 @@
 "use client";
-import Navbar from './(components)/Navbar';
+import Navbar from '../(components)/Navbar';
 import HeaderBanner from './(components)/HeaderBanner';
 import StatsSection from './(components)/StatsSection';
 import EventsSection from './(components)/EventsSection';
@@ -36,13 +36,13 @@ export default function Page() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
-      <Navbar activeSection={activeSection} setActiveSection={setActiveSection} />
+      <Navbar />
       <HeaderBanner />
       <div className="container mx-auto px-4 py-8">
         <StatsSection stats={stats} />
         <EventsSection events={events} />
         <ProjectsSection projects={projects} />
-        <MembersSection members={members} />
+        {/* <MembersSection members={members} /> */}
         <ResourcesSection isResourcesOpen={isResourcesOpen} setIsResourcesOpen={setIsResourcesOpen} />
       </div>
       <Footer />
