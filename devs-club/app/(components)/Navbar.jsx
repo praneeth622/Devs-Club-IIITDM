@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import logo from '../(assets)/image.png'
 
 export default function Navbar () {
   return (
@@ -16,7 +17,7 @@ export default function Navbar () {
         >
           <Link href="/" className="flex items-center space-x-2">
           <Image
-            src="/placeholder.svg?height=40&width=40"
+            src={logo}
             alt=""
             width={40}
             height={40}
@@ -33,7 +34,7 @@ export default function Navbar () {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="flex space-x-6 items-center"
         >
-          {['About', 'Achievements', 'Projects'].map((item, index) => (
+          {['About', 'Dashboard', 'Projects'].map((item, index) => (
             <motion.div
               key={item}
               className="relative group"
@@ -56,7 +57,7 @@ export default function Navbar () {
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 200 }}
           >
-            <Button className="bg-blue-700 text-white hover:bg-blue-800 font-semibold transition duration-300">
+            <Button className="bg-blue-800 text-white hover:bg-blue-900 font-semibold rounded transition duration-300">
               <Link href="/login">Login</Link>
             </Button>
           </motion.div>
