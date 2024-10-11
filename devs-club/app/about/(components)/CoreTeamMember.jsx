@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { useState } from "react";
 
 const CoreTeamMember = ({ name, role, bio, image }) => {
@@ -32,7 +33,7 @@ const CoreTeamMember = ({ name, role, bio, image }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <img src={image} alt={name} className="w-32 h-32 rounded-full mb-4" />
+            <Image src={image} alt={name} className="w-32 h-32 rounded-full mb-4" />
             <h3 className="text-white text-xl font-bold">{name}</h3>
             <p className="text-white text-sm">{role}</p>
           </motion.div>
