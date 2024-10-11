@@ -1,5 +1,6 @@
 import React from 'react'
 import { Clock, MapPin, Phone } from "lucide-react"
+import Image from 'next/image'
 
 export default function Component() {
   return (
@@ -8,7 +9,7 @@ export default function Component() {
         <div className="md:w-1/2 relative group">
           <div className="absolute inset-0 bg-sky-200 transform transition-transform duration-300 ease-in-out group-hover:scale-105"></div>
           <div className="relative z-10 p-6 transition-transform duration-300 ease-in-out transform group-hover:scale-95">
-            <img
+            <Image
               src="/placeholder.svg?height=400&width=400"
               alt="Laptop on a desk with plants and coffee"
               width={400}
