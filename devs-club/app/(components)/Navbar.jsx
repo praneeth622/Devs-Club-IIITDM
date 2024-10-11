@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
-import logo from '../(assets)/image.png'
+import logo from '../../public/assets/image.png'
 import { Menu, X } from 'lucide-react'
 
 export default function Navbar() {
@@ -67,8 +67,21 @@ export default function Navbar() {
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 200 }}
           >
-            <Button className="bg-blue-700 text-white hover:bg-blue-800 font-semibold rounded transition duration-300">
-              <Link href="/login">Login</Link>
+            <Button
+              style={{
+                backgroundColor: '#3182ce', // blue-600
+                color: '#ffffff', // white text
+                fontWeight: '600', // font-semibold
+                borderRadius: '0.375rem', // rounded
+                width: '100%', // w-full
+                transition: 'background-color 0.3s ease', // transition duration-300
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2b6cb0')} // blue-700 on hover
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#3182ce')} // revert to blue-600
+            >
+              <Link href="/login" onClick={toggleMenu} style={{ color: 'inherit', textDecoration: 'none' }}>
+                Login
+              </Link>
             </Button>
           </motion.div>
         </motion.div>
@@ -96,14 +109,14 @@ export default function Navbar() {
                     <Link
                       key={item}
                       href={`/${item.toLowerCase()}`}
-                      className="block text-gray-600 font-medium pb- text-lg transition-colors duration-300 hover:text-blue-600"
+                      className="block text-gray-600 font-medium pb-4 text-lg transition-colors duration-300 hover:text-blue-600"
                       onClick={toggleMenu}
                     >
                       {item}
                     </Link>
                   ))}
                 </div>
-                <Button className="bg-blue-800 text-white hover:bg-blue-900 font-semibold rounded transition duration-300 w-full">
+                <Button className="bg-red-600 !important text-white hover:bg-blue-700 font-semibold rounded transition duration-300 w-full">
                   <Link href="/login" onClick={toggleMenu}>
                     Login
                   </Link>
