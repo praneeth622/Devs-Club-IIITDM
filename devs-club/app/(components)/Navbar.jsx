@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 
-export const Navbar = () => {
+export default function Navbar () {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-40">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
@@ -13,7 +14,16 @@ export const Navbar = () => {
           transition={{ duration: 0.5 }}
           className="text-3xl font-extrabold text-blue-600 tracking-wide"
         >
-          Developers Club
+          <Link href="/" className="flex items-center space-x-2">
+          <Image
+            src="/placeholder.svg?height=40&width=40"
+            alt=""
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
+          <span className="font-bold text-xl text-blue-600">GDSC</span>
+        </Link>
         </motion.div>
 
         {/* Navigation Links */}
@@ -29,7 +39,7 @@ export const Navbar = () => {
               className="relative group"
             >
               <Link
-                href={`#${item.toLowerCase()}`}
+                href={`${item.toLowerCase()}`}
                 className="text-gray-600 font-medium text-lg transition-colors duration-300 group-hover:text-blue-600"
               >
                 {item}
