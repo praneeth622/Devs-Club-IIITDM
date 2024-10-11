@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react'
 
 export const HeroSection = () => {
   return (
-    <section className="text-center px-4 py-20">
+    <section className="text-center bg-sky-50 px-4 py-20">
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

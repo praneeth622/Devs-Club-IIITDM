@@ -56,7 +56,7 @@ export default function Navbar () {
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 200 }}
           >
-            <Button className="bg-blue-600 text-white hover:bg-blue-700 font-semibold transition duration-300">
+            <Button className="bg-blue-700 text-white hover:bg-blue-800 font-semibold transition duration-300">
               <Link href="/login">Login</Link>
             </Button>
           </motion.div>
