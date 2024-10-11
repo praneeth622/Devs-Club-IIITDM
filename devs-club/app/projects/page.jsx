@@ -106,12 +106,15 @@ const projects = [
 
 export default function Page() {
   return (
-    
+    <div>
+    <Navbar />
     <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-12">GDSC Projects</h1>
         <ProjectsList projects={projects} />
       </div>
+    </div>
+    <Footer />
     </div>
   );
 }
