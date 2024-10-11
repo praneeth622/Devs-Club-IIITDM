@@ -67,7 +67,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 200 }}
           >
-            <Button className="bg-blue-800 text-white hover:bg-blue-900 font-semibold rounded transition duration-300">
+            <Button className="bg-blue-700 text-white hover:bg-blue-800 font-semibold rounded transition duration-300">
               <Link href="/login">Login</Link>
             </Button>
           </motion.div>
@@ -96,7 +96,7 @@ export default function Navbar() {
                     <Link
                       key={item}
                       href={`/${item.toLowerCase()}`}
-                      className="block text-gray-600 font-medium pb-5 text-lg transition-colors duration-300 hover:text-blue-600"
+                      className="block text-gray-600 font-medium pb- text-lg transition-colors duration-300 hover:text-blue-600"
                       onClick={toggleMenu}
                     >
                       {item}

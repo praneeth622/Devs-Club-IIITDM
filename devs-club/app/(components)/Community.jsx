@@ -14,7 +14,7 @@ export const JoinCommunity = () => {
           transition={{ duration: 0.8 }}
           className="mb-12"
         >
-          <Image src="/community.svg" alt="Join our community" width={600} height={400} className="mx-auto" />
+          <Image src="https://images.pexels.com/lib/api/pexels-white.png" alt="Join our community" width={600} height={400} className="mx-auto" />
         </motion.div>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
