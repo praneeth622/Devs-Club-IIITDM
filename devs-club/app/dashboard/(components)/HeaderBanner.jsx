@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useUser } from '@clerk/clerk-react'
+import { UserButton } from '@clerk/nextjs'
 
 export default function HeaderBanner() {
+  const {user} = useUser()
   return (
     <motion.section
       initial={{ opacity: 0, y: 20 }}
@@ -11,7 +14,7 @@ export default function HeaderBanner() {
     >
       <div className="relative h-64 md:h-80 rounded-xl overflow-hidden shadow-lg">
         <Image
-          src="/placeholder.svg?height=320&width=1024"
+          src={user?.imageUrl}
           alt="GDSC Banner"
           layout="fill"
           objectFit="cover"
@@ -30,8 +33,8 @@ export default function HeaderBanner() {
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
             >
               <Image
-                src="/placeholder.svg?height=80&width=80"
-                alt="GDSC Logo"
+                src="/assets/image.png"
+                alt="Developer Club Logo"
                 width={80}
                 height={80}
                 className="mx-auto mb-4"
@@ -43,7 +46,7 @@ export default function HeaderBanner() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.7, duration: 0.5 }}
             >
-              Welcome back, User!
+              Welcome back, {user?.firstName}!
             </motion.h1>
             <motion.p
               className="text-xl text-white"

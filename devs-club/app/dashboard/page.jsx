@@ -6,8 +6,9 @@ import EventsSection from './(components)/EventsSection';
 import ProjectsSection from './(components)/ProjectsSection';
 import MembersSection from './(components)/MembersSection';
 import ResourcesSection from './(components)/ResourcesSection';
-import Footer from './(components)/Footer';
+import {Footer} from '../(components)/Footer';
 import { useState } from 'react';
+
 
 //Making route protected
 // import withProtectedRoute from '../ProtectedRoute'; 
@@ -43,7 +44,7 @@ function Page() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
       <Navbar />
       <HeaderBanner />
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-14 py-8">
         <StatsSection stats={stats} />
         <EventsSection events={events} />
         <ProjectsSection projects={projects} />

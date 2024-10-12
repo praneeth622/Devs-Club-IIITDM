@@ -7,12 +7,14 @@ import {Button} from '../../components/ui/button'
 import Image from 'next/image'
 import logo from '../../public/assets/image.png'
 import { Menu, X } from 'lucide-react'
+import { UserButton, useUser } from '@clerk/clerk-react'
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [SignedIn , setSignedIn] = useState(false)
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
-
+  const { isSignedIn } = useUser()
   const navItems = ['About', 'Achievements', 'Projects']
 
   return (
@@ -67,7 +69,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 200 }}
           >
-            <Button
+            {/* <Button
               style={{
                 backgroundColor: '#3182ce', // blue-600
                 color: '#ffffff', // white text
@@ -79,10 +81,49 @@ export default function Navbar() {
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2b6cb0')} // blue-700 on hover
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#3182ce')} // revert to blue-600
             >
-              <Link href="/login" onClick={toggleMenu} style={{ color: 'inherit', textDecoration: 'none' }}>
+              <Link href="/dashboard" onClick={toggleMenu} style={{ color: 'inherit', textDecoration: 'none' }}>
                 Login
               </Link>
-            </Button>
+            </Button> */}
+            {/* Conditional Rendering for User Button or Login Button */}
+          {isSignedIn ? (
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: 'spring', stiffness: 200 }}
+              className='flex justify-content-between gap-8'
+            >
+              <Link
+                href='/dashboard'
+                className="text-gray-600 font-medium text-lg transition-colors duration-300 group-hover:text-blue-600"
+              >
+                Dashbaord
+              </Link>
+            <UserButton />
+            </motion.div >
+          ) : (
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: 'spring', stiffness: 200 }}
+            >
+              
+              <Button
+                style={{
+                  backgroundColor: '#3182ce', // blue-600
+                  color: '#ffffff', // white text
+                  fontWeight: '600', // font-semibold
+                  borderRadius: '0.375rem', // rounded
+                  width: '100%', // w-full
+                  transition: 'background-color 0.3s ease', // transition duration-300
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2b6cb0')} // blue-700 on hover
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#3182ce')} // revert to blue-600
+              >
+                <Link href="/dashboard" onClick={toggleMenu} style={{ color: 'inherit', textDecoration: 'none' }}>
+                  Login
+                </Link>
+              </Button>
+            </motion.div>
+          )}
           </motion.div>
         </motion.div>
 
@@ -116,11 +157,27 @@ export default function Navbar() {
                     </Link>
                   ))}
                 </div>
-                <Button className="bg-red-600 !important text-white hover:bg-blue-700 font-semibold rounded transition duration-300 w-full">
-                  <Link href="/login" onClick={toggleMenu}>
-                    Login
-                  </Link>
-                </Button>
+                {isSignedIn ? (
+                  <div>
+                    <Link
+                      href={'/dashboard'}
+                      className="block text-gray-600 font-medium pb-4 text-lg transition-colors duration-300 hover:text-blue-600"
+                      onClick={toggleMenu}
+                    >
+                      Dashboard
+                    </Link>
+                  <UserButton />
+                  </div>
+                ) : (
+                  <div>
+                    
+                  <Button className="bg-red-600 text-white hover:bg-blue-700 font-semibold rounded transition duration-300 w-full">
+                    <Link href="/dashboard" onClick={toggleMenu}>
+                      Login
+                    </Link>
+                  </Button>
+                  </div>
+                )}
               </div>
             </motion.div>
           )}
