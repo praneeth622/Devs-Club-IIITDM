@@ -2,7 +2,7 @@
 import AnimatedSection from "./(components)/AnimatedSection";
 import CoreTeamMember from "./(components)/CoreTeamMember";
 import TimelineEvent from "./(components)/TimelineEvent";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../components/ui/button";
 import {
   ChevronRight,
   Users,
@@ -12,10 +12,10 @@ import {
   Activity,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import Navbar from "app/(components)/Navbar";
+import { Card, CardContent } from "../../components/ui/card";
+import Navbar from "../(components)/Navbar";
 import Link from "next/link";
-import { Footer } from "app/(components)/Footer";
+import { Footer } from "../(components)/Footer";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },

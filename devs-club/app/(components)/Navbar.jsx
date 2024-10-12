@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Button } from '@/components/ui/button'
+import {Button} from '../../components/ui/button'
 import Image from 'next/image'
 import logo from '../../public/assets/image.png'
 import { Menu, X } from 'lucide-react'

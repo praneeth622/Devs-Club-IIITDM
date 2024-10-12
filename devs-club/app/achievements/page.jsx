@@ -3,8 +3,8 @@
 import React, { useRef, useEffect } from 'react'
 import { motion, useAnimation, useAnimationFrame, useInView, useMotionValue, useScroll, useSpring, useTransform, useVelocity, wrap } from 'framer-motion'
 import { Award, Users, TrendingUp, Trophy, Code, Zap, Globe, Cpu, Cloud, CpuIcon, GlobeIcon, Code2, BarChart2, ZapIcon } from 'lucide-react'
-import Navbar from 'app/(components)/Navbar'
-import { Footer } from 'app/(components)/Footer'
+import Navbar from '../(components)/Navbar'
+import { Footer } from '../(components)/Footer'
 
 const achievements = [
   {

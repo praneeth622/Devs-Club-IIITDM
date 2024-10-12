@@ -9,7 +9,12 @@ import ResourcesSection from './(components)/ResourcesSection';
 import Footer from './(components)/Footer';
 import { useState } from 'react';
 
-export default function Page() {
+//Making route protected
+// import withProtectedRoute from '../ProtectedRoute'; 
+// remove this if you want to make route un protected
+
+
+function Page() {
   const [activeSection, setActiveSection] = useState('Overview');
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
 
@@ -49,3 +54,7 @@ export default function Page() {
     </div>
   );
 }
+
+// export default Page;
+
+export default withProtectedRoute(Page); 
