@@ -7,6 +7,8 @@ import { MeetOurTeam } from '../(components)/Meet_team'
 import { ProjectsGallery } from '../(components)/Project_gallery'
 import { JoinCommunity } from '../(components)/Community'
 import { Footer } from '../(components)/Footer'
+import ImpactAchievements from 'app/(components)/Achivements';
+import PlannedEvents from 'app/(components)/Planned_events';
 
 export default function page() {
   return (
@@ -14,7 +16,9 @@ export default function page() {
       <Navbar/>
       <HeroSection/>
       <MeetOurTeam/>
+      <ImpactAchievements />
       <ProjectsGallery/>
+      <PlannedEvents />
       <JoinCommunity/>
       <Footer/>
     </div>

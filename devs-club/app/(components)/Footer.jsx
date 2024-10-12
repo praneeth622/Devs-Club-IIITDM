@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { Facebook, Twitter, Linkedin, Github } from 'lucide-react'
+import { Facebook, Twitter, Linkedin, Github, Instagram } from 'lucide-react'
 
 export const Footer = () => {
   return (
@@ -24,15 +24,12 @@ export const Footer = () => {
           className="flex justify-center space-x-6 mb-8"
         >
           <Link href="#">
-            <Facebook className="text-white hover:text-blue-500 transition-colors duration-300" size={24} />
-          </Link>
-          <Link href="#">
-            <Twitter className="text-white hover:text-blue-400 transition-colors duration-300" size={24} />
+            <Instagram className="text-white hover:text-blue-500 transition-colors duration-300" size={24} />
           </Link>
           <Link href="#">
             <Linkedin className="text-white hover:text-blue-600 transition-colors duration-300" size={24} />
           </Link>
-          <Link href="#">
+          <Link href="https://github.com/DevClubIIITDM" target='_blank'>
             <Github className="text-white hover:text-gray-400 transition-colors duration-300" size={24} />
           </Link>
         </motion.div>

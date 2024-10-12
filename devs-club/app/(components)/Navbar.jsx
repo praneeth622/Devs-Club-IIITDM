@@ -13,7 +13,7 @@ export default function Navbar() {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
-  const navItems = ['About', 'Dashboard', 'Projects']
+  const navItems = ['About', 'Achievements', 'Projects']
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-40">
