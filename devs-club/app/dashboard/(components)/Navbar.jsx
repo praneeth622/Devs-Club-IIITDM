@@ -1,8 +1,8 @@
 import { Menu, ChevronRight, Calendar, Users, Folder, Book } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "../../../components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "../../../components/ui/sheet";
 import { useState } from 'react';
 
 export default function Navbar({ activeSection, setActiveSection }) {

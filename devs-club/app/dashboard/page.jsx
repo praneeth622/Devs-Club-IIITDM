@@ -55,6 +55,6 @@ function Page() {
   );
 }
 
-// export default Page;
+export default Page;
 
-export default withProtectedRoute(Page); 
+// export default withProtectedRoute(Page); 

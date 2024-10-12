@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Cloud, Code, Book, Settings } from 'lucide-react';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "../../../components/ui/button";
+import { Card, CardContent } from "../../../components/ui/card";
 
 export default function ResourcesSection({ isResourcesOpen, setIsResourcesOpen }) {
   return (

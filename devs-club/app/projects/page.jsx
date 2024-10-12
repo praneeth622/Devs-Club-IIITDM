@@ -1,6 +1,6 @@
 "use client"
 import ProjectsList from './(components)/ProjectsList';
-import Navbar from 'app/(components)/Navbar'
+import Navbar from '../(components)/Navbar'
 import {Footer} from '../(components)/Footer'
 import React from 'react'
 
