@@ -31,7 +31,7 @@ Developers Club        </motion.h1>
         </motion.p>
         <Image
           src="/assets/image.png"
-          alt="GDSC Illustration"
+          alt="Developers Club Illustration"
           width={400}
           height={400}
           className="rounded-lg shadow-2xl relative z-10"

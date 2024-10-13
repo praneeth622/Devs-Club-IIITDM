@@ -39,7 +39,7 @@ export const JoinCommunity = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex justify-center"
         >
-          <Link href="/join" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-4 px-8 rounded-full transition-transform transform hover:scale-105">
+          <Link href="/dashboard" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-4 px-8 rounded-full transition-transform transform hover:scale-105">
             Join Us Today
           </Link>
         </motion.div>

@@ -132,7 +132,7 @@ export default function GDSCAboutPage() {
                 >
                   <Activity className="w-12 h-12 text-primary" />
                 </motion.div>
-                <h3 className="text-3xl font-bold">Core Activities of GDSC</h3>
+                <h3 className="text-3xl font-bold">Core Activities of Developers Club</h3>
                 <h4 className="text-xl font-semibold text-gray-700">
                   What We Do
                 </h4>

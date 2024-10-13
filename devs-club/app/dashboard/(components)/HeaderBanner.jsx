@@ -15,7 +15,7 @@ export default function HeaderBanner() {
       <div className="relative h-64 md:h-80 rounded-xl overflow-hidden shadow-lg">
         <Image
           src={user?.imageUrl}
-          alt="GDSC Banner"
+          alt="Developers Club Banner"
           layout="fill"
           objectFit="cover"
           className="parallax-bg"

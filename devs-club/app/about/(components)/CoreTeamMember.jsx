@@ -116,14 +116,14 @@ export default function CoreTeam() {
   const headCore = {
     name: "John Doe",
     role: "Head Core",
-    bio: "Passionate about leading and inspiring the GDSC community.",
+    bio: "Passionate about leading and inspiring the Developers Club community.",
     image: "/placeholder.svg",
     linkedin: "https://linkedin.com/in/johndoe",
     github: "https://github.com/johndoe"
   }
 
   const cores = [
-    { name: "Vishnu Teja", role: "Technical Lead", bio: "Full-stack developer with a keen interest in cloud technologies and DevOps.", image: '/assets/Vishnu_Teja.jpg', linkedin: "https://linkedin.com/in/janesmith", github: "https://github.com/janesmith" },
+    { name: "Vishnu Teja", role: "Technical Lead", bio: "Full-stack developer with a keen interest in cloud technologies and DevOps.", image: '/assets/cs21b2027.jpg', linkedin: "https://linkedin.com/in/janesmith", github: "https://github.com/janesmith" },
     { name: "Harsha Vardhan G", role: "Design Lead", bio: "UI/UX enthusiast. Believes in creating intuitive and accessible designs for all.", image: "/assets/cs21b1052.jpg", linkedin: "https://linkedin.com/in/mikejohnson", github: "https://github.com/mikejohnson" },
     { name: "K M V R Madhava Krishna", role: "Marketing Lead", bio: "Creative marketer with a passion for community building and event planning.", image: "/assets/cs22b1005.jpg", linkedin: "https://linkedin.com/in/emilybrown", github: "https://github.com/emilybrown" },
     { name: "Praneeth Devarasetty", role: "Content Lead", bio: "Skilled writer and content creator, focusing on tech education and documentation.", image: "/assets/cs22b1014.jpg", linkedin: "https://linkedin.com/in/chrislee", github: "https://github.com/chrislee" },
