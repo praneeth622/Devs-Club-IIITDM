@@ -35,7 +35,9 @@ export default function Navbar() {
               height={40}
               className="rounded-full"
             />
-            <span className="font-bold text-xl text-blue-600">Developers Club</span>
+            <span className="font-bold text-xl text-blue-600">
+              Developers Club
+            </span>
           </Link>
         </motion.div>
 
@@ -87,7 +89,7 @@ export default function Navbar() {
           {/* Conditional Rendering for User Button or Login Button */}
           {isSignedIn ? (
             <div className="flex justify-content-between gap-8 text-gray-600 font-medium text-lg transition-colors duration-300 group-hover:text-blue-600">
-                <motion.div className="relative group">
+              <motion.div className="relative group">
                 <Link
                   href="/dashboard"
                   className="text-gray-600 font-medium text-lg transition-colors duration-300 group-hover:text-blue-600"
@@ -95,37 +97,43 @@ export default function Navbar() {
                   Dashbaord
                 </Link>
                 <motion.div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-                </motion.div>
+              </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="hidden md:flex space-x-6 items-center hidden md:flex space-x-6 items-center"
               >
-              <UserButton />
+                <UserButton />
               </motion.div>
             </div>
           ) : (
             <motion.div
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 200 }}
+              className="bg-red-800"
             >
               <Button
                 style={{
                   backgroundColor: "#3182ce", // blue-600
                   color: "#ffffff", // white text
                   fontWeight: "600", // font-semibold
-                  borderRadius: "0.375rem", // rounded
-                  width: "100%", // w-full
-                  transition: "background-color 0.3s ease", // transition duration-300
+                  borderRadius: "0.375rem",
+                  width: "100%",
+                  transition: "background-color 0.3s ease",
                 }}
                 onMouseEnter={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#2b6cb0")
-                } // blue-700 on hover
+                  (e.currentTarget.style.backgroundColor = "#9b2c2c")
+                } // red-900 on hover
                 onMouseLeave={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#3182ce")
-                } // revert to blue-600
-              >
+                  (e.currentTarget.style.backgroundColor = "#c53030")
+                } // revert to red-800
+                onMouseDown={(e) =>
+                  (e.currentTarget.style.backgroundColor = "#742a2a")
+                } // darker red on press
+                onMouseUp={(e) =>
+                  (e.currentTarget.style.backgroundColor = "#9b2c2c")
+                }>
                 <Link
                   href="/dashboard"
                   onClick={toggleMenu}

@@ -168,8 +168,7 @@ const BenefitsOfJoining = () => {
 
   return (
     <section className="py-16 mb-16 relative overflow-hidden" ref={ref}>
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-background z-0"></div>
-      <ParallaxText baseVelocity={5}>Benefits</ParallaxText>
+      
       <div className="container mx-auto px-4 relative z-10">
         <motion.h2 
           className="text-6xl font-bold text-center mb-12 bg-clip-text text-blue-600 bg-gradient-to-r from-secondary to-primary"
