@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import { motion } from 'framer-motion'
-import { SignIn } from '@clerk/nextjs'
+import { SignIn, SignUp } from '@clerk/nextjs'
 import Image from 'next/image'
 
 const LoginPage = () => {
@@ -79,7 +79,7 @@ Developers Club        </motion.h1>
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1 }}
         >
-          <SignIn
+          <SignUp
             appearance={{
               elements: {
                 card: 'bg-white shadow-none',
