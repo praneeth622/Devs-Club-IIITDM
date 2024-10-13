@@ -122,4 +122,4 @@ We look forward to your contributions! Together, we can build an inclusive and i
 **Stay Connected**:
 - Follow us on [LinkedIn](https://www.linkedin.com/company/developers-club-iiitdm/)
 - Contact us at [devclub@iiitdm.ac.in]
-```
+
