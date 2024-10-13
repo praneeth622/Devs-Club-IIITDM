@@ -11,7 +11,7 @@ export default function HeroSection  (){
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
           >
-            Developers Club's Projects
+            Developers Club &lsquo;s Projects
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
