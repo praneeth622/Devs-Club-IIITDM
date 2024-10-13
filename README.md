@@ -123,9 +123,3 @@ We look forward to your contributions! Together, we can build an inclusive and i
 - Follow us on [LinkedIn](https://www.linkedin.com/company/developers-club-iiitdm/)
 - Contact us at [devclub@iiitdm.ac.in]
 ```
-
-### Changes added:
-- **Overview**: Brief introduction to the purpose of the website and key highlights.
-- **Getting Started**: Steps to set up the project locally for development.
-- **Contributing**: Detailed instructions on how to contribute to the project.
-- **License**: Included information about the project's MIT License.
