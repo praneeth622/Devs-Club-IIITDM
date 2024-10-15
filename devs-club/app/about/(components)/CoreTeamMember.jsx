@@ -114,10 +114,10 @@ const TeamSection = ({ title, members }) => (
 
 export default function CoreTeam() {
   const headCore = {
-    name: "John Doe",
+    name: "T Lakshmi Srinivas",
     role: "Head Core",
     bio: "Passionate about leading and inspiring the Developers Club community.",
-    image: "/placeholder.svg",
+    image: "/assets/Head_core.png",
     linkedin: "https://linkedin.com/in/johndoe",
     github: "https://github.com/johndoe"
   }
