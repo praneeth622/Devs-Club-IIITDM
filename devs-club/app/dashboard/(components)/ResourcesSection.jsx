@@ -99,7 +99,7 @@ export default function ResourcesSection() {
           >
             <Button
               onClick={() => setIsResourcesOpen(!isResourcesOpen)}
-              className="w-full justify-between rounded-none h-14 text-lg font-semibold bg-gray-200 hover:bg-gray-300 transition-colors duration-200"
+              className="w-full text-[20px] justify-between rounded-none h-14 font-semibold bg-gray-200 hover:bg-gray-300 transition-colors duration-200"
             >
               <span>{isResourcesOpen ? 'Hide Resources' : 'Explore Resources'}</span>
               <motion.div
@@ -171,7 +171,7 @@ export default function ResourcesSection() {
             )}
           </div>
           <DialogClose asChild>
-            <Button className="w-full mt-4 bg-gray-800 text-black hover:bg-gray-700 hover:text-white transition-colors">
+            <Button className="w-full mt-4 bg-gray-800 text-black hover:bg-gray-700 transition-colors border-b border-gray-600">
               Close
             </Button>
           </DialogClose>
