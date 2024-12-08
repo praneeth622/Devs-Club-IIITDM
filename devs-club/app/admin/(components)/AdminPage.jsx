@@ -10,11 +10,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger }from  
 import { Label } from "../../../components/ui/label"
 import { Checkbox } from "../../../components/ui/checkbox"
 import { ScrollArea } from "../../../components/ui/scroll-area"
-import { BarChart, Users, Folder, BookOpen, Settings, Plus, Edit, Trash } from  'lucide-react'
+import { BarChart, Users, Folder, BookOpen, Settings, Plus, Edit, Trash, Menu, X } from  'lucide-react'
 import { Textarea } from "../../../components/ui/textarea"
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState('dashboard')
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const tabVariants = {
     hidden: { opacity: 0, y: 10 },
@@ -22,37 +23,74 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <motion.h1
+    <div className="min-h-screen bg-gray-100">
+      <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="text-4xl font-bold text-gray-800 mb-8"
+        className="p-4 md:p-8 flex items-center justify-between"
       >
-        Admin Dashboard
-      </motion.h1>
+        <motion.h1 className="text-2xl md:text-4xl font-bold text-gray-800">
+          Admin Dashboard
+        </motion.h1>
+        
+        <button 
+          className="md:hidden p-2 rounded-lg hover:bg-gray-200"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          <Menu className="h-6 w-6" />
+        </button>
+      </motion.div>
 
-      <div className="flex">
-        {/* Sidebar */}
-        <div className="w-1/4 pr-8">
-          <Tabs orientation="vertical">
-            <TabsList className="flex flex-col gap-4">
-              {['dashboard', 'resources', 'projects', 'team', 'access', 'settings'].map((tab) => (
-                <TabsTrigger
-                  key={tab}
-                  value={tab}
-                  className={`w-full text-left px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-200 ${activeTab === tab ? 'bg-gray-500 text-white' : ''}`}
-                  onClick={() => setActiveTab(tab)}
-                >
-                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
+      <div className="flex flex-col md:flex-row">
+        <div className={`
+          ${isMobileMenuOpen ? 'block' : 'hidden'} 
+          md:block 
+          w-full md:w-64 lg:w-72 
+          fixed md:relative 
+          top-0 left-0 
+          h-screen md:h-auto 
+          z-50 md:z-0
+          bg-white md:bg-transparent
+          pt-16 md:pt-0
+        `}>
+          <div className="p-4 md:p-6 h-full relative">
+            <button 
+              className="md:hidden absolute top-[-48px] right-4 p-2 rounded-lg hover:bg-gray-100"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <X className="h-6 w-6" />
+            </button>
+
+            <Tabs orientation="vertical" value={activeTab} onValueChange={setActiveTab}>
+              <TabsList className="flex flex-col w-full space-y-2 rounded-lg p-2 items-start">
+                {['dashboard', 'resources', 'projects', 'team', 'access', 'settings'].map((tab) => (
+                  <TabsTrigger
+                    key={tab}
+                    value={tab}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`
+                      w-full text-left px-4 py-3 
+                      rounded-md transition-all duration-200 
+                      flex items-center justify-start
+                      ${activeTab === tab 
+                        ? 'bg-primary text-primary-foreground border-5 border-black bg-gray-500 shadow-sm' 
+                        : 'hover:bg-gray-300 text-gray-600 hover:text-gray-900'
+                      }
+                    `}
+                  >
+                    <div className="flex items-center gap-3 w-full">
+                      <span className="flex-shrink-0">{getTabIcon(tab)}</span>
+                      <span className="capitalize truncate text-left">{tab}</span>
+                    </div>
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
+          </div>
         </div>
 
-        {/* Main Content */}
-        <div className="w-3/4">
+        <div className="flex-1 md:pl-6 p-4 bg-transparent">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
             {/* Dashboard Tab */}
             <TabsContent value="dashboard">
@@ -71,17 +109,15 @@ export default function AdminPage() {
 
             {/* Resources Tab */}
             <TabsContent value="resources">
-              <motion.div variants={tabVariants} initial="hidden" animate="visible">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Manage Resources</CardTitle>
-                    <CardDescription>Add, edit, or delete resources</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <ResourceManager />
-                  </CardContent>
-                </Card>
-              </motion.div>
+              <Card >
+                <CardHeader>
+                  <CardTitle>Manage Resources</CardTitle>
+                  <CardDescription>Add, edit, or delete resources</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ResourceManager />
+                </CardContent>
+              </Card>
             </TabsContent>
 
             {/* Projects Tab */}
@@ -143,9 +179,17 @@ export default function AdminPage() {
           </Tabs>
         </div>
       </div>
+
+      {isMobileMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-60 z-40 md:hidden pt-16"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
     </div>
   )
 }
+
 function StatsCard({ title, value, icon: Icon }) {
   return (
     <Card className="shadow-lg hover:shadow-xl transition-shadow duration-200">
@@ -609,4 +653,28 @@ function SettingsManager() {
       <Button className="w-full">Save Settings</Button>
     </div>
   )
+}
+
+function getTabIcon(tab) {
+  const iconProps = { 
+    className: "h-5 w-5 flex-shrink-0",
+    strokeWidth: 2 
+  }
+  
+  switch (tab) {
+    case 'dashboard':
+      return <BarChart {...iconProps} />
+    case 'resources':
+      return <BookOpen {...iconProps} />
+    case 'projects':
+      return <Folder {...iconProps} />
+    case 'team':
+      return <Users {...iconProps} />
+    case 'access':
+      return <Settings {...iconProps} />
+    case 'settings':
+      return <Settings {...iconProps} />
+    default:
+      return null
+  }
 }

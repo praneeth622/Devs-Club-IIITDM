@@ -102,7 +102,7 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="hidden md:flex space-x-6 items-center hidden md:flex space-x-6 items-center"
+                className="hidden md:flex space-x-6 items-center "
               >
                 <UserButton />
               </motion.div>
