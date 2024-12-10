@@ -51,6 +51,15 @@ export const Footer = () => {
               Contact Us
             </Link>
           </div>
+          <div className="mt-4 ">
+            <span>Made with ❤️ by </span>
+            <Link 
+              href="/web-team" 
+              className="hover:text-white transition-colors underline duration-300"
+            >
+              Praneeth and Team
+            </Link>
+          </div>
         </motion.div>
       </div>
     </footer>
