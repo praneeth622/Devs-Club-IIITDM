@@ -12,29 +12,34 @@ export const HeroSection = () => {
       {/* Floating Elements */}
       <div className="absolute inset-0">
         {/* Animated Code Symbols */}
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 100 }}
-            animate={{
-              opacity: [0.4, 0.8, 0.4],
-              y: [-10, 10, -10],
-              x: [-10, 10, -10],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              delay: i * 0.7,
-            }}
-            className="absolute hidden md:block"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-          >
-            {[<Code2 />, <Terminal />, <Cpu />][i % 3]}
-          </motion.div>
-        ))}
+        {[...Array(5)].map((_, i) => {
+  const icons = [Code2, Terminal, Cpu];
+  const IconComponent = icons[i % 3];
+  return (
+    <motion.div
+      key={`floating-icon-${i}`}
+      initial={{ opacity: 0, y: 100 }}
+      animate={{
+        opacity: [0.4, 0.8, 0.4],
+        y: [-10, 10, -10],
+        x: [-10, 10, -10],
+      }}
+      transition={{
+        duration: 8,
+        repeat: Infinity,
+        delay: i * 0.7,
+      }}
+      className="absolute hidden md:block"
+      style={{
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+      }}
+    >
+      <IconComponent />
+    </motion.div>
+  );
+})}
+
 
         {/* Glowing Grid */}
         <div className="absolute inset-0 grid grid-cols-8 md:grid-cols-12 gap-4 opacity-20">

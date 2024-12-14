@@ -39,7 +39,7 @@ export default function GDSCAboutPage() {
   return (
     <div className="min-h-screen text-foreground">
       <Navbar />
-      
+
       {/* Header Section */}
       <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
         {/* Animated Gradient Orb */}
@@ -68,7 +68,9 @@ export default function GDSCAboutPage() {
                 top: `${Math.random() * 100}%`,
               }}
             >
-              {[<Users />, <Target />, <Activity />][i % 3]}
+              {
+                [<Users key="users" />, <Target key="target" />, <Activity key="activity" />][i % 3]
+              }
             </motion.div>
           ))}
 
@@ -123,8 +125,8 @@ export default function GDSCAboutPage() {
               transition={{ delay: 0.2 }}
               className="text-lg md:text-xl text-gray-300 mb-12 leading-relaxed max-w-3xl mx-auto"
             >
-              Join us on a journey of innovation and coding excellence. Discover our projects, 
-              meet our team, and be part of our vibrant community dedicated to pushing the boundaries 
+              Join us on a journey of innovation and coding excellence. Discover our projects,
+              meet our team, and be part of our vibrant community dedicated to pushing the boundaries
               of technology.
             </motion.p>
 
@@ -143,8 +145,8 @@ export default function GDSCAboutPage() {
         {/* Creative Bottom Wave */}
         <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
           <svg className="relative block w-full h-[100px]" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path 
-              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
+            <path
+              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
               className="fill-blue-900/30"
             ></path>
           </svg>
@@ -163,7 +165,7 @@ export default function GDSCAboutPage() {
             <Card className="shadow-lg rounded-lg pt-10 ">
               <CardContent className="py-10 px-8 space-y-6">
                 <motion.div
-                  whileHover={{ scale: 1.04}}
+                  whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <Users className="w-14 h-14 text-primary" />
@@ -185,8 +187,8 @@ export default function GDSCAboutPage() {
           >
             <Card className="shadow-lg rounded-lg pt-10">
               <CardContent className="py-10 px-8 space-y-6">
-              <motion.div
-                  whileHover={{ scale: 1.04}}
+                <motion.div
+                  whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <Target className="w-14 h-14 text-primary" />
@@ -210,7 +212,7 @@ export default function GDSCAboutPage() {
             <Card className="shadow-lg rounded-lg pt-10">
               <CardContent className="py-10 px-8 space-y-6">
                 <motion.div
-                  whileHover={{ scale: 1.04}}
+                  whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <Activity className="w-12 h-12 text-primary" />
@@ -226,7 +228,7 @@ export default function GDSCAboutPage() {
                     </li>
                     <li>Hackathons: Build innovative solutions in teams.</li>
                     <li>Projects: Work on real-world projects, collaborate with
-                    teams.</li>
+                      teams.</li>
                   </ul>
                   <ul className="space-y-3 list-disc pl-6">
                     <li>Study Jams: Learn Google tech, earn certifications.</li>
