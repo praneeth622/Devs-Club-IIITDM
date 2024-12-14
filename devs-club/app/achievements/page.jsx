@@ -1,11 +1,10 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { useState } from 'react'
-import { ChevronRight, Award, Users, TrendingUp, Star, Code, Brain } from 'lucide-react'
-import Navbar from '../(components)/Navbar'
-import { Footer } from '../(components)/Footer'
-import HeroSection from './(components)/Herosection'
+import { motion } from 'framer-motion';
+import { ChevronRight, Award, Users, TrendingUp, Star, Code, Brain } from 'lucide-react';
+import Navbar from '../(components)/Navbar';
+import { Footer } from '../(components)/Footer';
+import HeroSection from './(components)/Herosection';
 
 const achievements = [
   {
@@ -38,7 +37,7 @@ const achievements = [
     description: "Hands-on session on deep learning model development by the core team.",
     icon: <Code className="w-8 h-8 text-indigo-500" />
   }
-]
+];
 
 const benefits = [
   {
@@ -61,7 +60,7 @@ const benefits = [
     description: "Showcase talent at industry events.",
     icon: <Award className="w-8 h-8 text-purple-500" />
   }
-]
+];
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -71,7 +70,7 @@ const containerVariants = {
       staggerChildren: 0.1
     }
   }
-}
+};
 
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
@@ -83,9 +82,10 @@ const itemVariants = {
       stiffness: 100
     }
   }
-}
+};
 
-export function AchievementsPage() {
+// Internal component, not exported
+function AchievementsSection() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 text-gray-800 py-16">
       <motion.h1 
@@ -169,8 +169,10 @@ export function AchievementsPage() {
             transition={{ duration: 0.3 }}
           >
             <h3 className="text-2xl font-bold mb-4">Vashisht Hackathon</h3>
-            <p className="text-lg mb-6">Our largest event to date, bringing together over 1,100 participants to create innovative tech solutions. This hackathon showcased the incredible talent and creativity within our community.</p>
-            
+            <p className="text-lg mb-6">
+              Our largest event to date, bringing together over 1,100 participants to create innovative tech solutions.
+              This hackathon showcased the incredible talent and creativity within our community.
+            </p>
           </motion.div>
         </motion.section>
 
@@ -190,18 +192,16 @@ export function AchievementsPage() {
         </motion.div>
       </div>
     </div>
-  )
+  );
 }
 
-
-export default function AchievementsAndBenefits() {
+export default function Page() {
   return (
     <div className="bg-background text-foreground">
       <Navbar />
       <HeroSection />
-      <AchievementsPage />
+      <AchievementsSection />
       <Footer />
     </div>
-  )
+  );
 }
-

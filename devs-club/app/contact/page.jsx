@@ -11,7 +11,7 @@ import { Button } from "../../components/ui/button"
 import Navbar from '../(components)/Navbar'
 import { Footer } from '../(components)/Footer'
 
-export function ContactFormComponent(){
+function ContactFormComponent(){
     const [isSubmitted, setIsSubmitted] = useState(false)
 
   const handleSubmit = () => {

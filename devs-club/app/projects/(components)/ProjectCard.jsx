@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const ProjectCard = ({ project, onHover, onClick }) => {
   const cardRef = useRef(null);
@@ -29,11 +30,13 @@ const ProjectCard = ({ project, onHover, onClick }) => {
 
         <div className="mt-6">
           <div className="flex items-center space-x-4">
-            <img
-              src={project.teamLead.photo}
-              alt={project.teamLead.name}
-              className="w-10 h-10 rounded-full border-2 border-white/20"
-            />
+          <Image
+            src={project.teamLead.photo}
+            alt={project.teamLead.name}
+            className="rounded-full border-2 border-white/20"
+            layout="fill"
+            objectFit="cover"
+          />
             <div>
               <p className="text-sm font-medium text-gray-600 group-hover:text-white/90 transition-colors duration-300">
                 Team Lead

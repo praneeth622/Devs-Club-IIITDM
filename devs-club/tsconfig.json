@@ -16,7 +16,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    
+    "noImplicitAny": false,
+    "strictNullChecks": false,
     "plugins": [
       {
         "name": "next"
@@ -28,7 +29,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "app/(components)/Achivements.jsx"  ],
   "exclude": [
     "node_modules"
   ]

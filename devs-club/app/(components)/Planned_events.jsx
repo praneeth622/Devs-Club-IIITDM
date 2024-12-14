@@ -54,25 +54,28 @@ export default function ImpactAchievements() {
   const [isVisible, setIsVisible] = useState(false); 
 
   useEffect(() => {
+    const currentRef = achievementRef.current; // Store the ref value in a variable
+  
     const options = {
       root: null, 
       threshold: 0.5, 
     };
-
+  
     const observer = new IntersectionObserver((entries) => {
       setIsVisible(entries[0].isIntersecting); 
     }, options);
-
-    if (achievementRef.current) {
-      observer.observe(achievementRef.current);
+  
+    if (currentRef) {
+      observer.observe(currentRef);
     }
-
+  
     return () => {
-      if (achievementRef.current) {
-        observer.unobserve(achievementRef.current); 
+      if (currentRef) {
+        observer.unobserve(currentRef); // Use the stored value
       }
     };
   }, []);
+  
 
   return (
     <section className="py-16 px-16 bg-gradient-to-b from-background to-muted">
