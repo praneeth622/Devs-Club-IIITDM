@@ -93,7 +93,7 @@ function OpenSourcePage() {
           <CardContent>
             <ol className="list-decimal list-inside space-y-2 text-black">
               <motion.li variants={itemVariants}>
-                Fork the repository you're interested in
+                Fork the repository you&apos;re interested in
               </motion.li>
               <motion.li variants={itemVariants}>
                 Clone your fork to your local machine
