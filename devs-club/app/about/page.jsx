@@ -165,7 +165,7 @@ export default function GDSCAboutPage() {
         <CoreTeamMember />
 
         {/* Events & Achievements Section */}
-        <div className="bg-sky-50 py-20">
+        <div className="bg-sky-50 w-full py-20">
           <AnimatedSection>
             <motion.section variants={fadeInUp}>
               <h2 className="text-4xl font-bold mb-12 text-center">

@@ -15,11 +15,11 @@ export default function Navbar() {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const { isSignedIn } = useUser();
-  const navItems = ["About", "Achievements", "Projects"];
+  const navItems = ["About", "Achievements", "Projects","Contact"];
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-40">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+      <nav className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
         {/* Animated Logo */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}

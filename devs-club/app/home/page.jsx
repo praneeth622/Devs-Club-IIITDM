@@ -15,7 +15,7 @@ export default function page() {
     <div>
       <Navbar/>
       <HeroSection/>
-      <MeetOurTeam/>
+      {/* <MeetOurTeam/> */}
       <ImpactAchievements />
       <ProjectsGallery/>
       <PlannedEvents />

@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useRef, useEffect } from 'react'
-import { motion, useAnimation, useAnimationFrame, useInView, useMotionValue, useScroll, useSpring, useTransform, useVelocity, wrap } from 'framer-motion'
-import { Award, Users, TrendingUp, Trophy, Code, Zap, Globe, Cpu, Cloud, CpuIcon, GlobeIcon, Code2, BarChart2, ZapIcon } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { ChevronRight, Award, Users, TrendingUp, Star, Code, Brain } from 'lucide-react'
 import Navbar from '../(components)/Navbar'
 import { Footer } from '../(components)/Footer'
 import HeroSection from './(components)/Herosection'
@@ -11,32 +11,32 @@ const achievements = [
   {
     title: "Google Cloud Study Jams",
     description: "Multi-session event with practical Google Cloud experience, resulting in certifications.",
-    icon: <Cloud className="w-8 h-8 text-primary" />
+    icon: <Award className="w-8 h-8 text-blue-500" />
   },
   {
     title: "Mastering Deep Learning",
     description: "Insights into deep learning models and industrial expectations, led by AMD senior.",
-    icon: <CpuIcon className="w-8 h-8 text-primary" />
+    icon: <Brain className="w-8 h-8 text-green-500" />
   },
   {
     title: "Winter Innovation Challenge",
     description: "Students proposed tech solutions to global issues, aligned with WHO goals.",
-    icon: <GlobeIcon className="w-8 h-8 text-primary" />
+    icon: <Star className="w-8 h-8 text-yellow-500" />
   },
   {
     title: "Vashisht Hackathon",
     description: "Massive hackathon with 1100+ participants, focusing on innovative tech solutions.",
-    icon: <Code className="w-8 h-8 text-primary" />
+    icon: <Users className="w-8 h-8 text-purple-500" />
   },
   {
     title: "Data Analytics Series",
     description: "Two-part session on data analytics, including coding and theory.",
-    icon: <BarChart2 className="w-8 h-8 text-primary" />
+    icon: <TrendingUp className="w-8 h-8 text-red-500" />
   },
   {
     title: "Intro to Deep Learning",
     description: "Hands-on session on deep learning model development by the core team.",
-    icon: <ZapIcon className="w-8 h-8 text-primary" />
+    icon: <Code className="w-8 h-8 text-indigo-500" />
   }
 ]
 
@@ -44,169 +44,152 @@ const benefits = [
   {
     title: "Skill Development",
     description: "Practical learning with cutting-edge technologies.",
-    icon: <Award className="w-12 h-12 text-primary" />
+    icon: <TrendingUp className="w-8 h-8 text-blue-500" />
   },
   {
     title: "Networking",
     description: "Build connections with peers and industry leaders.",
-    icon: <Users className="w-12 h-12 text-primary" />
+    icon: <Users className="w-8 h-8 text-green-500" />
   },
   {
     title: "Career Advancement",
     description: "Strengthen resume and develop leadership skills.",
-    icon: <TrendingUp className="w-12 h-12 text-primary" />
+    icon: <Star className="w-8 h-8 text-yellow-500" />
   },
   {
     title: "Recognition",
     description: "Showcase talent at industry events.",
-    icon: <Trophy className="w-12 h-12 text-primary" />
+    icon: <Award className="w-8 h-8 text-purple-500" />
   }
 ]
 
-const AnimatedCard = ({ children, index }) => {
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  })
-
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0])
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8])
-  const y = useTransform(scrollYProgress, [0, 0.5, 1], [100, 0, -100])
-
-  return (
-    <motion.div
-      ref={ref}
-      style={{ opacity, scale, y }}
-      className="bg-card text-card-foreground rounded-lg shadow-lg p-6 h-full backdrop-blur-sm bg-opacity-80 border border-primary/10 hover:border-primary/30 transition-all duration-300"
-    >
-      {children}
-    </motion.div>
-  )
-}
-
-const ParallaxText = ({ children, baseVelocity = 100 }) => {
-  const baseX = useMotionValue(0)
-  const { scrollY } = useScroll()
-  const scrollVelocity = useVelocity(scrollY)
-  const smoothVelocity = useSpring(scrollVelocity, {
-    damping: 50,
-    stiffness: 400
-  })
-  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
-    clamp: false
-  })
-
-  const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`)
-
-  const directionFactor = useRef(1)
-  useAnimationFrame((t, delta) => {
-    let moveBy = directionFactor.current * baseVelocity * (delta / 1000)
-    if (velocityFactor.get() < 0) {
-      directionFactor.current = -1
-    } else if (velocityFactor.get() > 0) {
-      directionFactor.current = 1
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
     }
-    moveBy += directionFactor.current * moveBy * velocityFactor.get()
-    baseX.set(baseX.get() + moveBy)
-  })
-
-  return (
-    <div className="parallax">
-      <motion.div className="scroller" style={{ x }}>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-      </motion.div>
-    </div>
-  )
+  }
 }
 
-const PreviousAchievements = () => {
-  return (
-    <section className="py-16 relative overflow-hidden">
-      <div className="absolute text-black inset-0 bg-gradient-to-b from-background via-background/50 to-background z-0"></div>
-      
-      <div className="container mx-auto px-4 relative z-10 ">
-        <motion.h2 
-          className="text-6xl font-bold text-center bg-clip-text text-blue-600 bg-gradient-to-r mb-20 from-primary to-secondary"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          Previous Achievements
-        </motion.h2>
-        <div className='m-10'>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
-          {achievements.map((achievement, index) => (
-            <AnimatedCard key={index} index={index}>
-              <div className="flex items-center mb-4">
-                {achievement.icon}
-                <h3 className="text-xl font-semibold ml-4">{achievement.title}</h3>
-              </div>
-              <p className="text-muted-foreground">{achievement.description}</p>
-            </AnimatedCard>
-          ))}
-        </div>
-      </div>
-      </div>
-    </section>
-  )
-}
-
-const BenefitsOfJoining = () => {
-  const controls = useAnimation()
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true })
-
-  useEffect(() => {
-    if (inView) {
-      controls.start("visible")
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100
     }
-  }, [controls, inView])
+  }
+}
 
+export function AchievementsPage() {
   return (
-    <section className="py-16 mb-16 relative overflow-hidden" ref={ref}>
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.h2 
-          className="text-6xl font-bold text-center mb-12 bg-clip-text text-blue-600 bg-gradient-to-r from-secondary to-primary"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          Benefits of Joining Developers Club
-        </motion.h2>
-        <div className='mt-10'>
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 m-5"
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                delayChildren: 0.3,
-                staggerChildren: 0.2
-              }
-            }
-          }}
+    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 text-gray-800 py-16">
+      <motion.h1 
+        className="text-5xl font-bold text-center mb-16 text-blue-600"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
+      >
+        Developers Club Achievements
+      </motion.h1>
+
+      <div className="max-w-7xl mx-auto">
+        <motion.section 
+          className="mb-20"
+          variants={containerVariants}
           initial="hidden"
-          animate={controls}
+          animate="visible"
         >
-          {benefits.map((achievement, index) => (
-            <AnimatedCard key={index} index={index}>
-              <div className="flex items-center mb-4">
-                {achievement.icon}
-                <h3 className="text-xl font-semibold ml-4">{achievement.title}</h3>
-              </div>
-              <p className="text-muted-foreground">{achievement.description}</p>
-            </AnimatedCard>
-          ))}
+          <h2 className="text-3xl font-semibold mb-8 text-center">Our Journey of Excellence</h2>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {achievements.map((achievement, index) => (
+              <motion.div 
+                key={index}
+                className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+                variants={itemVariants}
+                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+              >
+                <div className="flex items-center mb-4">
+                  <div className="bg-blue-100 rounded-full p-3 mr-4">
+                    {achievement.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold">{achievement.title}</h3>
+                </div>
+                <p className="text-gray-600">{achievement.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        <motion.section
+          className="bg-white rounded-xl p-8 mb-20 shadow-lg"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <h2 className="text-3xl font-semibold mb-8 text-center">Why Join Developers Club?</h2>
+          <motion.div 
+            className="grid gap-6 md:grid-cols-2"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {benefits.map((benefit, index) => (
+              <motion.div 
+                key={index}
+                className="flex items-start p-4 bg-blue-50 rounded-lg"
+                variants={itemVariants}
+                whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+              >
+                <div className="flex-shrink-0 mr-4 bg-white rounded-full p-3 shadow-md">
+                  {benefit.icon}
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
+                  <p className="text-gray-600">{benefit.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.section>
+
+        <motion.section
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <h2 className="text-3xl font-semibold mb-8 text-center">Spotlight Achievement</h2>
+          <motion.div 
+            className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl p-8 shadow-xl"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.3 }}
+          >
+            <h3 className="text-2xl font-bold mb-4">Vashisht Hackathon</h3>
+            <p className="text-lg mb-6">Our largest event to date, bringing together over 1,100 participants to create innovative tech solutions. This hackathon showcased the incredible talent and creativity within our community.</p>
+            
+          </motion.div>
+        </motion.section>
+
+        <motion.div
+          className="mt-16 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <motion.button
+            className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold text-lg shadow-lg"
+            whileHover={{ scale: 1.05, backgroundColor: "#3b82f6" }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Join Developers Club Today!
+          </motion.button>
         </motion.div>
-        </div>
       </div>
-    </section>
+    </div>
   )
 }
 
@@ -216,9 +199,9 @@ export default function AchievementsAndBenefits() {
     <div className="bg-background text-foreground">
       <Navbar />
       <HeroSection />
-      <PreviousAchievements />
-      <BenefitsOfJoining />
+      <AchievementsPage />
       <Footer />
     </div>
   )
 }
+

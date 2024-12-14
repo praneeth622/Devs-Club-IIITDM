@@ -1,10 +1,45 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import { Clock, MapPin, Phone } from "lucide-react"
 import Image from 'next/image'
-import Navbar from './Navbar'
+import { motion } from 'framer-motion'
+import { FiSend, FiCode, FiGithub, FiLinkedin } from 'react-icons/fi'
+import { Card, CardContent } from "../../components/ui/card"
+import { Input } from "../../components/ui/input"
+import { Textarea } from "../../components/ui//textarea"
+import { Button } from "../../components/ui/button"
+import Navbar from '../(components)/Navbar'
+import { Footer } from '../(components)/Footer'
 
 export function ContactFormComponent(){
+    const [isSubmitted, setIsSubmitted] = useState(false)
+
+  const handleSubmit = () => {
+    e.preventDefault()
+    setIsSubmitted(true)
+    setTimeout(() => setIsSubmitted(false), 3000)
+  }
+
+  const inputVariants = {
+    focus: { scale: 1.02, transition: { duration: 0.2 } },
+  }
   return (
+    <div className="min-h-screen bg-white p-4 md:p-8">
+        <motion.h1 
+          className="text-4xl md:text-5xl py-4 pb-8 font-bold text-center mb-8 text-blue-500"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          <FiCode className="inline-block mr-2" />
+          Contact Developers Club
+        </motion.h1>
+    <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="max-w-4xl mx-auto"
+      >
     <Card className="shadow-lg border-blue-500 border-t-4 overflow-hidden">
           <CardContent className="p-6 md:p-8">
             <div className="grid md:grid-cols-2 gap-8">
@@ -67,7 +102,8 @@ export function ContactFormComponent(){
             </div>
           </CardContent>
         </Card>
-
+        </motion.div>
+        </div>
   )
 }
 
@@ -76,6 +112,7 @@ export default function Component() {
     <div>
       <Navbar />
       <ContactFormComponent />
+      <Footer />
     </div>
   )
 }
