@@ -130,6 +130,7 @@ function AchievementsSection() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
+          
         >
           <h2 className="text-3xl font-semibold mb-8 text-center">Why Join Developers Club?</h2>
           <motion.div 
@@ -161,10 +162,11 @@ function AchievementsSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
+          className="px-8"
         >
           <h2 className="text-3xl font-semibold mb-8 text-center">Spotlight Achievement</h2>
           <motion.div 
-            className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl p-8 shadow-xl"
+            className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
           >
