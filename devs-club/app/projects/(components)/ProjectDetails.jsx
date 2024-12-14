@@ -19,14 +19,6 @@ const ProjectDetails = ({ project, onClose }) => {
       >
         <div className="p-6">
           <div className="flex items-center mb-4">
-            <motion.img
-              src={project.teamLead.photo}
-              alt={project.teamLead.name}
-              className="w-16 h-16 rounded-full mr-4 border-2 border-purple-500"
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.3 }}
-            />
             <div>
               <h3 className="text-xl font-semibold text-gray-800">{project.teamLead.name}</h3>
               <p className="text-purple-600">Team Lead</p>
