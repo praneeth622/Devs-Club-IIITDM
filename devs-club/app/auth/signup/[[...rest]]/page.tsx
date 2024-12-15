@@ -82,17 +82,20 @@ Developers Club        </motion.h1>
           <SignUp
             appearance={{
               elements: {
-                card: 'bg-white shadow-none',
-                headerTitle: 'text-3xl font-bold text-gray-800 mb-2',
-                headerSubtitle: 'text-lg text-gray-600 mb-6',
+                animations: true,
+                socialButtonsVariant: 'auto',
+                card: 'bg-gradient-to-br from-purple-500 to-indigo-500 shadow',
+                headerTitle: 'text-3xl font-bold text-[#fff] mb-2',
+                headerSubtitle: 'text-lg text-[#fff] mb-6',
                 formButtonPrimary: 'bg-purple-600 hover:bg-purple-700 text-white transition-colors duration-200',
                 formFieldInput: 'border-gray-300 focus:ring-purple-500 focus:border-purple-500',
                 footerActionLink: 'text-purple-600 hover:text-purple-700',
-                dividerLine: 'bg-gray-200',
-                dividerText: 'text-gray-500',
-                socialButtonsBlockButton: 'border-gray-300 hover:bg-gray-50 transition-colors duration-200',
+                dividerLine: 'bg-white',
+                dividerText: 'text-[#fff]',
+                socialButtonsBlockButton: 'bg-[#fff] hover:bg-[#fff] transition-colors duration-200',
                 socialButtonsBlockButtonText: 'text-gray-600',
-                formFieldLabel: 'text-gray-700',
+                formFieldLabel: 'text-[#fff]',
+                formFieldSuccessText:"text-[#fff]"
               },
             }}
           />
