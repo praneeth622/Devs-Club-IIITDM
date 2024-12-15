@@ -1,10 +1,19 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { ChevronRight, Award, Users, TrendingUp, Star, Code, Brain } from 'lucide-react';
-import Navbar from '../(components)/Navbar';
-import { Footer } from '../(components)/Footer';
-import HeroSection from './(components)/Herosection';
+import { motion } from "framer-motion";
+import {
+  ChevronRight,
+  Award,
+  Users,
+  TrendingUp,
+  Star,
+  Code,
+  Brain,
+} from "lucide-react";
+import Navbar from "../(components)/Navbar";
+import { Footer } from "../(components)/Footer";
+import HeroSection from "./(components)/Herosection";
+import { useEffect, useState } from "react";
 
 const achievements = [
   {
@@ -38,28 +47,27 @@ const achievements = [
     icon: <Code className="w-8 h-8 text-indigo-500" />
   }
 ];
-
 const benefits = [
   {
     title: "Skill Development",
     description: "Practical learning with cutting-edge technologies.",
-    icon: <TrendingUp className="w-8 h-8 text-blue-500" />
+    icon: <TrendingUp className="w-8 h-8 text-blue-500" />,
   },
   {
     title: "Networking",
     description: "Build connections with peers and industry leaders.",
-    icon: <Users className="w-8 h-8 text-green-500" />
+    icon: <Users className="w-8 h-8 text-green-500" />,
   },
   {
     title: "Career Advancement",
     description: "Strengthen resume and develop leadership skills.",
-    icon: <Star className="w-8 h-8 text-yellow-500" />
+    icon: <Star className="w-8 h-8 text-yellow-500" />,
   },
   {
     title: "Recognition",
     description: "Showcase talent at industry events.",
-    icon: <Award className="w-8 h-8 text-purple-500" />
-  }
+    icon: <Award className="w-8 h-8 text-purple-500" />,
+  },
 ];
 
 const containerVariants = {
@@ -67,9 +75,9 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
-    }
-  }
+      staggerChildren: 0.1,
+    },
+  },
 };
 
 const itemVariants = {
@@ -79,16 +87,16 @@ const itemVariants = {
     opacity: 1,
     transition: {
       type: "spring",
-      stiffness: 100
-    }
-  }
+      stiffness: 100,
+    },
+  },
 };
 
 // Internal component, not exported
 function AchievementsSection() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 text-gray-800 py-16">
-      <motion.h1 
+      <motion.h1
         className="text-5xl font-bold text-center mb-16 text-blue-600"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -98,30 +106,40 @@ function AchievementsSection() {
       </motion.h1>
 
       <div className="max-w-7xl mx-auto">
-        <motion.section 
+        <motion.section
           className="mb-20"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <h2 className="text-3xl font-semibold mb-8 text-center">Our Journey of Excellence</h2>
+          <h2 className="text-3xl font-semibold mb-8 text-center">
+            Our Journey of Excellence
+          </h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {achievements.map((achievement, index) => (
-              <motion.div 
-                key={index}
-                className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-              >
-                <div className="flex items-center mb-4">
-                  <div className="bg-blue-100 rounded-full p-3 mr-4">
+            {achievements.length > 0 ? (
+              achievements.map((achievement, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                >
+                  <div className="flex items-center mb-4">
+                    <div className="bg-blue-100 rounded-full p-3 mr-4">
                     {achievement.icon}
+                    </div>
+                    <h3 className="text-xl font-semibold">
+                      {achievement.title}
+                    </h3>
                   </div>
-                  <h3 className="text-xl font-semibold">{achievement.title}</h3>
-                </div>
-                <p className="text-gray-600">{achievement.description}</p>
-              </motion.div>
-            ))}
+                  <p className="text-gray-600">{achievement.description}</p>
+                </motion.div>
+              ))
+            ) : (
+              <p className="text-gray-500 text-center col-span-full">
+                No achievements available yet.
+              </p>
+            )}
           </div>
         </motion.section>
 
@@ -130,17 +148,18 @@ function AchievementsSection() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          
         >
-          <h2 className="text-3xl font-semibold mb-8 text-center">Why Join Developers Club?</h2>
-          <motion.div 
+          <h2 className="text-3xl font-semibold mb-8 text-center">
+            Why Join Developers Club?
+          </h2>
+          <motion.div
             className="grid gap-6 md:grid-cols-2"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
             {benefits.map((benefit, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 className="flex items-start p-4 bg-blue-50 rounded-lg"
                 variants={itemVariants}
@@ -150,7 +169,9 @@ function AchievementsSection() {
                   {benefit.icon}
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
+                  <h3 className="text-xl font-semibold mb-2">
+                    {benefit.title}
+                  </h3>
                   <p className="text-gray-600">{benefit.description}</p>
                 </div>
               </motion.div>
@@ -164,16 +185,20 @@ function AchievementsSection() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="px-8"
         >
-          <h2 className="text-3xl font-semibold mb-8 text-center">Spotlight Achievement</h2>
-          <motion.div 
+          <h2 className="text-3xl font-semibold mb-8 text-center">
+            Spotlight Achievement
+          </h2>
+          <motion.div
             className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
           >
             <h3 className="text-2xl font-bold mb-4">Vashisht Hackathon</h3>
             <p className="text-lg mb-6">
-              Our largest event to date, bringing together over 1,100 participants to create innovative tech solutions.
-              This hackathon showcased the incredible talent and creativity within our community.
+              Our largest event to date, bringing together over 1,100
+              participants to create innovative tech solutions. This hackathon
+              showcased the incredible talent and creativity within our
+              community.
             </p>
           </motion.div>
         </motion.section>

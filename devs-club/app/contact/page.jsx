@@ -64,7 +64,7 @@ function ContactFormComponent() {
       />
 
       <motion.h1 
-        className="text-6xl md:text-7xl py-8 pb-12 font-extrabold text-center mb-10 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600"
+        className="text-6xl md:text-6xl py-8 pb-12 font-extrabold text-center mb-10 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600"
         initial="initial"
         animate="animate"
         exit="exit"
@@ -91,7 +91,7 @@ function ContactFormComponent() {
                 transition={{ delay: 0.3, duration: 0.5 }}
                 className="relative"
               >
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-lg blur opacity-10"></div>
+                <div className="absolute -inset-1 align-middle bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-lg blur opacity-10"></div>
                 <h2 className="text-4xl font-bold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Get in Touch</h2>
                 <form onSubmit={handleSubmit} className="space-y-7">
                   <motion.div variants={inputVariants} whileFocus="focus" className="group">

@@ -31,7 +31,7 @@
     "**/*.ts",
     "**/*.tsx",
     "app/(components)/Achivements.jsx"
-  ],
+, "app/api/getProjects/route.js"  ],
   "exclude": [
     "node_modules"
   ]

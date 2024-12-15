@@ -8,6 +8,7 @@ const isPublicRoute = createRouteMatcher([
   '/contact',    
   '/projects',  
   '/open-source',
+  '/api(/.*)?',
   '/',
 ]);
 export default clerkMiddleware((auth, request) => {
