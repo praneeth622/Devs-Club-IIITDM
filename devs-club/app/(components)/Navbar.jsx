@@ -15,7 +15,7 @@ export default function Navbar() {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const { isSignedIn } = useUser();
-  const navItems = ["About", "Achievements", "Projects","Contact","Open-Source"];
+  const navItems = ["About", "Achievements", "Projects","Open-Source","Contact"];
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-40">

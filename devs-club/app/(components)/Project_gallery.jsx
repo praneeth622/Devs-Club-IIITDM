@@ -2,10 +2,10 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 const projects = [
-  { title: 'Annual Hackathon', image: '/placeholder.svg' },
-  { title: 'Coding Workshop', image: '/placeholder.svg' },
-  { title: 'Tech Conference', image: '/placeholder.svg' },
-  { title: 'Team Collaboration', image: '/placeholder.svg' },
+  { title: 'Annual Hackathon', image: '/assets/img4.png' },
+  { title: 'Coding Workshop', image: '/assets/img5.png' },
+  { title: 'Project Session', image: '/assets/img6.png' },
+  { title: 'Team Collaboration', image: '/assets/img7.png' },
 ]
 
 export const ProjectsGallery = () => {

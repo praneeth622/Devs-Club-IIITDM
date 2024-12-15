@@ -20,7 +20,7 @@ const TimelineEvent = ({ title, date, description }) => {
       <motion.div
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.2 }}
-        className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
+        className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow "
       >
         {/* Header */}
         <div className="flex items-start justify-between mb-4">
