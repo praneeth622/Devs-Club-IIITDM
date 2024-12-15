@@ -1,5 +1,5 @@
 import dbConnect from "../conn";
-import Project from "../../models/Project";
+import Project from "../../models/project";
 
 export async function GET(req) {
   console.log("Fetching projects...");
@@ -7,7 +7,7 @@ export async function GET(req) {
     await dbConnect();
 
     const projects = await Project.find({});
-    console.log("Fetched projects:", projects);
+    // console.log("Fetched projects:", projects);
 
     return new Response(JSON.stringify({ success: true, data: projects }), {
       status: 200,
