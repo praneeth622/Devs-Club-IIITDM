@@ -112,7 +112,7 @@ function OpenSourcePage() {
               </motion.li>
               <motion.li variants={itemVariants}>
                 Make your changes and commit them with meaningful commit
-                messages: <code>git commit -m "Your commit message"</code>.
+                messages: <code>git commit -m &quot;Your commit message&quot;</code>.
               </motion.li>
               <motion.li variants={itemVariants}>
                 Push your changes to your fork using:{" "}
