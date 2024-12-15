@@ -287,7 +287,7 @@ export default function CoreTeam() {
   ]
 
   const mentors = [
-    { name: "Vishnu Ram A V", role: "AI/ML Mentor", bio: "Professor of Computer Science with 20+ years of industry experience.", image: "/assets/cs21b1043.jpg", linkedin: "https://linkedin.com/in/drrobertwhite", github: "https://github.com/drrobertwhite" },
+    { name: "Vishnu Ram A V", role: "AI/ML Mentor", bio: "Professor of Computer Science with 20+ years of industry experience.", image: "/assets/cs21b1043.jpg", linkedin: "https://www.linkedin.com/in/vishnuram-av-6306b029a", github: "https://github.com/drrobertwhite" },
     { name: "K Noineesh Reddy", role: "AI Mentor", bio: "Senior Software Engineer at Google, specializing in large-scale distributed systems.", image: "/assets/cs21b2023.jpg", linkedin: "https://linkedin.com/in/profemmagreen", github: "https://github.com/profemmagreen" },
   ]
 
