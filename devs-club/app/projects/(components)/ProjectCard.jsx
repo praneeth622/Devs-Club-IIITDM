@@ -8,7 +8,7 @@ const ProjectCard = ({ project, onHover, onClick }) => {
   return (
     <motion.div
       ref={cardRef}
-      className="group relative bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer h-[400px] border border-gray-100"
+      className="group relative bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer h-[400px] border border-gray-200"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -16,14 +16,14 @@ const ProjectCard = ({ project, onHover, onClick }) => {
       onHoverStart={onHover}
       onClick={onClick}
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-600/90 to-blue-600/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-800/90 to-blue-800/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       
       <div className="p-8 h-full flex flex-col relative z-10">
         <div className="mb-auto">
-          <h2 className="text-2xl font-bold text-gray-800 group-hover:text-white transition-colors duration-300 mb-3">
+          <h2 className="text-2xl font-bold text-gray-900 group-hover:text-white transition-colors duration-300 mb-3">
             {project.name}
           </h2>
-          <p className="text-gray-600 group-hover:text-white/90 transition-colors duration-300">
+          <p className="text-gray-700 group-hover:text-white/90 transition-colors duration-300">
             {project.description}
           </p>
         </div>
@@ -31,10 +31,10 @@ const ProjectCard = ({ project, onHover, onClick }) => {
         <div className="mt-6">
           <div className="flex items-center space-x-4">
             <div>
-              <p className="text-sm font-medium text-gray-600 group-hover:text-white/90 transition-colors duration-300">
+              <p className="text-sm font-medium text-gray-700 group-hover:text-white/90 transition-colors duration-300">
                 Team Lead
               </p>
-              <p className="text-sm text-gray-500 group-hover:text-white/70 transition-colors duration-300">
+              <p className="text-sm text-gray-600 group-hover:text-white/70 transition-colors duration-300">
                 {project.teamLead.name}
               </p>
             </div>
@@ -43,7 +43,7 @@ const ProjectCard = ({ project, onHover, onClick }) => {
 
         <div className="absolute bottom-4 right-4">
           <motion.button
-            className="text-purple-600 group-hover:text-white transition-colors duration-300"
+            className="text-blue-700 group-hover:text-white transition-colors duration-300"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >

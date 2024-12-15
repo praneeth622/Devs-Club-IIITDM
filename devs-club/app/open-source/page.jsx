@@ -52,188 +52,209 @@ function OpenSourcePage() {
   };
 
   return (
-    <div className="min-h-screen bg-white p-4 md:p-8">
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-6xl mx-auto"
-      >
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-8 text-blue-500">
-          <FiCode className="inline-block mr-2" />
-          Open Source Contributions
-        </h1>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="text-center mb-12"
-        >
-          <p className="text-lg text-black mb-4">
-            Join our community in building amazing open-source projects. Your
-            contributions can make a difference!
-          </p>
-          <Button className="bg-blue-500 hover:bg-blue-600 text-white">
-            <Link
-              href="https://github.com/developersclub"
-              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium bg-blue-500 hover:bg-blue-600 text-white px-4 py-2"
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50">
+      {/* Hero Section */}
+      <section className="relative min-h-[60vh] overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur-3xl opacity-10 animate-pulse" />
+        
+        <div className="relative z-10 container mx-auto px-4 py-20 min-h-[60vh] flex flex-col items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center max-w-5xl mx-auto backdrop-blur-sm bg-slate-900/30 p-8 rounded-2xl border border-white/5"
+          >
+            <motion.h1 
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              className="text-4xl md:text-7xl font-bold text-white mb-6 tracking-tight"
             >
-              <FiGithub className="mr-2" /> Visit Our GitHub
-            </Link>
-          </Button>
-        </motion.div>
-
-        <Card className="shadow-lg border-blue-500 border-t-4 mb-8">
-          <CardHeader>
-            <CardTitle className="text-2xl font-semibold text-blue-500">
-              How to Contribute
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ol className="list-decimal list-inside space-y-2 text-black">
-              <motion.li variants={itemVariants}>
-                Fork the{" "}
-                <a
-                  href="https://github.com/praneeth622/Devs-Club-IIITDM"
-                  className="text-blue-600 underline"
-                >
-                  Devs-Club-IIITDM
-                </a>{" "}
-                repository.
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                Clone your fork to your local machine using:{" "}
-                <code>git clone https://github.com/praneeth622/Devs-Club-IIITDM.git</code>.
-              </motion.li> 
-              <motion.li variants={itemVariants}>
-                Create a new branch for your feature or bug fix using:{" "}
-                <code>git checkout -b your-branch-name</code>.
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                Make your changes and commit them with meaningful commit
-                messages: <code>git commit -m &quot;Your commit message&quot;</code>.
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                Push your changes to your fork using:{" "}
-                <code>git push origin your-branch-name</code>.
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                Open a pull request to the{" "}
-                <a
-                  href="https://github.com/praneeth622/Devs-Club-IIITDM"
-                  className="text-blue-600 underline"
-                >
-                  original repository
-                </a>
-                , describing your changes clearly.
-              </motion.li>
-            </ol>
-          </CardContent>
-        </Card>
-
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold text-blue-500 mb-4">
-            Our Projects
-          </h2>
-          <div className="flex space-x-4 mb-4">
-            <div
-              onClick={() => setActiveTab("featured")}
-              className={`cursor-pointer rounded-md px-4 py-2 transition-colors duration-300 ${
-                activeTab === "featured"
-                  ? "bg-blue-500 text-white"
-                  : "bg-transparent text-blue-500 hover:bg-blue-100"
-              }`}
+              Open Source
+              <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-blue-300 to-purple-200 animate-gradient font-extrabold">
+                Contributions
+              </span>
+            </motion.h1>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-lg md:text-xl text-gray-100 mb-8 leading-relaxed max-w-3xl mx-auto"
             >
-              Featured
-            </div>
-            <div
-              onClick={() => setActiveTab("all")}
-              className={`cursor-pointer rounded-md px-4 py-2 transition-colors duration-300 ${
-                activeTab === "all"
-                  ? "bg-blue-500 text-white"
-                  : "bg-transparent text-blue-500 hover:bg-blue-100"
-              }`}
+              Join our thriving community of developers and make meaningful contributions 
+              to projects that matter. Your code can change the world.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
             >
-              All Projects
-            </div>
-          </div>
+              <Link
+                href="https://github.com/developersclub"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-full hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              >
+                <FiGithub className="text-xl" /> Explore Our GitHub
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-        >
-          {projects.map((project) => (
-            <motion.div key={project.id} variants={itemVariants}>
-              <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <CardTitle className="text-xl font-semibold text-blue-500">
-                    {project.name}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex justify-between text-sm text-black">
-                    <span className="flex items-center">
-                      <FiStar className="mr-1 text-yellow-400" />{" "}
-                      {project.stars}
-                    </span>
-                    <span className="flex items-center">
-                      <FiGitPullRequest className="mr-1 text-green-500" />{" "}
-                      {project.prs}
-                    </span>
-                    <span className="flex items-center">
-                      <FiUsers className="mr-1 text-blue-500" />{" "}
-                      {project.contributors}
-                    </span>
-                  </div>
-                  {/* <Button
-                    asChild
-                    className="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white"
-                  > */}
-                  <Link
-                    href={`https://github.com/developersclub/${project.name}`}
-                    className=" w-full mt-4 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium bg-blue-500 hover:bg-blue-600 text-white px-4 py-2"
-                  >
-                    View Project
-                  </Link>
-                  {/* </Button> */}
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden">
+          <svg className="relative block w-full h-[100px]" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path 
+              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
+              className="fill-slate-50"
+            ></path>
+          </svg>
+        </div>
+      </section>
 
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-16">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.7, duration: 0.5 }}
-          className="mt-12 text-center"
+          className="max-w-6xl mx-auto"
         >
-          <h2 className="text-2xl font-semibold text-blue-500 mb-4">
-            Ready to Start?
-          </h2>
-          <p className="text-black mb-6">
-            Dive into our open-source projects and make your mark in the
-            developer community!
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium bg-blue-500 hover:bg-blue-600 text-white px-4 py-2"
+          {/* Contribution Guide */}
+          <Card className="mb-16 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+            <CardHeader className="border-b border-gray-100">
+              <CardTitle className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+                How to Contribute
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-8">
+              <ol className="list-decimal list-inside space-y-4 text-gray-700">
+                {[
+                  "Fork the repository",
+                  "Clone your fork locally",
+                  "Create a new feature branch",
+                  "Make your changes",
+                  "Commit with clear messages",
+                  "Push and open a pull request"
+                ].map((step, index) => (
+                  <motion.li 
+                    key={index}
+                    variants={itemVariants}
+                    className="flex items-center space-x-2 text-lg"
+                  >
+                    <span className="text-blue-600 font-semibold">{step}</span>
+                  </motion.li>
+                ))}
+              </ol>
+            </CardContent>
+          </Card>
+
+          {/* Projects Section */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
           >
-            Get in Touch
-          </Link>
-          {/* </Button> */}
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+                Featured Projects
+              </h2>
+              <div className="flex gap-4">
+                {["Featured", "All Projects"].map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab.toLowerCase())}
+                    className={`px-6 py-3 rounded-full transition-all duration-300 ${
+                      activeTab === tab.toLowerCase()
+                        ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
+                        : "bg-white/50 text-gray-600 hover:bg-white"
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {projects.map((project) => (
+                <motion.div key={project.id} variants={itemVariants}>
+                  <Card className="group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-white/80 backdrop-blur-sm border-0">
+                    <CardHeader className="border-b border-gray-100">
+                      <CardTitle className="text-2xl font-bold text-gray-800">
+                        {project.name}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-6 space-y-6">
+                      <div className="flex justify-between text-gray-600">
+                        <span className="flex items-center gap-2">
+                          <FiStar className="text-yellow-500" /> {project.stars}
+                        </span>
+                        <span className="flex items-center gap-2">
+                          <FiGitPullRequest className="text-green-500" /> {project.prs}
+                        </span>
+                        <span className="flex items-center gap-2">
+                          <FiUsers className="text-blue-500" /> {project.contributors}
+                        </span>
+                      </div>
+                      <Link
+                        href={`https://github.com/developersclub/${project.name}`}
+                        className="block w-full py-3 text-center text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-md hover:shadow-lg"
+                      >
+                        View Project
+                      </Link>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Call to Action */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+            className="mt-20 text-center relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-blue-700 to-violet-700 opacity-90 rounded-2xl" />
+            <div className="relative z-10 p-16 backdrop-blur-sm">
+              <motion.h2 
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.8 }}
+                className="text-4xl font-bold mb-6 text-white tracking-tight"
+              >
+                Contribute to Open Source Excellence
+              </motion.h2>
+              <motion.p 
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.9 }}
+                className="text-xl mb-10 text-blue-50 max-w-2xl mx-auto leading-relaxed"
+              >
+                Join our thriving developer community and help build innovative solutions that make a difference. Your expertise can shape the future of technology.
+              </motion.p>
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 1 }}
+              >
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center px-10 py-4 bg-gradient-to-r from-white to-blue-50 text-indigo-700 rounded-full font-semibold hover:from-blue-50 hover:to-white transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 text-lg"
+                >
+                  Start Contributing
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 }
+
 export default function OpenSource() {
   return (
-    <div>
+    <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50">
       <Navbar />
       <OpenSourcePage />
       <Footer />
