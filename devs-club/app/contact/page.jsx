@@ -144,8 +144,7 @@ function ContactFormComponent() {
               >
                 <div>
                   <h2 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Connect with Us</h2>
-                  <p className="text-gray-700 text-xl leading-relaxed">Join our vibrant community of developers and innovators. Let's collaborate to build the future of technology together!</p>
-                </div>
+                  <p className="text-gray-700 text-xl leading-relaxed">Join our vibrant community of developers and innovators. Let&apos;s collaborate to build the future of technology together!</p>                </div>
                 
                 <div className="space-y-4 py-4">
                   <motion.a
