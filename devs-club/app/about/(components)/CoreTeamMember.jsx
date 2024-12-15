@@ -5,7 +5,14 @@ import { Github, Linkedin } from 'lucide-react'
 import image from '../../(assets)/image.png'
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { 
+      duration: 0.5,
+      ease: [0.6, -0.05, 0.01, 0.99] 
+    } 
+  },
 }
 
 const staggerChildren = {
@@ -27,66 +34,204 @@ const CoreTeamMember = ({ name, role, bio, image, linkedin, github }) => {
 
   return (
     <motion.div
-      className="relative w-64 h-80 cursor-pointer"
+      className="relative w-64 h-80"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       initial="rest"
       whileHover="hover"
       animate={isHovered ? "hover" : "rest"}
     >
-      {/* The background animation for the card */}
+      {/* Base card with shadow and scale */}
       <motion.div
-        className="absolute inset-0 bg-primary rounded-lg"
+        className="absolute inset-0 bg-white rounded-xl shadow-lg"
         variants={{
-          rest: { scale: 1 },
-          hover: { scale: 1.05 },
+          rest: { 
+            scale: 1,
+            boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+            transition: { duration: 0.4, ease: [0.6, -0.05, 0.01, 0.99] }
+          },
+          hover: { 
+            scale: 1.02,
+            boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+            transition: { duration: 0.4, ease: [0.6, -0.05, 0.01, 0.99] }
+          }
         }}
       />
 
-      {/* Default non-hover state */}
-      <AnimatePresence>
+      {/* Front face */}
+      <AnimatePresence mode="wait">
         {!isHovered && (
           <motion.div
-            className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center rounded-lg"
+            className="absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-gradient-to-b from-primary/90 to-primary overflow-hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
           >
-            <Image
-              src={image}
-              alt={name}
-              width={128}
-              height={128}
-              className="w-32 h-32 rounded-full mb-4"
-            />
-            <h3 className="text-black text-xl font-bold">{name}</h3>
-            <p className="text-black text-sm">{role}</p>
+            {/* Background pattern for visual interest */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 to-transparent" />
+            </div>
+
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ 
+                scale: 1, 
+                opacity: 1,
+                transition: { 
+                  duration: 0.4,
+                  ease: [0.6, -0.05, 0.01, 0.99]
+                }
+              }}
+              className="relative z-10"
+            >
+              <div className="w-28 h-28 rounded-full overflow-hidden ring-4 ring-white/30 shadow-xl">
+                <Image
+                  src={image}
+                  alt={name}
+                  width={128}
+                  height={128}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </motion.div>
+            
+            <motion.div
+              className="relative z-10 text-center mt-4 px-4"
+              initial={{ y: 10, opacity: 0 }}
+              animate={{ 
+                y: 0, 
+                opacity: 1,
+                transition: { 
+                  delay: 0.1, 
+                  duration: 0.4,
+                  ease: [0.6, -0.05, 0.01, 0.99]
+                }
+              }}
+            >
+              <h3 className="text-black text-xl font-bold tracking-wide mb-2 drop-shadow-md">
+                {name}
+              </h3>
+              <div className="relative">
+                <p className="text-black/90 text-sm font-medium px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm inline-block">
+                  {role}
+                </p>
+              </div>
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ 
+                  opacity: 1, 
+                  y: 0,
+                  transition: { 
+                    delay: 0.2,
+                    duration: 0.4,
+                    ease: [0.6, -0.05, 0.01, 0.99]
+                  }
+                }}
+                className="mt-3 flex justify-center space-x-3"
+              >
+                <a 
+                  href={linkedin} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="transform transition-all hover:scale-110 hover:-translate-y-1"
+                >
+                  <Linkedin className="w-5 h-5 text-white/80 hover:text-white" />
+                </a>
+                <a 
+                  href={github} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="transform transition-all hover:scale-110 hover:-translate-y-1"
+                >
+                  <Github className="w-5 h-5 text-white/80 hover:text-white" />
+                </a>
+              </motion.div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Hover state */}
-      <AnimatePresence>
+      {/* Back face */}
+      <AnimatePresence mode="wait">
         {isHovered && (
           <motion.div
-            className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-primary-foreground rounded-lg"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
+            className="absolute inset-0 p-6 rounded-xl bg-white"
+            initial={{ clipPath: "circle(0% at 50% 50%)" }}
+            animate={{ 
+              clipPath: "circle(100% at 50% 50%)",
+              transition: { 
+                duration: 0.5,
+                ease: [0.6, -0.05, 0.01, 0.99]
+              }
+            }}
+            exit={{ 
+              clipPath: "circle(0% at 50% 50%)",
+              transition: { 
+                duration: 0.4,
+                ease: [0.6, -0.05, 0.01, 0.99]
+              }
+            }}
           >
-            <h3 className="text-black text-xl font-bold mb-2">{name}</h3>
-            <p className="text-black text-sm mb-4">{role}</p>
-            <p className="text-black text-sm mb-4 text-center">{bio}</p>
-            <div className="flex justify-center space-x-4">
-              <a href={linkedin} target="_blank" rel="noopener noreferrer">
-                <Linkedin className="w-6 h-6 text-black hover:text-sky-300" />
-              </a>
-              <a href={github} target="_blank" rel="noopener noreferrer">
-                <Github className="w-6 h-6 text-black hover:text-gray-300" />
-              </a>
-            </div>
+            <motion.div
+              className="h-full flex flex-col justify-between"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.1,
+                    delayChildren: 0.2,
+                  }
+                }
+              }}
+            >
+              <motion.div
+                variants={{
+                  hidden: { y: 20, opacity: 0 },
+                  visible: { 
+                    y: 0, 
+                    opacity: 1,
+                    transition: { duration: 0.4, ease: [0.6, -0.05, 0.01, 0.99] }
+                  }
+                }}
+              >
+                <h3 className="text-gray-900 text-xl font-bold mb-2">{name}</h3>
+                <p className="text-primary font-medium text-sm mb-3">{role}</p>
+                <p className="text-gray-600 text-sm leading-relaxed">{bio}</p>
+              </motion.div>
+              
+              <motion.div 
+                className="flex justify-center space-x-4 pt-4"
+                variants={{
+                  hidden: { y: 20, opacity: 0 },
+                  visible: { 
+                    y: 0, 
+                    opacity: 1,
+                    transition: { duration: 0.4, ease: [0.6, -0.05, 0.01, 0.99] }
+                  }
+                }}
+              >
+                <a 
+                  href={linkedin} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="transform transition-transform hover:-translate-y-1"
+                >
+                  <Linkedin className="w-6 h-6 text-[#0077b5]" />
+                </a>
+                <a 
+                  href={github} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="transform transition-transform hover:-translate-y-1"
+                >
+                  <Github className="w-6 h-6 text-gray-700" />
+                </a>
+              </motion.div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
