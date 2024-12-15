@@ -93,22 +93,40 @@ function OpenSourcePage() {
           <CardContent>
             <ol className="list-decimal list-inside space-y-2 text-black">
               <motion.li variants={itemVariants}>
-                Fork the repository you&apos;re interested in
+                Fork the{" "}
+                <a
+                  href="https://github.com/praneeth622/Devs-Club-IIITDM"
+                  className="text-blue-600 underline"
+                >
+                  Devs-Club-IIITDM
+                </a>{" "}
+                repository.
               </motion.li>
               <motion.li variants={itemVariants}>
-                Clone your fork to your local machine
+                Clone your fork to your local machine using:{" "}
+                <code>git clone https://github.com/praneeth622/Devs-Club-IIITDM.git</code>.
+              </motion.li> 
+              <motion.li variants={itemVariants}>
+                Create a new branch for your feature or bug fix using:{" "}
+                <code>git checkout -b your-branch-name</code>.
               </motion.li>
               <motion.li variants={itemVariants}>
-                Create a new branch for your feature or bug fix
+                Make your changes and commit them with meaningful commit
+                messages: <code>git commit -m "Your commit message"</code>.
               </motion.li>
               <motion.li variants={itemVariants}>
-                Make your changes and commit them
+                Push your changes to your fork using:{" "}
+                <code>git push origin your-branch-name</code>.
               </motion.li>
               <motion.li variants={itemVariants}>
-                Push your changes to your fork
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                Open a pull request to the original repository
+                Open a pull request to the{" "}
+                <a
+                  href="https://github.com/praneeth622/Devs-Club-IIITDM"
+                  className="text-blue-600 underline"
+                >
+                  original repository
+                </a>
+                , describing your changes clearly.
               </motion.li>
             </ol>
           </CardContent>
