@@ -21,7 +21,7 @@ const ProjectDetails = ({ project, onClose }) => {
           <div className="flex items-center mb-4">
             <div>
               <h3 className="text-xl font-semibold text-gray-800">{project.teamLead.name}</h3>
-              <p className="text-purple-600">Team Lead</p>
+              <p className="text-blue-600">Team Lead</p>
             </div>
           </div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2">{project.name}</h2>
@@ -45,7 +45,7 @@ const ProjectDetails = ({ project, onClose }) => {
             ))}
           </ul>
           <motion.button
-            className="mt-6 px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors duration-200"
+            className="mt-6 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={onClose}

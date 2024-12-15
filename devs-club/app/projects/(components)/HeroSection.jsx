@@ -91,7 +91,7 @@ const HeroSection = () => {
                     >
                         Explore our innovative projects and technical achievements. 
                         From web applications to cutting-edge software solutions, 
-                        discover what we've built together.
+                        discover what we&aposve built together.
                     </motion.p>
 
                     {/* Status Indicator - improved visibility */}

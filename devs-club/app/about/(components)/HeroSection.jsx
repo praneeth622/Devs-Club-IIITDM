@@ -52,7 +52,7 @@ const HeroSection = () => {
                     >
                         <div className="flex items-center gap-2 text-gray-100 backdrop-blur-md bg-white/10 px-8 py-4 rounded-full border border-white/20 shadow-lg">
                             <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-lg shadow-emerald-500/20" />
-                            <span className="font-medium">Building tomorrow's tech leaders</span>
+                            <span className="font-medium">Building tomorrow&aposs tech leaders</span>
                         </div>
                     </motion.div>
                 </motion.div>
