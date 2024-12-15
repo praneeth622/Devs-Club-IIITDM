@@ -116,7 +116,7 @@ export const HeroSection = () => {
             
             <Link 
               href="/about" 
-              className="group relative inline-flex items-center gap-2 px-8 py-4 w-full md:w-auto bg-transparent border-2 border-blue-400 rounded-full hover:border-purple-400 text-white transition-colors duration-300"
+              className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-blue-400 rounded-full hover:border-purple-400 text-white transition-colors duration-300"
             >
               <span className="relative font-bold">About Us</span>
               <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
