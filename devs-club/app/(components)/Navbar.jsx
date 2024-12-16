@@ -90,6 +90,8 @@ export default function Navbar() {
   const { isSignedIn } = useUser();
   const navItems = ["About", "Achievements", "Projects", "Open-Source", "Contact"];
 
+  const handleMenuToggle = () => setIsMenuOpen(!isMenuOpen);
+
   return (
     <header className="bg-white shadow-sm sticky top-0 z-40">
       <style jsx global>{mobileMenuStyles}</style>
@@ -111,7 +113,7 @@ export default function Navbar() {
         <div className="md:hidden dropdown">
           <button 
             className="dropdown-toggle"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={handleMenuToggle}
           >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -122,7 +124,7 @@ export default function Navbar() {
                 <Link 
                   key={item} 
                   href={`/${item.toLowerCase()}`}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={handleMenuToggle}
                 >
                   <button className="dropdown-item">
                     {item}
@@ -134,7 +136,7 @@ export default function Navbar() {
               
               {isSignedIn ? (
                 <>
-                  <Link href="/dashboard" onClick={() => setIsMenuOpen(false)}>
+                  <Link href="/dashboard" onClick={handleMenuToggle}>
                     <button className="dropdown-item">
                       Dashboard
                     </button>
@@ -144,7 +146,7 @@ export default function Navbar() {
                   </div>
                 </>
               ) : (
-                <Link href="/dashboard" onClick={() => setIsMenuOpen(false)}>
+                <Link href="/dashboard" onClick={handleMenuToggle}>
                   <button className="dropdown-item">
                     Login
                   </button>
@@ -154,7 +156,7 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Desktop Navigation remains the same */}
+        {/* Desktop Navigation */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -172,23 +174,6 @@ export default function Navbar() {
               <motion.div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
             </motion.div>
           ))}
-          {/* <Button
-              style={{
-                backgroundColor: '#3182ce', // blue-600
-                color: '#ffffff', // white text
-                fontWeight: '600', // font-semibold
-                borderRadius: '0.375rem', // rounded
-                width: '100%', // w-full
-                transition: 'background-color 0.3s ease', // transition duration-300
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2b6cb0')} // blue-700 on hover
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#3182ce')} // revert to blue-600
-            >
-              <Link href="/dashboard" onClick={toggleMenu} style={{ color: 'inherit', textDecoration: 'none' }}>
-                Login
-              </Link>
-            </Button> */}
-          {/* Conditional Rendering for User Button or Login Button */}
           {isSignedIn ? (
             <div className="flex justify-content-between gap-8 text-gray-600 font-medium text-lg transition-colors duration-300 group-hover:text-blue-600">
               <motion.div className="relative group">
@@ -200,12 +185,7 @@ export default function Navbar() {
                 </Link>
                 <motion.div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="hidden md:flex space-x-6 items-center "
-              >
+              <motion.div className="hidden md:flex space-x-6 items-center">
                 <UserButton />
               </motion.div>
             </div>
@@ -217,28 +197,21 @@ export default function Navbar() {
             >
               <Button
                 style={{
-                  backgroundColor: "#3182ce", // blue-600
-                  color: "#ffffff", // white text
-                  fontWeight: "600", // font-semibold
+                  backgroundColor: "#3182ce",
+                  color: "#ffffff",
+                  fontWeight: "600",
                   borderRadius: "0.375rem",
                   width: "100%",
                   transition: "background-color 0.3s ease",
                 }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#9b2c2c")
-                } // red-900 on hover
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#c53030")
-                } // revert to red-800
-                onMouseDown={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#742a2a")
-                } // darker red on press
-                onMouseUp={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#9b2c2c")
-                }>
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#9b2c2c")}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#c53030")}
+                onMouseDown={(e) => (e.currentTarget.style.backgroundColor = "#742a2a")}
+                onMouseUp={(e) => (e.currentTarget.style.backgroundColor = "#9b2c2c")}
+              >
                 <Link
                   href="/dashboard"
-                  onClick={toggleMenu}
+                  onClick={handleMenuToggle}
                   style={{ color: "inherit", textDecoration: "none" }}
                 >
                   Login
