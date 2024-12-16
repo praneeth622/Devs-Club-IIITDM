@@ -95,7 +95,7 @@ const itemVariants = {
 // Internal component, not exported
 function AchievementsSection() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 text-gray-800 py-16">
+    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 text-gray-800 py-16 px-4 md:px-0">
       <motion.h1
         className="text-5xl font-bold text-center mb-16 text-blue-600"
         initial={{ opacity: 0, y: -50 }}
@@ -105,7 +105,7 @@ function AchievementsSection() {
         Developers Club Achievements
       </motion.h1>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.section
           className="mb-20"
           variants={containerVariants}
@@ -144,7 +144,7 @@ function AchievementsSection() {
         </motion.section>
 
         <motion.section
-          className="bg-white rounded-xl p-8 mb-20 shadow-lg"
+          className="bg-white rounded-xl p-8 mb-20 shadow-lg mx-4 sm:mx-0"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -183,7 +183,7 @@ function AchievementsSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="px-8"
+          className="px-4 sm:px-8"
         >
           <h2 className="text-3xl font-semibold mb-8 text-center">
             Spotlight Achievement
