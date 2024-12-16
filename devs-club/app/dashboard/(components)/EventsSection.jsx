@@ -6,6 +6,14 @@ import { Calendar, Clock, MapPin, Users, Link as LinkIcon, ArrowRight } from 'lu
 import { Button } from "../../../components/ui/button"
 import { Badge } from "../../../components/ui/badge"
 
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+};
+
 const EventsSection = ({ events }) => {
   const getEventStatus = (date) => {
     const eventDate = new Date(date);
@@ -46,7 +54,7 @@ const EventsSection = ({ events }) => {
                       <div className="space-y-4 text-gray-600">
                         <div className="flex items-center">
                           <Calendar className="w-5 h-5 mr-3 text-blue-500 flex-shrink-0" />
-                          <span className="text-sm">{new Date(event.date).toLocaleDateString()}</span>
+                          <span className="text-sm">{formatDate(event.date)}</span>
                         </div>
                         <div className="flex items-center">
                           <Clock className="w-5 h-5 mr-3 text-blue-500 flex-shrink-0" />
@@ -78,7 +86,7 @@ const EventsSection = ({ events }) => {
                       <Calendar className="w-5 h-5 mr-4 text-blue-500 flex-shrink-0 mt-1" />
                       <div>
                         <p className="font-semibold mb-1">Date</p>
-                        <p>{new Date(event.date).toLocaleDateString()}</p>
+                        <p>{formatDate(event.date)}</p>
                       </div>
                     </div>
                     <div className="flex items-start text-gray-600">
