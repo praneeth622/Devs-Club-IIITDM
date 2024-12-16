@@ -24,7 +24,7 @@ const EventsSection = ({ events }) => {
       transition={{ duration: 0.5 }}
       className="mb-12 px-4"
     >
-      <h2 className="text-2xl font-bold mb-8 text-gray-800">Upcoming Events</h2>
+      <h2 className="text-2xl font-bold mb-8 h-auto text-gray-800">Upcoming Events</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {events.map((event, index) => {
           const status = getEventStatus(event.date);
@@ -35,7 +35,7 @@ const EventsSection = ({ events }) => {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Card className="h-full cursor-pointer bg-white hover:shadow-lg transition-shadow duration-300 relative overflow-hidden group">
+                  <Card className="h-auto cursor-pointer bg-white hover:shadow-lg transition-shadow duration-300 relative overflow-hidden group">
                     <div className="absolute top-4 right-4">
                       <Badge className={`${status.color} text-white px-3 py-1`}>
                         {status.text}
@@ -65,7 +65,7 @@ const EventsSection = ({ events }) => {
                   </Card>
                 </motion.div>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-[550px] bg-white">
+              <DialogContent className="sm:max-w-[550px] max-h-[700px] bg-white">
                 <div className="p-8">
                   <div className="flex justify-between items-start mb-8">
                     <h2 className="text-2xl font-bold leading-tight pr-4">{event.name}</h2>

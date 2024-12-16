@@ -9,7 +9,7 @@ const projectSchema = new mongoose.Schema({
   link: { type: String, required: true },
 });
 
-const Project = mongoose.models.Project || mongoose.model("Project", projectSchema, "Projects");
+const Project = mongoose.models.Project || mongoose.model("OSProject", projectSchema, "OSProjects");
 
 
 export default Project;
