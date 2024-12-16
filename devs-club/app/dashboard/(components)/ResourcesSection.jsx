@@ -164,7 +164,6 @@ const resources = [
 ]
 
 export default function ResourcesSection() {
-  const [isResourcesOpen, setIsResourcesOpen] = useState(false)
   const [selectedResource, setSelectedResource] = useState(null)
 
   return (
@@ -172,66 +171,40 @@ export default function ResourcesSection() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="px-4 py-8"
+      className="px-6 py-12 md:px-8"
     >
-      <h2 className="text-3xl font-bold text-gray-800 mb-6">Resources & Tools</h2>
-      <Card className="overflow-hidden shadow-lg">
-        <CardContent className="p-0">
+      <h2 className="text-3xl font-bold text-gray-800 mb-8">Resources & Tools</h2>
+      <Card className="overflow-hidden shadow-lg border-0">
+        <CardContent className="p-8 md:p-10">
           <motion.div
-            initial={false}
-            animate={{ height: isResourcesOpen ? 'auto' : '56px' }}
-            className="overflow-hidden"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8"
           >
-            <Button
-              onClick={() => setIsResourcesOpen(!isResourcesOpen)}
-              className="w-full text-[20px] justify-between rounded-none h-14 font-semibold bg-gray-200 hover:bg-gray-300 transition-colors duration-200"
-            >
-              <span>{isResourcesOpen ? 'Hide Resources' : 'Explore Resources'}</span>
-              <motion.div
-                animate={{ rotate: isResourcesOpen ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
+            {resources.map((resource, index) => (
+              <motion.button
+                key={resource.name}
+                onClick={() => setSelectedResource(resource)}
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`flex flex-col items-center p-6 md:p-8 ${resource.bg} rounded-xl shadow-md hover:shadow-lg transition-all duration-200`}
               >
-                <ChevronRight className="h-6 w-6" />
-              </motion.div>
-            </Button>
-            <AnimatePresence>
-              {isResourcesOpen && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="p-6 grid grid-cols-2 md:grid-cols-4 gap-6"
-                >
-                  {resources.map((resource, index) => (
-                    <motion.button
-                      key={resource.name}
-                      onClick={() => setSelectedResource(resource)}
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ delay: index * 0.1 }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`flex flex-col items-center p-6 ${resource.bg} rounded-xl shadow-md hover:shadow-lg transition-all duration-200`}
-                    >
-                      <resource.icon className={`w-12 h-12 ${resource.color} mb-3`} />
-                      <span className="text-lg font-semibold text-gray-800">{resource.name}</span>
-                    </motion.button>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
+                <resource.icon className={`w-12 h-12 ${resource.color} mb-4`} />
+                <span className="text-lg font-semibold text-gray-800 text-center">{resource.name}</span>
+              </motion.button>
+            ))}
           </motion.div>
         </CardContent>
       </Card>
 
       <Dialog open={!!selectedResource} onOpenChange={() => setSelectedResource(null)}>
-        <DialogContent className="sm:max-w-[555px] bg-white rounded-md p-6 shadow-xl">
-          <DialogHeader>
-            <DialogTitle className="flex items-center space-x-2 text-xl font-bold">
+        <DialogContent className="sm:max-w-[600px] bg-white rounded-lg p-8">
+          <DialogHeader className="mb-6">
+            <DialogTitle className="flex items-center space-x-3 text-2xl font-bold mb-3">
               {selectedResource && (
                 <>
-                  <selectedResource.icon className={`w-6 h-6 ${selectedResource.color}`} />
+                  <selectedResource.icon className={`w-8 h-8 ${selectedResource.color}`} />
                   <span>{selectedResource?.name}</span>
                 </>
               )}
@@ -240,7 +213,7 @@ export default function ResourcesSection() {
               Explore documents, courses, and community resources.
             </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4 py-4">
+          <div className="grid gap-6 py-4">
             {selectedResource && (
               <>
                 {selectedResource.documents && selectedResource.documents.length > 0 && (
@@ -256,7 +229,7 @@ export default function ResourcesSection() {
             )}
           </div>
           <DialogClose asChild>
-            <Button className="w-full mt-4 bg-gray-800 text-black hover:bg-gray-700 transition-colors border-b border-gray-600">
+            <Button className="w-full mt-6 bg-gray-800 text-white hover:bg-gray-700 transition-colors">
               Close
             </Button>
           </DialogClose>
@@ -268,22 +241,24 @@ export default function ResourcesSection() {
 
 function ResourceSection({ title, items }) {
   return (
-    <div>
-      <h3 className="text-lg font-semibold mb-2 text-gray-800">{title}</h3>
-      <ul className="space-y-2">
+    <div className="space-y-3">
+      <h3 className="text-lg font-semibold mb-3 text-gray-800">{title}</h3>
+      <ul className="space-y-3">
         {items.map((item, index) => (
           <li key={index}>
             <a
               href={item.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 p-2 rounded-md bg-gray-50 hover:bg-gray-100 transition-colors duration-200"
+              className="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors duration-200"
             >
-              <item.icon className="w-5 h-5 text-gray-600" />
-              <span className="text-sm text-gray-700">{item.name}</span>
-              {item.description && (
-                <span className="text-xs text-gray-500">{item.description}</span>
-              )}
+              <item.icon className="w-5 h-5 text-gray-600 flex-shrink-0" />
+              <div className="flex-1">
+                <span className="text-sm font-medium text-gray-700">{item.name}</span>
+                {item.description && (
+                  <p className="text-xs text-gray-500 mt-1">{item.description}</p>
+                )}
+              </div>
             </a>
           </li>
         ))}
