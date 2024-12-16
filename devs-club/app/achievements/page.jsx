@@ -9,6 +9,7 @@ import {
   Star,
   Code,
   Brain,
+  Trophy,
 } from "lucide-react";
 import Navbar from "../(components)/Navbar";
 import { Footer } from "../(components)/Footer";
@@ -185,21 +186,60 @@ function AchievementsSection() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="px-4 sm:px-8"
         >
-          <h2 className="text-3xl font-semibold mb-8 text-center">
-            Spotlight Achievement
+          <h2 className="text-3xl font-semibold mb-12 text-center">
+            <span className="relative">
+              Spotlight Achievement
+              <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-blue-500 rounded-full"></span>
+            </span>
           </h2>
           <motion.div
-            className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-8 shadow-2xl hover:shadow-xl transition-shadow duration-300 text-white relative overflow-hidden"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
           >
-            <h3 className="text-2xl font-bold mb-4">Vashisht Hackathon</h3>
-            <p className="text-lg mb-6">
-              Our largest event to date, bringing together over 1,100
-              participants to create innovative tech solutions. This hackathon
-              showcased the incredible talent and creativity within our
-              community.
-            </p>
+            {/* Background decoration */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full transform translate-x-1/2 -translate-y-1/2"></div>
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white opacity-5 rounded-full transform -translate-x-1/2 translate-y-1/2"></div>
+            
+            {/* Content */}
+            <div className="relative z-10">
+              <div className="flex items-center mb-6">
+                <div className="bg-white/10 p-4 rounded-full mr-4">
+                  <Trophy className="w-8 h-8 text-yellow-400" />
+                </div>
+                <h3 className="text-3xl font-bold bg-gradient-to-r from-yellow-200 to-yellow-400 text-transparent bg-clip-text">
+                  Vashisht Hackathon
+                </h3>
+              </div>
+              
+              <div className="space-y-6">
+                <p className="text-lg leading-relaxed text-blue-50">
+                  Our largest event to date, bringing together over 1,100
+                  participants to create innovative tech solutions. This hackathon
+                  showcased the incredible talent and creativity within our
+                  community.
+                </p>
+                
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                  <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                    <div className="text-2xl font-bold text-yellow-400">1,100+</div>
+                    <div className="text-sm text-blue-100">Participants</div>
+                  </div>
+                  <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                    <div className="text-2xl font-bold text-yellow-400">48hrs</div>
+                    <div className="text-sm text-blue-100">Duration</div>
+                  </div>
+                  <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                    <div className="text-2xl font-bold text-yellow-400">250+</div>
+                    <div className="text-sm text-blue-100">Projects</div>
+                  </div>
+                  <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                    <div className="text-2xl font-bold text-yellow-400">₹2L+</div>
+                    <div className="text-sm text-blue-100">Prize Pool</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </motion.section>
 
