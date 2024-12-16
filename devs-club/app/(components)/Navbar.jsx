@@ -57,92 +57,64 @@ export default function Navbar() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="hidden md:flex space-x-6 items-center"
+          className="hidden md:flex items-center gap-2"
         >
           {navItems.map((item) => (
-            <motion.div key={item} className="relative group">
-              <Link
-                href={`/${item.toLowerCase()}`}
-                className="text-gray-600 font-medium text-lg transition-colors duration-300 group-hover:text-blue-600"
-              >
-                {item}
-              </Link>
-              <motion.div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-            </motion.div>
+            <Link key={item} href={`/${item.toLowerCase()}`}>
+              <button className="cursor-pointer bg-white relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-[#F5F5F5] hover:text-blue-600 h-9 px-3">
+                <span>{item}</span>
+              </button>
+            </Link>
           ))}
-          {/* <Button
-              style={{
-                backgroundColor: '#3182ce', // blue-600
-                color: '#ffffff', // white text
-                fontWeight: '600', // font-semibold
-                borderRadius: '0.375rem', // rounded
-                width: '100%', // w-full
-                transition: 'background-color 0.3s ease', // transition duration-300
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2b6cb0')} // blue-700 on hover
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#3182ce')} // revert to blue-600
-            >
-              <Link href="/dashboard" onClick={toggleMenu} style={{ color: 'inherit', textDecoration: 'none' }}>
-                Login
-              </Link>
-            </Button> */}
-          {/* Conditional Rendering for User Button or Login Button */}
+
           {isSignedIn ? (
-            <div className="flex justify-content-between gap-8 text-gray-600 font-medium text-lg transition-colors duration-300 group-hover:text-blue-600">
-              <motion.div className="relative group">
-                <Link
-                  href="/dashboard"
-                  className="text-gray-600 font-medium text-lg transition-colors duration-300 group-hover:text-blue-600"
-                >
+            <div className="flex items-center gap-2">
+              <Link href="/dashboard">
+                <button className="cursor-pointer bg-white relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-[#F5F5F5] hover:text-[#06B6D4] h-9 px-3">
+                  <svg
+                    className="text-cyan-500"
+                    stroke="currentColor"
+                    fill="none"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    height="22"
+                    width="22"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+                    <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+                    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+                    <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+                  </svg>
                   Dashboard
-                </Link>
-                <motion.div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="hidden md:flex space-x-6 items-center "
-              >
+                </button>
+              </Link>
+              <div className="ml-2">
                 <UserButton />
-              </motion.div>
+              </div>
             </div>
           ) : (
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 200 }}
-              className="bg-red-800"
-            >
-              <Button
-                style={{
-                  backgroundColor: "#3182ce", // blue-600
-                  color: "#ffffff", // white text
-                  fontWeight: "600", // font-semibold
-                  borderRadius: "0.375rem",
-                  width: "100%",
-                  transition: "background-color 0.3s ease",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#9b2c2c")
-                } // red-900 on hover
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#c53030")
-                } // revert to red-800
-                onMouseDown={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#742a2a")
-                } // darker red on press
-                onMouseUp={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#9b2c2c")
-                }>
-                <Link
-                  href="/dashboard"
-                  onClick={toggleMenu}
-                  style={{ color: "inherit", textDecoration: "none" }}
+            <Link href="/dashboard">
+              <button className="cursor-pointer bg-white relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-[#F5F5F5] hover:text-[#06B6D4] h-9 px-3">
+                <svg
+                  className="text-cyan-500"
+                  stroke="currentColor"
+                  fill="none"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  height="22"
+                  width="22"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  Login
-                </Link>
-              </Button>
-            </motion.div>
+                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3" />
+                </svg>
+                Login
+              </button>
+            </Link>
           )}
         </motion.div>
 
