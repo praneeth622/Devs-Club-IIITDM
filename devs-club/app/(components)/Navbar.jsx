@@ -9,18 +9,92 @@ import logo from "../../public/assets/image.png";
 import { Menu, X } from "lucide-react";
 import { UserButton, useUser } from "@clerk/clerk-react";
 
+const mobileMenuStyles = `
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-toggle {
+    background-color: #f8f9fa;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+  }
+
+  .dropdown-toggle:hover {
+    background-color: #e9ecef;
+  }
+
+  .dropdown-menu {
+    position: fixed;
+    right: 0;
+    top: 60px;
+    background-color: white;
+    min-width: 250px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 0.375rem;
+    padding: 0.5rem 0;
+    z-index: 1000;
+    transform-origin: top right;
+    animation: dropdownAnimation 0.2s ease forwards;
+  }
+
+  @keyframes dropdownAnimation {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .dropdown-item:hover {
+    color: #1e2125;
+    background-color: #f8f9fa;
+  }
+
+  .dropdown-divider {
+    height: 0;
+    margin: 0.5rem 0;
+    overflow: hidden;
+    border-top: 1px solid #e9ecef;
+  }
+`;
+
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [SignedIn, setSignedIn] = useState(false);
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const { isSignedIn } = useUser();
-  const navItems = ["About", "Achievements", "Projects","Open-Source","Contact"];
+  const navItems = ["About", "Achievements", "Projects", "Open-Source", "Contact"];
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-40">
+      <style jsx global>{mobileMenuStyles}</style>
       <nav className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-        {/* Animated Logo */}
+        {/* Logo section remains the same */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -28,150 +102,151 @@ export default function Navbar() {
           className="text-3xl font-extrabold text-blue-600 tracking-wide"
         >
           <Link href="/" className="flex items-center space-x-2">
-            <Image
-              src={logo}
-              alt="Developers Club Logo"
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-            <span className="font-bold text-xl text-blue-600">
-              Developers Club
-            </span>
+            <Image src={logo} alt="Developers Club Logo" width={40} height={40} className="rounded-full" />
+            <span className="font-bold text-xl text-blue-600">Developers Club</span>
           </Link>
         </motion.div>
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
-          <Button variant="ghost" size="icon" onClick={toggleMenu}>
-            {isMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </Button>
+        {/* Mobile Menu */}
+        <div className="md:hidden dropdown">
+          <button 
+            className="dropdown-toggle"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+          
+          {isMenuOpen && (
+            <div className="dropdown-menu">
+              {navItems.map((item) => (
+                <Link 
+                  key={item} 
+                  href={`/${item.toLowerCase()}`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <button className="dropdown-item">
+                    {item}
+                  </button>
+                </Link>
+              ))}
+              
+              <div className="dropdown-divider" />
+              
+              {isSignedIn ? (
+                <>
+                  <Link href="/dashboard" onClick={() => setIsMenuOpen(false)}>
+                    <button className="dropdown-item">
+                      Dashboard
+                    </button>
+                  </Link>
+                  <div className="px-6 py-2">
+                    <UserButton />
+                  </div>
+                </>
+              ) : (
+                <Link href="/dashboard" onClick={() => setIsMenuOpen(false)}>
+                  <button className="dropdown-item">
+                    Login
+                  </button>
+                </Link>
+              )}
+            </div>
+          )}
         </div>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation remains the same */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="hidden md:flex items-center gap-2"
+          className="hidden md:flex space-x-6 items-center"
         >
           {navItems.map((item) => (
-            <Link key={item} href={`/${item.toLowerCase()}`}>
-              <button className="cursor-pointer bg-white relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-[#F5F5F5] hover:text-blue-600 h-9 px-3">
-                <span>{item}</span>
-              </button>
-            </Link>
-          ))}
-
-          {isSignedIn ? (
-            <div className="flex items-center gap-2">
-              <Link href="/dashboard">
-                <button className="cursor-pointer bg-white relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-[#F5F5F5] hover:text-[#06B6D4] h-9 px-3">
-                  <svg
-                    className="text-cyan-500"
-                    stroke="currentColor"
-                    fill="none"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    height="22"
-                    width="22"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
-                    <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
-                    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
-                    <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
-                  </svg>
-                  Dashboard
-                </button>
+            <motion.div key={item} className="relative group">
+              <Link
+                href={`/${item.toLowerCase()}`}
+                className="text-gray-600 font-medium text-lg transition-colors duration-300 group-hover:text-blue-600"
+              >
+                {item}
               </Link>
-              <div className="ml-2">
+              <motion.div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+            </motion.div>
+          ))}
+          {/* <Button
+              style={{
+                backgroundColor: '#3182ce', // blue-600
+                color: '#ffffff', // white text
+                fontWeight: '600', // font-semibold
+                borderRadius: '0.375rem', // rounded
+                width: '100%', // w-full
+                transition: 'background-color 0.3s ease', // transition duration-300
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2b6cb0')} // blue-700 on hover
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#3182ce')} // revert to blue-600
+            >
+              <Link href="/dashboard" onClick={toggleMenu} style={{ color: 'inherit', textDecoration: 'none' }}>
+                Login
+              </Link>
+            </Button> */}
+          {/* Conditional Rendering for User Button or Login Button */}
+          {isSignedIn ? (
+            <div className="flex justify-content-between gap-8 text-gray-600 font-medium text-lg transition-colors duration-300 group-hover:text-blue-600">
+              <motion.div className="relative group">
+                <Link
+                  href="/dashboard"
+                  className="text-gray-600 font-medium text-lg transition-colors duration-300 group-hover:text-blue-600"
+                >
+                  Dashboard
+                </Link>
+                <motion.div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="hidden md:flex space-x-6 items-center "
+              >
                 <UserButton />
-              </div>
+              </motion.div>
             </div>
           ) : (
-            <Link href="/dashboard">
-              <button className="cursor-pointer bg-white relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-[#F5F5F5] hover:text-[#06B6D4] h-9 px-3">
-                <svg
-                  className="text-cyan-500"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  height="22"
-                  width="22"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3" />
-                </svg>
-                Login
-              </button>
-            </Link>
-          )}
-        </motion.div>
-
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, x: "100%" }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: "100%" }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed inset-y-0 right-0 w-64 bg-white shadow-lg z-50 md:hidden"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 200 }}
+              className="bg-red-800"
             >
-              <div className="flex flex-col h-full p-4">
-                {/* Close button */}
-                <div className="flex justify-end pb-6">
-                  <Button variant="ghost" size="icon" onClick={toggleMenu}>
-                    <X className="h-6 w-6" />
-                  </Button>
-                </div>
-
-                <div className="space-y-3">
-                  {navItems.map((item) => (
-                    <Link
-                      key={item}
-                      href={`/${item.toLowerCase()}`}
-                      className="block text-gray-600 font-medium pb-4 text-lg transition-colors duration-300 hover:text-blue-600"
-                      onClick={toggleMenu}
-                    >
-                      {item}
-                    </Link>
-                  ))}
-                </div>
-                {isSignedIn ? (
-                  <div>
-                    <Link
-                      href={"/dashboard"}
-                      className="block text-gray-600 font-medium pb-4 text-lg transition-colors duration-300 hover:text-blue-600"
-                      onClick={toggleMenu}
-                    >
-                      Dashboard
-                    </Link>
-                    <UserButton />
-                  </div>
-                ) : (
-                  <div>
-                    <Button className="bg-red-600 text-white hover:bg-blue-700 font-semibold rounded transition duration-300 w-full">
-                      <Link href="/dashboard" onClick={toggleMenu}>
-                        Login
-                      </Link>
-                    </Button>
-                  </div>
-                )}
-              </div>
+              <Button
+                style={{
+                  backgroundColor: "#3182ce", // blue-600
+                  color: "#ffffff", // white text
+                  fontWeight: "600", // font-semibold
+                  borderRadius: "0.375rem",
+                  width: "100%",
+                  transition: "background-color 0.3s ease",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.backgroundColor = "#9b2c2c")
+                } // red-900 on hover
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.backgroundColor = "#c53030")
+                } // revert to red-800
+                onMouseDown={(e) =>
+                  (e.currentTarget.style.backgroundColor = "#742a2a")
+                } // darker red on press
+                onMouseUp={(e) =>
+                  (e.currentTarget.style.backgroundColor = "#9b2c2c")
+                }>
+                <Link
+                  href="/dashboard"
+                  onClick={toggleMenu}
+                  style={{ color: "inherit", textDecoration: "none" }}
+                >
+                  Login
+                </Link>
+              </Button>
             </motion.div>
           )}
-        </AnimatePresence>
+        </motion.div>
       </nav>
     </header>
   );
