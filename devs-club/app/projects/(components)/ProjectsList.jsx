@@ -1,26 +1,15 @@
-import { useState } from 'react';
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import ProjectCard from './ProjectCard';
 import ProjectDetails from './ProjectDetails';
 import { motion } from 'framer-motion';
 
-// {
-//   id: 1,
-//   name: "AI Assistant",
-//   description: "An AI-powered virtual assistant for productivity enhancement.",
-//   teamLead: {
-//     name: "Emma Watson",
-//     photo: "/placeholder.svg?height=100&width=100",
-//     linkedin: "https://linkedin.com/in/emmawatson",
-//     github: "https://github.com/emmawatson"
-//   },
-const ProjectsList = ({ projects }) => {
+const ProjectsList = ({ projects: initialProjects }) => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -56,7 +45,7 @@ const ProjectsList = ({ projects }) => {
           </motion.div>
         ))}
       </div>
-      
+
       <AnimatePresence>
         {selectedProject && (
           <ProjectDetails
