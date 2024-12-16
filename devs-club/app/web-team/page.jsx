@@ -22,15 +22,15 @@ const teamMembers = [
   },
   {
     name: "Dharshan Karthikeya ",
-    role: "Frontend Developer",
+    role: "UI/UX Designer",
     description: "Mike specializes in creating responsive and accessible web interfaces using modern frontend technologies.",
     photo: "",
     linkedin: "https://linkedin.com/in/mikejohnson",
     github: "https://github.com/mikejohnson",
   },
   {
-    name: "Chaitayna Reddy",
-    role: "Backend Developer",
+    name: "G Chaitanya Reddy",
+    role: "Frontend Developer",
     description: "Emily is an expert in server-side programming, database management, and API development.",
     photo: "/assets/CS22B1052.jpg",
     linkedin: "https://linkedin.com/in/emilybrown",

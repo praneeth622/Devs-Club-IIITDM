@@ -57,7 +57,7 @@ export const Footer = () => {
               href="/web-team" 
               className="hover:text-white transition-colors underline duration-300"
             >
-              Praneeth and Team
+              Web Team Developers Club
             </Link>
           </div>
         </motion.div>
