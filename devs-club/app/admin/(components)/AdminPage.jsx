@@ -12,6 +12,8 @@ import { Checkbox } from "../../../components/ui/checkbox"
 import { ScrollArea } from "../../../components/ui/scroll-area"
 import { BarChart, Users, Folder, BookOpen, Settings, Plus, Edit, Trash, Menu, X } from  'lucide-react'
 import { Textarea } from "../../../components/ui/textarea"
+import { useUser } from '@clerk/nextjs'
+import axios from 'axios'
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState('dashboard')
@@ -338,8 +340,6 @@ function ProjectManager() {
       console.error(err);  // Log any error
     }
   };
-  
-  
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -382,6 +382,30 @@ function ProjectManager() {
       teamMembers: [...newProject.teamMembers, { name: '', linkedin: '', github: '' }],
     });
   };
+
+  // Delete project
+  const handleDeleteProject = async (projectId) => {
+    try {
+      const response = await fetch('/api/projects', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: projectId }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        // Remove the deleted project from the state
+        setProjects(projects.filter(project => project.id !== projectId));
+      } else {
+        setError('Failed to delete project');
+      }
+    } catch (err) {
+      setError('Error deleting project');
+      console.error("unable to delete project",err);
+    }
+  };
+
 
   return (
     <div className="container mx-auto p-4 space-y-4">
@@ -456,8 +480,14 @@ function ProjectManager() {
             <p className="text-sm text-muted-foreground">{project.description}</p>
           </div>
           <div>
-            <Button variant="ghost" size="icon"><Edit className="h-4 w-4" /></Button>
-            <Button variant="ghost" size="icon"><Trash className="h-4 w-4" /></Button>
+          <Button 
+                variant="ghost" 
+                size="icon" 
+                onClick={() => handleDeleteProject(project.id)}  // Handle project delete
+              >
+                <Trash className="h-4 w-4" />
+              </Button>
+            {/* <Button variant="ghost" size="icon"><Trash className="h-4 w-4" /></Button> */}
           </div>
         </div>
       ))}
@@ -614,26 +644,46 @@ function TeamManager() {
 }
 
 function AdminAccessManager() {
-  const [admins, setAdmins] = useState([
-    { id: 1, name: 'Admin User', role: 'Admin', email: 'admin@example.com' },
-    { id: 2, name: 'Super Admin', role: 'Super Admin', email: 'superadmin@example.com' },
-  ]);
 
+  const { user, isSignedIn, isLoaded } = useUser();
+  const [admins, setAdmins] = useState([]); // Changed from `isAdmin` to `admins`
   const [isAddingAdmin, setIsAddingAdmin] = useState(false);
-  const [newAdmin, setNewAdmin] = useState({
-    name: '',
-    role: '',
-    email: '',
-  });
+  const [newAdmin, setNewAdmin] = useState({ name: '', role: '', email: '' });
+  
 
-  const handleAddAdmin = () => {
-    setAdmins([...admins, { id: Date.now(), ...newAdmin }]);
-    setIsAddingAdmin(false);
-    setNewAdmin({
-      name: '',
-      role: '',
-      email: '',
-    });
+  // Fetch admins from the backend
+  useEffect(() => {
+    async function fetchAdmins() {
+      try {
+        const response = await axios.get('/api/admin');
+        setAdmins(response.data.data); // Store the admin data in the state
+      } catch (error) {
+        console.error("Error fetching admins:", error);
+      }
+    }
+    fetchAdmins();
+  }, []);
+
+  // Add a new admin
+  const handleAddAdmin = async () => {
+    try {
+      const response = await axios.post('/api/admin', newAdmin);
+      setAdmins([...admins, response.data.data]);
+      setIsAddingAdmin(false);
+      setNewAdmin({ name: '', role: '', email: '' });
+    } catch (error) {
+      console.error("Error adding admin:", error);
+    }
+  };
+
+  // Delete an admin
+  const handleDeleteAdmin = async (id) => {
+    try {
+      await axios.delete('/api/admin', { data: { id } }); // Send the `id` as the body
+      setAdmins(admins.filter((admin) => admin._id !== id)); // Use `_id` here too
+    } catch (error) {
+      console.error("Error deleting admin:", error);
+    }
   };
 
   return (
@@ -648,7 +698,7 @@ function AdminAccessManager() {
           <DialogHeader>
             <DialogTitle>Add New Admin</DialogTitle>
           </DialogHeader>
-          <div className="grid grid-cols-2 gap-4"> {/* Grid layout with 2 columns */}
+          <div className="grid grid-cols-2 gap-4">
             <div>
               <Label htmlFor="admin-name">Name</Label>
               <Input
@@ -675,12 +725,16 @@ function AdminAccessManager() {
                 className="w-full p-2 border border-gray-300 rounded-md"
               >
                 <option value="">Select Role</option>
-                <option value="Head core">Head core</option>
+                <option value="Head-core">Head core</option>
                 <option value="Core">Core</option>
                 <option value="Coordinator">Coordinator</option>
+                <option value="Admin">Admin</option>
+                <option value="PIC">PIC</option>
+                <option value="Incharge">Incharge</option>
+                <option value="Misc">Misc</option>
               </select>
             </div>
-            <div className="col-span-2"> {/* Full width button */}
+            <div className="col-span-2">
               <Button onClick={handleAddAdmin} className="w-full">
                 Submit
               </Button>
@@ -702,7 +756,11 @@ function AdminAccessManager() {
               <Button variant="ghost" size="icon">
                 <Edit className="h-4 w-4" />
               </Button>
-              <Button variant="ghost" size="icon">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => handleDeleteAdmin(admin._id)}
+              >
                 <Trash className="h-4 w-4" />
               </Button>
             </div>

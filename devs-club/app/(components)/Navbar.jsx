@@ -167,27 +167,25 @@ export default function Navbar() {
       <style jsx global>{mobileMenuStyles}</style>
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex justify-between items-center">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="flex items-center space-x-2"
-          >
-            <Link href="/" className="flex items-center space-x-3 group">
-              <div className="relative w-11 h-11 transform transition-all duration-300 group-hover:scale-105">
-                <Image 
-                  src={logo} 
-                  alt="Developers Club Logo" 
-                  className="rounded-xl shadow-md group-hover:shadow-lg transition-shadow duration-300"
-                  fill
-                  style={{ objectFit: 'cover' }}
-                />
-              </div>
-              <span className="font-bold text-xl bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 bg-clip-text text-transparent group-hover:from-blue-700 group-hover:to-blue-900 transition-all duration-300">
-                Developers Club
-              </span>
-            </Link>
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-3xl font-extrabold text-blue-600 tracking-wide"
+        >
+          <Link href="/" className="flex items-center space-x-2">
+            <Image
+              src={logo}
+              alt="Developers Club Logo"
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
+            <span className="font-bold text-xl text-blue-600">
+              Developers Club
+            </span>
+          </Link>
+        </motion.div>
 
           <div className="dropdown">
             <button 
@@ -251,13 +249,9 @@ export default function Navbar() {
                         </motion.button>
                       </Link>
                       <motion.div 
-                        className="user-section"
+                        className="dropdown-item"
                         whileHover={{ x: 8 }}
                       >
-                        <div className="user-section-label">
-                          <span className="mr-3 text-xl">👤</span>
-                          Profile
-                        </div>
                         <UserButton 
                           afterSignOutUrl="/"
                           appearance={{
@@ -266,7 +260,7 @@ export default function Navbar() {
                               userButtonPopoverCard: "right-0"
                             }
                           }}
-                        />
+                        /> <div className="pl-3">Profile</div>
                       </motion.div>
                     </>
                   ) : (

@@ -61,3 +61,32 @@ export async function GET(req) {
       );
     }
   }
+
+  export async function DELETE(req) {
+    console.log("Deleting project...");
+    try {
+      const { id } = await req.json();  // Extract project id from request body
+      console.log("Id is " + id);
+      // Find and delete the project by its custom 'id' field
+      const deletedProject = await Project.findOneAndDelete({ id: id });  // use id field, not _id
+      
+      if (!deletedProject) {
+        return new Response(
+          JSON.stringify({ success: false, error: "Project not found" }),
+          { status: 400, headers: { "Content-Type": "application/json" } }
+        );
+      }
+  
+      return new Response(
+        JSON.stringify({ success: true, data: deletedProject }),
+        { status: 200, headers: { "Content-Type": "application/json" } }
+      );
+    } catch (error) {
+      console.error("Error deleting project:", error);
+      return new Response(
+        JSON.stringify({ success: false, error: "Failed to delete project" }),
+        { status: 500, headers: { "Content-Type": "application/json" } }
+      );
+    }
+  }
+  
