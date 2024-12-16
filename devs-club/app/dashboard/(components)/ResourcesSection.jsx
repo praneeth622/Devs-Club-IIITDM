@@ -199,7 +199,7 @@ export default function ResourcesSection() {
       </Card>
 
       <Dialog open={!!selectedResource} onOpenChange={() => setSelectedResource(null)}>
-        <DialogContent className="sm:max-w-[600px] bg-white rounded-lg p-8">
+        <DialogContent className="sm:max-w-[600px] max-h-[700px] bg-white rounded-lg p-8">
           <DialogHeader className="mb-6">
             <DialogTitle className="flex items-center space-x-3 text-2xl font-bold mb-3">
               {selectedResource && (
@@ -213,7 +213,7 @@ export default function ResourcesSection() {
               Explore documents, courses, and community resources.
             </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-6 py-4">
+          <div className="grid gap-6">
             {selectedResource && (
               <>
                 {selectedResource.documents && selectedResource.documents.length > 0 && (

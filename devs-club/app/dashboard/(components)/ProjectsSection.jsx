@@ -34,10 +34,12 @@ export default function ProjectsSection({ projects }) {
               >
                 <Card className="h-full cursor-pointer bg-white hover:shadow-lg transition-shadow duration-300">
                   <CardContent className="p-6 flex flex-col justify-between h-full">
-                    <div>
-                      <Badge className={`${statusColors[project.status]} text-white mb-3`}>
+                    <div >
+                      <div className={`${statusColors[project.status]} text-white mb-3 inline-flex`}>
+                      <Badge >
                         {project.status}
                       </Badge>
+                      </div>
                       <h3 className="text-xl font-semibold text-gray-800 mb-2">{project.title}</h3>
                       <p className="text-sm text-gray-600 mb-4">{project.description.substring(0, 100)}...</p>
                     </div>
@@ -53,9 +55,11 @@ export default function ProjectsSection({ projects }) {
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
                   <h2 className="text-2xl font-bold">{project.title}</h2>
+                  <div className={`${statusColors[project.status]} text-white mb-3 inline-flex`}>
                   <Badge className={`${statusColors[project.status]} text-white`}>
                     {project.status}
                   </Badge>
+                  </div>
                 </div>
                 <p className="text-gray-600 mb-6">{project.description}</p>
                 <div className="grid grid-cols-2 gap-4 mb-6">
