@@ -9,6 +9,7 @@ import ResourcesSection from './(components)/ResourcesSection';
 import PastEventsSection from './(components)/PastEventsSection';
 import {Footer} from '../(components)/Footer';
 import { useState } from 'react';
+import { formatDate } from '../../utils/dateFormatter'
 
 
 //Making route protected
