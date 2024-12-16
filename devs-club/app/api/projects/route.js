@@ -25,3 +25,39 @@ export async function GET(req) {
       );
     }
   }
+
+  export async function POST(req) {
+    try {
+      const { name, description, teamLead, fullDescription, teamMembers } = await req.json();
+  
+      // Create a new project document
+      const newProject = new Project({
+        name,
+        description,
+        teamLead,
+        fullDescription,
+        teamMembers,
+      });
+  
+      // Save the project to the database
+      await newProject.save();
+  
+      return new Response(
+        JSON.stringify({ success: true, data: newProject }),
+        {
+          status: 201,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    } catch (error) {
+      console.error("Error adding project:", error);
+  
+      return new Response(
+        JSON.stringify({ success: false, error: "Failed to add project" }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+  }

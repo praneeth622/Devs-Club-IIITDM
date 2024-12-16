@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../../components/ui/card"
@@ -296,95 +296,173 @@ function ResourceManager() {
 }
 
 function ProjectManager() {
-  const [projects, setProjects] = useState([
-    {
-      id: 1,
-      name: "HealthHub",
-      description: "Centralized platform for managing personal health data.",
-      teamLead: {
-        name: "Hugh Jackman",
-        photo: "/placeholder.svg?height=100&width=100",
-        linkedin: "https://linkedin.com/in/hughjackman",
-        github: "https://github.com/hughjackman"
-      },
-      teamMembers: [
-        { name: "Phoebe Buffay", linkedin: "https://linkedin.com/in/phoebebuffay", github: "https://github.com/phoebebuffay" },
-        { name: "Chandler Bing", linkedin: "https://linkedin.com/in/chandlerbing", github: "https://github.com/chandlerbing" },
-      ],
-      fullDescription: "HealthHub is a comprehensive health management system."
-    },
-  ])
 
-  const [isAddingProject, setIsAddingProject] = useState(false)
+  const [isAddingProject, setIsAddingProject] = useState(false);
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [newProject, setNewProject] = useState({
     name: '',
     description: '',
-    teamLead: { name: '', photo: '', linkedin: '', github: '' },
-    teamMembers: [],
+    teamLead: { name: '', linkedin: '', github: '' },
+    teamMembers: [{ name: '', linkedin: '', github: '' }], 
     fullDescription: '',
-  })
+  });
 
-  const handleAddProject = () => {
-    setProjects([...projects, { id: Date.now(), ...newProject }])
-    setIsAddingProject(false)
-    setNewProject({
-      name: '',
-      description: '',
-      teamLead: { name: '', photo: '', linkedin: '', github: '' },
-      teamMembers: [],
-      fullDescription: '',
-    })
+  const handleAddProject = async () => {
+    try {
+      console.log("New Project Data: ", newProject);  // Log the project data
+      const response = await fetch('/api/projects', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newProject),
+      });
+  
+      const result = await response.json();
+  
+      if (result.success) {
+        setProjects([...projects, result.data]);
+        setIsAddingProject(false);
+        setNewProject({
+          name: '',
+          description: '',
+          teamLead: { name: '', photo: '', linkedin: '', github: '' },
+          teamMembers: [{ name: '', linkedin: '', github: '' }],
+          fullDescription: '',
+        });
+      } else {
+        setError('Failed to add project');
+      }
+    } catch (err) {
+      setError('Error adding project');
+      console.error(err);  // Log any error
+    }
+  };
+  
+  
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch('/api/projects');
+        const result = await response.json();
+        if (result.success) {
+          setProjects(result.data);
+        } else {
+          setError('Failed to fetch projects');
+        }
+        setLoading(false);
+      } catch (err) {
+        setError('Error fetching projects');
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+  if (loading) {
+    return <div>Loading projects...</div>;
   }
 
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  // Handle team member changes
+  const handleTeamMemberChange = (index, field, value) => {
+    const updatedTeamMembers = [...newProject.teamMembers];
+    updatedTeamMembers[index][field] = value;
+    setNewProject({ ...newProject, teamMembers: updatedTeamMembers });
+  };
+
+  // Add new team member
+  const handleAddTeamMember = () => {
+    setNewProject({
+      ...newProject,
+      teamMembers: [...newProject.teamMembers, { name: '', linkedin: '', github: '' }],
+    });
+  };
+
   return (
-    <div className="space-y-4">
-      <Dialog open={isAddingProject} onOpenChange={setIsAddingProject}>
-        <DialogTrigger asChild>
-          <Button className="w-full"><Plus className="mr-2 h-4 w-4" /> Add Project</Button>
-        </DialogTrigger>
-        <DialogContent className='bg-white'>
-          <DialogHeader>
-            <DialogTitle>Add New Project</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4">
+    <div className="container mx-auto p-4 space-y-4">
+    <Dialog open={isAddingProject} onOpenChange={setIsAddingProject}>
+      <DialogTrigger asChild>
+        <Button className="w-full sm:w-auto"><Plus className="mr-2 h-4 w-4" /> Add Project</Button>
+      </DialogTrigger>
+      <DialogContent className="bg-white max-w-4xl w-full">
+        <DialogHeader>
+          <DialogTitle>Add New Project</DialogTitle>
+        </DialogHeader>
+        <div className="space-y-4 max-h-[70vh] overflow-y-auto pr-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="project-name">Name</Label>
               <Input id="project-name" value={newProject.name} onChange={(e) => setNewProject({...newProject, name: e.target.value})} />
             </div>
             <div>
               <Label htmlFor="project-description">Description</Label>
-              <Textarea id="project-description" value={newProject.description} onChange={(e) => setNewProject({...newProject, description: e.target.value})} />
+              <Input id="project-description" value={newProject.description} onChange={(e) => setNewProject({...newProject, description: e.target.value})} />
             </div>
-            <div>
-              <Label htmlFor="project-full-description">Full Description</Label>
-              <Textarea id="project-full-description" value={newProject.fullDescription} onChange={(e) => setNewProject({...newProject, fullDescription: e.target.value})} />
-            </div>
-            <div>
-              <Label>Team Lead</Label>
+          </div>
+          <div>
+            <Label htmlFor="project-full-description">Full Description</Label>
+            <Textarea id="project-full-description" value={newProject.fullDescription} onChange={(e) => setNewProject({...newProject, fullDescription: e.target.value})} />
+          </div>
+          <div className="space-y-2">
+            <Label>Team Lead</Label>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input placeholder="Name" value={newProject.teamLead.name} onChange={(e) => setNewProject({...newProject, teamLead: {...newProject.teamLead, name: e.target.value}})} />
               <Input placeholder="Photo URL" value={newProject.teamLead.photo} onChange={(e) => setNewProject({...newProject, teamLead: {...newProject.teamLead, photo: e.target.value}})} />
               <Input placeholder="LinkedIn" value={newProject.teamLead.linkedin} onChange={(e) => setNewProject({...newProject, teamLead: {...newProject.teamLead, linkedin: e.target.value}})} />
               <Input placeholder="GitHub" value={newProject.teamLead.github} onChange={(e) => setNewProject({...newProject, teamLead: {...newProject.teamLead, github: e.target.value}})} />
             </div>
-            <Button onClick={handleAddProject}>Submit</Button>
           </div>
-        </DialogContent>
-      </Dialog>
-      <ScrollArea className="h-[300px]">
-        {projects.map((project) => (
-          <div key={project.id} className="flex items-center justify-between p-2 hover:bg-accent">
-            <div>
-              <p className="font-medium">{project.name}</p>
-              <p  className="text-sm text-muted-foreground">{project.description}</p>
-            </div>
-            <div>
-              <Button variant="ghost" size="icon"><Edit className="h-4 w-4" /></Button>
-              <Button variant="ghost" size="icon"><Trash className="h-4 w-4" /></Button>
-            </div>
+          <div className="space-y-2">
+            <Label>Team Members</Label>
+            <ScrollArea className="h-[200px] w-full rounded-md border p-4">
+              {newProject.teamMembers.map((member, index) => (
+                <Card key={index} className="p-4 mb-4">
+                  <CardContent className="p-0 space-y-2">
+                    <Input
+                      placeholder="Member Name"
+                      value={member.name}
+                      onChange={(e) => handleTeamMemberChange(index, 'name', e.target.value)}
+                    />
+                    <Input
+                      placeholder="LinkedIn"
+                      value={member.linkedin}
+                      onChange={(e) => handleTeamMemberChange(index, 'linkedin', e.target.value)}
+                    />
+                    <Input
+                      placeholder="GitHub"
+                      value={member.github}
+                      onChange={(e) => handleTeamMemberChange(index, 'github', e.target.value)}
+                    />
+                  </CardContent>
+                </Card>
+              ))}
+            </ScrollArea>
+            <Button variant="outline" onClick={handleAddTeamMember} className="w-full">Add Team Member</Button>
           </div>
-        ))}
-      </ScrollArea>
-    </div>
+        </div>
+        <Button onClick={handleAddProject} className="w-full mt-4">Submit</Button>
+      </DialogContent>
+    </Dialog>
+    <ScrollArea className="h-[calc(100vh-200px)] w-full rounded-md border">
+      {projects.map((project) => (
+        <div key={project.id} className="flex items-center justify-between p-4 hover:bg-accent">
+          <div>
+            <p className="font-medium">{project.name}</p>
+            <p className="text-sm text-muted-foreground">{project.description}</p>
+          </div>
+          <div>
+            <Button variant="ghost" size="icon"><Edit className="h-4 w-4" /></Button>
+            <Button variant="ghost" size="icon"><Trash className="h-4 w-4" /></Button>
+          </div>
+        </div>
+      ))}
+    </ScrollArea>
+  </div>
   )
 }
 
