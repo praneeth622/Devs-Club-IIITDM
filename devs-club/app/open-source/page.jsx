@@ -190,18 +190,18 @@ function OpenSourcePage() {
             animate="visible"
             className="space-y-8"
           >
-            <div className="flex justify-between items-center mb-8">
-              <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
+              <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-blue-900">
                 Featured Projects
               </h2>
-              <div className="flex gap-4">
+              <div className="flex gap-2">
                 {["Featured", "All Projects"].map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab.toLowerCase())}
-                    className={`px-6 py-3 rounded-full transition-all duration-300 ${
+                    className={`px-4 py-2 rounded-full text-sm transition-all duration-300 ${
                       activeTab === tab.toLowerCase()
-                        ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
+                        ? "bg-gradient-to-r from-blue-700 to-blue-900 text-white shadow-lg"
                         : "bg-white/50 text-gray-600 hover:bg-white"
                     }`}
                   >
@@ -211,35 +211,45 @@ function OpenSourcePage() {
               </div>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               {projects?.length > 0 ? (
                 projects.map((project) => (
                   <motion.div key={project.id} variants={itemVariants}>
                     <Card className="group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-white/80 backdrop-blur-sm border-0">
-                      <CardHeader className="border-b border-gray-100">
-                        <CardTitle className="text-2xl font-bold text-gray-800">
+                      <CardHeader className="border-b border-gray-100 p-4 sm:p-6">
+                        <CardTitle className="text-xl sm:text-2xl font-bold text-gray-800 flex items-center gap-2">
+                          <FiCode className="text-blue-700" />
                           {project.name}
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="p-6 space-y-6">
-                        <div className="flex justify-between text-gray-600">
-                          <span className="flex items-center gap-2">
-                            <FiStar className="text-yellow-500" />{" "}
-                            {project.stars}
-                          </span>
-                          <span className="flex items-center gap-2">
-                            <FiGitPullRequest className="text-green-500" />{" "}
-                            {project.prs}
-                          </span>
-                          <span className="flex items-center gap-2">
-                            <FiUsers className="text-blue-500" />{" "}
-                            {project.contributors}
-                          </span>
+                      <CardContent className="p-4 sm:p-6 space-y-4">
+                        <div className="grid grid-cols-3 gap-2 text-gray-600">
+                          <div className="flex flex-col items-center p-2 sm:p-3 bg-gray-50 rounded-lg">
+                            <FiStar className="text-yellow-500 text-xl sm:text-2xl mb-1" />
+                            <span className="text-sm sm:text-base font-semibold">
+                              {project.stars}
+                            </span>
+                            <span className="text-xs text-gray-500">Stars</span>
+                          </div>
+                          <div className="flex flex-col items-center p-2 sm:p-3 bg-gray-50 rounded-lg">
+                            <FiGitPullRequest className="text-green-500 text-xl sm:text-2xl mb-1" />
+                            <span className="text-sm sm:text-base font-semibold">
+                              {project.prs}
+                            </span>
+                            <span className="text-xs text-gray-500">PRs</span>
+                          </div>
+                          <div className="flex flex-col items-center p-2 sm:p-3 bg-gray-50 rounded-lg">
+                            <FiUsers className="text-blue-500 text-xl sm:text-2xl mb-1" />
+                            <span className="text-sm sm:text-base font-semibold">
+                              {project.contributors}
+                            </span>
+                            <span className="text-xs text-gray-500">Contributors</span>
+                          </div>
                         </div>
                         <Link
                           target="_blank"
                           href={`${project.link}`}
-                          className="block w-full py-3 text-center text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-md hover:shadow-lg"
+                          className="block w-full py-2.5 sm:py-3 text-center text-white bg-gradient-to-r from-blue-700 to-blue-900 rounded-lg hover:from-blue-800 hover:to-blue-950 transition-all duration-300 shadow-md hover:shadow-lg text-sm sm:text-base font-medium"
                         >
                           View Project
                         </Link>
@@ -248,7 +258,7 @@ function OpenSourcePage() {
                   </motion.div>
                 ))
               ) : (
-                <p className="text-gray-500">No projects available.</p>
+                <p className="text-gray-500 text-center col-span-full">No projects available.</p>
               )}
             </div>
           </motion.div>
@@ -258,41 +268,49 @@ function OpenSourcePage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7 }}
-            className="mt-20 text-center relative overflow-hidden"
+            className="mt-20 text-center relative overflow-hidden px-4 sm:px-0"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-blue-700 to-violet-700 opacity-90 rounded-2xl" />
-            <div className="relative z-10 p-16 backdrop-blur-sm">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-700 via-blue-800 to-blue-900 opacity-90 rounded-2xl" />
+            <div className="relative z-10 p-6 sm:p-16 backdrop-blur-sm">
               <motion.h2
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.8 }}
-                className="text-4xl font-bold mb-6 text-white tracking-tight"
+                className="text-2xl sm:text-4xl font-bold mb-4 sm:mb-6 text-white tracking-tight"
               >
-                Contribute to Open Source Excellence
+                <span className="relative inline-block">
+                  Contribute to Open Source
+                  <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-blue-300/50 rounded-full"></span>
+                </span>
               </motion.h2>
               <motion.p
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.9 }}
-                className="text-xl mb-10 text-blue-50 max-w-2xl mx-auto leading-relaxed"
+                className="text-base sm:text-xl mb-8 sm:mb-10 text-blue-50 max-w-2xl mx-auto leading-relaxed px-4"
               >
                 Join our thriving developer community and help build innovative
-                solutions that make a difference. Your expertise can shape the
-                future of technology.
+                solutions that make a difference.
               </motion.p>
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 1 }}
+                className="flex justify-center"
               >
                 <Link
                   target="_blank"
                   href="https://github.com/praneeth622/Devs-Club-IIITDM"
-                  className="inline-flex items-center px-10 py-4 bg-gradient-to-r from-white to-blue-50 text-indigo-700 rounded-full font-semibold hover:from-blue-50 hover:to-white transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 text-lg"
+                  className="inline-flex items-center justify-center px-6 sm:px-10 py-3 sm:py-4 bg-white text-blue-800 rounded-full font-semibold hover:bg-blue-50 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 text-sm sm:text-lg gap-2"
                 >
+                  <FiGithub className="w-5 h-5" />
                   Start Contributing
                 </Link>
               </motion.div>
+              
+              {/* Background Decorations */}
+              <div className="absolute top-0 right-0 w-32 h-32 sm:w-64 sm:h-64 bg-white opacity-5 rounded-full transform translate-x-1/2 -translate-y-1/2"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 sm:w-48 sm:h-48 bg-white opacity-5 rounded-full transform -translate-x-1/2 translate-y-1/2"></div>
             </div>
           </motion.div>
         </motion.div>
