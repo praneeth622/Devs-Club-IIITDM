@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "../../components/ui/button";
 import Image from "next/image";
 import logo from "../../public/assets/image.png";
 import { Menu, X } from "lucide-react";
@@ -16,210 +15,276 @@ const mobileMenuStyles = `
   }
 
   .dropdown-toggle {
-    background-color: #f8f9fa;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(59, 130, 246, 0.1);
+    padding: 0.7rem;
+    border-radius: 1rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    transition: all 0.2s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #4B5563;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(8px);
   }
 
   .dropdown-toggle:hover {
-    background-color: #e9ecef;
+    background-color: rgba(59, 130, 246, 0.08);
+    border-color: #3B82F6;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
   }
 
   .dropdown-menu {
     position: fixed;
-    right: 0;
-    top: 60px;
-    background-color: white;
-    min-width: 250px;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    border-radius: 0.375rem;
-    padding: 0.5rem 0;
+    right: 1rem;
+    top: 4.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    min-width: 320px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 
+                0 4px 8px rgba(59, 130, 246, 0.05);
+    border-radius: 1.2rem;
+    padding: 1rem;
     z-index: 1000;
     transform-origin: top right;
-    animation: dropdownAnimation 0.2s ease forwards;
-  }
-
-  @keyframes dropdownAnimation {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    backdrop-filter: blur(12px);
+    overflow: hidden;
   }
 
   .dropdown-item {
-    display: block;
+    display: flex;
+    align-items: center;
     width: 100%;
-    padding: 0.75rem 1.5rem;
-    clear: both;
-    font-weight: 400;
-    color: #212529;
-    text-align: inherit;
+    padding: 1rem 1.2rem;
+    margin: 0.3rem 0;
+    font-weight: 500;
+    color: #4B5563;
+    text-align: left;
     text-decoration: none;
-    white-space: nowrap;
     background-color: transparent;
     border: 0;
+    border-radius: 1rem;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dropdown-item:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(59, 130, 246, 0.04);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
   }
 
   .dropdown-item:hover {
-    color: #1e2125;
-    background-color: #f8f9fa;
+    color: #3B82F6;
+    transform: translateX(4px);
+  }
+
+  .dropdown-item:hover:before {
+    transform: translateX(0);
   }
 
   .dropdown-divider {
-    height: 0;
-    margin: 0.5rem 0;
+    height: 2px;
+    margin: 1rem 0;
+    background: linear-gradient(to right, 
+      transparent, 
+      rgba(59, 130, 246, 0.1), 
+      transparent
+    );
+    border: none;
+  }
+
+  .user-section {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 1.2rem;
+    margin: 0.3rem 0;
+    font-weight: 500;
+    color: #4B5563;
+    text-align: left;
+    background-color: transparent;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    justify-content: space-between;
+    position: relative;
     overflow: hidden;
-    border-top: 1px solid #e9ecef;
+  }
+
+  .user-section:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(59, 130, 246, 0.04);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .user-section:hover {
+    color: #3B82F6;
+    transform: translateX(4px);
+  }
+
+  .user-section:hover:before {
+    transform: translateX(0);
+  }
+
+  .user-section-label {
+    display: flex;
+    align-items: center;
   }
 `;
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isSignedIn } = useUser();
-  const navItems = ["About", "Achievements", "Projects", "Open-Source", "Contact"];
+  const navItems = [
+    { name: "About", icon: "🎯" },
+    { name: "Achievements", icon: "🏆" },
+    { name: "Projects", icon: "💻" },
+    { name: "Open-Source", icon: "🌟" },
+    { name: "Contact", icon: "📧" }
+  ];
 
   const handleMenuToggle = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-40">
+    <header className="bg-white/90 backdrop-blur-2xl shadow-lg sticky top-0 z-40 border-b border-blue-100/50">
       <style jsx global>{mobileMenuStyles}</style>
-      <nav className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-        {/* Logo section remains the same */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-3xl font-extrabold text-blue-600 tracking-wide"
-        >
-          <Link href="/" className="flex items-center space-x-2">
-            <Image src={logo} alt="Developers Club Logo" width={40} height={40} className="rounded-full" />
-            <span className="font-bold text-xl text-blue-600">Developers Club</span>
-          </Link>
-        </motion.div>
-
-        {/* Mobile Menu */}
-        <div className="md:hidden dropdown">
-          <button 
-            className="dropdown-toggle"
-            onClick={handleMenuToggle}
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="flex justify-between items-center">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="flex items-center space-x-2"
           >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
-          
-          {isMenuOpen && (
-            <div className="dropdown-menu">
-              {navItems.map((item) => (
-                <Link 
-                  key={item} 
-                  href={`/${item.toLowerCase()}`}
-                  onClick={handleMenuToggle}
-                >
-                  <button className="dropdown-item">
-                    {item}
-                  </button>
-                </Link>
-              ))}
-              
-              <div className="dropdown-divider" />
-              
-              {isSignedIn ? (
-                <>
-                  <Link href="/dashboard" onClick={handleMenuToggle}>
-                    <button className="dropdown-item">
-                      Dashboard
-                    </button>
-                  </Link>
-                  <div className="px-6 py-2">
-                    <UserButton />
-                  </div>
-                </>
-              ) : (
-                <Link href="/dashboard" onClick={handleMenuToggle}>
-                  <button className="dropdown-item">
-                    Login
-                  </button>
-                </Link>
-              )}
-            </div>
-          )}
-        </div>
+            <Link href="/" className="flex items-center space-x-3 group">
+              <div className="relative w-11 h-11 transform transition-all duration-300 group-hover:scale-105">
+                <Image 
+                  src={logo} 
+                  alt="Developers Club Logo" 
+                  className="rounded-xl shadow-md group-hover:shadow-lg transition-shadow duration-300"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
+              <span className="font-bold text-xl bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 bg-clip-text text-transparent group-hover:from-blue-700 group-hover:to-blue-900 transition-all duration-300">
+                Developers Club
+              </span>
+            </Link>
+          </motion.div>
 
-        {/* Desktop Navigation */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="hidden md:flex space-x-6 items-center"
-        >
-          {navItems.map((item) => (
-            <motion.div key={item} className="relative group">
-              <Link
-                href={`/${item.toLowerCase()}`}
-                className="text-gray-600 font-medium text-lg transition-colors duration-300 group-hover:text-blue-600"
-              >
-                {item}
-              </Link>
-              <motion.div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-            </motion.div>
-          ))}
-          {isSignedIn ? (
-            <div className="flex justify-content-between gap-8 text-gray-600 font-medium text-lg transition-colors duration-300 group-hover:text-blue-600">
-              <motion.div className="relative group">
-                <Link
-                  href="/dashboard"
-                  className="text-gray-600 font-medium text-lg transition-colors duration-300 group-hover:text-blue-600"
-                >
-                  Dashboard
-                </Link>
-                <motion.div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              </motion.div>
-              <motion.div className="hidden md:flex space-x-6 items-center">
-                <UserButton />
-              </motion.div>
-            </div>
-          ) : (
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 200 }}
-              className="bg-red-800"
+          <div className="dropdown">
+            <button 
+              className="dropdown-toggle group"
+              onClick={handleMenuToggle}
+              aria-label="Menu"
             >
-              <Button
-                style={{
-                  backgroundColor: "#3182ce",
-                  color: "#ffffff",
-                  fontWeight: "600",
-                  borderRadius: "0.375rem",
-                  width: "100%",
-                  transition: "background-color 0.3s ease",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#9b2c2c")}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#c53030")}
-                onMouseDown={(e) => (e.currentTarget.style.backgroundColor = "#742a2a")}
-                onMouseUp={(e) => (e.currentTarget.style.backgroundColor = "#9b2c2c")}
-              >
-                <Link
-                  href="/dashboard"
-                  onClick={handleMenuToggle}
-                  style={{ color: "inherit", textDecoration: "none" }}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={isMenuOpen ? "close" : "menu"}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.8, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="text-blue-600 group-hover:text-blue-700"
                 >
-                  Login
-                </Link>
-              </Button>
-            </motion.div>
-          )}
-        </motion.div>
+                  {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                </motion.div>
+              </AnimatePresence>
+            </button>
+            
+            <AnimatePresence>
+              {isMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="dropdown-menu"
+                >
+                  {navItems.map((item, index) => (
+                    <Link 
+                      key={item.name} 
+                      href={`/${item.name.toLowerCase()}`}
+                      onClick={handleMenuToggle}
+                    >
+                      <motion.button
+                        className="dropdown-item"
+                        initial={{ x: -20, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: index * 0.1 }}
+                        whileHover={{ x: 8 }}
+                      >
+                        <span className="mr-3 text-xl">{item.icon}</span>
+                        {item.name}
+                      </motion.button>
+                    </Link>
+                  ))}
+                  
+                  <div className="dropdown-divider" />
+                  
+                  {isSignedIn ? (
+                    <>
+                      <Link href="/dashboard" onClick={handleMenuToggle}>
+                        <motion.button
+                          className="dropdown-item"
+                          whileHover={{ x: 8 }}
+                        >
+                          <span className="mr-3 text-xl">🎮</span>
+                          Dashboard
+                        </motion.button>
+                      </Link>
+                      <motion.div 
+                        className="user-section"
+                        whileHover={{ x: 8 }}
+                      >
+                        <div className="user-section-label">
+                          <span className="mr-3 text-xl">👤</span>
+                          Profile
+                        </div>
+                        <UserButton 
+                          afterSignOutUrl="/"
+                          appearance={{
+                            elements: {
+                              avatarBox: "w-8 h-8",
+                              userButtonPopoverCard: "right-0"
+                            }
+                          }}
+                        />
+                      </motion.div>
+                    </>
+                  ) : (
+                    <Link href="/dashboard" onClick={handleMenuToggle}>
+                      <motion.button
+                        className="dropdown-item"
+                        whileHover={{ x: 8 }}
+                      >
+                        <span className="mr-3 text-xl">🔑</span>
+                        Login
+                      </motion.button>
+                    </Link>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
       </nav>
     </header>
   );
