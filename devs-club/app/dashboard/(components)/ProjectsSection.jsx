@@ -23,7 +23,7 @@ export default function ProjectsSection({ projects }) {
       transition={{ duration: 0.5 }}
       className="mb-12"
     >
-      <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Our Projects</h2>
+      <h2 className="text-2xl font-bold text-gray-800 mb-8">Projects</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-8xl mx-auto">
         {projects.map((project, index) => (
           <Dialog key={project.title}>
@@ -32,7 +32,7 @@ export default function ProjectsSection({ projects }) {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <Card className="h-full cursor-pointer hover:shadow-lg transition-shadow duration-300">
+                <Card className="h-full cursor-pointer bg-white hover:shadow-lg transition-shadow duration-300">
                   <CardContent className="p-6 flex flex-col justify-between h-full">
                     <div>
                       <Badge className={`${statusColors[project.status]} text-white mb-3`}>
