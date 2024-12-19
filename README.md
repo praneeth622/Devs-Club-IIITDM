@@ -53,7 +53,8 @@ To contribute to the website, follow the steps below to set up the project local
 
 2. Navigate to the project directory:
    ```bash
-   cd devs-club-iiitdm
+   cd Devs-club-iiitdm
+   cd devs-club
    ```
 
 3. Install the necessary dependencies:
