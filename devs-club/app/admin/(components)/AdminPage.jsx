@@ -13,6 +13,7 @@ import { ScrollArea } from "../../../components/ui/scroll-area"
 import { BarChart, Users, Folder, BookOpen, Settings, Plus, Edit, Trash, Menu, X } from  'lucide-react'
 import { Textarea } from "../../../components/ui/textarea"
 import { useUser } from '@clerk/nextjs'
+import toast, { Toaster } from "react-hot-toast";
 import axios from 'axios'
 
 export default function AdminPage() {
@@ -332,12 +333,15 @@ function ProjectManager() {
           teamMembers: [{ name: '', linkedin: '', github: '' }],
           fullDescription: '',
         });
+        toast.success("Project Added successfully!");
       } else {
         setError('Failed to add project');
+        toast.error(`Error adding project: ${error.response?.data?.message || error.message}`);
       }
     } catch (err) {
       setError('Error adding project');
       console.error(err);  // Log any error
+      toast.error(`Error adding project: ${error.response?.data?.message || error.message}`);
     }
   };
 
@@ -348,12 +352,15 @@ function ProjectManager() {
         const result = await response.json();
         if (result.success) {
           setProjects(result.data);
+          toast.success("Projects fetched successfully!");
         } else {
           setError('Failed to fetch projects');
+          toast.error(`Error adding project: ${error.response?.data?.message || error.message}, Try Again later`);
         }
         setLoading(false);
       } catch (err) {
         setError('Error fetching projects');
+        toast.error(`Error Fetching project: ${error.response?.data?.message || error.message}, Try Again later`);
         setLoading(false);
       }
     };
@@ -361,7 +368,7 @@ function ProjectManager() {
     fetchProjects();
   }, []);
   if (loading) {
-    return <div>Loading projects...</div>;
+    return <div className='flex justify-center align-middle'>Loading projects...</div>;
   }
 
   if (error) {
@@ -409,6 +416,7 @@ function ProjectManager() {
 
   return (
     <div className="container mx-auto p-4 space-y-4">
+    <Toaster position="top-right" reverseOrder={false} />
     <Dialog open={isAddingProject} onOpenChange={setIsAddingProject}>
       <DialogTrigger asChild>
         <Button className="w-full sm:w-auto"><Plus className="mr-2 h-4 w-4" /> Add Project</Button>
@@ -657,6 +665,7 @@ function AdminAccessManager() {
       try {
         const response = await axios.get('/api/admin');
         setAdmins(response.data.data); // Store the admin data in the state
+        
       } catch (error) {
         console.error("Error fetching admins:", error);
       }
@@ -668,11 +677,17 @@ function AdminAccessManager() {
   const handleAddAdmin = async () => {
     try {
       const response = await axios.post('/api/admin', newAdmin);
+      console.log(response)
       setAdmins([...admins, response.data.data]);
       setIsAddingAdmin(false);
+      if (response.status === 201 ) {
+        toast.success("Admin added successfully!");
+      }
+      // window.location.reload();
       setNewAdmin({ name: '', role: '', email: '' });
     } catch (error) {
-      console.error("Error adding admin:", error);
+      console.error("Error adding admin:", error.response?.data.error);
+      toast.error(`Error adding Admin: ${error.response?.data?.error || error.message}, Try Again later`);
     }
   };
 
@@ -681,13 +696,16 @@ function AdminAccessManager() {
     try {
       await axios.delete('/api/admin', { data: { id } }); // Send the `id` as the body
       setAdmins(admins.filter((admin) => admin._id !== id)); // Use `_id` here too
+      toast.success("Admin Deleted successfully!");
     } catch (error) {
       console.error("Error deleting admin:", error);
+      toast.error(`Error Deleting Admin: ${error.response?.data?.message || error.message}, Try Again later`);
     }
   };
 
   return (
     <div className="space-y-4">
+      <Toaster position="top-right" reverseOrder={false} />
       <Dialog open={isAddingAdmin} onOpenChange={setIsAddingAdmin}>
         <DialogTrigger asChild>
           <Button className="w-full">
@@ -735,7 +753,7 @@ function AdminAccessManager() {
               </select>
             </div>
             <div className="col-span-2">
-              <Button onClick={handleAddAdmin} className="w-full">
+              <Button onClick={handleAddAdmin}  className="w-full">
                 Submit
               </Button>
             </div>

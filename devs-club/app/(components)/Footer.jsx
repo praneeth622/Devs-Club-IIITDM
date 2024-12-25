@@ -47,7 +47,7 @@ export const Footer = () => {
             <Link href="#" className="hover:text-white transition-colors duration-300">
               Terms of Service
             </Link>
-            <Link href="#" className="hover:text-white transition-colors duration-300">
+            <Link href="/contact" className="hover:text-white transition-colors duration-300">
               Contact Us
             </Link>
           </div>

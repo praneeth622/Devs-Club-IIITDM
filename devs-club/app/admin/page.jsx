@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Footer } from '../(components)/Footer'
 import AdminPage from "./(components)/AdminPage"
 import { AiOutlineLoading } from 'react-icons/ai'
+import axios from 'axios';
 
 export default function AdminDashboard() {
   const { user, isSignedIn, isLoaded } = useUser();
@@ -13,11 +14,6 @@ export default function AdminDashboard() {
   const router = useRouter();
   const [allowedEmails, setAllowedEmails] = useState([]);
 
-  // const allowedEmails = [
-  //   'CS22B1014@iiitdm.ac.in',
-  //   'admin2@example.com',
-  //   'manager@example.com',
-  // ];
 
   useEffect(() => {
     async function fetchAllowedEmails() {
@@ -35,10 +31,20 @@ export default function AdminDashboard() {
   }, []);
 
   useEffect(() => {
-    if (isLoaded && (!isSignedIn || !allowedEmails.includes(user?.emailAddresses[0]?.emailAddress) || 'CS22B1014@iiitdm.ac.in')) {
-      <Unauthorized />
+    const email = user?.emailAddresses[0]?.emailAddress;
+    console.log("Allowed Emails:", allowedEmails);
+    console.log("User Email:", user?.emailAddresses[0]?.emailAddress);
+    if (!isLoaded || loading) return;
+    
+    if (!isSignedIn || !allowedEmails.map((e) => e.toLowerCase()).includes(email) ) {
+      console.log("your email is", email )
+      router.push('/unauthorized');
     }
-  }, [isLoaded, isSignedIn, allowedEmails, user]);
+    else {
+      // Simulate loading for 5 seconds before rendering the page
+      setTimeout(() => setLoading(false), 5000);
+    }
+  }, [isLoaded, isSignedIn, allowedEmails, user, loading]);
 
   // Show a loading state until `useUser` is fully loaded
   if (loading || !isLoaded) {
@@ -57,16 +63,4 @@ export default function AdminDashboard() {
         <Footer/>
     </div>
   )
-}
-
-function Unauthorized() {
-  const router = useRouter();
-
-  return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1>Unauthorized Access</h1>
-      <p>You do not have permission to view this page.</p>
-      <button onClick={() => router.push('/')}>Go Back to Home</button>
-    </div>
-  );
 }
