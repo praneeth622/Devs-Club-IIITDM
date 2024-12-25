@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../../components/ui/card"
@@ -10,11 +10,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger }from  
 import { Label } from "../../../components/ui/label"
 import { Checkbox } from "../../../components/ui/checkbox"
 import { ScrollArea } from "../../../components/ui/scroll-area"
-import { BarChart, Users, Folder, BookOpen, Settings, Plus, Edit, Trash, Menu, X } from  'lucide-react'
+import { BarChart, Users, Folder, BookOpen, Settings, Plus, Edit, Trash, Menu, X , Presentation } from  'lucide-react'
 import { Textarea } from "../../../components/ui/textarea"
 import { useUser } from '@clerk/nextjs'
 import toast, { Toaster } from "react-hot-toast";
 import axios from 'axios'
+import { storage } from '../../../firebaseConfig'
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState('dashboard')
@@ -67,7 +69,7 @@ export default function AdminPage() {
 
             <Tabs orientation="vertical" value={activeTab} onValueChange={setActiveTab}>
               <TabsList className="flex flex-col w-full space-y-2 rounded-lg p-2 items-start">
-                {['dashboard', 'resources', 'projects', 'team', 'access', 'settings'].map((tab) => (
+                {['dashboard', 'resources', 'projects', 'team', 'Events', 'access', 'settings'].map((tab) => (
                   <TabsTrigger
                     key={tab}
                     value={tab}
@@ -161,6 +163,20 @@ export default function AdminPage() {
                   </CardHeader>
                   <CardContent>
                     <AdminAccessManager />
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </TabsContent>
+
+            <TabsContent value="Events">
+              <motion.div variants={tabVariants} initial="hidden" animate="visible">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Manage Events Access</CardTitle>
+                    <CardDescription>Events and workshops</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <EventManager />
                   </CardContent>
                 </Card>
               </motion.div>
@@ -504,6 +520,314 @@ function ProjectManager() {
   )
 }
 
+function EventManager() {
+  const [events, setEvents] = useState([])
+  const [isAddingEvent, setIsAddingEvent] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [newEvent, setNewEvent] = useState({
+    Event_name: '',
+    Event_details: '',
+    Project_Discription: '',
+    Event_outcome: '',
+    Event_lead: '',
+    Event_team: [{ name: '', linkedin: '', github: '' }],
+    date: '',
+    Attendance: '',
+    Event_Type: '',
+    Photos: [],
+    budget: 0,
+    Resources: [],
+    project_github: '',
+  })
+
+  useEffect(() => {
+    fetchEvents()
+  }, [])
+
+  const fetchEvents = async () => {
+    try {
+      const response = await axios.get('/api/events')
+      setEvents(response.data)
+    } catch (error) {
+      console.error('Error fetching events:', error)
+      toast.error('Failed to fetch events')
+    }
+  }
+
+  const handleAddEvent = async () => {
+    setIsLoading(true)
+    try {
+      const uploadedUrls = await Promise.all(newEvent.Photos.map(uploadImage))
+      const eventWithUrls = { ...newEvent, Photos: uploadedUrls }
+      const response = await axios.post('/api/events', eventWithUrls)
+      setEvents([...events, response.data])
+      setIsAddingEvent(false)
+      resetNewEventForm()
+      toast.success('Event added successfully')
+    } catch (error) {
+      console.error('Error adding event:', error)
+      toast.error('Failed to add event')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleDeleteEvent = async (eventId) => {
+    try {
+      await axios.delete(`/api/events/${eventId}`)
+      setEvents(events.filter(event => event.id !== eventId))
+      toast.success('Event deleted successfully')
+    } catch (error) {
+      console.error('Error deleting event:', error)
+      toast.error('Failed to delete event')
+    }
+  }
+
+  const resetNewEventForm = () => {
+    setNewEvent({
+      Event_name: '',
+      Event_details: '',
+      Project_Discription: '',
+      Event_outcome: '',
+      Event_lead: '',
+      Event_team: [{ name: '', linkedin: '', github: '' }],
+      date: '',
+      Attendance: '',
+      Event_Type: '',
+      Photos: [],
+      budget: 0,
+      Resources: [],
+      project_github: '',
+    })
+  }
+
+  const uploadImage = async (file) => {
+    const storageRef = ref(storage, `event_photos/${file.name}`)
+    await uploadBytes(storageRef, file)
+    return getDownloadURL(storageRef)
+  }
+
+  const handleFileChange = useCallback((e) => {
+    const files = Array.from(e.target.files)
+    setNewEvent(prev => ({ ...prev, Photos: files }))
+  }, [])
+
+  const handleTeamMemberChange = (index, field, value) => {
+    const updatedTeam = [...newEvent.Event_team]
+    updatedTeam[index] = { ...updatedTeam[index], [field]: value }
+    setNewEvent({ ...newEvent, Event_team: updatedTeam })
+  }
+
+  const handleAddTeamMember = () => {
+    setNewEvent({
+      ...newEvent,
+      Event_team: [...newEvent.Event_team, { name: '', linkedin: '', github: '' }],
+    })
+  }
+
+  return (
+    <div className="space-y-4">
+      <Toaster position="top-right" reverseOrder={false} />
+      <Dialog open={isAddingEvent} onOpenChange={setIsAddingEvent}>
+        <DialogTrigger asChild>
+          <Button className="w-full sm:w-auto"><Plus className="mr-2 h-4 w-4" /> Add Event</Button>
+        </DialogTrigger>
+        <DialogContent className="bg-white max-w-4xl w-full">
+          <DialogHeader>
+            <DialogTitle>Add New Event</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 max-h-[70vh] overflow-y-auto pr-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="event-name">Event Name</Label>
+                <Input 
+                  id="event-name" 
+                  value={newEvent.Event_name} 
+                  onChange={(e) => setNewEvent({...newEvent, Event_name: e.target.value})}
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="event-details">Event Details</Label>
+                <Input 
+                  id="event-details" 
+                  value={newEvent.Event_details} 
+                  onChange={(e) => setNewEvent({...newEvent, Event_details: e.target.value})}
+                  required
+                />
+              </div>
+            </div>
+            <div>
+              <Label htmlFor="project-description">Project Description</Label>
+              <Textarea 
+                id="project-description" 
+                value={newEvent.Project_Discription} 
+                onChange={(e) => setNewEvent({...newEvent, Project_Discription: e.target.value})}
+              />
+            </div>
+            <div>
+              <Label htmlFor="project-github">Project GitHub</Label>
+              <Input 
+                id="project-github" 
+                value={newEvent.project_github} 
+                onChange={(e) => setNewEvent({...newEvent, project_github: e.target.value})}
+                placeholder="https://github.com/username/project"
+              />
+            </div>
+            <div>
+              <Label htmlFor="event-outcome">Event Outcome</Label>
+              <Input 
+                id="event-outcome" 
+                value={newEvent.Event_outcome} 
+                onChange={(e) => setNewEvent({...newEvent, Event_outcome: e.target.value})}
+              />
+            </div>
+            <div>
+              <Label htmlFor="event-lead">Event Lead</Label>
+              <Input 
+                id="event-lead" 
+                value={newEvent.Event_lead} 
+                onChange={(e) => setNewEvent({...newEvent, Event_lead: e.target.value})}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label>Team Members</Label>
+              <ScrollArea className="h-[200px] w-full rounded-md border p-4">
+                {newEvent.Event_team.map((member, index) => (
+                  <Card key={index} className="p-4 mb-4">
+                    <CardContent className="p-0 space-y-2">
+                      <Input
+                        placeholder="Member Name"
+                        value={member.name}
+                        onChange={(e) => handleTeamMemberChange(index, 'name', e.target.value)}
+                      />
+                      <Input
+                        placeholder="LinkedIn"
+                        value={member.linkedin}
+                        onChange={(e) => handleTeamMemberChange(index, 'linkedin', e.target.value)}
+                      />
+                      <Input
+                        placeholder="GitHub"
+                        value={member.github}
+                        onChange={(e) => handleTeamMemberChange(index, 'github', e.target.value)}
+                      />
+                    </CardContent>
+                  </Card>
+                ))}
+              </ScrollArea>
+              <Button variant="outline" onClick={handleAddTeamMember} className="w-full">Add Team Member</Button>
+            </div>
+            <div>
+              <Label htmlFor="event-date">Date</Label>
+              <Input 
+                id="event-date" 
+                type="date" 
+                value={newEvent.date} 
+                onChange={(e) => setNewEvent({...newEvent, date: e.target.value})}
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="event-attendance">Attendance</Label>
+              <Input 
+                id="event-attendance" 
+                value={newEvent.Attendance} 
+                onChange={(e) => setNewEvent({...newEvent, Attendance: e.target.value})}
+              />
+            </div>
+            <div>
+              <Label htmlFor="event-type">Event Type</Label>
+              <select
+                id="event-type"
+                value={newEvent.Event_Type}
+                onChange={(e) => setNewEvent({...newEvent, Event_Type: e.target.value})}
+                className="w-full p-2 border border-gray-300 rounded-md"
+                required
+              >
+                <option value="">Select Event Type</option>
+                <option value="External Invited Talk">External Invited Talk</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Hackathon">Hackathon</option>
+                <option value="Teaching learning Session - organized by club">Teaching learning Session - organized by club</option>
+                <option value="Competition">Competition</option>
+                <option value="Others">Others</option>
+              </select>
+            </div>
+            <div>
+              <Label htmlFor="event-budget">Budget</Label>
+              <Input 
+                id="event-budget" 
+                type="number" 
+                value={newEvent.budget} 
+                onChange={(e) => setNewEvent({...newEvent, budget: parseFloat(e.target.value)})}
+              />
+            </div>
+            <div>
+              <Label htmlFor="event-resources">Resources (comma-separated URLs)</Label>
+              <Input 
+                id="event-resources" 
+                value={newEvent.Resources.join(', ')} 
+                onChange={(e) => setNewEvent({...newEvent, Resources: e.target.value.split(',')})}
+              />
+            </div>
+            <div>
+              <Label htmlFor="event-photos">Photos</Label>
+              <Input 
+                id="event-photos" 
+                type="file"
+                multiple
+                onChange={handleFileChange}
+                className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
+              />
+            </div>
+          </div>
+          <Button onClick={handleAddEvent} className="w-full mt-4" disabled={isLoading}>
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Uploading...
+              </>
+            ) : (
+              'Submit'
+            )}
+          </Button>
+        </DialogContent>
+      </Dialog>
+      <ScrollArea className="h-[calc(100vh-200px)] w-full rounded-md border">
+        {events.map((event) => (
+          <motion.div
+            key={event.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="flex items-center justify-between p-4 hover:bg-accent"
+          >
+            <div>
+              <p className="font-medium">{event.Event_name}</p>
+              <p className="text-sm text-muted-foreground">{new Date(event.date).toLocaleDateString()}</p>
+            </div>
+            <div>
+              <Button variant="ghost" size="icon">
+                <Edit className="h-4 w-4" />
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={() => handleDeleteEvent(event.id)}
+              >
+                <Trash className="h-4 w-4" />
+              </Button>
+            </div>
+          </motion.div>
+        ))}
+      </ScrollArea>
+    </div>
+  )
+}
+
+
+
+
 function TeamManager() {
   const [teamMembers, setTeamMembers] = useState([
     {
@@ -828,6 +1152,8 @@ function getTabIcon(tab) {
       return <Settings {...iconProps} />
     case 'settings':
       return <Settings {...iconProps} />
+    case 'Events':
+      return <Presentation {...iconProps} />
     default:
       return null
   }
