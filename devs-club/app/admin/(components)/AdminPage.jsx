@@ -10,11 +10,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger }from  
 import { Label } from "../../../components/ui/label"
 import { Checkbox } from "../../../components/ui/checkbox"
 import { ScrollArea } from "../../../components/ui/scroll-area"
-import { BarChart, Users, Folder, BookOpen, Settings, Plus, Edit, Trash, Menu, X , Presentation, Loader2 } from  'lucide-react'
+import { BarChart, Users, Folder, BookOpen, Settings, Plus, Edit, Trash, Menu, X , Presentation, Loader2,MessageSquareText } from  'lucide-react'
 import { Textarea } from "../../../components/ui/textarea"
 import { useUser } from '@clerk/nextjs'
 import toast, { Toaster } from "react-hot-toast";
 import axios from 'axios'
+import { format } from 'date-fns';
 import { storage } from '../../../firebaseConfig'
 import { ref, uploadBytes, getDownloadURL, uploadBytesResumable } from 'firebase/storage'
 import { useRouter } from 'next/navigation';
@@ -70,7 +71,7 @@ export default function AdminPage() {
 
             <Tabs orientation="vertical" value={activeTab} onValueChange={setActiveTab}>
               <TabsList className="flex flex-col w-full space-y-2 rounded-lg p-2 items-start">
-                {['dashboard', 'resources', 'projects', 'team', 'Events', 'access', 'settings'].map((tab) => (
+                {['dashboard', 'resources', 'projects', 'team', 'Events', 'access', 'Messages'].map((tab) => (
                   <TabsTrigger
                     key={tab}
                     value={tab}
@@ -173,7 +174,7 @@ export default function AdminPage() {
               <motion.div variants={tabVariants} initial="hidden" animate="visible">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Manage Events Access</CardTitle>
+                    <CardTitle>Manage Events</CardTitle>
                     <CardDescription>Events and workshops</CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -183,15 +184,15 @@ export default function AdminPage() {
               </motion.div>
             </TabsContent>
 
-            <TabsContent value="settings">
+            <TabsContent value="Messages">
               <motion.div variants={tabVariants} initial="hidden" animate="visible">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Admin Settings</CardTitle>
-                    <CardDescription>Configure admin dashboard settings</CardDescription>
+                    <CardTitle>Messages</CardTitle>
+                    <CardDescription>Contact Form Messages</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <SettingsManager />
+                    <MessageManager />
                   </CardContent>
                 </Card>
               </motion.div>
@@ -1178,23 +1179,77 @@ function AdminAccessManager() {
   );
 }
 
-function SettingsManager() {
+function MessageManager() {
+  const [messages, setMessages] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    fetchMessages()
+  }, [])
+
+  const fetchMessages = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get('/api/contact');
+      console.log("Response data:", response.data);
+
+      // Ensure we are getting an array of messages
+      if (response.data && Array.isArray(response.data.data)) {
+        // Set messages from response.data.data
+        setMessages(response.data.data);
+      } else {
+        console.error("Unexpected response format:", response.data);
+        setMessages([]); // Fallback to an empty array if format is incorrect
+      }
+    } catch (error) {
+      console.error('Error fetching messages:', error);
+      toast.error('Failed to fetch messages');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const sortedMessages = [...messages].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+  // Function to format the date and time correctly
+  const formatDate = (date) => {
+    // Format both date and time
+    return format(new Date(date), 'MMMM dd, yyyy h:mm a'); // e.g., "December 26, 2024 10:32 AM"
+  };
+
   return (
-    <div className="space-y-4">
-      <div className="space-y-2">
-        <Label htmlFor="site-name">Site Name</Label>
-        <Input id="site-name" placeholder="Enter site name" />
-      </div>
-      <div className="space-y-2">
-        <Label htmlFor="admin-email">Admin Email</Label>
-        <Input id="admin-email" type="email" placeholder="admin@example.com" />
-      </div>
-      <div className="space-y-2">
-        <Label htmlFor="timezone">Timezone</Label>
-        <Input id="timezone" placeholder="Select timezone" />
-      </div>
-      <Button className="w-full">Save Settings</Button>
-    </div>
+    <Card className="w-full">
+      <CardContent>
+        <Toaster position="top-right" reverseOrder={false} />
+        {isLoading ? (
+          <div className="flex justify-center items-center h-64">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          </div>
+        ) : (
+          <ScrollArea className="h-[calc(100vh-200px)] w-full rounded-md border">
+            {sortedMessages.map((message) => (
+              <motion.div
+                key={message._id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="p-4 hover:bg-accent rounded-lg mb-2"
+              >
+                <div className="flex justify-between items-start mb-2">
+                  <div>
+                    <p className="font-medium">{message.name}</p>
+                    <p className="text-sm text-muted-foreground">{message.email}</p>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    {formatDate(message.createdAt)} {/* Display formatted date and time */}
+                  </p>
+                </div>
+                <p className="text-sm">{message.message}</p>
+              </motion.div>
+            ))}
+          </ScrollArea>
+        )}
+      </CardContent>
+    </Card>
   )
 }
 
@@ -1215,8 +1270,8 @@ function getTabIcon(tab) {
       return <Users {...iconProps} />
     case 'access':
       return <Settings {...iconProps} />
-    case 'settings':
-      return <Settings {...iconProps} />
+    case 'Messages':
+      return <MessageSquareText  {...iconProps} />
     case 'Events':
       return <Presentation {...iconProps} />
     default:

@@ -11,6 +11,8 @@ import { Button } from "../../components/ui/button"
 import Navbar from '../(components)/Navbar'
 import { Footer } from '../(components)/Footer'
 import { toast } from 'react-hot-toast'
+import { Toaster } from 'react-hot-toast';
+import axios from 'axios'
 
 function ContactFormComponent() {
   const [formData, setFormData] = useState({
@@ -29,21 +31,31 @@ function ContactFormComponent() {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsLoading(true)
-    
+    e.preventDefault();
+    setIsLoading(true);
+  
     try {
-      // Here you would typically make an API call to your backend
-      // await axios.post('/api/contact', formData)
-      
-      toast.success('Message sent successfully!')
-      setFormData({ name: '', email: '', message: '' })
+      // Sending the form data to the backend API
+      const response = await axios.post("/api/contact", formData);
+  
+      // Log the response for debugging
+      console.log("API Response:", response);
+  
+      if (response.data.success) {
+        toast.success("Message sent successfully!");
+        setFormData({ name: "", email: "", message: "" }); // Reset the form
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
     } catch (error) {
-      toast.error('Failed to send message. Please try again.')
+      // Log the error for debugging
+      console.error("Error submitting form:", error);
+      toast.error("Failed to send message. Please try again.");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
+  
 
   const pageVariants = {
     initial: { opacity: 0, y: 20 },
@@ -66,6 +78,10 @@ function ContactFormComponent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 p-4 md:p-8 relative overflow-hidden">
+      <Toaster 
+        position="top-right"  
+        reverseOrder={false} 
+      />
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl"
