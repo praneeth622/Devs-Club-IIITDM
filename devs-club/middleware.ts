@@ -10,6 +10,7 @@ const isPublicRoute = createRouteMatcher([
   '/open-source',
   '/api(/.*)?',
   '/',
+  '/web-team',
 ]);
 export default clerkMiddleware((auth, request) => {
   

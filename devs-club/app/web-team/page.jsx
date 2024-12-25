@@ -8,7 +8,7 @@ const teamMembers = [
     name: "Praneeth Devarasetty",
     role: "Lead Developer",
     description: "John leads the development team with expertise in React, Node.js, and cloud technologies.",
-    photo: "/assets/CS22B1014.jpg",
+    photo: "/assets/cs22b1014.jpg",
     linkedin: "https://linkedin.com/in/johndoe",
     github: "https://github.com/johndoe",
   },
@@ -32,7 +32,7 @@ const teamMembers = [
     name: "G Chaitanya Reddy",
     role: "Frontend Developer",
     description: "Emily is an expert in server-side programming, database management, and API development.",
-    photo: "/assets/CS22B1052.jpg",
+    photo: "/assets/cs22b1052.jpg",
     linkedin: "https://linkedin.com/in/emilybrown",
     github: "https://github.com/emilybrown",
   }

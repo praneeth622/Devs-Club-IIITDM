@@ -1,7 +1,0 @@
-  <div className="achievements-section">
-    {/* Achievements content */}
-  </div>
-  <div className="achievements-section-mobile">
-    {/* Achievements content for mobile view */}
-  </div>
-</div> 
