@@ -16,7 +16,7 @@ import { useUser } from '@clerk/nextjs'
 import toast, { Toaster } from "react-hot-toast";
 import axios from 'axios'
 import { storage } from '../../../firebaseConfig'
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { ref, uploadBytes, getDownloadURL, uploadBytesResumable } from 'firebase/storage'
 import { useRouter } from 'next/navigation';
 
 export default function AdminPage() {
@@ -525,6 +525,7 @@ function EventManager() {
   const [events, setEvents] = useState([])
   const [isAddingEvent, setIsAddingEvent] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [percentage,setPercentage] = useState(0)
   const [newEvent, setNewEvent] = useState({
     Event_name: '',
     Event_details: '',
@@ -547,42 +548,106 @@ function EventManager() {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get('/api/events')
-      setEvents(response.data)
+      const response = await axios.get('/api/events');
+      // Check if the response is an array
+      console.log("Response is ",response)
+      if(response.status == 200){
+        const flattenedEvents = response.data.data.map(event => {
+          return {
+            ...event,
+            Photos: event.Photos.flat(), // Flatten the Photos array (if it’s nested)
+            Resources: event.Resources.flat() // Flatten the Resources array (if it’s nested)
+          };
+        });
+        setEvents(flattenedEvents)
+      }
+      else{
+        console.log("Error in fetching data")
+      }
     } catch (error) {
-      console.error('Error fetching events:', error)
-      toast.error('Failed to fetch events')
+      console.error('Error fetching events:', error);
+      toast.error('Failed to fetch events');
     }
-  }
+  };
 
   const handleAddEvent = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
-      const uploadedUrls = await Promise.all(newEvent.Photos.map(uploadImage))
-      const eventWithUrls = { ...newEvent, Photos: uploadedUrls }
-      const response = await axios.post('/api/events', eventWithUrls)
-      setEvents([...events, response.data])
-      setIsAddingEvent(false)
-      resetNewEventForm()
-      toast.success('Event added successfully')
-    } catch (error) {
-      console.error('Error adding event:', error)
-      toast.error('Failed to add event')
-    } finally {
-      setIsLoading(false)
+      // Upload each photo and retrieve its download URL
+      const uploadedUrls = await Promise.all(
+        newEvent.Photos.map(async (file) => {
+          const storageRef = ref(storage, `Events/${newEvent.Event_name}/${file.name}`);
+          const uploadTask = uploadBytesResumable(storageRef, file);
+  
+          return new Promise((resolve, reject) => {
+            uploadTask.on(
+              "state_changed",
+              (snapshot) => {
+                // Update percentage if needed
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                setPercentage(Math.round(progress));
+              },
+              (error) => reject(error), // Handle upload error
+              async () => {
+                const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                console.log("Downloaded Url for image is : ",downloadURL)
+                resolve(downloadURL); // Resolve with the download URL
+              }
+            );
+          });
+        })
+      );
+  
+      // Add uploaded URLs to the event data
+      const eventWithUrls = { ...newEvent, Photos: uploadedUrls };
+  
+      // Submit the event data to the API
+      try{
+        const response = await axios.post('/api/events', eventWithUrls);
+        console.log('response is ', response)
+      
+  
+      // Update the events list with the newly created event
+      setEvents((prevEvents) => [...prevEvents, response.data]);
+      toast.success('Event added successfully');
+      
+      // Reset the form and state
+      resetNewEventForm();
+      setIsAddingEvent(false);
     }
-  }
+    catch(err){
+      console.log("error in the uploding data to api ", err)
+      toast.error(`${err}`)
+    }
+    } catch (error) {
+      console.error('Error adding event:', error);
+      toast.error('Failed to add event. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
 
   const handleDeleteEvent = async (eventId) => {
     try {
-      await axios.delete(`/api/events/${eventId}`)
-      setEvents(events.filter(event => event.id !== eventId))
-      toast.success('Event deleted successfully')
+      // Sending the eventId in the body of the DELETE request
+      const response = await axios.delete('/api/events', {
+        data: { id: eventId } // The id is sent in the `data` field for DELETE requests
+      });
+  
+      // Assuming the response contains a `success` field and the deleted event data
+      if (response.data.success) {
+        setEvents(events.filter((event) => event._id !== eventId)); // Filtering out the deleted event by its _id
+        toast.success('Event deleted successfully');
+      } else {
+        toast.error('Failed to delete event');
+      }
     } catch (error) {
-      console.error('Error deleting event:', error)
-      toast.error('Failed to delete event')
+      console.error('Error deleting event:', error);
+      toast.error('Failed to delete event');
     }
-  }
+  };
+  
 
   const resetNewEventForm = () => {
     setNewEvent({
@@ -609,9 +674,9 @@ function EventManager() {
   }
 
   const handleFileChange = useCallback((e) => {
-    const files = Array.from(e.target.files)
-    setNewEvent(prev => ({ ...prev, Photos: files }))
-  }, [])
+    const files = Array.from(e.target.files); // Convert FileList to an array
+    setNewEvent((prev) => ({ ...prev, Photos: files }));
+  }, []);
 
   const handleTeamMemberChange = (index, field, value) => {
     const updatedTeam = [...newEvent.Event_team]
@@ -814,7 +879,7 @@ function EventManager() {
               <Button 
                 variant="ghost" 
                 size="icon"
-                onClick={() => handleDeleteEvent(event.id)}
+                onClick={() => handleDeleteEvent(event._id)}
               >
                 <Trash className="h-4 w-4" />
               </Button>
