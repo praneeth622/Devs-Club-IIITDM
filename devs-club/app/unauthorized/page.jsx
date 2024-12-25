@@ -23,7 +23,7 @@ export default function Unauthorized() {
           Access Denied
         </h1>
         <p className="text-xl text-gray-600 mb-8 max-w-md mx-auto">
-          We're sorry, but you don't have permission to access this page.
+          We&apos;re sorry, but you don&apos;t have permission to access this page.
         </p>
         <Link 
           href="/"

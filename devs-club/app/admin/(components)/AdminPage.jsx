@@ -10,13 +10,14 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger }from  
 import { Label } from "../../../components/ui/label"
 import { Checkbox } from "../../../components/ui/checkbox"
 import { ScrollArea } from "../../../components/ui/scroll-area"
-import { BarChart, Users, Folder, BookOpen, Settings, Plus, Edit, Trash, Menu, X , Presentation } from  'lucide-react'
+import { BarChart, Users, Folder, BookOpen, Settings, Plus, Edit, Trash, Menu, X , Presentation, Loader2 } from  'lucide-react'
 import { Textarea } from "../../../components/ui/textarea"
 import { useUser } from '@clerk/nextjs'
 import toast, { Toaster } from "react-hot-toast";
 import axios from 'axios'
 import { storage } from '../../../firebaseConfig'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { useRouter } from 'next/navigation';
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState('dashboard')
@@ -371,12 +372,12 @@ function ProjectManager() {
           toast.success("Projects fetched successfully!");
         } else {
           setError('Failed to fetch projects');
-          toast.error(`Error adding project: ${error.response?.data?.message || error.message}, Try Again later`);
+          toast.error(`Error adding project: ${error.response?.data?.message }, Try Again later`);
         }
         setLoading(false);
       } catch (err) {
         setError('Error fetching projects');
-        toast.error(`Error Fetching project: ${error.response?.data?.message || error.message}, Try Again later`);
+        toast.error(`Error Fetching project: ${error.response?.data?.message }, Try Again later`);
         setLoading(false);
       }
     };
@@ -1007,7 +1008,6 @@ function AdminAccessManager() {
       if (response.status === 201 ) {
         toast.success("Admin added successfully!");
       }
-      // window.location.reload();
       setNewAdmin({ name: '', role: '', email: '' });
     } catch (error) {
       console.error("Error adding admin:", error.response?.data.error);

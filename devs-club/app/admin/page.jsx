@@ -44,7 +44,7 @@ export default function AdminDashboard() {
       // Simulate loading for 5 seconds before rendering the page
       setTimeout(() => setLoading(false), 5000);
     }
-  }, [isLoaded, isSignedIn, allowedEmails, user, loading]);
+  }, [isLoaded, isSignedIn, allowedEmails, user, loading, router]);
 
   // Show a loading state until `useUser` is fully loaded
   if (loading || !isLoaded) {
