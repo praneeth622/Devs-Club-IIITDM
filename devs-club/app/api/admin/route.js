@@ -43,6 +43,7 @@ export async function POST(req) {
     // Check if the email already exists in the database
     const existingAdmin = await Admin.findOne({ email });
     if (existingAdmin) {
+      console.log('Email already exists')
       return new Response(
         JSON.stringify({ success: false, error: 'Admin with this email already exists' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
