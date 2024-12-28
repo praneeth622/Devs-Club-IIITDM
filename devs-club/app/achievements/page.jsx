@@ -253,6 +253,7 @@ function AchievementsSection() {
             className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold text-lg shadow-lg"
             whileHover={{ scale: 1.05, backgroundColor: "#3b82f6" }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => window.location.href = "https://chat.whatsapp.com/HoZ7hfu8MEy1fQL7eLGiAl"}
           >
             Join Developers Club Today!
           </motion.button>

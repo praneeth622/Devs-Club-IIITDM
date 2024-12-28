@@ -260,7 +260,7 @@ function ContactFormComponent() {
 
                 <div className="space-y-4">
                   <motion.a
-                    href="https://github.com/Devs-Club-IIITDM" 
+                    href="https://github.com/Developers-Club-IIITDM" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center space-x-4 text-gray-200 p-4 rounded-xl transition-all duration-500 group relative overflow-hidden"
@@ -287,14 +287,14 @@ function ContactFormComponent() {
                           transition: { duration: 0.2 }
                         }}
                       >
-                        github.com/Devs-Club-IIITDM
+                        github.com/Developers-Club-IIITDM
                         <div className="h-0.5 w-full bg-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                       </motion.span>
                     </div>
                   </motion.a>
 
                   <motion.a
-                    href="https://www.linkedin.com/company/developers-club-iiitdm" 
+                    href="https://www.linkedin.com/company/developersclub-iiitdm-kancheepuram/" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center space-x-4 text-gray-200 p-4 rounded-xl transition-all duration-500 group relative overflow-hidden"
@@ -321,7 +321,7 @@ function ContactFormComponent() {
                           transition: { duration: 0.2 }
                         }}
                       >
-                        linkedin.com/developers-club-iiitdm
+                        linkedin.com/company/developersclub-iiitdm-kancheepuram
                         <div className="h-0.5 w-full bg-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                       </motion.span>
                     </div>
