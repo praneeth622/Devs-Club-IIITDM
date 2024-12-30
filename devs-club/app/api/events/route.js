@@ -2,7 +2,7 @@ import Event from '../../models/events';
 import dbConnect from '../conn';
 
 // GET request: Fetch all events
-export async function GET(req, res) {
+export async function GET(req) {
   try {
     await dbConnect();
     const events = await Event.find();
