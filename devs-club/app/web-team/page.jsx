@@ -21,12 +21,12 @@ const teamMembers = [
     github: "https://github.com/janesmith",
   },
   {
-    name: "Dharshan Karthikeya ",
+    name: "Darshan Karthikeya ",
     role: "UI/UX Designer",
     description: "Mike specializes in creating responsive and accessible web interfaces using modern frontend technologies.",
     photo: "",
     linkedin: "https://linkedin.com/in/mikejohnson",
-    github: "https://github.com/mikejohnson",
+    github: "https://github.com/karthikeya1220",
   },
   {
     name: "G Chaitanya Reddy",
