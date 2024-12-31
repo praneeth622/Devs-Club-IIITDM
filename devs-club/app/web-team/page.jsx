@@ -18,15 +18,15 @@ const teamMembers = [
     description: "Jane is responsible for creating the user interface and experience, focusing on user-centered design principles.",
     photo: "/placeholder.svg?height=300&width=300",
     linkedin: "https://linkedin.com/in/janesmith",
-    github: "https://github.com/janesmith",
+    github: "https://github.com/sriram0620",
   },
   {
-    name: "Dharshan Karthikeya ",
+    name: "Darshan Karthikeya ",
     role: "UI/UX Designer",
     description: "Mike specializes in creating responsive and accessible web interfaces using modern frontend technologies.",
     photo: "",
     linkedin: "https://linkedin.com/in/mikejohnson",
-    github: "https://github.com/mikejohnson",
+    github: "https://github.com/karthikeya1220",
   },
   {
     name: "G Chaitanya Reddy",
@@ -34,7 +34,7 @@ const teamMembers = [
     description: "Emily is an expert in server-side programming, database management, and API development.",
     photo: "/assets/cs22b1052.jpg",
     linkedin: "https://linkedin.com/in/emilybrown",
-    github: "https://github.com/emilybrown",
+    github: "https://github.com/chaitanya-reddy-13",
   }
 ]
 

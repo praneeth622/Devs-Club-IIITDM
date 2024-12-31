@@ -157,7 +157,8 @@ export default function Navbar() {
     { name: "Achievements", icon: "🏆" },
     { name: "Projects", icon: "💻" },
     { name: "Open-Source", icon: "🌟" },
-    { name: "Contact", icon: "📧" }
+    { name: "Contact", icon: "📧" },
+    { name: "Events", icon: "📅" }
   ];
 
   const handleMenuToggle = () => setIsMenuOpen(!isMenuOpen);

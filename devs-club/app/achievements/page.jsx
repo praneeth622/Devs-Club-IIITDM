@@ -1,5 +1,7 @@
 "use client";
 
+import React from 'react';
+import Link from 'next/link';
 import { motion } from "framer-motion";
 import {
   ChevronRight,
@@ -249,13 +251,15 @@ function AchievementsSection() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          <motion.button
-            className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold text-lg shadow-lg"
-            whileHover={{ scale: 1.05, backgroundColor: "#3b82f6" }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Join Developers Club Today!
-          </motion.button>
+          <Link href="/contact">
+            <motion.button
+              className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold text-lg shadow-lg"
+              whileHover={{ scale: 1.05, backgroundColor: "#3b82f6" }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Join Developers Club Today!
+            </motion.button>
+          </Link>
         </motion.div>
       </div>
     </div>
