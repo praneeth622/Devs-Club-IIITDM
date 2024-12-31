@@ -6,7 +6,7 @@ import {
   SignInButton,
   SignedIn,
   SignedOut,
-  UserButton
+  UserButton,
 } from '@clerk/nextjs'
 
 const geistSans = localFont({
@@ -25,7 +25,10 @@ export const metadata = {
   description: "Join the Developer Club at IIITDM Kancheepuram: Engage in workshops, hackathons, and networking opportunities to enhance your coding skills and connect with tech enthusiasts in a vibrant community.",
 };
 
+
+
 export default function RootLayout({ children }) {
+  
   return (
     <ClerkProvider>
     <html lang="en">

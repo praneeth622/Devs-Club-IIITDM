@@ -1082,9 +1082,9 @@ function AdminAccessManager() {
   };
 
   // Delete an admin
-  const handleDeleteAdmin = async (id) => {
+  const handleDeleteAdmin = async (id,email) => {
     try {
-      await axios.delete('/api/admin', { data: { id } }); // Send the `id` as the body
+      await axios.delete('/api/admin', { data: { id ,email} }); // Send the `id` as the body
       setAdmins(admins.filter((admin) => admin._id !== id)); // Use `_id` here too
       toast.success("Admin Deleted successfully!");
     } catch (error) {
@@ -1167,7 +1167,7 @@ function AdminAccessManager() {
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => handleDeleteAdmin(admin._id)}
+                onClick={() => handleDeleteAdmin(admin._id,admin.email)}
               >
                 <Trash className="h-4 w-4" />
               </Button>
