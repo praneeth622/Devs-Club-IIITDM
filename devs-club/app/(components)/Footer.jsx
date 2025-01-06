@@ -51,7 +51,7 @@ export const Footer = () => {
               Contact Us
             </Link>
           </div>
-          <div className="mt-4 ">
+          {/* <div className="mt-4 ">
             <span>Made with ❤️ by </span>
             <Link 
               href="/web-team" 
@@ -59,7 +59,7 @@ export const Footer = () => {
             >
               Web Team Developers Club
             </Link>
-          </div>
+          </div> */}
         </motion.div>
       </div>
     </footer>

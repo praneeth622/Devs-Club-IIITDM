@@ -154,6 +154,7 @@ export default function Navbar() {
   const { isSignedIn } = useUser();
   const navItems = [
     { name: "About", icon: "🎯" },
+    { name: "Team", icon: "👩‍💻" },
     { name: "Achievements", icon: "🏆" },
     { name: "Projects", icon: "💻" },
     { name: "Open-Source", icon: "🌟" },
