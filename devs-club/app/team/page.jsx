@@ -293,7 +293,14 @@ export default function Team() {
   ]
   const pics = [
     { name: "Dr. Preeth R", role: "Assistant Professor", bio: "Assistant Professor specializing in IoT, Machine Learning, Computer Vision, and Data Science research.", image: "/assets/Preeth.jpg", linkedin: "https://www.linkedin.com/in/preethr/"},
-      ];
+    ];
+
+    const developers = [
+        { name: "Praneeth Devarasetty", role: "Lead Developer", bio: "Leads the development team with expertise in Nextjs and cloud technologies.", image: "/assets/cs22b1014.jpg", linkedin: "https://www.linkedin.com/in/praneeth-devarasetty/", github: "https://github.com/praneeth622" },
+        { name: "Surya Srirama Murthy", role: "UI/UX Designer", bio: "Sriram is responsible for creating the user interface and experience, focusing on user-centered design principles", image: '', linkedin: "https://www.linkedin.com/in/vishnu-surla-70384524a/", github: "https://github.com/sriram0620" },
+        { name: "Darshan Karthikeya", role: "UI/UX Designer", bio: "Mike specializes in creating responsive and accessible web interfaces using modern frontend technologies.", image: "/assets/cs22b1022.jpg", linkedin: "https://www.linkedin.com/in/darshan-karthikeya/", github: "https://github.com/karthikeya1220" },
+        { name: "G Chaithanya Reddy", role: "Frontend Developer", bio: "Chaithanya is an expert in server-side programming, database management, and API development.", image: "/assets/cs22b1052.jpg", linkedin: "https://www.linkedin.com/in/chaitanya-reddy-gavinolla-22166b258/", github: "https://github.com/chaitanya-reddy-13" },
+      ]
 
   return (
     <div className="container mx-auto px-4 py-16">
@@ -305,6 +312,7 @@ export default function Team() {
       <TeamSection title="Core Team" members={cores} />
       <TeamSection title="Coordinators" members={coordinators} />
       <TeamSection title="Mentors" members={mentors} />
+      <TeamSection title="Developers" members={developers} />
     </div>
   )
 }
