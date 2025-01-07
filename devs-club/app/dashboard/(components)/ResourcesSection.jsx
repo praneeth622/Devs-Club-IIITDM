@@ -199,8 +199,8 @@ export default function ResourcesSection() {
       </Card>
 
       <Dialog open={!!selectedResource} onOpenChange={() => setSelectedResource(null)}>
-        <DialogContent className="sm:max-w-[600px] max-h-[700px] bg-white rounded-lg p-8">
-          <DialogHeader className="mb-6">
+        <DialogContent className="sm:max-w-[600px] max-h-[700px] bg-white rounded-lg m-5 p-10">
+          <DialogHeader className="mb-6 ">
             <DialogTitle className="flex items-center space-x-3 text-2xl font-bold mb-3">
               {selectedResource && (
                 <>
