@@ -34,7 +34,7 @@ export async function GET(req, res) {
       isAdmin = 0;
     }
     console.log("isAdmin:", isAdmin)
-    console.log("role:",org?.orgRole)
+    console.log("role:",org)
     if (!isAdmin) {
       return new Response(
         JSON.stringify({ success: false, error: 'Forbidden: You do not have admin access.' }),
