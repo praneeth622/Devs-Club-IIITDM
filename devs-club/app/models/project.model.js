@@ -8,17 +8,17 @@ const ProjectSchema = new mongoose.Schema({
     description: { type: String, required: true },
     teamLead: {
       name: { type: String, required: true },
-      linkedin: { type: String, required: true },
-      github: { type: String, required: true },
+      linkedin: { type: String },
+      github: { type: String },
     },
     teamMembers: [
         {
-          name: { type: String, required: true },
-          linkedin: { type: String, required: true },
-          github: { type: String, required: true },
+          name: { type: String },
+          linkedin: { type: String },
+          github: { type: String },
         }
     ],
-    fullDescription: { type: String, required: true },
+    fullDescription: { type: String},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
 });

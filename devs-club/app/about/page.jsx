@@ -203,8 +203,6 @@ export default function GDSCAboutPage() {
           </motion.div>
         </section>
 
-        {/* Core Team Section */}
-        <CoreTeamMember />
 
         {/* Events & Achievements Section */}
         <div className="bg-sky-50 w-full py-20 pr-6 ">

@@ -331,6 +331,24 @@ function ProjectManager() {
   });
 
   const handleAddProject = async () => {
+    if (!newProject.name || !newProject.description || !newProject.fullDescription) {
+      toast.error("Please fill in all the required fields: Name, Description, and Full Description.");
+      return;
+    }
+  
+    // Validate teamLead
+    if (!newProject.teamLead.name || !newProject.teamLead.linkedin || !newProject.teamLead.github) {
+      toast.error("Please fill in all the fields for the Team Lead.");
+      return;
+    }
+  
+    // Validate each team member
+    for (const member of newProject.teamMembers) {
+      if (!member.name || !member.linkedin || !member.github) {
+        toast.error("Please fill in all the fields for each Team Member.");
+        return;
+      }
+    }
     try {
       console.log("New Project Data: ", newProject);  // Log the project data
       const response = await fetch('/api/projects', {
@@ -447,24 +465,23 @@ function ProjectManager() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="project-name">Name</Label>
-              <Input id="project-name" value={newProject.name} onChange={(e) => setNewProject({...newProject, name: e.target.value})} />
+              <Input id="project-name" required value={newProject.name} onChange={(e) => setNewProject({...newProject, name: e.target.value})} />
             </div>
             <div>
               <Label htmlFor="project-description">Description</Label>
-              <Input id="project-description" value={newProject.description} onChange={(e) => setNewProject({...newProject, description: e.target.value})} />
+              <Input id="project-description" required value={newProject.description} onChange={(e) => setNewProject({...newProject, description: e.target.value})} />
             </div>
           </div>
           <div>
             <Label htmlFor="project-full-description">Full Description</Label>
-            <Textarea id="project-full-description" value={newProject.fullDescription} onChange={(e) => setNewProject({...newProject, fullDescription: e.target.value})} />
+            <Textarea id="project-full-description" required value={newProject.fullDescription} onChange={(e) => setNewProject({...newProject, fullDescription: e.target.value})} />
           </div>
           <div className="space-y-2">
             <Label>Team Lead</Label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Input placeholder="Name" value={newProject.teamLead.name} onChange={(e) => setNewProject({...newProject, teamLead: {...newProject.teamLead, name: e.target.value}})} />
-              <Input placeholder="Photo URL" value={newProject.teamLead.photo} onChange={(e) => setNewProject({...newProject, teamLead: {...newProject.teamLead, photo: e.target.value}})} />
-              <Input placeholder="LinkedIn" value={newProject.teamLead.linkedin} onChange={(e) => setNewProject({...newProject, teamLead: {...newProject.teamLead, linkedin: e.target.value}})} />
-              <Input placeholder="GitHub" value={newProject.teamLead.github} onChange={(e) => setNewProject({...newProject, teamLead: {...newProject.teamLead, github: e.target.value}})} />
+              <Input placeholder="Name" required value={newProject.teamLead.name} onChange={(e) => setNewProject({...newProject, teamLead: {...newProject.teamLead, name: e.target.value}})} />
+              <Input placeholder="LinkedIn" required value={newProject.teamLead.linkedin} onChange={(e) => setNewProject({...newProject, teamLead: {...newProject.teamLead, linkedin: e.target.value}})} />
+              <Input placeholder="GitHub" required value={newProject.teamLead.github} onChange={(e) => setNewProject({...newProject, teamLead: {...newProject.teamLead, github: e.target.value}})} />
             </div>
           </div>
           <div className="space-y-2">
@@ -535,13 +552,12 @@ function EventManager() {
     Event_lead: '',
     Event_team: [{ name: '', linkedin: '', github: '' }],
     date: '',
-    Attendance: '',
-    Event_Type: '',
+    time: '',
+    Event_location: '',
     Photos: [],
-    budget: 0,
     Resources: [],
     project_github: '',
-  })
+  });
 
   useEffect(() => {
     fetchEvents()
@@ -573,6 +589,12 @@ function EventManager() {
 
   const handleAddEvent = async () => {
     setIsLoading(true);
+    if (!newEvent.Event_name || !newEvent.Event_details || !newEvent.date) {
+      // toast.error("Please fill out all required fields.");
+      alert("Please fill out all required fields.")
+      setIsLoading(false);
+      return;
+    }
     try {
       // Upload each photo and retrieve its download URL
       const uploadedUrls = await Promise.all(
@@ -659,14 +681,13 @@ function EventManager() {
       Event_lead: '',
       Event_team: [{ name: '', linkedin: '', github: '' }],
       date: '',
-      Attendance: '',
-      Event_Type: '',
+      time: '',
+      Event_location: '',
       Photos: [],
-      budget: 0,
       Resources: [],
       project_github: '',
-    })
-  }
+    });
+  };
 
   const uploadImage = async (file) => {
     const storageRef = ref(storage, `event_photos/${file.name}`)
@@ -759,7 +780,7 @@ function EventManager() {
             </div>
             <div className="space-y-2">
               <Label>Team Members</Label>
-              <ScrollArea className="h-[200px] w-full rounded-md border p-4">
+              <ScrollArea className="h-[200px] w-full rounded-md border p-4 overflow-auto">
                 {newEvent.Event_team.map((member, index) => (
                   <Card key={index} className="p-4 mb-4">
                     <CardContent className="p-0 space-y-2">
@@ -794,15 +815,15 @@ function EventManager() {
                 required
               />
             </div>
-            <div>
+            {/* <div>
               <Label htmlFor="event-attendance">Attendance</Label>
               <Input 
                 id="event-attendance" 
                 value={newEvent.Attendance} 
                 onChange={(e) => setNewEvent({...newEvent, Attendance: e.target.value})}
               />
-            </div>
-            <div>
+            </div> */}
+            {/* <div>
               <Label htmlFor="event-type">Event Type</Label>
               <select
                 id="event-type"
@@ -819,8 +840,8 @@ function EventManager() {
                 <option value="Competition">Competition</option>
                 <option value="Others">Others</option>
               </select>
-            </div>
-            <div>
+            </div> */}
+            {/* <div>
               <Label htmlFor="event-budget">Budget</Label>
               <Input 
                 id="event-budget" 
@@ -828,7 +849,7 @@ function EventManager() {
                 value={newEvent.budget} 
                 onChange={(e) => setNewEvent({...newEvent, budget: parseFloat(e.target.value)})}
               />
-            </div>
+            </div> */}
             <div>
               <Label htmlFor="event-resources">Resources (comma-separated URLs)</Label>
               <Input 
