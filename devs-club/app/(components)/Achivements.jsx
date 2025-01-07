@@ -99,7 +99,7 @@ export default function ImpactAchievements() {
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.2 }}
               >
                 <Counter end={achievement.count} duration={2000} />
-                {achievement.count === 5 ? '+' : null}
+                {achievement.count ? '+' : null}
               </motion.h3>
               <motion.h4
                 className="text-xl font-semibold mb-2"

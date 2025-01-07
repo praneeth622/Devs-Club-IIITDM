@@ -242,7 +242,7 @@ function ContactFormComponent() {
                     </p>
                   </motion.div>
 
-                  <motion.div
+                  {/* <motion.div
                     whileHover={{ scale: 1.02 }}
                     className="p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/10 hover:bg-white/20 transition-all duration-300 group"
                   >
@@ -255,7 +255,7 @@ function ContactFormComponent() {
                     <p className="text-gray-200 group-hover:text-white transition-colors">
                       Saturday: 10am - 4pm
                     </p>
-                  </motion.div>
+                  </motion.div> */}
                 </div>
 
                 <div className="space-y-4">
