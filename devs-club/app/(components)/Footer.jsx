@@ -41,10 +41,10 @@ export const Footer = () => {
         >
           <div>&copy; {new Date().getFullYear()} Developers Club. All rights reserved.</div>
           <div className="flex justify-center space-x-4 mt-4">
-            <Link href="#" className="hover:text-white transition-colors duration-300">
+            <Link href="privacy-policy" className="hover:text-white transition-colors duration-300">
               Privacy Policy
             </Link>
-            <Link href="#" className="hover:text-white transition-colors duration-300">
+            <Link href="terms-conditions" className="hover:text-white transition-colors duration-300">
               Terms of Service
             </Link>
             <Link href="/contact" className="hover:text-white transition-colors duration-300">
