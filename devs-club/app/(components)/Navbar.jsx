@@ -34,7 +34,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white border-b border-gray-200 shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px:10">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-3">
             <div className="relative w-8 h-8">
@@ -52,7 +52,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation Items */}
-          <div className="hidden md:flex space-x-4">
+          <div className="hidden md:flex items-center space-x-2">
             {navItems.map((item) => (
               <motion.div
                 key={item.name}
@@ -61,7 +61,7 @@ const Navbar = () => {
               >
                 <Link 
                   href={`/${item.name.toLowerCase()}`}
-                  className="px-4 py-2 rounded-md text-sm font-medium text-gray-700 transition-all duration-300 ease-in-out hover:bg-blue-200 hover:text-blue-600"
+                  className="px-3 py-2 rounded-full text-base font-medium text-gray-900 transition-all duration-300 ease-in-out hover:bg-blue-200 hover:text-blue-600 text-base"
                 >
                   {item.name}
                 </Link>
@@ -74,7 +74,7 @@ const Navbar = () => {
               >
                 <Link 
                   href="/dashboard" 
-                  className="px-4 py-2 rounded-md text-sm font-medium text-gray-700 transition-all duration-300 ease-in-out hover:bg-blue-200 hover:text-blue-600"
+                  className="px-3 py-2 rounded-full text-base font-medium text-gray-900 transition-all duration-300 ease-in-out hover:bg-blue-200 hover:text-blue-600"
                 >
                   Dashboard
                 </Link>

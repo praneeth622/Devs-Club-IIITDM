@@ -6,6 +6,7 @@ import { Footer } from '../(components)/Footer'
 import { motion, AnimatePresence } from 'framer-motion'
 import axios from 'axios'
 import { CalendarDays, MapPin, Clock, ExternalLink } from 'lucide-react'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 const separateEvents = (events) => {
   const currentDate = new Date()
