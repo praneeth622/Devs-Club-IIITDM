@@ -19,8 +19,8 @@ const resources = [
       { name: 'W3Schools Cloud Guide', link: 'https://www.w3schools.in/google-cloud-services', icon: Link },
     ],
     courses: [
-      { name: 'Google Cloud Fundamentals', link: 'https://www.coursera.org/learn/gcp-fundamentals', icon: Linkedin },
-      { name: 'Ultimate Google Cloud Certification', link: 'https://www.udemy.com/course/google-cloud-certification-associate-cloud-engineer/', icon: Link },
+      { name: 'Coursera', link: 'https://www.coursera.org/learn/gcp-fundamentals', icon: Linkedin },
+      { name: 'Udemy', link: 'https://www.udemy.com/course/google-cloud-certification-associate-cloud-engineer/', icon: Link },
       { name:'Youtube',link: 'https://www.youtube.com/watch?v=kzKFuHk8ovk&list=PLIivdWyY5sqKh1gDR0WpP9iIOY00IE0xL',icon: Link },
     ],
     community: [
@@ -37,7 +37,7 @@ const resources = [
       { name: 'W3Schools Cloud Guide', link: 'https://www.w3schools.com/cybersecurity/', icon: Link },
     ],
     courses: [
-      { name: 'Cyber Security Fundamentals', link: 'https://www.coursera.org/professional-certificates/google-cybersecurity', icon: Linkedin },
+      { name: 'Coursera', link: 'https://www.coursera.org/professional-certificates/google-cybersecurity', icon: Linkedin },
       { name:'Youtube',link: 'https://www.youtube.com/watch?v=lpa8uy4DyMo&list=PL9ooVrP1hQOGPQVeapGsJCktzIO4DtI4_',icon: Link },
     ],
     community: [
@@ -54,7 +54,6 @@ const resources = [
       { name: 'W3Schools Cloud Guide', link: 'https://www.w3schools.com/datascience/', icon: Link },
     ],
     courses: [
-      { name: 'Udemy Guide', link: 'https://www.w3schools.com/datascience/', icon: Link },
       { name: 'Coursera', link: 'https://www.coursera.org/professional-certificates/ibm-data-science', icon: Link },
       { name:'Youtube',link: 'https://www.youtube.com/watch?v=ua-CiDNNj30&list=PLWKjhJtqVAblQe2CCWqV4Zy3LY01Z8aF1',icon: Link },
 
@@ -76,8 +75,8 @@ const resources = [
 
     ],
     courses: [
-      { name: 'Coursera', link: 'https://www.udemy.com/course/machinelearning/?couponCode=NEWYEARCAREER', icon: Link },
-      { name:'Youtube',link: 'https://www.youtube.com/watch?v=i_LwzRVP7bg&list=PLWKjhJtqVAblStefaz_YOVpDWqcRScc2s',icon: Link },
+      { name: 'Udemy-ML', link: 'https://www.udemy.com/course/machinelearning/?couponCode=NEWYEARCAREER', icon: Link },
+      { name:'Youtube-ML',link: 'https://www.youtube.com/watch?v=i_LwzRVP7bg&list=PLWKjhJtqVAblStefaz_YOVpDWqcRScc2s',icon: Link },
 
     ],
     community: [
@@ -96,8 +95,7 @@ const resources = [
 
     ],
     courses: [
-      { name: 'Kotlin for Beginners', link: 'https://www.udemy.com/course/kotlin-for-beginners/', icon: Linkedin },
-      { name: 'Android Development with Kotlin', link: 'https://www.coursera.org/specializations/android-kotlin-development', icon: Link },
+      { name: 'Kotlin for Beginners - Udemy', link: 'https://www.udemy.com/course/kotlin-for-beginners/', icon: Linkedin },
       { name:'Youtube',link: 'https://www.youtube.com/watch?v=EExSSotojVI&list=PLBewgZ0s8b7-b6Ux5xrrozYMl4qiulQlL',icon: Link },
 
     ],
@@ -112,13 +110,11 @@ const resources = [
     bg: 'bg-yellow-100',
     documents: [
       { name: 'React Native Docs', link: 'https://reactnative.dev/docs/getting-started', icon: FileText },
-      { name: 'React Native CLI Guide', link: 'https://reactnative.dev/docs/cli', icon: Link },
-      { name: 'W3Schools Kotlin Guide', link: 'https://www.w3schools.com/REACT/DEFAULT.ASP', icon: Link },
+      { name: 'W3Schools Kotlin Guide', link: 'https://www.w3schools.com/KOTLIN/index.php', icon: Link },
 
     ],
     courses: [
-      { name: 'React Native Crash Course', link: 'https://www.udemy.com/course/react-native-the-practical-guide/', icon: Linkedin },
-      { name: 'Build Apps with React Native', link: 'https://www.coursera.org/learn/react-native', icon: Link },
+      { name: 'React Native Crash Course-Udemy', link: 'https://www.udemy.com/course/react-native-the-practical-guide/', icon: Linkedin },
       { name:'Youtube',link: 'https://www.youtube.com/watch?v=0-S5a0eXPoc&t=6s',icon: Link },
 
     ],
@@ -138,8 +134,8 @@ const resources = [
 
     ],
     courses: [
-      { name: 'Flutter for Beginners', link: 'https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/', icon: Linkedin },
-      { name: 'Dart and Flutter Development Bootcamp', link: 'https://www.udemy.com/course/flutter-bootcamp-with-dart/', icon: Link },
+      { name: 'Flutter for Beginners-Udemy', link: 'https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/', icon: Linkedin },
+      { name: 'Dart and Flutter Development Bootcamp-Udemy', link: 'https://www.udemy.com/course/flutter-bootcamp-with-dart/', icon: Link },
       { name:'Youtube',link: 'https://www.youtube.com/watch?v=VPvVD8t02U8',icon: Link },
 
     ],
