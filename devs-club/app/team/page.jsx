@@ -276,10 +276,10 @@ export default function Team() {
   ]
 
   const coordinators = [
-    { name: " A Varshini ", role: "CS23B1015", bio: "Frontend specialist with a knack for creating responsive and accessible websites.", image: '/assets/cs23b1015.jpg', linkedin: "https://www.linkedin.com/in/varshini-avula", github: "https://github.com/varshini-1396" },
     { name: "R K Larika", role: "CS23B1028", bio: "Passionate learner exploring development and AI/ML.", image: "/assets/cs23b1028.jpg", linkedin: "https://www.linkedin.com/in/larika-rajasekaran-02b43a2a7/", github: "https://github.com/Larika85" },
     { name: " Sudarshan S", role: "CS23B2007", bio: "Intrigued by the fields of data analytics, iOS development, and graphic design, I have diligently sought to acquire a comprehensive understanding of these disciplines and their applications.", image: "/assets/cs23b2007.jpeg", linkedin: "https://www.linkedin.com/in/sudarshan-sudhakar-43a262274", github: "https://github.com/sxdxde" },
     { name: "Y Sainatha Reddy", role: "CS23I1010", bio: "Passionate about web development and cybersecurity, eager to make a difference in the digital world.", image: "/assets/cs23i1010.jpg", linkedin: "https://www.linkedin.com/in/sainatha-reddy/", github: "https://github.com/sainatha-reddy" },
+    { name: " A Varshini ", role: "CS23B1015", bio: "Frontend specialist with a knack for creating responsive and accessible websites.", image: '/assets/varshini.jpg', linkedin: "https://www.linkedin.com/in/varshini-avula", github: "https://github.com/varshini-1396" },
     { name: "Y Harith", role: "CS23I1027", bio: "Interested in exploring all the fields of Computer Science specifically in Machine Learning and Web Development.", image: "/assets/cs23i1027.jpg", linkedin: "https://www.linkedin.com/in/harith-yerragolam-617486288/", github: "https://github.com/Harith-Y" },
     { name: "Deetya A M ", role: "CS23I1032", bio: "Driven by a deep interest in machine learning and web development, I continuously strive to expand my expertise in these fields and their practical applications.", image: "/assets/cs23i1032.jpg", linkedin: "https://www.linkedin.com/in/deetya-mehta-046582282", github: "https://github.com/deerobo1" },
     { name: "Vijay S K", role: "EC23B1012", bio: "Interested in artificial intelligence and machine learning, web development. I am willing to expand my knowledge in these fields.", image: "/assets/EC23B1012.png", linkedin: "https://www.linkedin.com/in/vijay-shanmugham-karthikheyen-313ab32ba/", github: "https://github.com/vijaysk06" },
@@ -297,9 +297,11 @@ export default function Team() {
 
     const developers = [
         { name: "Praneeth Devarasetty", role: "Lead Developer", bio: "Leads the development team with expertise in Nextjs and cloud technologies.", image: "/assets/cs22b1014.jpg", linkedin: "https://www.linkedin.com/in/praneeth-devarasetty/", github: "https://github.com/praneeth622" },
-        { name: "Surya Srirama Murthy", role: "UI/UX Designer", bio: "Sriram is responsible for creating the user interface and experience, focusing on user-centered design principles", image: '', linkedin: "https://www.linkedin.com/in/vishnu-surla-70384524a/", github: "https://github.com/sriram0620" },
-        { name: "Darshan Karthikeya", role: "UI/UX Designer", bio: "Mike specializes in creating responsive and accessible web interfaces using modern frontend technologies.", image: "/assets/cs22b1022.jpg", linkedin: "https://www.linkedin.com/in/darshan-karthikeya/", github: "https://github.com/karthikeya1220" },
-        { name: "G Chaithanya Reddy", role: "Frontend Developer", bio: "Chaithanya is an expert in server-side programming, database management, and API development.", image: "/assets/cs22b1052.jpg", linkedin: "https://www.linkedin.com/in/chaitanya-reddy-gavinolla-22166b258/", github: "https://github.com/chaitanya-reddy-13" },
+        { name: "Surya Srirama Murthy", role: "UI/UX Designer", bio: "Sriram is responsible for creating the user interface and experience, focusing on user-centered design principles", image: '/assets/sriram.jpg', linkedin: "https://www.linkedin.com/in/vishnu-surla-70384524a/", github: "https://github.com/sriram0620" },
+        { name: "Darshan Karthikeya", role: "UI/UX Designer", bio: "Darshan specializes in creating responsive and accessible web interfaces using modern frontend technologies.", image: "/assets/cs22b1022.jpg", linkedin: "https://www.linkedin.com/in/darshan-karthikeya/", github: "https://github.com/karthikeya1220" },
+        { name: "G Chaithanya Reddy", role: "Frontend Developer", bio: "Chaithanya is a Front-end Developer focused on building responsive, intuitive user interfaces with clean code and modern tech.", image: "/assets/cs22b1052.jpg", linkedin: "https://www.linkedin.com/in/chaitanya-reddy-gavinolla-22166b258/", github: "https://github.com/chaitanya-reddy-13" },
+        { name: "Y Sainatha Reddy", role: "Backend Developer", bio: "Sainatha is a Back-end Developer focused on building reliable system, managing data, and ensuring smooth connections between servers and users.", image: "/assets/cs23i1010.jpg", linkedin: "https://www.linkedin.com/in/sainatha-reddy/", github: "https://github.com/sainatha-reddy" },
+
       ]
 
   return (

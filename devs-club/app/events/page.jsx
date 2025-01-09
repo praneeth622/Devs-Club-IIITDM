@@ -1,206 +1,276 @@
-"use client";
+'use client'
 
-import React, { useEffect, useState } from 'react';
-import Navbar from '../(components)/Navbar';
-import { Footer } from '../(components)/Footer';
-import { motion } from 'framer-motion';
-import PastEventsSection from '../(components)/PastEventsSection';
-import EventsSection from '../(components)/EventsSection';
-import axios from 'axios';
-
-// const dummyEvents = [
-//   {
-//     Event_name: "AI/ML Workshop",
-//     Event_details: "A workshop on the basics of AI and Machine Learning.",
-//     Project_Discription: "Introduction to AI concepts and practical applications.",
-//     Event_outcome: "Participants will learn the fundamentals of AI and ML.",
-//     Event_lead: "Alice Johnson",
-//     Event_team: ["Alice Johnson", "Bob Smith"],
-//     date: new Date("2023-12-01T10:00:00Z"),
-//     Attendance: "50",
-//     Event_Type: "Workshop",
-//     Photos: [["https://example.com/photo1.jpg", "https://example.com/photo2.jpg"]],
-//     budget: 200,
-//     Resources: [["https://example.com/resource1.pdf", "https://example.com/resource2.pdf"]]
-//   },
-//   {
-//     Event_name: "Hackathon 2023",
-//     Event_details: "A 24-hour hackathon focused on building innovative solutions.",
-//     Project_Discription: "Participants will work in teams to create projects.",
-//     Event_outcome: "Teams will present their projects at the end of the event.",
-//     Event_lead: "John Doe",
-//     Event_team: ["John Doe", "Sarah Williams"],
-//     date: new Date("2023-11-05T09:00:00Z"),
-//     Attendance: "200",
-//     Event_Type: "Hackathon",
-//     Photos: [["https://example.com/hackathon1.jpg", "https://example.com/hackathon2.jpg"]],
-//     budget: 500,
-//     Resources: [["https://example.com/hackathon-guide.pdf"]]
-//   },
-//   {
-//     Event_name: "Web Development Bootcamp",
-//     Event_details: "An intensive bootcamp covering modern web development technologies.",
-//     Project_Discription: "Learn about React, Node.js, and building full-stack applications.",
-//     Event_outcome: "Participants will build a complete web application by the end of the bootcamp.",
-//     Event_lead: "Emma Watson",
-//     Event_team: ["Emma Watson", "Chris Hemsworth"],
-//     date: new Date("2023-12-15T09:00:00Z"),
-//     Attendance: "100",
-//     Event_Type: "Bootcamp",
-//     Photos: [["https://example.com/bootcamp1.jpg", "https://example.com/bootcamp2.jpg"]],
-//     budget: 300,
-//     Resources: [["https://example.com/bootcamp-resources.pdf"]]
-//   },
-//   {
-//     Event_name: "Data Science Seminar",
-//     Event_details: "A seminar on the latest trends in Data Science and AI.",
-//     Project_Discription: "Insights into data analysis, machine learning, and AI applications.",
-//     Event_outcome: "Participants will gain knowledge from industry experts.",
-//     Event_lead: "Diana Ross",
-//     Event_team: ["Diana Ross", "Charlie Brown"],
-//     date: new Date("2023-11-20T14:00:00Z"),
-//     Attendance: "150",
-//     Event_Type: "Seminar",
-//     Photos: [["https://example.com/seminar1.jpg"]],
-//     budget: 250,
-//     Resources: [["https://example.com/seminar-materials.pdf"]]
-//   },
-//   {
-//     Event_name: "Mobile App Development Workshop",
-//     Event_details: "A hands-on workshop on building mobile applications using Flutter.",
-//     Project_Discription: "Learn to create cross-platform mobile apps.",
-//     Event_outcome: "Participants will develop a simple mobile app by the end of the workshop.",
-//     Event_lead: "Alice Johnson",
-//     Event_team: ["Alice Johnson", "Bob Smith"],
-//     date: new Date("2023-12-10T10:00:00Z"),
-//     Attendance: "40",
-//     Event_Type: "Workshop",
-//     Photos: [["https://example.com/mobile-workshop1.jpg"]],
-//     budget: 150,
-//     Resources: [["https://example.com/mobile-workshop-resources.pdf"]]
-//   },
-//   {
-//     Event_name: "Blockchain Basics",
-//     Event_details: "An introductory session on blockchain technology.",
-//     Project_Discription: "Understanding the fundamentals of blockchain.",
-//     Event_outcome: "Participants will grasp the basic concepts of blockchain.",
-//     Event_lead: "Mark Spencer",
-//     Event_team: ["Mark Spencer", "Lisa Ray"],
-//     date: new Date("2023-11-30T10:00:00Z"),
-//     Attendance: "60",
-//     Event_Type: "Workshop",
-//     Photos: [["https://example.com/blockchain1.jpg"]],
-//     budget: 100,
-//     Resources: [["https://example.com/blockchain-resources.pdf"]]
-//   },
-//   {
-//     Event_name: "Cybersecurity Awareness",
-//     Event_details: "A seminar on the importance of cybersecurity.",
-//     Project_Discription: "Learn about common cybersecurity threats.",
-//     Event_outcome: "Participants will understand how to protect themselves online.",
-//     Event_lead: "Nina Patel",
-//     Event_team: ["Nina Patel", "Tom Hardy"],
-//     date: new Date("2025-11-25T14:00:00Z"),
-//     Attendance: "80",
-//     Event_Type: "Seminar",
-//     Photos: [["https://example.com/cybersecurity1.jpg"]],
-//     budget: 120,
-//     Resources: [["https://example.com/cybersecurity-resources.pdf"]]
-//   }
-// ];
+import React, { useEffect, useState } from 'react'
+import Navbar from '../(components)/Navbar'
+import { Footer } from '../(components)/Footer'
+import { motion, AnimatePresence } from 'framer-motion'
+import axios from 'axios'
+import { CalendarDays, MapPin, Clock, ExternalLink } from 'lucide-react'
 
 const separateEvents = (events) => {
-  const currentDate = new Date(); // Get the current date
-  const pastEvents = []; // Array to hold past events
-  const upcomingEvents = []; // Array to hold upcoming events
+  const currentDate = new Date()
+  return events.reduce(
+    (acc, event) => {
+      const eventDate = new Date(event.date)
+      if (eventDate < currentDate) {
+        acc.pastEvents.push(event)
+      } else {
+        acc.upcomingEvents.push(event)
+      }
+      return acc
+    },
+    { pastEvents: [], upcomingEvents: [] }
+  )
+}
 
-  events.forEach(event => {
-    const eventDate = new Date(event.date); // Convert event date to Date object
+const EventCard = ({ event, isPastEvent, onViewDetails }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -20 }}
+    className="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col h-full border border-gray-100"
+  >
+    {isPastEvent && (
+      <div className="relative h-48">
+        {event.Photos && event.Photos[0] && event.Photos[0][0] ? (
+          <img src={event.Photos[0][0]} alt={event.Event_name} className="w-full h-full object-cover" />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
+            <span className="text-white text-lg font-semibold">No Image Available</span>
+          </div>
+        )}
+        <div className="absolute top-0 right-0 m-4 px-3 py-1 bg-black bg-opacity-50 text-white text-sm rounded-full">
+          Past Event
+        </div>
+      </div>
+    )}
+    <div className="p-6 flex flex-col flex-grow">
+      <div className="mb-3 flex justify-between items-start">
+        <h3 className="text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors">{event.Event_name}</h3>
+        
+      </div>
+      <p className="text-gray-600 mb-4 flex-grow line-clamp-3">{event.Event_details}</p>
+      <div className="space-y-2 border-t border-gray-100 pt-4">
+        <div className="flex items-center text-gray-600">
+          <CalendarDays className="w-4 h-4 mr-2 text-blue-500" />
+          <span>{new Date(event.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+        </div>
+        <div className="flex items-center text-gray-600">
+          <MapPin className="w-4 h-4 mr-2 text-blue-500" />
+          <span>{event.location || 'Location TBA'}</span>
+        </div>
+      </div>
+      <button 
+        onClick={() => onViewDetails(event)}
+        className="mt-6 w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-2.5 px-4 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 shadow-md flex items-center justify-center space-x-2"
+      >
+        <span>View Details</span>
+        <ExternalLink className="w-4 h-4" />
+      </button>
+    </div>
+  </motion.div>
+)
 
-    // Compare event date with current date
-    if (eventDate < currentDate) {
-      pastEvents.push(event); // Add to past events if the date is in the past
-    } else {
-      upcomingEvents.push(event); // Add to upcoming events if the date is today or in the future
-    }
-  });
-
-  return { pastEvents, upcomingEvents }; // Return both arrays
-};
+const EventDetailsDialog = ({ event, onClose }) => (
+  <motion.div 
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm z-50 p-4"
+  >
+    <motion.div 
+      initial={{ scale: 0.9, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ scale: 0.9, opacity: 0 }}
+      className="bg-white rounded-2xl p-8 max-w-lg w-full shadow-2xl"
+    >
+      <h2 className="text-3xl font-bold mb-4 text-gray-900">{event.Event_name}</h2>
+      <div className="space-y-4">
+        <p className="text-gray-800">{event.Event_details}</p>
+        <p className="text-gray-800">{event.Event_description}</p>
+        <div className="flex items-center text-gray-700">
+          <CalendarDays className="w-5 h-5 mr-2 text-blue-500" />
+          <span>{new Date(event.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', weekday: 'long' })}</span>
+        </div>
+        <div className="bg-gray-50 p-4 rounded-lg">
+          <p className="text-gray-800">
+            {event.Resources && event.Resources.length > 0 ? (
+              event.Resources.map((resource, index) => (
+                <a 
+                  key={index}
+                  href={resource[0]}
+                  target="_blank"
+                  rel="noopener noreferrer" 
+                  className="text-blue-600 hover:text-blue-800 underline mr-4"
+                >
+                  {resource[1] || 'Resource ' + (index + 1)}
+                </a>
+              ))
+            ) : (
+              'No resources available'
+            )}
+          </p>
+        </div>
+      </div>
+      <div className="flex justify-end mt-6">
+        <button 
+          onClick={onClose} 
+          className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-2.5 px-6 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition duration-200 shadow-md"
+        >
+          Close
+        </button>
+      </div>
+    </motion.div>
+  </motion.div>
+)
 
 const EventsPage = () => {
-  const [events, setEvents] = useState([]);
-  const [pastEvents, setPastEvents] = useState([]);
-  const [upcomingEvents, setUpcomingEvents] = useState([]);
+  const [events, setEvents] = useState([])
+  const [activeTab, setActiveTab] = useState('upcoming')
+  const [isLoading, setIsLoading] = useState(true)
+  const [selectedEvent, setSelectedEvent] = useState(null)
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get('/api/events');
+        setIsLoading(true)
+        const response = await axios.get('/api/events')
         if (response.data.success) {
-          const fetchedEvents = response.data.data; // Extract the event data
-          setEvents(fetchedEvents);
+          setEvents(response.data.data)
         }
       } catch (error) {
-        console.error('Error fetching events:', error);
+        console.error('Error fetching events:', error)
+      } finally {
+        setIsLoading(false)
       }
-    };
+    }
 
-    fetchEvents();
-  }, []);
+    fetchEvents()
+  }, [])
 
-  useEffect(() => {
-    const { pastEvents, upcomingEvents } = separateEvents(events);
-    setPastEvents(pastEvents);
-    setUpcomingEvents(upcomingEvents);
-  }, [events]);
+  const { pastEvents, upcomingEvents } = separateEvents(events)
 
-  useEffect(() => {
-    const { pastEvents, upcomingEvents } = separateEvents(events);
-    setPastEvents(pastEvents);
-    setUpcomingEvents(upcomingEvents);
-  }, [events]);
+  const handleViewDetails = (event) => {
+    setSelectedEvent(event)
+  }
+
+  const closeDialog = () => {
+    setSelectedEvent(null)
+  }
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-gray-50 min-h-screen">
       <Navbar />
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} className="container mx-auto p-6">
-        <h1 className="text-4xl font-bold text-center mb-8 text-blue-600">Events</h1>
-        
-        {/* Upcoming Events Section */}
-        <div className="bg-white shadow-lg rounded-lg p-6 mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Upcoming Events</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {upcomingEvents.map((event, index) => (
-              <div key={index} className="bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden">
-                {event.Photos && event.Photos[0] && event.Photos[0][0] ? (
-    <img src={event.Photos[0][0]} alt={event.Event_name} className="w-full h-48 object-cover" />
-  ) : (
-    <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
-      <span className="text-gray-500">No Image Available</span>
-    </div>
-  )}
-                <div className="p-4">
-                  <h3 className="text-xl font-semibold text-gray-800">{event.Event_name}</h3>
-                  <p className="text-gray-600">{event.Event_details}</p>
-                  <p className="text-gray-500 mt-2">Date: {new Date(event.date).toLocaleDateString()}</p>
-                  <p className="text-gray-500">Type: {event.Event_Type}</p>
-                  <button className="mt-4 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-200">View Details</button>
-                </div>
-              </div>
-            ))}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="container mx-auto px-4 sm:px-6 lg:px-8 py-16"
+      >
+        {/* Hero Section */}
+        <div className="text-center mb-20">
+          <motion.div
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="inline-block mb-4 px-6 py-2 bg-blue-100 text-blue-600 rounded-full text-sm font-semibold tracking-wide"
+          >
+            EVENTS & WORKSHOPS
+          </motion.div>
+          <motion.h1
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="text-5xl font-extrabold text-gray-900 mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600"
+          >
+            Discover Our Events
+          </motion.h1>
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed"
+          >
+            Join us for exciting gatherings, workshops, and celebrations. Stay updated with our latest events and be part of our growing community.
+          </motion.p>
+        </div>
+
+        {/* Tab Navigation */}
+        <div className="flex justify-center mb-12">
+          <div className="inline-flex rounded-xl shadow-sm p-1 bg-white" role="group">
+            <button
+              onClick={() => setActiveTab('upcoming')}
+              className={`px-6 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
+                activeTab === 'upcoming'
+                  ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg'
+                  : 'bg-transparent text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              Upcoming Events
+            </button>
+            <button
+              onClick={() => setActiveTab('past')}
+              className={`px-6 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
+                activeTab === 'past'
+                  ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg'
+                  : 'bg-transparent text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              Past Events
+            </button>
           </div>
         </div>
 
-        {/* Past Events Section */}
-        <div className="bg-white shadow-lg rounded-lg p-6 mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Past Events</h2>
-          <PastEventsSection pastEvents={pastEvents} />
-        </div>
+        {/* Events Grid */}
+        {isLoading ? (
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-500 border-t-transparent"></div>
+          </div>
+        ) : (
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {(activeTab === 'upcoming' ? upcomingEvents : pastEvents).map((event, index) => (
+                <EventCard 
+                  key={index}
+                  event={event} 
+                  isPastEvent={activeTab === 'past'} 
+                  onViewDetails={handleViewDetails}
+                />
+              ))}
+            </motion.div>
+          </AnimatePresence>
+        )}
+
+        {/* No Events Message */}
+        {!isLoading && (activeTab === 'upcoming' ? upcomingEvents : pastEvents).length === 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-16"
+          >
+            <div className="bg-white rounded-2xl p-8 shadow-lg max-w-md mx-auto">
+              <div className="text-6xl mb-4">🎉</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No {activeTab} events at the moment</h3>
+              <p className="text-gray-600">Check back soon for more exciting events!</p>
+            </div>
+          </motion.div>
+        )}
       </motion.div>
       <Footer />
-    </div>
-  );
-};
 
-export default EventsPage; 
+      {/* Dialog for Event Details */}
+      <AnimatePresence>
+        {selectedEvent && <EventDetailsDialog event={selectedEvent} onClose={closeDialog} />}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+export default EventsPage

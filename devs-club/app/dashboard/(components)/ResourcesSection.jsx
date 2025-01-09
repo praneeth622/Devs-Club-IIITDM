@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronRight, Cloud, Code, Book, Settings, X, Link, Linkedin, Github, FileText } from 'lucide-react'
+import { ChevronRight, Cloud, Code, Book, Settings, X, Link, Linkedin, Github, FileText, Youtube } from 'lucide-react'
 import { Button } from "../../../components/ui/button"
 import { Card, CardContent } from "../../../components/ui/card"
 import { SiAmazonwebservices, SiFlutter,SiCyberdefenders, SiKotlin, SiReact, SiGooglecloud, SiNodedotjs, SiPython } from 'react-icons/si';
@@ -16,15 +16,15 @@ const resources = [
     bg: 'bg-blue-100',
     documents: [
       { name: 'Google Documentation', link: 'https://cloud.google.com/docs', icon: FileText },
-      { name: 'W3Schools Cloud Guide', link: 'https://www.w3schools.com/whatis/whatis_cloud.asp', icon: Link },
+      { name: 'W3Schools Cloud Guide', link: 'https://www.w3schools.in/google-cloud-services', icon: Link },
     ],
     courses: [
       { name: 'Google Cloud Fundamentals', link: 'https://www.coursera.org/learn/gcp-fundamentals', icon: Linkedin },
       { name: 'Ultimate Google Cloud Certification', link: 'https://www.udemy.com/course/google-cloud-certification-associate-cloud-engineer/', icon: Link },
+      { name:'Youtube',link: 'https://www.youtube.com/watch?v=kzKFuHk8ovk&list=PLIivdWyY5sqKh1gDR0WpP9iIOY00IE0xL',icon: Link },
     ],
     community: [
-      { name: 'Join Our Session', description: 'Date: June 15, 2023 | Time: 2 PM EST | Venue: Online', link: 'https://meet.google.com/abc-defg-hij', icon: Code },
-      { name: 'Join Our Telegram Channel', link: 'https://t.me/googlecloudcommunity', icon: Link },
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/KSNzrNYX', icon: Link },
     ],
   },
   {
@@ -33,16 +33,15 @@ const resources = [
     color: 'text-green-500',
     bg: 'bg-green-100',
     documents: [
-      { name: 'Google Documentation', link: 'https://cloud.google.com/docs', icon: FileText },
-      { name: 'W3Schools Cloud Guide', link: 'https://www.w3schools.com/whatis/whatis_cloud.asp', icon: Link },
+      { name: 'Google Documentation', link: 'https://www.cisco.com/site/us/en/learn/topics/security/what-is-cybersecurity.html#:~:text=Cybersecurity%20is%20the%20practice%20of,or%20interrupting%20normal%20business%20processes.', icon: FileText },
+      { name: 'W3Schools Cloud Guide', link: 'https://www.w3schools.com/cybersecurity/', icon: Link },
     ],
     courses: [
-      { name: 'Google Cloud Fundamentals', link: 'https://www.coursera.org/learn/gcp-fundamentals', icon: Linkedin },
-      { name: 'Ultimate Google Cloud Certification', link: 'https://www.udemy.com/course/google-cloud-certification-associate-cloud-engineer/', icon: Link },
+      { name: 'Cyber Security Fundamentals', link: 'https://www.coursera.org/professional-certificates/google-cybersecurity', icon: Linkedin },
+      { name:'Youtube',link: 'https://www.youtube.com/watch?v=lpa8uy4DyMo&list=PL9ooVrP1hQOGPQVeapGsJCktzIO4DtI4_',icon: Link },
     ],
     community: [
-      { name: 'Join Our Session', description: 'Date: June 15, 2023 | Time: 2 PM EST | Venue: Online', link: 'https://meet.google.com/abc-defg-hij', icon: Code },
-      { name: 'Join Our Telegram Channel', link: 'https://t.me/googlecloudcommunity', icon: Link },
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/QBkxv2JN', icon: Link },
     ],
   },
   {
@@ -51,12 +50,18 @@ const resources = [
     color: 'text-purple-500',
     bg: 'bg-purple-100',
     documents: [
-      { name: 'Google Documentation', link: 'https://cloud.google.com/docs', icon: FileText },
-      { name: 'W3Schools Cloud Guide', link: 'https://www.w3schools.com/whatis/whatis_cloud.asp', icon: Link },
+      { name: 'Documentation', link: 'https://www.ibm.com/think/topics/data-science', icon: FileText },
+      { name: 'W3Schools Cloud Guide', link: 'https://www.w3schools.com/datascience/', icon: Link },
     ],
     courses: [
-      { name: 'Google Cloud Fundamentals', link: 'https://www.coursera.org/learn/gcp-fundamentals', icon: Linkedin },
-      { name: 'Ultimate Google Cloud Certification', link: 'https://www.udemy.com/course/google-cloud-certification-associate-cloud-engineer/', icon: Link },
+      { name: 'Udemy Guide', link: 'https://www.w3schools.com/datascience/', icon: Link },
+      { name: 'Coursera', link: 'https://www.coursera.org/professional-certificates/ibm-data-science', icon: Link },
+      { name:'Youtube',link: 'https://www.youtube.com/watch?v=ua-CiDNNj30&list=PLWKjhJtqVAblQe2CCWqV4Zy3LY01Z8aF1',icon: Link },
+
+    ]
+    ,
+    community: [
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/uzKFQZ2M', icon: Link },
     ],
   },
   {
@@ -65,16 +70,18 @@ const resources = [
     color: 'text-red-500',
     bg: 'bg-red-100',
     documents: [
-      { name: 'Google Documentation', link: 'https://cloud.google.com/docs', icon: FileText },
-      { name: 'W3Schools Cloud Guide', link: 'https://www.w3schools.com/whatis/whatis_cloud.asp', icon: Link },
+      { name: 'Google Documentation', link: 'https://cloud.google.com/learn/artificial-intelligence-vs-machine-learning?hl=en', icon: FileText },
+      { name: 'W3Schools AI Guide', link: 'https://www.w3schools.com/training/aws/introduction-to-artificial-intelligence.php', icon: Link },
+      { name: 'W3Schools ML Guide', link: 'https://www.w3schools.com/ai/', icon: Link },
+
     ],
     courses: [
-      { name: 'Google Cloud Fundamentals', link: 'https://www.coursera.org/learn/gcp-fundamentals', icon: Linkedin },
-      { name: 'Ultimate Google Cloud Certification', link: 'https://www.udemy.com/course/google-cloud-certification-associate-cloud-engineer/', icon: Link },
+      { name: 'Coursera', link: 'https://www.udemy.com/course/machinelearning/?couponCode=NEWYEARCAREER', icon: Link },
+      { name:'Youtube',link: 'https://www.youtube.com/watch?v=i_LwzRVP7bg&list=PLWKjhJtqVAblStefaz_YOVpDWqcRScc2s',icon: Link },
+
     ],
     community: [
-      { name: 'Join Our Session', description: 'Date: June 15, 2023 | Time: 2 PM EST | Venue: Online', link: 'https://meet.google.com/abc-defg-hij', icon: Code },
-      { name: 'Join Our Telegram Channel', link: 'https://t.me/googlecloudcommunity', icon: Link },
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/6NgR6XkT', icon: Link },
     ],
   },
   {
@@ -85,10 +92,17 @@ const resources = [
     documents: [
       { name: 'Kotlin Documentation', link: 'https://kotlinlang.org/docs/home.html', icon: FileText },
       { name: 'Android Developer Guide', link: 'https://developer.android.com/docs', icon: Link },
+      { name: 'W3Schools Kotlin Guide', link: 'https://www.w3schools.com/KOTLIN/index.php', icon: Link },
+
     ],
     courses: [
       { name: 'Kotlin for Beginners', link: 'https://www.udemy.com/course/kotlin-for-beginners/', icon: Linkedin },
       { name: 'Android Development with Kotlin', link: 'https://www.coursera.org/specializations/android-kotlin-development', icon: Link },
+      { name:'Youtube',link: 'https://www.youtube.com/watch?v=EExSSotojVI&list=PLBewgZ0s8b7-b6Ux5xrrozYMl4qiulQlL',icon: Link },
+
+    ],
+    community: [
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/9ayTxkvk', icon: Link },
     ],
   },
   {
@@ -99,10 +113,17 @@ const resources = [
     documents: [
       { name: 'React Native Docs', link: 'https://reactnative.dev/docs/getting-started', icon: FileText },
       { name: 'React Native CLI Guide', link: 'https://reactnative.dev/docs/cli', icon: Link },
+      { name: 'W3Schools Kotlin Guide', link: 'https://www.w3schools.com/REACT/DEFAULT.ASP', icon: Link },
+
     ],
     courses: [
       { name: 'React Native Crash Course', link: 'https://www.udemy.com/course/react-native-the-practical-guide/', icon: Linkedin },
       { name: 'Build Apps with React Native', link: 'https://www.coursera.org/learn/react-native', icon: Link },
+      { name:'Youtube',link: 'https://www.youtube.com/watch?v=0-S5a0eXPoc&t=6s',icon: Link },
+
+    ],
+    community: [
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/XgGwr7FS', icon: Link },
     ],
   },
   {
@@ -113,10 +134,17 @@ const resources = [
     documents: [
       { name: 'Flutter Documentation', link: 'https://flutter.dev/docs', icon: FileText },
       { name: 'Flutter Widget Catalog', link: 'https://flutter.dev/docs/development/ui/widgets', icon: Link },
+      { name: 'Geeksforgeeks Documentation', link: 'https://www.geeksforgeeks.org/flutter-tutorial/', icon: FileText },
+
     ],
     courses: [
       { name: 'Flutter for Beginners', link: 'https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/', icon: Linkedin },
       { name: 'Dart and Flutter Development Bootcamp', link: 'https://www.udemy.com/course/flutter-bootcamp-with-dart/', icon: Link },
+      { name:'Youtube',link: 'https://www.youtube.com/watch?v=VPvVD8t02U8',icon: Link },
+
+    ],
+    community: [
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/qA4yWxGh', icon: Link },
     ],
   },
   {
@@ -130,7 +158,10 @@ const resources = [
     ],
     courses: [
       { name: 'MERN Stack Development', link: 'https://www.udemy.com/course/mern-stack-front-to-back/', icon: Linkedin },
-      { name: 'Full-Stack React Projects', link: 'https://www.coursera.org/learn/full-stack-react', icon: Link },
+      { name:'Youtube',link: 'https://www.youtube.com/watch?v=mU6anWqZJcc&list=PLf7L7Kg8_FNzwwSK7c4Dei_h3oqg3dwYc',icon: Link },
+    ],
+    community: [
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/7RZrWftb', icon: Link },
     ],
   },
   {
@@ -144,7 +175,10 @@ const resources = [
     ],
     courses: [
       { name: 'Python for Web Development', link: 'https://www.udemy.com/course/python-django-tutorial/', icon: Linkedin },
-      { name: 'Flask and Django Web Dev', link: 'https://www.coursera.org/learn/python-django', icon: Link },
+      { name:'Youtube',link: 'https://www.youtube.com/watch?v=yBDHkveJUf4',icon: Link },
+    ],
+    community: [
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/3tP2kdGU', icon: Link },
     ],
   },
   {
@@ -158,7 +192,10 @@ const resources = [
     ],
     courses: [
       { name: 'AWS Cloud Practitioner Essentials', link: 'https://www.coursera.org/learn/aws-cloud-practitioner-essentials', icon: Linkedin },
-      { name: 'AWS Solutions Architect Certification', link: 'https://www.udemy.com/course/aws-certified-solutions-architect-associate/', icon: Link },
+      { name:'Youtube',link: 'https://www.youtube.com/watch?v=NhDYbskXRgc',icon: Link },
+    ],
+    community: [
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/dgFmaYD4', icon: Link },
     ],
   },
 ]
