@@ -651,11 +651,13 @@ function EventManager() {
       // Submit the event data to the API
       try{
         const key =  process.env.NEXT_PUBLIC_KEY
+        
         const eventWithUrlsAndKey = {
           ...eventWithUrls,
           key,  // Add the key to the request body
         };
-        console.log('response is ', response)
+        const response = await axios.post('/api/events', eventWithUrlsAndKey);
+        // console.log('response is ', response)
       
   
       // Update the events list with the newly created event

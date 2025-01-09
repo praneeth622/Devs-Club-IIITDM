@@ -34,6 +34,7 @@ export async function POST(req) {
     Photos,
     budget,
     Resources,
+    key
   } = await req.json();
 
   try {
@@ -45,6 +46,16 @@ export async function POST(req) {
       return new Response(
         JSON.stringify({ success: false, error: 'Missing required fields' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if(!(key == process.env.NEXT_PUBLIC_KEY)){
+      return new Response(
+        JSON.stringify({ success: false, error: "Invalid API Key" }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json" },
+        }
       );
     }
 
@@ -82,7 +93,17 @@ export async function POST(req) {
 // DELETE request: Delete an event by ID
 export async function DELETE(req) {
   try {
-    const { id } = await req.json();
+    const { id,key } = await req.json();
+
+    if(!(key == process.env.NEXT_PUBLIC_KEY)){
+      return new Response(
+        JSON.stringify({ success: false, error: "Invalid API Key" }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
 
     if (!id) {
       return new Response(
