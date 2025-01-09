@@ -2,8 +2,9 @@
 import ProjectsList from './(components)/ProjectsList';
 import Navbar from '../(components)/Navbar'
 import {Footer} from '../(components)/Footer'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import HeroSection from './(components)/HeroSection'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 const projects = [
   {
@@ -105,6 +106,18 @@ const projects = [
 ];
 
 export default function Page() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div>
     <Navbar />
@@ -112,7 +125,11 @@ export default function Page() {
     <div className="min-h-screen  bg-sky-50 from-purple-100 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-12">Our Projects</h1>
-        <ProjectsList projects={projects} />
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <ProjectsList projects={projects} />
+        )}
       </div>
     </div>
     <Footer />
