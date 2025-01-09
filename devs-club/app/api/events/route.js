@@ -40,7 +40,8 @@ export async function POST(req) {
     await dbConnect();
 
     // Validate required fields
-    if (!Event_name || !Event_details || !date || !Event_Type) {
+    console.log("feilds",Event_name, Event_details, Event_Type,date)
+    if (!Event_name || !Event_details || !date ) {
       return new Response(
         JSON.stringify({ success: false, error: 'Missing required fields' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
