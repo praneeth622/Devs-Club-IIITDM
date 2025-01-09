@@ -68,7 +68,7 @@ export default function PrivacyPolicy() {
                     <li className="text-gray-700">
                       <span className="font-bold">Website</span> refers to{' '}
                       <a 
-                        href="https://devs-club-iiitdm.vercel.app/"
+                        href="https://devclub.iiitdm.ac.in"
                         className="text-blue-600 hover:text-blue-800 hover:underline"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -77,12 +77,12 @@ export default function PrivacyPolicy() {
                       </a>
                       , accessible from{' '}
                       <a 
-                        href="https://devs-club-iiitdm.vercel.app/"
+                        href="https://devclub.iiitdm.ac.in"
                         className="text-blue-600 hover:text-blue-800 hover:underline"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        https://devs-club-iiitdm.vercel.app/
+                        https://devclub.iiitdm.ac.in
                       </a>
                     </li>
                     <li className="text-gray-700">
@@ -315,10 +315,10 @@ export default function PrivacyPolicy() {
                       <div className="flex items-center gap-2">
                         <span className="font-bold">By email:</span>
                         <a
-                          href="mailto:devsclub@iiitdm.ac.in"
+                          href="mailto:devclub@iiitdm.ac.in"
                           className="text-blue-600 hover:text-blue-800 hover:underline"
                         >
-                          devsclub@iiitdm.ac.in
+                          devclub@iiitdm.ac.in
                         </a>
                       </div>
                     </li>
@@ -326,12 +326,12 @@ export default function PrivacyPolicy() {
                       <div className="flex items-center gap-2">
                         <span className="font-bold">By visiting our website:</span>
                         <a
-                          href="https://devs-club-iiitdm.vercel.app/"
+                          href="https://devclub.iiitdm.ac.in"
                           className="text-blue-600 hover:text-blue-800 hover:underline"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          https://devs-club-iiitdm.vercel.app/
+                          https://devclub.iiitdm.ac.in
                         </a>
                       </div>
                     </li>
