@@ -276,8 +276,7 @@ export default function Team() {
   ]
 
   const coordinators = [
-    { name: " A Varshini ", role: "CS23B1015", bio: "Frontend specialist with a knack for creating responsive and accessible websites.", image: '/assets/cs23b1015.jpg', linkedin: "https://www.linkedin.com/in/varshini-avula", github: "https://github.com/varshini-1396" },
-
+    { name: " A Varshini ", role: "CS23B1015", bio: "Frontend specialist with a knack for creating responsive and accessible websites.", image: '/assets/varshini.jpg', linkedin: "https://www.linkedin.com/in/varshini-avula", github: "https://github.com/varshini-1396" },
     { name: "R K Larika", role: "CS23B1028", bio: "Passionate learner exploring development and AI/ML.", image: "/assets/cs23b1028.jpg", linkedin: "https://www.linkedin.com/in/larika-rajasekaran-02b43a2a7/", github: "https://github.com/Larika85" },
     { name: " Sudarshan S", role: "CS23B2007", bio: "Intrigued by the fields of data analytics, iOS development, and graphic design, I have diligently sought to acquire a comprehensive understanding of these disciplines and their applications.", image: "/assets/cs23b2007.jpeg", linkedin: "https://www.linkedin.com/in/sudarshan-sudhakar-43a262274", github: "https://github.com/sxdxde" },
     { name: "Y Sainatha Reddy", role: "CS23I1010", bio: "Passionate about web development and cybersecurity, eager to make a difference in the digital world.", image: "/assets/cs23i1010.jpg", linkedin: "https://www.linkedin.com/in/sainatha-reddy/", github: "https://github.com/sainatha-reddy" },
