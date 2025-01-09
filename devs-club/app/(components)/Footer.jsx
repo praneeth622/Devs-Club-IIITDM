@@ -17,6 +17,7 @@ export const Footer = () => {
             Empowering coders, creators, and innovators to build the future. Join our community and grow with us.
           </p>
         </motion.div>
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -33,14 +34,14 @@ export const Footer = () => {
             <Github className="text-white hover:text-gray-400 transition-colors duration-300" size={24} />
           </Link>
         </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center text-gray-400 text-sm"
         >
-          <div>&copy; {new Date().getFullYear()} Developers Club. All rights reserved.</div>
-          <div className="flex justify-center space-x-4 mt-4">
+          <div className="flex justify-center space-x-4 mt-4 mb-4">
             <Link href="privacy-policy" className="hover:text-white transition-colors duration-300">
               Privacy Policy
             </Link>
@@ -51,6 +52,9 @@ export const Footer = () => {
               Contact Us
             </Link>
           </div>
+
+          <div>&copy; {new Date().getFullYear()} Developers Club. All rights reserved.</div>
+
           {/* <div className="mt-4 ">
             <span>Made with ❤️ by </span>
             <Link 
@@ -61,6 +65,8 @@ export const Footer = () => {
             </Link>
           </div> */}
         </motion.div>
+
+        
       </div>
     </footer>
   )

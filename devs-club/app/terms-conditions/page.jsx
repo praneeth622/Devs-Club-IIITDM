@@ -61,8 +61,8 @@ export default function TermsAndConditions() {
                       </li>
                       <li className="text-gray-700">
                         <span className="font-semibold">Website </span> refers to Developers Club, accessible from{' '}
-                        <a href="https://devs-club-iiitdm.vercel.app/" className="text-blue-600 hover:text-blue-800">
-                          https://devs-club-iiitdm.vercel.app/
+                        <a href="https://devclub.iiitdm.ac.in" className="text-blue-600 hover:text-blue-800">
+                        https://devclub.iiitdm.ac.in
                         </a>
                       </li>
                       <li className="text-gray-700">
@@ -226,10 +226,10 @@ export default function TermsAndConditions() {
                       <div className="flex items-center gap-2">
                         <span className="font-bold">By email:</span>
                         <a
-                          href="mailto:devsclub@iiitdm.ac.in"
+                          href="mailto:devclub@iiitdm.ac.in"
                           className="text-blue-600 hover:text-blue-800 hover:underline"
                         >
-                          devsclub@iiitdm.ac.in
+                          devclub@iiitdm.ac.in
                         </a>
                       </div>
                     </li>
@@ -237,12 +237,12 @@ export default function TermsAndConditions() {
                       <div className="flex items-center gap-2">
                         <span className="font-bold">By visiting our website:</span>
                         <a
-                          href="https://devs-club-iiitdm.vercel.app/"
+                          href="https://devclub.iiitdm.ac.in"
                           className="text-blue-600 hover:text-blue-800 hover:underline"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          https://devs-club-iiitdm.vercel.app/
+                          https://devclub.iiitdm.ac.in
                         </a>
                       </div>
                     </li>
