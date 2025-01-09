@@ -5,7 +5,7 @@ import Navbar from '../(components)/Navbar'
 import { Footer } from '../(components)/Footer'
 import { motion, AnimatePresence } from 'framer-motion'
 import axios from 'axios'
-import { CalendarDays, MapPin, Clock } from 'lucide-react'
+import { CalendarDays, MapPin, Clock, ExternalLink } from 'lucide-react'
 
 const separateEvents = (events) => {
   const currentDate = new Date()
@@ -28,60 +28,100 @@ const EventCard = ({ event, isPastEvent, onViewDetails }) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
-    className="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col h-full"
+    className="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col h-full border border-gray-100"
   >
     {isPastEvent && (
       <div className="relative h-48">
         {event.Photos && event.Photos[0] && event.Photos[0][0] ? (
           <img src={event.Photos[0][0]} alt={event.Event_name} className="w-full h-full object-cover" />
         ) : (
-          <div className="w-full h-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center">
+          <div className="w-full h-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
             <span className="text-white text-lg font-semibold">No Image Available</span>
           </div>
         )}
+        <div className="absolute top-0 right-0 m-4 px-3 py-1 bg-black bg-opacity-50 text-white text-sm rounded-full">
+          Past Event
+        </div>
       </div>
     )}
     <div className="p-6 flex flex-col flex-grow">
-      <div className="mb-2 flex justify-between items-start">
-        <h3 className="text-xl font-bold text-gray-800">{event.Event_name}</h3>
-        <span className="px-2 py-1 bg-blue-600 text-white text-sm font-semibold rounded">
-          {event.Event_Type}
-        </span>
+      <div className="mb-3 flex justify-between items-start">
+        <h3 className="text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors">{event.Event_name}</h3>
+        
       </div>
-      <p className="text-gray-600 mb-4 flex-grow">{event.Event_details}</p>
-      <div className="flex items-center text-gray-500 mb-2">
-        <CalendarDays className="w-4 h-4 mr-2" />
-        <span>{new Date(event.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
-      </div>
-      <div className="flex items-center text-gray-500 mb-4">
-        <MapPin className="w-4 h-4 mr-2" />
-        <span>{event.location || 'Location TBA'}</span>
+      <p className="text-gray-600 mb-4 flex-grow line-clamp-3">{event.Event_details}</p>
+      <div className="space-y-2 border-t border-gray-100 pt-4">
+        <div className="flex items-center text-gray-600">
+          <CalendarDays className="w-4 h-4 mr-2 text-blue-500" />
+          <span>{new Date(event.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+        </div>
+        <div className="flex items-center text-gray-600">
+          <MapPin className="w-4 h-4 mr-2 text-blue-500" />
+          <span>{event.location || 'Location TBA'}</span>
+        </div>
       </div>
       <button 
         onClick={() => onViewDetails(event)}
-        className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-4 rounded-lg hover:from-blue-700 hover:to-purple-700 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        className="mt-6 w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-2.5 px-4 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 shadow-md flex items-center justify-center space-x-2"
       >
-        View Details
+        <span>View Details</span>
+        <ExternalLink className="w-4 h-4" />
       </button>
     </div>
   </motion.div>
 )
 
 const EventDetailsDialog = ({ event, onClose }) => (
-  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-    <div className="bg-white rounded-lg p-6 max-w-md w-full shadow-lg">
-      <h2 className="text-2xl font-bold mb-4">{event.Event_name}</h2>
-      <p className="text-gray-700 mb-2"><strong>Details:</strong> {event.Event_details}</p>
-      <p className="text-gray-700 mb-2"><strong>Description:</strong> {event.Event_description}</p>
-      <p className="text-gray-700 mb-2"><strong>Date:</strong> {new Date(event.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
-      <p className="text-gray-700 mb-2"><strong>Resources:</strong> {event.resources ? event.resources.join(', ') : 'No resources available'}</p>
-      <div className="flex justify-end mt-4">
-        <button onClick={onClose} className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-200">
+  <motion.div 
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm z-50 p-4"
+  >
+    <motion.div 
+      initial={{ scale: 0.9, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ scale: 0.9, opacity: 0 }}
+      className="bg-white rounded-2xl p-8 max-w-lg w-full shadow-2xl"
+    >
+      <h2 className="text-3xl font-bold mb-4 text-gray-900">{event.Event_name}</h2>
+      <div className="space-y-4">
+        <p className="text-gray-800">{event.Event_details}</p>
+        <p className="text-gray-800">{event.Event_description}</p>
+        <div className="flex items-center text-gray-700">
+          <CalendarDays className="w-5 h-5 mr-2 text-blue-500" />
+          <span>{new Date(event.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', weekday: 'long' })}</span>
+        </div>
+        <div className="bg-gray-50 p-4 rounded-lg">
+          <p className="text-gray-800">
+            {event.Resources && event.Resources.length > 0 ? (
+              event.Resources.map((resource, index) => (
+                <a 
+                  key={index}
+                  href={resource[0]}
+                  target="_blank"
+                  rel="noopener noreferrer" 
+                  className="text-blue-600 hover:text-blue-800 underline mr-4"
+                >
+                  {resource[1] || 'Resource ' + (index + 1)}
+                </a>
+              ))
+            ) : (
+              'No resources available'
+            )}
+          </p>
+        </div>
+      </div>
+      <div className="flex justify-end mt-6">
+        <button 
+          onClick={onClose} 
+          className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-2.5 px-6 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition duration-200 shadow-md"
+        >
           Close
         </button>
       </div>
-    </div>
-  </div>
+    </motion.div>
+  </motion.div>
 )
 
 const EventsPage = () => {
@@ -125,15 +165,23 @@ const EventsPage = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="container mx-auto px-4 sm:px-6 lg:px-8 py-12"
+        className="container mx-auto px-4 sm:px-6 lg:px-8 py-16"
       >
         {/* Hero Section */}
-        <div className="text-center mb-16">
-          <motion.h1
+        <div className="text-center mb-20">
+          <motion.div
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="text-5xl font-extrabold text-gray-800 mb-4"
+            className="inline-block mb-4 px-6 py-2 bg-blue-100 text-blue-600 rounded-full text-sm font-semibold tracking-wide"
+          >
+            EVENTS & WORKSHOPS
+          </motion.div>
+          <motion.h1
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="text-5xl font-extrabold text-gray-900 mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600"
           >
             Discover Our Events
           </motion.h1>
@@ -141,31 +189,31 @@ const EventsPage = () => {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="text-xl text-gray-600 max-w-2xl mx-auto"
+            className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed"
           >
-            Join us for exciting gatherings, workshops, and celebrations. There's always something happening!
+            Join us for exciting gatherings, workshops, and celebrations. Stay updated with our latest events and be part of our growing community.
           </motion.p>
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex justify-center mb-8">
-          <div className="inline-flex rounded-md shadow-sm" role="group">
+        <div className="flex justify-center mb-12">
+          <div className="inline-flex rounded-xl shadow-sm p-1 bg-white" role="group">
             <button
               onClick={() => setActiveTab('upcoming')}
-              className={`px-4 py-2 text-sm font-medium rounded-l-lg ${
+              className={`px-6 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
                 activeTab === 'upcoming'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-50'
+                  ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg'
+                  : 'bg-transparent text-gray-700 hover:bg-gray-50'
               }`}
             >
               Upcoming Events
             </button>
             <button
               onClick={() => setActiveTab('past')}
-              className={`px-4 py-2 text-sm font-medium rounded-r-lg ${
+              className={`px-6 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
                 activeTab === 'past'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-50'
+                  ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg'
+                  : 'bg-transparent text-gray-700 hover:bg-gray-50'
               }`}
             >
               Past Events
@@ -176,7 +224,7 @@ const EventsPage = () => {
         {/* Events Grid */}
         {isLoading ? (
           <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+            <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-500 border-t-transparent"></div>
           </div>
         ) : (
           <AnimatePresence mode="wait">
@@ -189,7 +237,12 @@ const EventsPage = () => {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
               {(activeTab === 'upcoming' ? upcomingEvents : pastEvents).map((event, index) => (
-                <EventCard key={index} event={event} isPastEvent={activeTab === 'past'} onViewDetails={handleViewDetails} />
+                <EventCard 
+                  key={index}
+                  event={event} 
+                  isPastEvent={activeTab === 'past'} 
+                  onViewDetails={handleViewDetails}
+                />
               ))}
             </motion.div>
           </AnimatePresence>
@@ -197,22 +250,27 @@ const EventsPage = () => {
 
         {/* No Events Message */}
         {!isLoading && (activeTab === 'upcoming' ? upcomingEvents : pastEvents).length === 0 && (
-          <motion.p
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center text-gray-600 mt-8"
+            className="text-center py-16"
           >
-            No {activeTab} events at the moment. Check back soon!
-          </motion.p>
+            <div className="bg-white rounded-2xl p-8 shadow-lg max-w-md mx-auto">
+              <div className="text-6xl mb-4">🎉</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No {activeTab} events at the moment</h3>
+              <p className="text-gray-600">Check back soon for more exciting events!</p>
+            </div>
+          </motion.div>
         )}
       </motion.div>
       <Footer />
 
       {/* Dialog for Event Details */}
-      {selectedEvent && <EventDetailsDialog event={selectedEvent} onClose={closeDialog} />}
+      <AnimatePresence>
+        {selectedEvent && <EventDetailsDialog event={selectedEvent} onClose={closeDialog} />}
+      </AnimatePresence>
     </div>
   )
 }
 
 export default EventsPage
-
