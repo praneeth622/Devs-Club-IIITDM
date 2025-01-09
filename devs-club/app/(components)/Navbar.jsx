@@ -1,206 +1,106 @@
-"use client";
-
-import { useState } from "react";
-import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import logo from "../../public/assets/image.png";
-import { Menu, X } from "lucide-react";
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Menu, X } from 'lucide-react';
 import { UserButton, useUser } from "@clerk/clerk-react";
+import { motion, AnimatePresence } from 'framer-motion';
+import logo from "../../public/assets/image.png";
 
-const mobileMenuStyles = `
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
+const navItems = [
+  { name: "About", icon: "🎯" },
+  { name: "Team", icon: "👩‍💻" },
+  { name: "Achievements", icon: "🏆" },
+  { name: "Projects", icon: "💻" },
+  { name: "Open-Source", icon: "🌟" },
+  { name: "Contact", icon: "📧" },
+  { name: "Events", icon: "📅" }
+];
 
-  .dropdown-toggle {
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 2px solid rgba(59, 130, 246, 0.1);
-    padding: 0.7rem;
-    border-radius: 1rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    color: #4B5563;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    backdrop-filter: blur(8px);
-  }
-
-  .dropdown-toggle:hover {
-    background-color: rgba(59, 130, 246, 0.08);
-    border-color: #3B82F6;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
-  }
-
-  .dropdown-menu {
-    position: fixed;
-    right: 1rem;
-    top: 4.5rem;
-    background: rgba(255, 255, 255, 0.95);
-    min-width: 320px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 
-                0 4px 8px rgba(59, 130, 246, 0.05);
-    border-radius: 1.2rem;
-    padding: 1rem;
-    z-index: 1000;
-    transform-origin: top right;
-    border: 1px solid rgba(59, 130, 246, 0.1);
-    backdrop-filter: blur(12px);
-    overflow: hidden;
-  }
-
-  .dropdown-item {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 1rem 1.2rem;
-    margin: 0.3rem 0;
-    font-weight: 500;
-    color: #4B5563;
-    text-align: left;
-    text-decoration: none;
-    background-color: transparent;
-    border: 0;
-    border-radius: 1rem;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .dropdown-item:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(59, 130, 246, 0.04);
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-  }
-
-  .dropdown-item:hover {
-    color: #3B82F6;
-    transform: translateX(4px);
-  }
-
-  .dropdown-item:hover:before {
-    transform: translateX(0);
-  }
-
-  .dropdown-divider {
-    height: 2px;
-    margin: 1rem 0;
-    background: linear-gradient(to right, 
-      transparent, 
-      rgba(59, 130, 246, 0.1), 
-      transparent
-    );
-    border: none;
-  }
-
-  .user-section {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 1rem 1.2rem;
-    margin: 0.3rem 0;
-    font-weight: 500;
-    color: #4B5563;
-    text-align: left;
-    background-color: transparent;
-    border-radius: 1rem;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    justify-content: space-between;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .user-section:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(59, 130, 246, 0.04);
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-  }
-
-  .user-section:hover {
-    color: #3B82F6;
-    transform: translateX(4px);
-  }
-
-  .user-section:hover:before {
-    transform: translateX(0);
-  }
-
-  .user-section-label {
-    display: flex;
-    align-items: center;
-  }
-`;
-
-export default function Navbar() {
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isSignedIn } = useUser();
-  const navItems = [
-    { name: "About", icon: "🎯" },
-    { name: "Team", icon: "👩‍💻" },
-    { name: "Achievements", icon: "🏆" },
-    { name: "Projects", icon: "💻" },
-    { name: "Open-Source", icon: "🌟" },
-    { name: "Contact", icon: "📧" },
-    { name: "Events", icon: "📅" }
-  ];
 
   const handleMenuToggle = () => setIsMenuOpen(!isMenuOpen);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsMenuOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <header className="bg-white/90 backdrop-blur-2xl shadow-lg sticky top-0 z-40 border-b border-blue-100/50">
-      <style jsx global>{mobileMenuStyles}</style>
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="flex justify-between items-center">
-        
-          <Link href="/" className="flex items-center space-x-2">
-            <Image
-              src={logo}
-              alt="Developers Club Logo"
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-            <span className="font-bold text-xl text-blue-600">
+    <nav className="bg-white border-b border-gray-200 shadow-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          <Link href="/" className="flex items-center space-x-3">
+            <div className="relative w-8 h-8">
+              <Image
+                src={logo}
+                alt="Developers Club Logo"
+                layout="fill"
+                objectFit="cover"
+                className="rounded-full"
+              />
+            </div>
+            <span className="font-semibold text-xl text-gray-800">
               Developers Club
             </span>
           </Link>
 
-          <div className="dropdown">
+          {/* Desktop Navigation Items */}
+          <div className="hidden md:flex space-x-4">
+            {navItems.map((item) => (
+              <motion.div
+                key={item.name}
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                <Link 
+                  href={`/${item.name.toLowerCase()}`}
+                  className="px-4 py-2 rounded-md text-sm font-medium text-gray-700 transition-all duration-300 ease-in-out hover:bg-blue-200 hover:text-blue-600"
+                >
+                  {item.name}
+                </Link>
+              </motion.div>
+            ))}
+            {isSignedIn && (
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                <Link 
+                  href="/dashboard" 
+                  className="px-4 py-2 rounded-md text-sm font-medium text-gray-700 transition-all duration-300 ease-in-out hover:bg-blue-200 hover:text-blue-600"
+                >
+                  Dashboard
+                </Link>
+              </motion.div>
+            )}
+            {isSignedIn && (
+              <UserButton 
+                afterSignOutUrl="/"
+                appearance={{
+                  elements: {
+                    avatarBox: "w-8 h-8",
+                    userButtonPopoverCard: "right-0"
+                  }
+                }}
+              />
+            )}
+          </div>
+
+          {/* Mobile Dropdown Menu - Only visible on mobile */}
+          <div className="md:hidden">
             <button 
-              className="dropdown-toggle group"
+              className="dropdown-toggle group rounded-xl border border-gray-300 p-2 flex items-center"
               onClick={handleMenuToggle}
               aria-label="Menu"
             >
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={isMenuOpen ? "close" : "menu"}
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.8, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="text-blue-600 group-hover:text-blue-700"
-                >
-                  {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-                </motion.div>
-              </AnimatePresence>
+              <Menu className="h-6 w-6 text-blue-600" />
             </button>
             
             <AnimatePresence>
@@ -209,65 +109,30 @@ export default function Navbar() {
                   initial={{ opacity: 0, scale: 0.95, y: -10 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  className="dropdown-menu"
+                  transition={{ duration: 0.3 }}
+                  className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-2xl shadow-lg z-50"
                 >
-                  {navItems.map((item, index) => (
+                  {navItems.map((item) => (
                     <Link 
                       key={item.name} 
                       href={`/${item.name.toLowerCase()}`}
                       onClick={handleMenuToggle}
                     >
-                      <motion.button
-                        className="dropdown-item"
-                        initial={{ x: -20, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ delay: index * 0.1 }}
-                        whileHover={{ x: 8 }}
-                      >
-                        <span className="mr-3 text-xl">{item.icon}</span>
+                      <div className="flex items-center p-2 hover:bg-blue-100 transition duration-200 rounded-2xl">
+                        <span className="mr-2 text-xl">{item.icon}</span>
                         {item.name}
-                      </motion.button>
+                      </div>
                     </Link>
                   ))}
-                  
-                  <div className="dropdown-divider" />
-                  
-                  {isSignedIn ? (
-                    <>
-                      <Link href="/dashboard" onClick={handleMenuToggle}>
-                        <motion.button
-                          className="dropdown-item"
-                          whileHover={{ x: 8 }}
-                        >
-                          <span className="mr-3 text-xl">🎮</span>
-                          Dashboard
-                        </motion.button>
-                      </Link>
-                      <motion.div 
-                        className="dropdown-item"
-                        whileHover={{ x: 8 }}
-                      >
-                        <UserButton 
-                          afterSignOutUrl="/"
-                          appearance={{
-                            elements: {
-                              avatarBox: "w-8 h-8",
-                              userButtonPopoverCard: "right-0"
-                            }
-                          }}
-                        /> <div className="pl-3">Profile</div>
-                      </motion.div>
-                    </>
-                  ) : (
-                    <Link href="/dashboard" onClick={handleMenuToggle}>
-                      <motion.button
-                        className="dropdown-item"
-                        whileHover={{ x: 8 }}
-                      >
-                        <span className="mr-3 text-xl">🔑</span>
-                        Login
-                      </motion.button>
+                  {isSignedIn && (
+                    <Link 
+                      href="/dashboard" 
+                      onClick={handleMenuToggle}
+                    >
+                      <div className="flex items-center p-2 hover:bg-blue-100 transition duration-200 rounded-2xl">
+                        <span className="mr-2 text-xl">📊</span>
+                        Dashboard
+                      </div>
                     </Link>
                   )}
                 </motion.div>
@@ -275,7 +140,9 @@ export default function Navbar() {
             </AnimatePresence>
           </div>
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
   );
-}
+};
+
+export default Navbar;
