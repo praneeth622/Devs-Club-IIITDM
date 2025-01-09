@@ -16,7 +16,7 @@ const resources = [
     bg: 'bg-blue-100',
     documents: [
       { name: 'Google Documentation', link: 'https://cloud.google.com/docs', icon: FileText },
-      { name: 'W3Schools Cloud Guide', link: 'https://www.w3schools.com/whatis/whatis_cloud.asp', icon: Link },
+      { name: 'W3Schools Cloud Guide', link: 'https://www.w3schools.in/google-cloud-services', icon: Link },
     ],
     courses: [
       { name: 'Google Cloud Fundamentals', link: 'https://www.coursera.org/learn/gcp-fundamentals', icon: Linkedin },

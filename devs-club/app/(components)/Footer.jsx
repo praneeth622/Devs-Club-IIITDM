@@ -23,10 +23,10 @@ export const Footer = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="flex justify-center space-x-6 mb-8"
         >
-          <Link href="#">
+          <Link href="https://www.instagram.com/dev.club.iiitdm/">
             <Instagram className="text-white hover:text-blue-500 transition-colors duration-300" size={24} />
           </Link>
-          <Link href="#">
+          <Link href="https://www.linkedin.com/company/developersclub-iiitdm-kancheepuram/posts/?feedView=all">
             <Linkedin className="text-white hover:text-blue-600 transition-colors duration-300" size={24} />
           </Link>
           <Link href="https://github.com/DevClubIIITDM" target='_blank'>
