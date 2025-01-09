@@ -153,7 +153,7 @@ const resources = [
       { name: 'React Official Docs', link: 'https://reactjs.org/docs/getting-started.html', icon: Link },
     ],
     courses: [
-      { name: 'MERN Stack Development', link: 'https://www.udemy.com/course/mern-stack-front-to-back/', icon: Linkedin },
+      { name: 'MERN Stack Development-Udemy', link: 'https://www.udemy.com/course/mern-stack-front-to-back/', icon: Linkedin },
       { name:'Youtube',link: 'https://www.youtube.com/watch?v=mU6anWqZJcc&list=PLf7L7Kg8_FNzwwSK7c4Dei_h3oqg3dwYc',icon: Link },
     ],
     community: [
@@ -170,7 +170,7 @@ const resources = [
       { name: 'Django Official Docs', link: 'https://docs.djangoproject.com/en/stable/', icon: Link },
     ],
     courses: [
-      { name: 'Python for Web Development', link: 'https://www.udemy.com/course/python-django-tutorial/', icon: Linkedin },
+      { name: 'Python for Web Development - udemy', link: 'https://www.udemy.com/course/python-django-tutorial/', icon: Linkedin },
       { name:'Youtube',link: 'https://www.youtube.com/watch?v=yBDHkveJUf4',icon: Link },
     ],
     community: [
