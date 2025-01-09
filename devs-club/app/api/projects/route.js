@@ -8,7 +8,7 @@ export async function GET(req) {
       await dbConnect(); // Ensure database connection
   
       const projects = await Project.find({}); // Fetch projects from MongoDB
-      console.log("Fetched projects:", projects);
+      // console.log("Fetched projects:", projects);
       return new Response(JSON.stringify({ success: true, data: projects }), {
         status: 200,
         headers: { "Content-Type": "application/json" },
@@ -28,20 +28,37 @@ export async function GET(req) {
 
   export async function POST(req) {
     try {
-      const { name, description, teamLead, fullDescription, teamMembers } = await req.json();
-  
-      // Create a new project document
+      await dbConnect(); 
+      const data = await req.json();
+      const { name, description, teamLead, fullDescription, teamMembers, status,key } = data;
+      
+      if(!(key == process.env.NEXT_PUBLIC_KEY)){
+        return new Response(
+          JSON.stringify({ success: false, error: "Invalid API Key" }),
+          {
+            status: 401,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      }
+      // Validate status
+      const validStatus = ["active", "completed", "on-hold"];
+      const projectStatus = validStatus.includes(status) ? status : "completed";
+      console.log("status: " + status);
+
+      // Create new project with validated status
       const newProject = new Project({
         name,
         description,
-        teamLead,
+        status ,
+        teamLead, 
         fullDescription,
         teamMembers,
       });
-  
-      // Save the project to the database
+
       await newProject.save();
-  
+      console.log("Saved project with status:", newProject); // Debug log
+
       return new Response(
         JSON.stringify({ success: true, data: newProject }),
         {
@@ -51,9 +68,11 @@ export async function GET(req) {
       );
     } catch (error) {
       console.error("Error adding project:", error);
-  
       return new Response(
-        JSON.stringify({ success: false, error: "Failed to add project" }),
+        JSON.stringify({ 
+          success: false, 
+          error: error.message || "Failed to add project" 
+        }),
         {
           status: 500,
           headers: { "Content-Type": "application/json" },
@@ -65,7 +84,20 @@ export async function GET(req) {
   export async function DELETE(req) {
     console.log("Deleting project...");
     try {
-      const { id } = await req.json();  // Extract project id from request body
+      const { id,key } = await req.json();
+      console.log(id,key)  // Extract project id from request body
+
+      if(!(key == process.env.NEXT_PUBLIC_KEY)){
+        console.log("Key is ", key)
+        return new Response(
+          JSON.stringify({ success: false, error: "Invalid API Key" }),
+          {
+            status: 401,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      }
+      await dbConnect(); 
       console.log("Id is " + id);
       // Find and delete the project by its custom 'id' field
       const deletedProject = await Project.findOneAndDelete({ id: id });  // use id field, not _id
