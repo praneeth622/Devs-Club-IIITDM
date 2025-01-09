@@ -328,17 +328,21 @@ function ProjectManager() {
     teamLead: { name: '', linkedin: '', github: '' },
     teamMembers: [{ name: '', linkedin: '', github: '' }], 
     fullDescription: '',
+    status: 'active', 
+    key:process.env.NEXT_PUBLIC_KEY
   });
 
   const handleAddProject = async () => {
     if (!newProject.name || !newProject.description || !newProject.fullDescription) {
       toast.error("Please fill in all the required fields: Name, Description, and Full Description.");
+      alert("Please fill in all the required fields: Name, Description, and Full Description.");
       return;
     }
   
     // Validate teamLead
     if (!newProject.teamLead.name || !newProject.teamLead.linkedin || !newProject.teamLead.github) {
       toast.error("Please fill in all the fields for the Team Lead.");
+      alert("Please fill in all the fields for the Team Lead.");
       return;
     }
   
@@ -346,6 +350,7 @@ function ProjectManager() {
     for (const member of newProject.teamMembers) {
       if (!member.name || !member.linkedin || !member.github) {
         toast.error("Please fill in all the fields for each Team Member.");
+        alert("Please fill in all the fields for each Team Member.");
         return;
       }
     }
@@ -368,16 +373,17 @@ function ProjectManager() {
           teamLead: { name: '', photo: '', linkedin: '', github: '' },
           teamMembers: [{ name: '', linkedin: '', github: '' }],
           fullDescription: '',
+          status: 'active',
         });
         toast.success("Project Added successfully!");
       } else {
         setError('Failed to add project');
-        toast.error(`Error adding project: ${error.response?.data?.message || error.message}`);
+        toast.error(`Error adding project: ${error?.response?.data?.message || error?.message}`);
       }
     } catch (err) {
       setError('Error adding project');
       console.error(err);  // Log any error
-      toast.error(`Error adding project: ${error.response?.data?.message || error.message}`);
+      toast.error(`Error adding project: ${error?.response?.data?.message || error?.message}`);
     }
   };
 
@@ -396,7 +402,7 @@ function ProjectManager() {
         setLoading(false);
       } catch (err) {
         setError('Error fetching projects');
-        toast.error(`Error Fetching project: ${error.response?.data?.message }, Try Again later`);
+        toast.error(`Error Fetching project: ${error?.response?.data?.message }, Try Again later`);
         setLoading(false);
       }
     };
@@ -429,23 +435,27 @@ function ProjectManager() {
   // Delete project
   const handleDeleteProject = async (projectId) => {
     try {
+      const key =  process.env.NEXT_PUBLIC_KEY
       const response = await fetch('/api/projects', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: projectId }),
+        body: JSON.stringify({ 
+          id: projectId,  
+          key
+        }),
       });
 
       const result = await response.json();
 
       if (result.success) {
-        // Remove the deleted project from the state
         setProjects(projects.filter(project => project.id !== projectId));
+        toast.success('Project deleted successfully');
       } else {
-        setError('Failed to delete project');
+        toast.error(result.error || 'Failed to delete project');
       }
     } catch (err) {
-      setError('Error deleting project');
-      console.error("unable to delete project",err);
+      console.error("Error deleting project:", err);
+      toast.error('Error deleting project. Please try again.');
     }
   };
 
@@ -476,6 +486,19 @@ function ProjectManager() {
             <Label htmlFor="project-full-description">Full Description</Label>
             <Textarea id="project-full-description" required value={newProject.fullDescription} onChange={(e) => setNewProject({...newProject, fullDescription: e.target.value})} />
           </div>
+          <div>
+              <Label htmlFor="project-status">Status</Label>
+              <select
+                id="project-status"
+                className="w-full border rounded p-2"
+                value={newProject.status}
+                onChange={(e) => setNewProject({ ...newProject, status: e.target.value })}
+              >
+                <option value="active">Active</option>
+                <option value="completed">Completed</option>
+                <option value="on-hold">On-Hold</option>
+              </select>
+            </div>
           <div className="space-y-2">
             <Label>Team Lead</Label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -572,8 +595,8 @@ function EventManager() {
         const flattenedEvents = response.data.data.map(event => {
           return {
             ...event,
-            Photos: event.Photos.flat(), // Flatten the Photos array (if it’s nested)
-            Resources: event.Resources.flat() // Flatten the Resources array (if it’s nested)
+            Photos: event.Photos.flat(),
+            Resources: event.Resources.flat() 
           };
         });
         setEvents(flattenedEvents)
@@ -597,6 +620,7 @@ function EventManager() {
     }
     try {
       // Upload each photo and retrieve its download URL
+      
       const uploadedUrls = await Promise.all(
         newEvent.Photos.map(async (file) => {
           const storageRef = ref(storage, `Events/${newEvent.Event_name}/${file.name}`);
@@ -626,7 +650,11 @@ function EventManager() {
   
       // Submit the event data to the API
       try{
-        const response = await axios.post('/api/events', eventWithUrls);
+        const key =  process.env.NEXT_PUBLIC_KEY
+        const eventWithUrlsAndKey = {
+          ...eventWithUrls,
+          key,  // Add the key to the request body
+        };
         console.log('response is ', response)
       
   
@@ -654,8 +682,12 @@ function EventManager() {
   const handleDeleteEvent = async (eventId) => {
     try {
       // Sending the eventId in the body of the DELETE request
+      const key = process.env.NEXT_PUBLIC_KEY;
       const response = await axios.delete('/api/events', {
-        data: { id: eventId } // The id is sent in the `data` field for DELETE requests
+        data: { 
+          id: eventId, 
+          key 
+        }
       });
   
       // Assuming the response contains a `success` field and the deleted event data
