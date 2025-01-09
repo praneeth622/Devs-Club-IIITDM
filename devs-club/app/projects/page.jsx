@@ -105,18 +105,26 @@ import LoadingSpinner from '../components/LoadingSpinner'
 //   }
 // ];
 
-export default function Page() {
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setLoading(false);
-    };
-
-    fetchData();
-  }, []);
+  export default function Page() {
+    const [loading, setLoading] = useState(true);
+    const [projects, setProjects] = useState([]);
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        setLoading(true);
+        try {
+          const response = await axios.get('/api/projects'); // Fetch projects from API
+          setProjects(response.data); // Assuming response.data contains the projects array
+        } catch (error) {
+          console.error("Error fetching projects:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchData();
+    }, []);
 
   return (
     <div>
