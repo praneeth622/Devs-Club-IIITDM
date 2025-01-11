@@ -1,5 +1,7 @@
 import Event from '../../models/events';
 import dbConnect from '../conn';
+import { getAuth } from '@clerk/nextjs/server';
+import { auth } from '@clerk/nextjs/server'
 
 // GET request: Fetch all events
 export async function GET(req) {
@@ -34,9 +36,20 @@ export async function POST(req) {
     Photos,
     budget,
     Resources,
+    key,
+    location
   } = await req.json();
 
   try {
+    const { userId } = getAuth(req);
+    
+
+    if (!userId) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Unauthorized: No user session found.' }),
+        { status: 401, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
     await dbConnect();
 
     // Validate required fields
@@ -45,6 +58,16 @@ export async function POST(req) {
       return new Response(
         JSON.stringify({ success: false, error: 'Missing required fields' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if(!(key == process.env.NEXT_PUBLIC_KEY)){
+      return new Response(
+        JSON.stringify({ success: false, error: "Invalid API Key" }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json" },
+        }
       );
     }
 
@@ -62,6 +85,7 @@ export async function POST(req) {
       Photos,
       budget,
       Resources,
+      location
     });
 
     await newEvent.save();
@@ -82,7 +106,27 @@ export async function POST(req) {
 // DELETE request: Delete an event by ID
 export async function DELETE(req) {
   try {
-    const { id } = await req.json();
+    const { id,key } = await req.json();
+    const { userId } = getAuth(req);
+    
+
+    if (!userId) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Unauthorized: No user session found.' }),
+        { status: 401, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+    await dbConnect();
+
+    if(!(key == process.env.NEXT_PUBLIC_KEY)){
+      return new Response(
+        JSON.stringify({ success: false, error: "Invalid API Key" }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
 
     if (!id) {
       return new Response(

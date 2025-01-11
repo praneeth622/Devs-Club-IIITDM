@@ -2,8 +2,9 @@
 import ProjectsList from './(components)/ProjectsList';
 import Navbar from '../(components)/Navbar'
 import {Footer} from '../(components)/Footer'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import HeroSection from './(components)/HeroSection'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 // const projects = [
 //   {
@@ -104,7 +105,27 @@ import HeroSection from './(components)/HeroSection'
 //   }
 // ];
 
-export default function Page() {
+
+  export default function Page() {
+    const [loading, setLoading] = useState(true);
+    const [projects, setProjects] = useState([]);
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        setLoading(true);
+        try {
+          const response = await axios.get('/api/projects'); // Fetch projects from API
+          setProjects(response.data); // Assuming response.data contains the projects array
+        } catch (error) {
+          console.error("Error fetching projects:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchData();
+    }, []);
+
   return (
     <div>
     <Navbar />
@@ -112,7 +133,11 @@ export default function Page() {
     <div className="min-h-screen  bg-sky-50 from-purple-100 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-12">Our Projects</h1>
-        <ProjectsList  />
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <ProjectsList projects={projects} />
+        )}
       </div>
     </div>
     <Footer />

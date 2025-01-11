@@ -580,6 +580,7 @@ function EventManager() {
     Photos: [],
     Resources: [],
     project_github: '',
+    location:''
   });
 
   useEffect(() => {
@@ -612,7 +613,7 @@ function EventManager() {
 
   const handleAddEvent = async () => {
     setIsLoading(true);
-    if (!newEvent.Event_name || !newEvent.Event_details || !newEvent.date) {
+    if (!newEvent.Event_name || !newEvent.Event_details || !newEvent.date || !newEvent.location) {
       // toast.error("Please fill out all required fields.");
       alert("Please fill out all required fields.")
       setIsLoading(false);
@@ -651,11 +652,13 @@ function EventManager() {
       // Submit the event data to the API
       try{
         const key =  process.env.NEXT_PUBLIC_KEY
+        
         const eventWithUrlsAndKey = {
           ...eventWithUrls,
           key,  // Add the key to the request body
         };
-        console.log('response is ', response)
+        const response = await axios.post('/api/events', eventWithUrlsAndKey);
+        // console.log('response is ', response)
       
   
       // Update the events list with the newly created event
@@ -718,6 +721,7 @@ function EventManager() {
       Photos: [],
       Resources: [],
       project_github: '',
+      location : '',
     });
   };
 
@@ -778,11 +782,19 @@ function EventManager() {
               </div>
             </div>
             <div>
-              <Label htmlFor="project-description">Project Description</Label>
+              <Label htmlFor="project-description">Event Description</Label>
               <Textarea 
                 id="project-description" 
                 value={newEvent.Project_Discription} 
                 onChange={(e) => setNewEvent({...newEvent, Project_Discription: e.target.value})}
+              />
+            </div>
+            <div>
+              <Label htmlFor="project-location">Event Location</Label>
+              <Input 
+                id="project-location" 
+                value={newEvent.location} 
+                onChange={(e) => setNewEvent({...newEvent, location: e.target.value})}
               />
             </div>
             <div>

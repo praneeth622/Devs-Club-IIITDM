@@ -29,6 +29,15 @@ export async function GET(req) {
   export async function POST(req) {
     try {
       await dbConnect(); 
+      const { userId } = getAuth(req);
+    
+
+    if (!userId) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Unauthorized: No user session found.' }),
+        { status: 401, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
       const data = await req.json();
       const { name, description, teamLead, fullDescription, teamMembers, status,key } = data;
       
@@ -83,7 +92,17 @@ export async function GET(req) {
 
   export async function DELETE(req) {
     console.log("Deleting project...");
+
     try {
+      const { userId } = getAuth(req);
+    
+
+    if (!userId) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Unauthorized: No user session found.' }),
+        { status: 401, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
       const { id,key } = await req.json();
       console.log(id,key)  // Extract project id from request body
 

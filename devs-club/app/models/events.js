@@ -18,6 +18,9 @@ const EventSchema = new mongoose.Schema({
   Event_lead: {
     type: String,
   },
+  location: {
+    type: String,
+  },
   Event_team: {
     type: [{
         name: String,
