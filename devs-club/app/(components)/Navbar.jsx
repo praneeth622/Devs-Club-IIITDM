@@ -5,6 +5,7 @@ import { Menu, X } from 'lucide-react';
 import { UserButton, useUser } from "@clerk/clerk-react";
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from "../../public/assets/image.png";
+import { Button } from "../../components/ui/button";
 
 const navItems = [
   { name: "About", icon: "🎯" },
@@ -61,26 +62,13 @@ const Navbar = () => {
               >
                 <Link 
                   href={`/${item.name.toLowerCase()}`}
-                  className="px-3 py-2 rounded-full text-base font-medium text-gray-900 transition-all duration-300 ease-in-out hover:bg-blue-200 hover:text-blue-600 text-base"
+                  className="px-3 py-2 rounded-full text-base font-medium text-gray-900 transition-all duration-300 ease-in-out hover:bg-blue-200 hover:text-blue-600"
                 >
                   {item.name}
                 </Link>
               </motion.div>
             ))}
-            {isSignedIn && (
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-              >
-                <Link 
-                  href="/dashboard" 
-                  className="px-3 py-2 rounded-full text-base font-medium text-gray-900 transition-all duration-300 ease-in-out hover:bg-blue-200 hover:text-blue-600"
-                >
-                  Dashboard
-                </Link>
-              </motion.div>
-            )}
-            {isSignedIn && (
+            {isSignedIn ? (
               <UserButton 
                 afterSignOutUrl="/"
                 appearance={{
@@ -90,17 +78,58 @@ const Navbar = () => {
                   }
                 }}
               />
+            ) : (
+              <Link href="/dashboard">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button 
+                    className="bg-gradient-to-r from-blue-600 to-blue-800 text-white 
+                              px-6 py-2 rounded-lg font-medium
+                              transition-all duration-300
+                              hover:from-blue-700 hover:to-blue-900
+                              shadow-md hover:shadow-xl
+                              border border-blue-400/20
+                              flex items-center gap-2"
+                  >
+                    <motion.span
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      Login
+                    </motion.span>
+                    <motion.svg 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      width="16" 
+                      height="16" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                      className="transform transition-transform group-hover:translate-x-1"
+                    >
+                      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                      <polyline points="10 17 15 12 10 7"/>
+                      <line x1="15" y1="12" x2="3" y2="12"/>
+                    </motion.svg>
+                  </Button>
+                </motion.div>
+              </Link>
             )}
           </div>
 
-          {/* Mobile Dropdown Menu - Only visible on mobile */}
+          {/* Mobile Dropdown Menu */}
           <div className="md:hidden">
             <button 
               className="dropdown-toggle group rounded-xl border border-gray-300 p-2 flex items-center"
               onClick={handleMenuToggle}
               aria-label="Menu"
             >
-              <Menu className="h-6 w-6 text-blue-600" />
+              {isMenuOpen ? <X className="h-6 w-6 text-blue-600" /> : <Menu className="h-6 w-6 text-blue-600" />}
             </button>
             
             <AnimatePresence>
@@ -124,14 +153,24 @@ const Navbar = () => {
                       </div>
                     </Link>
                   ))}
-                  {isSignedIn && (
+                  {isSignedIn ? (
+                    <UserButton 
+                      afterSignOutUrl="/"
+                      appearance={{
+                        elements: {
+                          avatarBox: "w-8 h-8",
+                          userButtonPopoverCard: "right-0"
+                        }
+                      }}
+                    />
+                  ) : (
                     <Link 
-                      href="/dashboard" 
+                      href="/sign-in" 
                       onClick={handleMenuToggle}
                     >
                       <div className="flex items-center p-2 hover:bg-blue-100 transition duration-200 rounded-2xl">
-                        <span className="mr-2 text-xl">📊</span>
-                        Dashboard
+                        <span className="mr-2 text-xl">🔑</span>
+                        Login
                       </div>
                     </Link>
                   )}

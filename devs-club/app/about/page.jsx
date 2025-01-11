@@ -206,8 +206,8 @@ export default function GDSCAboutPage() {
               </h2>
               <div className="max-w-3xl mx-auto">
                 <TimelineEvent
-                  title="Android Study Jam"
-                  date="March 15, 2024"
+                  title="FullStack Fusion: Next.js & Convex"
+                  date="September 22, 2024"
                   description="A series of hands-on workshops to learn Android app development using Kotlin."
                 />
                 <TimelineEvent
