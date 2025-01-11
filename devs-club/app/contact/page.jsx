@@ -205,7 +205,7 @@ function ContactFormComponent() {
                       onChange={handleChange}
                       placeholder="Your Message" 
                       required 
-                      className="border-0 bg-white/10 backdrop-blur-md text-white placeholder:text-gray-300 rounded-xl p-6 min-h-[200px] focus:ring-2 focus:ring-blue-500 transition-all group-hover:bg-white/15"
+                      className="border-0 bg-white/10 backdrop-blur-md text-white placeholder:text-gray-100 rounded-xl p-6 min-h-[200px] focus:ring-2 focus:ring-blue-500 transition-all group-hover:bg-white/15"
                     />
                   </motion.div>
                   
