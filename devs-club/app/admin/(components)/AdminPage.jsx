@@ -1141,7 +1141,7 @@ function AdminAccessManager() {
       }
       setNewAdmin({ name: '', role: '', email: '' });
     } catch (error) {
-      console.error("Error adding admin:", error.response?.data.error);
+      console.error("Error adding admin:", error);
       toast.error(`Error adding Admin: ${error.response?.data?.error || error.message}, Try Again later`);
     }
   };

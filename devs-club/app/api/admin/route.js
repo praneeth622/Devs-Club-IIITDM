@@ -63,6 +63,7 @@ export async function POST(req) {
   const { userId } = getAuth(req);  
   const org = await auth()
   console.log("org:", org)
+  const OrgId = 'org_2qq40cm0EtvF24HU5bM3f2GVz2f'
 
   if (!userId) {
     return new Response(
@@ -130,13 +131,20 @@ export async function POST(req) {
     // Get the Clerk user ID from the fetched user list
     const userToUpdate = clerkUser.data[0];
     console.log('User to update1:', userToUpdate)
+    
+    if(!userToUpdate){
+      return new Response(
+        JSON.stringify({ success: false, error: 'User Not existed, Create user before assigning admin role' }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
     console.log("User to update2",  userToUpdate.id)
     const clerkUserId = userToUpdate.id;
     console.log('Clerk user ID:', clerkUserId)
 
     // Update the user's role in Clerk to 'admin'
     const organizationId = org?.orgId
-    console.log("org id is ",organizationId)
+    console.log(" my org id",organizationId) // this id we are updating to given email
 
     if (!organizationId) {
       return new Response(
@@ -144,67 +152,82 @@ export async function POST(req) {
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
-    
-    const memberships = await clerkClient.organizations.getOrganizationMembershipList({ organizationId });
-    // console.log("Memberships:", memberships);
-    // console.log("Memberships data:", memberships.data);
-
-    // Extracting the array of memberships
-    const members_data = memberships.data;
-    // console.log("Type of memberships:", Array.isArray(members_data));
-
-    // Ensure that members_data is an array
-    if (Array.isArray(members_data)) {
-      // console.log("First Membership:", members_data[0]);  // Log the first item in the array
-
-      // Iterating over members_data to access publicUserData for each membership
-      members_data.forEach((membership, index) => {
-        // console.log(`Member ${index + 1} publicUserData:`, membership.publicUserData);
-      });
-    } else {
-      console.log("Error: memberships.data is not an array");
+    try{
+      const response = await clerkClient.organizations.createOrganizationMembership({
+        userId: userToUpdate.id,
+        organizationId,
+        role: 'org:admin'
+      })
+      console.log("Response:", response)
     }
-
-    // Check if the user is a member by searching through members_data
-    const isMember = members_data.some(membership => membership.publicUserData.userId === clerkUserId) ? 1 : 0;
-
-    if (isMember) {
-      console.log(`User ${clerkUserId} has membership.`);
-    } else {
-      console.log(`No membership found for user ${clerkUserId}`);
-    }
-
-    if (!isMember) {
-      return new Response(
-        JSON.stringify({ success: false, error: 'User is not a member of the organization.' }),
-        { status: 400, headers: { 'Content-Type': 'application/json' } }
-      );
-    }
-
-    // Verify organizationId is provided and proceed to update membership
-    if (organizationId) {
-      try {
-        // Assigning the admin role, verify if 'admin' role is valid for the organization
-        await clerkClient.organizations.updateOrganizationMembership({
-          userId: clerkUserId,
-          organizationId,
-          role: 'org:admin', // Use 'org:admin' instead of 'admin'
-        });
-
-        console.log(`User ${clerkUserId} successfully added as admin.`);
-      } catch (error) {
-        console.error("Error updating membership:", error);
+    catch(error){
+      console.error("Error Adding admin:", error);
+      
         return new Response(
           JSON.stringify({ success: false, error: 'Failed to assign admin role.' }),
           { status: 500, headers: { 'Content-Type': 'application/json' } }
         );
-      }
-    } else {
-      return new Response(
-        JSON.stringify({ success: false, error: 'Organization ID is missing or user is not part of any organization' }),
-        { status: 400, headers: { 'Content-Type': 'application/json' } }
-      );
     }
+    
+    // console.log("Memberships:", memberships);
+    // console.log("Memberships data:", memberships.data);
+
+    // Extracting the array of memberships
+    // const members_data = memberships.data;
+    // console.log("Type of memberships:", Array.isArray(members_data));
+
+    // Ensure that members_data is an array
+    // if (Array.isArray(members_data)) {
+    //   // console.log("First Membership:", members_data[0]);  // Log the first item in the array
+
+    //   // Iterating over members_data to access publicUserData for each membership
+    //   members_data.forEach((membership, index) => {
+    //     // console.log(`Member ${index + 1} publicUserData:`, membership.publicUserData);
+    //   });
+    // } else {
+    //   console.log("Error: memberships.data is not an array"); 
+    // }
+
+    // // Check if the user is a member by searching through members_data
+    // const isMember = members_data.some(membership => membership.publicUserData.userId === clerkUserId) ? 1 : 0;
+
+    // if (isMember) {
+    //   console.log(`User ${clerkUserId} has membership.`);
+    // } else {
+    //   console.log(`No membership found for user ${clerkUserId}`);
+    // }
+
+    // if (!isMember) {
+    //   return new Response(
+    //     JSON.stringify({ success: false, error: 'User is not a member of the organization.' }),
+    //     { status: 400, headers: { 'Content-Type': 'application/json' } }
+    //   );
+    // }
+
+    // // Verify organizationId is provided and proceed to update membership
+    // if (organizationId) {
+    //   try {
+    //     // Assigning the admin role, verify if 'admin' role is valid for the organization
+    //     await clerkClient.organizations.updateOrganizationMembership({
+    //       userId: clerkUserId,
+    //       organizationId,
+    //       role: 'org:admin', // Use 'org:admin' instead of 'admin'
+    //     });
+
+    //     console.log(`User ${clerkUserId} successfully added as admin.`);
+    //   } catch (error) {
+    //     console.error("Error updating membership:", error);
+    //     return new Response(
+    //       JSON.stringify({ success: false, error: 'Failed to assign admin role.' }),
+    //       { status: 500, headers: { 'Content-Type': 'application/json' } }
+    //     );
+    //   }
+    // } else {
+    //   return new Response(
+    //     JSON.stringify({ success: false, error: 'Organization ID is missing or user is not part of any organization' }),
+    //     { status: 400, headers: { 'Content-Type': 'application/json' } }
+    //   );
+    // }
 
 
     // Create a new Admin entry
@@ -276,14 +299,14 @@ export async function DELETE(req) {
     }
 
     // Fetch the Clerk user using the email (we assume email is unique)
-    const allUsers = await clerkClient.users.getUserList({})
+    // const allUsers = await clerkClient.users.getUserList({})
     // console.log("all users:", allUsers)
     const clerkUser = await clerkClient.users.getUserList({ emailAddress: adminToDelete });
     // console.log("deleted user clerk id ",clerkUser.data[0].id);
 
     if (clerkUser.length === 0) {
       return new Response(
-        JSON.stringify({ success: false, error: 'No Clerk user found with this email.' }),
+        JSON.stringify({ success: false, error: 'No Admin user found with this email.' }),
         { status: 404, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -298,7 +321,7 @@ export async function DELETE(req) {
 
     if (!organizationId) {
       return new Response(
-        JSON.stringify({ success: false, error: 'User is not part of any organization' }),
+        JSON.stringify({ success: false, error: 'User is not a Admin' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -312,6 +335,11 @@ export async function DELETE(req) {
           organizationId,
           role: 'org:user', // Use 'org:admin' instead of 'admin'
         });
+        const response = await clerkClient.organizations.deleteOrganizationMembership({
+          userId: userToUpdate,
+          organizationId,
+        })
+        console.log("Membership deleted successfully:", response);
       }
       catch(error){
         console.error("Error deleting membership:", error);

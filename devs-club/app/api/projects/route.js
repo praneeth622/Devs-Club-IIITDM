@@ -1,6 +1,7 @@
 // pages/api/projects/index.js
 import dbConnect from '../conn';
 import Project from '../../models/project.model';
+import { getAuth } from '@clerk/nextjs/server';
 
 export async function GET(req) {
     console.log("Fetching projects...");
