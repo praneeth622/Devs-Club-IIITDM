@@ -14,7 +14,7 @@ export default function HeaderBanner() {
     >
       <div className="relative h-64 md:h-80 rounded-xl overflow-hidden shadow-lg">
         <Image
-          src={user?.imageUrl}
+          src="/assets/club_banner.png"
           alt="Developers Club Banner"
           layout="fill"
           objectFit="cover"
@@ -33,11 +33,11 @@ export default function HeaderBanner() {
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
             >
               <Image
-                src="/assets/image.png"
+                src={user?.imageUrl}
                 alt="Developer Club Logo"
                 width={80}
                 height={80}
-                className="mx-auto mb-4"
+                className="mx-auto mb-4 rounded-full object-cover border-2 border-white/20 shadow-lg hover:scale-105 transition-transform duration-300"
               />
             </motion.div>
             <motion.h1
@@ -46,7 +46,7 @@ export default function HeaderBanner() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.7, duration: 0.5 }}
             >
-              Welcome back, {user?.firstName}!
+              Welcome {user?.firstName}
             </motion.h1>
             <motion.p
               className="text-xl text-white mb-6"

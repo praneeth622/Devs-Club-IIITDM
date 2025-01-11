@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 import { Clock, MapPin, Phone } from "lucide-react"
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { FiSend, FiCode, FiGithub, FiLinkedin } from 'react-icons/fi'
+import { FiSend, FiCode, FiGithub, FiLinkedin ,FiMail } from 'react-icons/fi'
+import { MdEmail } from 'react-icons/md';
 import { Card, CardContent } from "../../components/ui/card"
 import { Input } from "../../components/ui/input"
 import { Textarea } from "../../components/ui//textarea"
@@ -205,7 +206,7 @@ function ContactFormComponent() {
                       onChange={handleChange}
                       placeholder="Your Message" 
                       required 
-                      className="border-0 bg-white/10 backdrop-blur-md text-white placeholder:text-gray-300 rounded-xl p-6 min-h-[200px] focus:ring-2 focus:ring-blue-500 transition-all group-hover:bg-white/15"
+                      className="border-0 bg-white/10 backdrop-blur-md text-white placeholder:text-gray-100 rounded-xl p-6 min-h-[200px] focus:ring-2 focus:ring-blue-500 transition-all group-hover:bg-white/15"
                     />
                   </motion.div>
                   
@@ -258,9 +259,9 @@ function ContactFormComponent() {
                   </motion.div> */}
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-0">
                   <motion.a
-                    href="https://github.com/Devs-Club-IIITDM" 
+                    href="https://github.com/DevClubIIITDM" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center space-x-4 text-gray-200 p-4 rounded-xl transition-all duration-500 group relative overflow-hidden"
@@ -287,14 +288,14 @@ function ContactFormComponent() {
                           transition: { duration: 0.2 }
                         }}
                       >
-                        github.com/Devs-Club-IIITDM
+                        github.com/Dev-Club-IIITDM
                         <div className="h-0.5 w-full bg-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                       </motion.span>
                     </div>
                   </motion.a>
 
                   <motion.a
-                    href="https://www.linkedin.com/company/developers-club-iiitdm" 
+                    href="https://www.linkedin.com/company/developersclub-iiitdm-kancheepuram/posts/?feedView=all" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center space-x-4 text-gray-200 p-4 rounded-xl transition-all duration-500 group relative overflow-hidden"
@@ -322,6 +323,39 @@ function ContactFormComponent() {
                         }}
                       >
                         linkedin.com/developers-club-iiitdm
+                        <div className="h-0.5 w-full bg-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                      </motion.span>
+                    </div>
+                  </motion.a>
+
+                  <motion.a
+                    href="mailto:devclub@iiitdm.ac.in" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-4 text-gray-200 p-4 rounded-xl transition-all duration-500 group relative overflow-hidden"
+                    whileHover={{ 
+                      scale: 1.02,
+                      transition: { duration: 0.2 }
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    {/* Background gradient that slides in */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
+                    
+                    {/* Icon container with animations */}
+                    <div className="relative z-10 bg-white/10 p-3 rounded-full group-hover:bg-white/20 transition-colors duration-300">
+                      <FiMail className="text-2xl transform group-hover:rotate-12 transition-all duration-300 group-hover:scale-110" />      
+                      </div>              
+                    {/* Text with slide-up animation */}
+                    <div className="relative z-10 overflow-hidden">
+                      <motion.span 
+                        className="font-medium inline-block"
+                        whileHover={{
+                          color: "#60A5FA",
+                          transition: { duration: 0.2 }
+                        }}
+                      >
+                        devclub@iiitdm.ac.in
                         <div className="h-0.5 w-full bg-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                       </motion.span>
                     </div>

@@ -268,18 +268,18 @@ export default function Team() {
   }
 
   const cores = [
-    { name: "Vishnu Teja", role: "CS21B2017", bio: "Interested in coding, collaboration, and driving innovation through community-driven development initiatives.", image: '/assets/cs21b2027.jpg', linkedin: "https://www.linkedin.com/in/vishnu-surla-70384524a/", github: "https://github.com/Vishnuteja-Surla" },
     { name: "Harsha Vardhan G", role: "CS21B1052", bio: "Passionate AI enthusiast with research experience and strong technical skills.", image: "/assets/cs21b1052.jpg", linkedin: "https://www.linkedin.com/in/govindharshavardhan", github: "https://github.com/harshavardhan784" },
+    { name: "Vishnu Teja", role: "CS21B2037", bio: "Interested in coding, collaboration, and driving innovation through community-driven development initiatives.", image: '/assets/cs21b2027.jpg', linkedin: "https://www.linkedin.com/in/vishnu-surla-70384524a/", github: "https://github.com/Vishnuteja-Surla" },
     { name: "K M V R Madhava Krishna", role: "CS22B1005", bio: "Data science student excelling in ML, Python, cloud integration, problem-solving, and impactful solutions.", image: "/assets/cs22b1005.jpg", linkedin: "https://www.linkedin.com/in/k-m-v-r-madhava-krishna-a71533262/", github: "https://github.com/Madhava0412" },
     { name: "Praneeth Devarasetty", role: "CS22B1014", bio: "Full Stack Developer skilled in React, Node.js, databases, APIs, responsive design, and performance optimization", image: "/assets/cs22b1014.jpg", linkedin: "https://www.linkedin.com/in/praneeth-devarasetty/", github: "https://github.com/praneeth622" },
     { name: "G Chaithanya Reddy", role: "CS22B1052", bio: "Networking expert, dedicated to expanding GDSC's partnerships and collaborations.", image: "/assets/cs22b1052.jpg", linkedin: "https://www.linkedin.com/in/chaitanya-reddy-gavinolla-22166b258/", github: "https://github.com/chaitanya-reddy-13" },
   ]
 
   const coordinators = [
+    { name: " A Varshini ", role: "CS23B1015", bio: "Frontend specialist with a knack for creating responsive and accessible websites.", image: '/assets/varshini.jpg', linkedin: "https://www.linkedin.com/in/varshini-avula", github: "https://github.com/varshini-1396" },
     { name: "R K Larika", role: "CS23B1028", bio: "Passionate learner exploring development and AI/ML.", image: "/assets/cs23b1028.jpg", linkedin: "https://www.linkedin.com/in/larika-rajasekaran-02b43a2a7/", github: "https://github.com/Larika85" },
     { name: " Sudarshan S", role: "CS23B2007", bio: "Intrigued by the fields of data analytics, iOS development, and graphic design, I have diligently sought to acquire a comprehensive understanding of these disciplines and their applications.", image: "/assets/cs23b2007.jpeg", linkedin: "https://www.linkedin.com/in/sudarshan-sudhakar-43a262274", github: "https://github.com/sxdxde" },
     { name: "Y Sainatha Reddy", role: "CS23I1010", bio: "Passionate about web development and cybersecurity, eager to make a difference in the digital world.", image: "/assets/cs23i1010.jpg", linkedin: "https://www.linkedin.com/in/sainatha-reddy/", github: "https://github.com/sainatha-reddy" },
-    { name: " A Varshini ", role: "CS23B1015", bio: "Frontend specialist with a knack for creating responsive and accessible websites.", image: '/assets/varshini.jpg', linkedin: "https://www.linkedin.com/in/varshini-avula", github: "https://github.com/varshini-1396" },
     { name: "Y Harith", role: "CS23I1027", bio: "Interested in exploring all the fields of Computer Science specifically in Machine Learning and Web Development.", image: "/assets/cs23i1027.jpg", linkedin: "https://www.linkedin.com/in/harith-yerragolam-617486288/", github: "https://github.com/Harith-Y" },
     { name: "Deetya A M ", role: "CS23I1032", bio: "Driven by a deep interest in machine learning and web development, I continuously strive to expand my expertise in these fields and their practical applications.", image: "/assets/cs23i1032.jpg", linkedin: "https://www.linkedin.com/in/deetya-mehta-046582282", github: "https://github.com/deerobo1" },
     { name: "Vijay S K", role: "EC23B1012", bio: "Interested in artificial intelligence and machine learning, web development. I am willing to expand my knowledge in these fields.", image: "/assets/EC23B1012.png", linkedin: "https://www.linkedin.com/in/vijay-shanmugham-karthikheyen-313ab32ba/", github: "https://github.com/vijaysk06" },
@@ -289,7 +289,7 @@ export default function Team() {
   const mentors = [
     { name: "Jashwanth Peddisetty", role: "Developer@Randomwalk.Ai", bio: "Developer at Randomwalk.Ai | Ex-Intern at Congruent Solutions | Web3 enthusiast | ETHForAll winner 🏆 | GDSC core member", image: "/assets/jashwanth.jpg", linkedin: "https://www.linkedin.com/in/jashwanth-peddisetty/", github: "https://github.com/jashwanth0712" },
     { name: "Vishnu Ram A V", role: "CS21B1043", bio: "Working on LLM and fine tuning", image: "/assets/cs21b1043.jpg", linkedin: "https://www.linkedin.com/in/vishnuram-av-6306b029a", github: "https://github.com/drrobertwhite" },
-    { name: "K Noineesh Reddy", role: "CS21B2023", bio: "Exploring the intersection of hardware and software in the Internet of Things.", image: "/assets/cs21b2023.jpg", linkedin: "https://linkedin.com/in/profemmagreen", github: "https://github.com/profemmagreen" },
+    { name: "K Noineesh Reddy", role: "CS21B2032", bio: "Exploring the intersection of hardware and software in the Internet of Things.", image: "/assets/cs21b2023.jpg", linkedin: "https://linkedin.com/in/profemmagreen", github: "https://github.com/profemmagreen" },
   ]
   const pics = [
     { name: "Dr. Preeth R", role: "Assistant Professor", bio: "Assistant Professor specializing in IoT, Machine Learning, Computer Vision, and Data Science research.", image: "/assets/Preeth.jpg", linkedin: "https://www.linkedin.com/in/preethr/"},

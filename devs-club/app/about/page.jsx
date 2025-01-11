@@ -186,10 +186,10 @@ export default function GDSCAboutPage() {
                     <li>Hackathons: Build innovative solutions in teams.</li>
                     <li>Projects: Work on real-world projects, collaborate with
                       teams.</li>
+                    <li>Guest Talks: Hear from industry experts and alumni.</li>
                   </ul>
                   <ul className="space-y-3 list-disc pl-6">
-                    <li>Study Jams: Learn Google tech, earn certifications.</li>
-                    <li>Guest Talks: Hear from industry experts and alumni.</li>
+                    
                   </ul>
                 </div>
                 {/* <div className="text-gray-600 pt-4">
