@@ -139,7 +139,7 @@ function OpenSourcePage() {
           {/* Contribution Guide */}
           <Card className="mb-16 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
             <CardHeader className="border-b border-gray-100">
-              <CardTitle className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+              <CardTitle className="text-3xl font-bold text-gray-900">
                 How to Contribute
               </CardTitle>
             </CardHeader>
@@ -272,16 +272,13 @@ function OpenSourcePage() {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-blue-700 via-blue-800 to-blue-900 opacity-90 rounded-2xl" />
             <div className="relative z-10 p-6 sm:p-16 backdrop-blur-sm">
-              <motion.h2
+            <motion.h2
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.8 }}
                 className="text-2xl sm:text-4xl font-bold mb-4 sm:mb-6 text-white tracking-tight"
               >
-                <span className="relative inline-block">
-                  Contribute to Open Source
-                  <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-blue-300/50 rounded-full"></span>
-                </span>
+                Contribute to Open Source
               </motion.h2>
               <motion.p
                 initial={{ y: 20, opacity: 0 }}
