@@ -20,8 +20,8 @@ import { useEffect, useState } from "react";
 
 const achievements = [
   {
-    title: "Google Cloud Study Jams",
-    description: "Multi-session event with practical Google Cloud experience, resulting in certifications.",
+    title: "Git and Github Session",
+    description: "A session to equip members with Git and GitHub skills for effective collaboration on projects.",
     icon: <Award className="w-8 h-8 text-blue-500" />
   },
   {
@@ -30,8 +30,8 @@ const achievements = [
     icon: <Brain className="w-8 h-8 text-green-500" />
   },
   {
-    title: "Winter Innovation Challenge",
-    description: "Students proposed tech solutions to global issues, aligned with WHO goals.",
+    title: "Python and Introduction to AI/ML",
+    description: "Mastering Python with hands-on AI and Machine Learning projects for real-world applications..",
     icon: <Star className="w-8 h-8 text-yellow-500" />
   },
   {
@@ -40,8 +40,8 @@ const achievements = [
     icon: <Users className="w-8 h-8 text-purple-500" />
   },
   {
-    title: "Data Analytics Series",
-    description: "Two-part session on data analytics, including coding and theory.",
+    title: "Crafting Scalable Backends with Convex",
+    description: "Built a fantasy game with Convex, leveraging its scalable backend.",
     icon: <TrendingUp className="w-8 h-8 text-red-500" />
   },
   {

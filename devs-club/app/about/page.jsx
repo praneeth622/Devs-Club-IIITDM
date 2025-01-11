@@ -114,31 +114,8 @@ export default function GDSCAboutPage() {
       <main className="container mx-auto py-16 space-y-24">
         {/* Mission & Vision Section */}
         <section className="grid md:grid-cols-2 gap-12 px-8">
-          <motion.div
+        <motion.div
             variants={slideIn("left")}
-            initial="hidden"
-            animate="visible"
-          >
-            <Card className="shadow-lg rounded-lg pt-10 ">
-              <CardContent className="py-10 px-8 space-y-6">
-                <motion.div
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Users className="w-14 h-14 text-primary" />
-                </motion.div>
-                <h3 className="text-3xl font-bold">Our Mission</h3>
-                <p className="text-gray-600">
-                  To inspire and enable students to become world-class
-                  developers by providing access to learning resources,
-                  mentorship, and real-world projects.
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            variants={slideIn("right")}
             initial="hidden"
             animate="visible"
           >
@@ -148,23 +125,39 @@ export default function GDSCAboutPage() {
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Target className="w-14 h-14 text-primary" />
+                  <Target className="w-12 h-12 text-primary" />
                 </motion.div>
-                <h3 className="text-3xl font-bold">Our Vision</h3>
-                <p className="text-gray-600">
-                  To inspire and enable students to become world-class
-                  developers by providing access to learning resources,
-                  mentorship, and real-world projects.
-                </p>
+                <h3 className="text-3xl font-bold">Our Goals</h3>
+                <h4 className="text-xl font-semibold text-gray-700">
+                  What We Planned
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-600">
+                  <ul className="space-y-3 list-disc pl-6">
+                    <li>
+                      Develop technical skills through workshops and hands-on sessions.
+                    </li>
+                    <li>
+                      Encourage collaboration and teamwork in projects.
+                    </li>
+                    <li>
+                      Connect students with industry professionals and alumni.
+                    </li>
+                    <li>
+                      Provide a platform for innovation and problem-solving.
+                    </li>
+                  </ul>
+                  <ul className="space-y-3 list-disc pl-6">
+                    
+                  </ul>
+                </div>
               </CardContent>
             </Card>
           </motion.div>
 
           <motion.div
-            variants={slideIn("up")}
+            variants={slideIn("right")}
             initial="hidden"
             animate="visible"
-            className="md:col-span-2"
           >
             <Card className="shadow-lg rounded-lg pt-10">
               <CardContent className="py-10 px-8 space-y-6">
