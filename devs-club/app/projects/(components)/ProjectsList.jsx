@@ -16,6 +16,7 @@ const ProjectsList = () => {
         const response = await fetch('/api/projects');
         const result = await response.json();
         if (result.success) {
+          console.log("Projects are : ", result.data)
           setProjects(result.data);
         } else {
           setError('Failed to fetch projects');

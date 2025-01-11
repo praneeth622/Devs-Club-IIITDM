@@ -115,7 +115,9 @@ import LoadingSpinner from '../components/LoadingSpinner'
         setLoading(true);
         try {
           const response = await axios.get('/api/projects'); // Fetch projects from API
-          setProjects(response.data); // Assuming response.data contains the projects array
+          console.log("response ",response);
+          setProjects(response.data); 
+          console.log(response)
         } catch (error) {
           console.error("Error fetching projects:", error);
         } finally {

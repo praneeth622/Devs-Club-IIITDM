@@ -24,7 +24,13 @@ const ProjectDetails = ({ project, onClose }) => {
               <p className="text-blue-600">Team Lead</p>
             </div>
           </div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">{project.name}</h2>
+          <div className='flex justify-between'>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">{project.name}</h2>
+            <div className="ml-2 flex space-x-2 items-center">
+                  <SocialIcon href={project.teamLead.linkedin} icon={<Linkedin size={16} />} />
+                  <SocialIcon href={project.teamLead.github} icon={<Github size={16} />} />
+                </div>
+          </div>
           <p className="text-gray-600 mb-4">{project.fullDescription}</p>
           <h4 className="text-lg font-semibold text-gray-800 mb-2">Team Members:</h4>
           <ul className="space-y-2">
