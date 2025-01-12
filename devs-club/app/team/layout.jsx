@@ -9,7 +9,7 @@ export default function layout() {
   return (
     <div>
         <Navbar/>
-        <HeroSection />
+        <HeroSection/>
         <Team/>
         <Footer />
     </div>

@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import axios from 'axios'
 import { CalendarDays, MapPin, Clock, ExternalLink } from 'lucide-react'
 import LoadingSpinner from '../components/LoadingSpinner'
+import HeroSection from './(components)/HeroSection'
 
 const separateEvents = (events) => {
   const currentDate = new Date()
@@ -162,6 +163,7 @@ const EventsPage = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
       <Navbar />
+      <HeroSection />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
