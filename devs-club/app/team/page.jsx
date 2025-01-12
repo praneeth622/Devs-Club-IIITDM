@@ -296,11 +296,18 @@ export default function Team() {
     ];
 
     const developers = [
+        { name: "T Lakshmi Srinivas", role: "Lead Developer", bio: "Leads the development team with expertise in Nextjs and cloud technologies.", image: "/assets/Head_core.png", linkedin: "https://www.linkedin.com/in/srinivastls/", github: "https://github.com/srinivastls   " },      
         { name: "Praneeth Devarasetty", role: "Lead Developer", bio: "Leads the development team with expertise in Nextjs and cloud technologies.", image: "/assets/cs22b1014.jpg", linkedin: "https://www.linkedin.com/in/praneeth-devarasetty/", github: "https://github.com/praneeth622" },
         { name: "Darshan Karthikeya", role: "Frontend Developer", bio: "Darshan specializes in creating responsive and accessible web interfaces using modern frontend technologies.", image: "/assets/cs22b1022.jpg", linkedin: "https://www.linkedin.com/in/darshan-karthikeya/", github: "https://github.com/karthikeya1220" },
         { name: "Surya Srirama Murthy", role: "UI/UX Designer", bio: "Sriram is responsible for creating the user interface and experience, focusing on user-centered design principles", image: '/assets/sriram.jpg', linkedin: "https://www.linkedin.com/in/vishnu-surla-70384524a/", github: "https://github.com/sriram0620" },
+<<<<<<< HEAD
         { name: "Y Sainatha Reddy", role: "Backend Developer", bio: "Sainatha is a Back-end Developer focused on building reliable system, managing data, and ensuring smooth connections between servers and users.", image: "/assets/cs23i1010.jpg", linkedin: "https://www.linkedin.com/in/sainatha-reddy/", github: "https://github.com/sainatha-reddy" },
         { name: "G Chaithanya Reddy", role: "Frontend Developer", bio: "Chaithanya is a Front-end Developer focused on building responsive, intuitive user interfaces with clean code and modern tech.", image: "/assets/cs22b1052.jpg", linkedin: "https://www.linkedin.com/in/chaitanya-reddy-gavinolla-22166b258/", github: "https://github.com/chaitanya-reddy-13" },
+=======
+        { name: "Darshan Karthikeya", role: "UI/UX Designer", bio: "Darshan specializes in creating responsive and accessible web interfaces using modern frontend technologies.", image: "/assets/cs22b1022.jpg", linkedin: "https://www.linkedin.com/in/darshan-karthikeya/", github: "https://github.com/karthikeya1220" },
+        { name: "G Chaithanya Reddy", role: "Frontend Developer", bio: "Chaithanya is a Front-end Developer focused on building responsive, intuitive user interfaces with clean code and modern tech.", image: "/assets/chaitanaya.jpg", linkedin: "https://www.linkedin.com/in/chaitanya-reddy-gavinolla-22166b258/", github: "https://github.com/chaitanya-reddy-13" },
+        { name: "Y Sainatha Reddy", role: "Backend Developer", bio: "Sainatha is a Back-end Developer focused on building reliable system, managing data, and ensuring smooth connections between servers and users.", image: "/assets/sainatha.jpg", linkedin: "https://www.linkedin.com/in/sainatha-reddy/", github: "https://github.com/sainatha-reddy" },
+>>>>>>> b212a5e436e859a3e9748adf2202404a79e290e5
 
       ]
 

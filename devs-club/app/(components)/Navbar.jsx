@@ -48,7 +48,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white border-b border-gray-200 shadow-md sticky z-50 top-0">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px:10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-3">
             <div className="relative w-8 h-8">
@@ -81,6 +81,19 @@ const Navbar = () => {
                 </Link>
               </motion.div>
             ))}
+            {isSignedIn && (
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                <Link 
+                  href="/dashboard"
+                  className="px-3 py-2 rounded-full text-base font-medium text-gray-900 transition-all duration-300 ease-in-out hover:bg-blue-200 hover:text-blue-600"
+                >
+                  Dashboard
+                </Link>
+              </motion.div>
+            )}
             {isSignedIn ? (
               <UserButton 
                 afterSignOutUrl="/"
@@ -113,22 +126,6 @@ const Navbar = () => {
                     >
                       Login
                     </motion.span>
-                    <motion.svg 
-                      xmlns="http://www.w3.org/2000/svg" 
-                      width="16" 
-                      height="16" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      strokeWidth="2" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round"
-                      className="transform transition-transform group-hover:translate-x-1"
-                    >
-                      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-                      <polyline points="10 17 15 12 10 7"/>
-                      <line x1="15" y1="12" x2="3" y2="12"/>
-                    </motion.svg>
                   </Button>
                 </motion.div>
               </Link>
@@ -171,6 +168,7 @@ const Navbar = () => {
                   className="absolute right-0 top-full mt-2 w-56 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden"
                   style={{ maxHeight: "calc(100vh - 80px)", overflowY: "auto" }}
                 >
+<<<<<<< HEAD
                   <div className="py-2">
                     {navItems.map((item) => (
                       <Link 
@@ -196,6 +194,42 @@ const Navbar = () => {
                       </Link>
                     )}
                   </div>
+=======
+                  {navItems.map((item) => (
+                    <Link 
+                      key={item.name} 
+                      href={`/${item.name.toLowerCase()}`}
+                      onClick={handleMenuToggle}
+                    >
+                      <div className="flex items-center p-2 hover:bg-blue-100 transition duration-200 rounded-2xl">
+                        <span className="mr-2 text-xl">{item.icon}</span>
+                        {item.name}
+                      </div>
+                    </Link>
+                  ))}
+                  {isSignedIn && (
+                    <Link 
+                      href="/dashboard"
+                      onClick={handleMenuToggle}
+                    >
+                      <div className="flex items-center p-2 hover:bg-blue-100 transition duration-200 rounded-2xl">
+                        <span className="mr-2 text-xl">📋</span>
+                        Dashboard
+                      </div>
+                    </Link>
+                  )}
+                  {!isSignedIn && (
+                    <Link 
+                      href="/dashboard" 
+                      onClick={handleMenuToggle}
+                    >
+                      <div className="flex items-center p-2 hover:bg-blue-100 transition duration-200 rounded-2xl">
+                        <span className="mr-2 text-xl">🔑</span>
+                        Login
+                      </div>
+                    </Link>
+                  )}
+>>>>>>> b212a5e436e859a3e9748adf2202404a79e290e5
                 </motion.div>
               )}
             </AnimatePresence>
