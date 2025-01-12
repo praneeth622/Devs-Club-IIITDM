@@ -296,7 +296,7 @@ export default function Team() {
     ];
 
     const developers = [
-        { name: "T Lakshmi Srinivas", role: "Lead Developer", bio: "Leads the development team with expertise in Nextjs and cloud technologies.", image: "/assets/Head_core.png", linkedin: "https://www.linkedin.com/in/srinivastls/", github: "https://github.com/srinivastls   " },      
+        { name: "T Lakshmi Srinivas", role: "Lead Developer", bio: "Leads the development team with expertise in Nextjs and cloud technologies.", image: "/assets/srinivas.png", linkedin: "https://www.linkedin.com/in/srinivastls/", github: "https://github.com/srinivastls   " },      
         { name: "Praneeth Devarasetty", role: "Lead Developer", bio: "Leads the development team with expertise in Nextjs and cloud technologies.", image: "/assets/cs22b1014.jpg", linkedin: "https://www.linkedin.com/in/praneeth-devarasetty/", github: "https://github.com/praneeth622" },
         { name: "Surya Srirama Murthy", role: "UI/UX Designer", bio: "Sriram is responsible for creating the user interface and experience, focusing on user-centered design principles", image: '/assets/sriram.jpg', linkedin: "https://www.linkedin.com/in/vishnu-surla-70384524a/", github: "https://github.com/sriram0620" },
         { name: "Darshan Karthikeya", role: "UI/UX Designer", bio: "Darshan specializes in creating responsive and accessible web interfaces using modern frontend technologies.", image: "/assets/cs22b1022.jpg", linkedin: "https://www.linkedin.com/in/darshan-karthikeya/", github: "https://github.com/karthikeya1220" },
