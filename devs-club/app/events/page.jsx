@@ -8,6 +8,7 @@ import axios from 'axios'
 import { CalendarDays, MapPin, Clock, ExternalLink } from 'lucide-react'
 import LoadingSpinner from '../components/LoadingSpinner'
 import HeroSection from './(components)/HeroSection'
+import Image from 'next/image'
 
 const separateEvents = (events) => {
   const currentDate = new Date()
@@ -35,7 +36,7 @@ const EventCard = ({ event, isPastEvent, onViewDetails }) => (
     {isPastEvent && (
       <div className="relative h-48">
         {event.Photos && event.Photos[0] && event.Photos[0][0] ? (
-          <img src={event.Photos[0][0]} alt={event.Event_name} className="w-full h-full object-cover" />
+          <Image src={event.Photos[0][0]} alt={event.Event_name} className="w-full h-full object-cover" />
         ) : (
           <div className="w-full h-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
             <span className="text-white text-lg font-semibold">No Image Available</span>

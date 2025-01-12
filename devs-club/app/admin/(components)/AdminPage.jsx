@@ -397,7 +397,7 @@ function ProjectManager() {
           toast.success("Projects fetched successfully!");
         } else {
           setError('Failed to fetch projects');
-          toast.error(`Error adding project: ${error.response?.data?.message }, Try Again later`);
+          toast.error(`Error adding project: ${error?.response?.data?.message }, Try Again later`);
         }
         setLoading(false);
       } catch (err) {
