@@ -168,7 +168,6 @@ const Navbar = () => {
                   className="absolute right-0 top-full mt-2 w-56 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden"
                   style={{ maxHeight: "calc(100vh - 80px)", overflowY: "auto" }}
                 >
-<<<<<<< HEAD
                   <div className="py-2">
                     {navItems.map((item) => (
                       <Link 
@@ -194,42 +193,6 @@ const Navbar = () => {
                       </Link>
                     )}
                   </div>
-=======
-                  {navItems.map((item) => (
-                    <Link 
-                      key={item.name} 
-                      href={`/${item.name.toLowerCase()}`}
-                      onClick={handleMenuToggle}
-                    >
-                      <div className="flex items-center p-2 hover:bg-blue-100 transition duration-200 rounded-2xl">
-                        <span className="mr-2 text-xl">{item.icon}</span>
-                        {item.name}
-                      </div>
-                    </Link>
-                  ))}
-                  {isSignedIn && (
-                    <Link 
-                      href="/dashboard"
-                      onClick={handleMenuToggle}
-                    >
-                      <div className="flex items-center p-2 hover:bg-blue-100 transition duration-200 rounded-2xl">
-                        <span className="mr-2 text-xl">📋</span>
-                        Dashboard
-                      </div>
-                    </Link>
-                  )}
-                  {!isSignedIn && (
-                    <Link 
-                      href="/dashboard" 
-                      onClick={handleMenuToggle}
-                    >
-                      <div className="flex items-center p-2 hover:bg-blue-100 transition duration-200 rounded-2xl">
-                        <span className="mr-2 text-xl">🔑</span>
-                        Login
-                      </div>
-                    </Link>
-                  )}
->>>>>>> b212a5e436e859a3e9748adf2202404a79e290e5
                 </motion.div>
               )}
             </AnimatePresence>

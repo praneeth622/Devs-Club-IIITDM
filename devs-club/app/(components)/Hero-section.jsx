@@ -102,7 +102,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="flex flex-col md:flex-row items-center justify-center gap-6"
+            className="flex flex-col md:flex-row items-center justify-center gap-6 px-4"
           >
             <Link 
               href="/achievements" 
