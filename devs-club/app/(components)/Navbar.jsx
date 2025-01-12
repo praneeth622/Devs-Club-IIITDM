@@ -14,7 +14,8 @@ const navItems = [
   { name: "Projects", icon: "💻" },
   { name: "Open-Source", icon: "🌟" },
   { name: "Contact", icon: "📧" },
-  { name: "Events", icon: "📅" }
+  { name: "Events", icon: "📅" },
+  { name: "Dashboard", icon: "📊" }
 ];
 
 const Navbar = () => {
@@ -32,6 +33,18 @@ const Navbar = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isMenuOpen && !event.target.closest('.mobile-menu-container')) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isMenuOpen]);
 
   return (
     <nav className="bg-white border-b border-gray-200 shadow-md sticky z-50 top-0">
@@ -79,7 +92,7 @@ const Navbar = () => {
                 }}
               />
             ) : (
-              <Link href="/dashboard">
+              <Link href="/sign-in">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -123,14 +136,30 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Dropdown Menu */}
-          <div className="md:hidden">
-            <button 
-              className="dropdown-toggle group rounded-xl border border-gray-300 p-2 flex items-center"
-              onClick={handleMenuToggle}
-              aria-label="Menu"
-            >
-              {isMenuOpen ? <X className="h-6 w-6 text-blue-600" /> : <Menu className="h-6 w-6 text-blue-600" />}
-            </button>
+          <div className="md:hidden mobile-menu-container relative">
+            <div className="flex items-center gap-2">
+              {isSignedIn && (
+                <UserButton 
+                  afterSignOutUrl="/"
+                  appearance={{
+                    elements: {
+                      avatarBox: "w-8 h-8",
+                      userButtonPopoverCard: "right-0"
+                    }
+                  }}
+                />
+              )}
+              <button 
+                className="dropdown-toggle group rounded-xl border border-gray-300 p-2 flex items-center"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleMenuToggle();
+                }}
+                aria-label="Menu"
+              >
+                {isMenuOpen ? <X className="h-6 w-6 text-blue-600" /> : <Menu className="h-6 w-6 text-blue-600" />}
+              </button>
+            </div>
             
             <AnimatePresence>
               {isMenuOpen && (
@@ -138,42 +167,35 @@ const Navbar = () => {
                   initial={{ opacity: 0, scale: 0.95, y: -10 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-2xl shadow-lg z-50"
+                  transition={{ duration: 0.2 }}
+                  className="absolute right-0 top-full mt-2 w-56 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden"
+                  style={{ maxHeight: "calc(100vh - 80px)", overflowY: "auto" }}
                 >
-                  {navItems.map((item) => (
-                    <Link 
-                      key={item.name} 
-                      href={`/${item.name.toLowerCase()}`}
-                      onClick={handleMenuToggle}
-                    >
-                      <div className="flex items-center p-2 hover:bg-blue-100 transition duration-200 rounded-2xl">
-                        <span className="mr-2 text-xl">{item.icon}</span>
-                        {item.name}
-                      </div>
-                    </Link>
-                  ))}
-                  {isSignedIn ? (
-                    <UserButton 
-                      afterSignOutUrl="/"
-                      appearance={{
-                        elements: {
-                          avatarBox: "w-8 h-8",
-                          userButtonPopoverCard: "right-0"
-                        }
-                      }}
-                    />
-                  ) : (
-                    <Link 
-                      href="/sign-in" 
-                      onClick={handleMenuToggle}
-                    >
-                      <div className="flex items-center p-2 hover:bg-blue-100 transition duration-200 rounded-2xl">
-                        <span className="mr-2 text-xl">🔑</span>
-                        Login
-                      </div>
-                    </Link>
-                  )}
+                  <div className="py-2">
+                    {navItems.map((item) => (
+                      <Link 
+                        key={item.name} 
+                        href={`/${item.name.toLowerCase()}`}
+                        onClick={handleMenuToggle}
+                      >
+                        <div className="flex items-center px-4 py-3 hover:bg-blue-50 transition-colors duration-200">
+                          <span className="mr-3 text-xl">{item.icon}</span>
+                          <span className="text-gray-700 font-medium">{item.name}</span>
+                        </div>
+                      </Link>
+                    ))}
+                    {!isSignedIn && (
+                      <Link 
+                        href="/sign-in" 
+                        onClick={handleMenuToggle}
+                      >
+                        <div className="flex items-center px-4 py-3 hover:bg-blue-50 transition-colors duration-200 border-t border-gray-100">
+                          <span className="mr-3 text-xl">🔑</span>
+                          <span className="text-gray-700 font-medium">Login</span>
+                        </div>
+                      </Link>
+                    )}
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
