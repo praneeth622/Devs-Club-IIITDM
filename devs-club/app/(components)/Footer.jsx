@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Facebook, Twitter, Linkedin, Github, Instagram } from 'lucide-react'
+import { OrganizationSwitcher } from '@clerk/nextjs'
 
 export const Footer = () => {
   return (
@@ -54,6 +55,7 @@ export const Footer = () => {
           </div>
 
           <div>&copy; {new Date().getFullYear()} Developers Club. All rights reserved.</div>
+          <div className='pt-5'><OrganizationSwitcher /></div>
 
           {/* <div className="mt-4 ">
             <span>Made with ❤️ by </span>

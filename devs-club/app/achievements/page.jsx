@@ -98,7 +98,7 @@ const itemVariants = {
 // Internal component, not exported
 function AchievementsSection() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 text-gray-800 py-16 px-4 md:px-0">
+    <div className="min-h-screen 'bg-sky-50 from-purple-100 to-indigo-100 text-gray-800 py-16 px-4 md:px-0">
       <motion.h1
         className="text-5xl font-bold text-center mb-16 text-blue-600"
         initial={{ opacity: 0, y: -50 }}

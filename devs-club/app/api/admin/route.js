@@ -10,10 +10,6 @@ export async function GET(req, res) {
   try {
     await dbConnect();
     const { userId } = getAuth(req);
-    // console.log("userId:", userId);
-    const org = await auth()
-    // console.log("org:", org)
-    
 
     if (!userId) {
       return new Response(
@@ -21,20 +17,20 @@ export async function GET(req, res) {
         { status: 401, headers: { 'Content-Type': 'application/json' } }
       );
     }
-    // Fetch user info from Clerk
-    const user = await clerkClient.users.getUser(userId);
-    console.log("user", user)
-
-    // Check if the user has 'admin' role
+    // console.log("userId:", userId);
+    const orgId = 'org_2qq40cm0EtvF24HU5bM3f2GVz2f';
     var isAdmin = 0
-    if(org?.orgRole== "org:admin"){
-      isAdmin = 1;
+    
+    const response = await clerkClient.users.getOrganizationMembershipList({ userId })
+    console.log("Get org:", response.data[0].organization.id) //org_2qq40cm0EtvF24HU5bM3f2GVz2f
+    const userOrg = response.data[0].organization.id
+    console.log("Get org:", response.data[0].organization)
+    if (userOrg == orgId){
+      isAdmin = true
     }
     else{
-      isAdmin = 0;
+      isAdmin = false
     }
-    console.log("isAdmin:", isAdmin)
-    console.log("role:",org)
     if (!isAdmin) {
       return new Response(
         JSON.stringify({ success: false, error: 'Forbidden: You do not have admin access.' }),

@@ -15,7 +15,6 @@ const navItems = [
   { name: "Open-Source", icon: "🌟" },
   { name: "Contact", icon: "📧" },
   { name: "Events", icon: "📅" },
-  { name: "Dashboard", icon: "📊" }
 ];
 
 const Navbar = () => {
@@ -105,7 +104,7 @@ const Navbar = () => {
                 }}
               />
             ) : (
-              <Link href="/sign-in">
+              <Link href="/dashboard">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -183,7 +182,7 @@ const Navbar = () => {
                     ))}
                     {!isSignedIn && (
                       <Link 
-                        href="/sign-in" 
+                        href="/dashboard" 
                         onClick={handleMenuToggle}
                       >
                         <div className="flex items-center px-4 py-3 hover:bg-blue-50 transition-colors duration-200 border-t border-gray-100">
