@@ -131,7 +131,7 @@ export default function GDSCAboutPage() {
                 <h4 className="text-xl font-semibold text-gray-700">
                   What We Planned
                 </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-600">
+                <div className="grid grid-cols-1  gap-6 text-gray-600">
                   <ul className="space-y-3 list-disc pl-6">
                     <li>
                       Develop technical skills through workshops and hands-on sessions.
@@ -171,7 +171,7 @@ export default function GDSCAboutPage() {
                 <h4 className="text-xl font-semibold text-gray-700">
                   What We Do
                 </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-600">
+                <div className="grid grid-cols-1 gap-6 text-gray-600">
                   <ul className="space-y-3 list-disc pl-6">
                     <li>
                       Workshops: Learn Google Cloud, ML, web dev, and more.
