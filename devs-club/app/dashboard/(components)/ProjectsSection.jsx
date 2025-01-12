@@ -9,6 +9,7 @@ import { Calendar, Github, ChevronLeft, ChevronRight, ExternalLink } from "lucid
 import { Card, CardContent } from "../../../components/ui/card";
 import useEmblaCarousel from "embla-carousel-react";
 import { toast } from "react-hot-toast";
+import  Loader  from "../../(components)/Loader.jsx";
 
 const statusColors = {
   active: "bg-green-500",
@@ -16,21 +17,21 @@ const statusColors = {
   "on-hold": "bg-yellow-500",
 };
 
-export const Loader = () => (
-  <div className="flex justify-center items-center h-64">
-    <motion.div
-      className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full"
-      animate={{ rotate: 360 }}
-      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-    >
-      <motion.div
-        className="w-12 h-12 border-t-4 border-pink-500 border-solid rounded-full"
-        animate={{ rotate: -360 }}
-        transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-      />
-    </motion.div>
-  </div>
-);
+// export const Loader = () => (
+//   <div className="flex justify-center items-center h-64">
+//     <motion.div
+//       className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full"
+//       animate={{ rotate: 360 }}
+//       transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+//     >
+//       <motion.div
+//         className="w-12 h-12 border-t-4 border-pink-500 border-solid rounded-full"
+//         animate={{ rotate: -360 }}
+//         transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+//       />
+//     </motion.div>
+//   </div>
+// );
 
 
 

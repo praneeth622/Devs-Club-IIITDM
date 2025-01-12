@@ -19,6 +19,7 @@ import {
 import { Button } from "../../../components/ui/button";
 import { Badge } from "../../../components/ui/badge";
 import { useCallback, useEffect, useState } from "react";
+import  Loader  from "../../(components)/Loader.jsx";
 
 const formatDate = (dateString) => {
   const date = new Date(dateString)
@@ -150,24 +151,36 @@ const EventCard = ({ event, index }) => {
 }
 
 const EventsSection = ({ events }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, align: 'start' })
-  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
-  const [nextBtnEnabled, setNextBtnEnabled] = useState(false)
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, align: 'start' });
+  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
+  const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
+  const [loading, setLoading] = useState(true); // Loading state
 
-  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi])
-  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi])
+  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
 
   const onSelect = useCallback(() => {
-    if (!emblaApi) return
-    setPrevBtnEnabled(emblaApi.canScrollPrev())
-    setNextBtnEnabled(emblaApi.canScrollNext())
-  }, [emblaApi])
+    if (!emblaApi) return;
+    setPrevBtnEnabled(emblaApi.canScrollPrev());
+    setNextBtnEnabled(emblaApi.canScrollNext());
+  }, [emblaApi]);
 
   useEffect(() => {
-    if (!emblaApi) return
-    onSelect()
-    emblaApi.on('select', onSelect)
-  }, [emblaApi, onSelect])
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
+  }, [emblaApi, onSelect]);
+
+  // Simulate data loading
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false); // Simulate loading completion
+    }, 2000); // 2 seconds delay
+  }, []);
+
+  if (loading) {
+    return <Loader />; // Show the loader while loading
+  }
 
   return (
     <motion.section

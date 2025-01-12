@@ -16,7 +16,6 @@ const navItems = [
   { name: "Team", icon: "👩‍💻" },
   { name: "Open-Source", icon: "🌟" },
   { name: "Contact", icon: "📧" },
-  { name: "Events", icon: "📅" },
 ];
 
 const Navbar = () => {

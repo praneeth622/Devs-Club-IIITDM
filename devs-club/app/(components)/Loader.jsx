@@ -2,12 +2,11 @@
 import React from 'react';
 import { Loader as LoaderIcon } from 'lucide-react';
 
-const Loader = () => {
+export default function Loader (){
   return (
-    <div className="flex justify-center items-center h-screen bg-white">
-      <LoaderIcon className="w-16 h-16 text-blue-500 animate-spin" />
+    <div className="flex justify-center items-center ">
+      <LoaderIcon className="w-8 h-8 text-blue-500 animate-spin" />
     </div>
   );
 };
 
-export default Loader; // Ensure this line is present
