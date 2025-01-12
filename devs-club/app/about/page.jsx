@@ -205,22 +205,24 @@ export default function GDSCAboutPage() {
                 Events & Achievements
               </h2>
               <div className="max-w-3xl mx-auto">
-                <TimelineEvent
-                  title="FullStack Fusion: Next.js & Convex"
-                  date="September 22, 2024"
-                  description="A series of hands-on workshops to learn Android app development using Kotlin."
-                />
-                <TimelineEvent
-                  title="Hackathon 2023"
-                  date="November 5-7, 2023"
-                  description="Our annual hackathon where students built innovative solutions for local community problems."
-                />
-                <TimelineEvent
-                  title="Cloud Study Jam"
-                  date="September 20, 2023"
-                  description="An intensive workshop on Google Cloud Platform, covering core services and best practices."
-                />
-              </div>
+  <TimelineEvent
+    title="FullStack Fusion: Next.js & Convex"
+    date="September 22, 2024"
+    description="Learn backend development with Convex and Next.js in this hands-on workshop."
+  />
+  <TimelineEvent
+    title="Git & GitHub Session"
+    date="October 9, 2024"
+    description="Master version control and collaboration in this interactive Git and GitHub session."
+  />
+  <TimelineEvent
+    title="Python and Introduction to AI/ML"
+    date="October 22, 2024"
+    description="Explore Python programming and foundational AI/ML concepts in this comprehensive session."
+  />
+</div>
+
+
             </motion.section>
           </AnimatedSection>
         </div>
