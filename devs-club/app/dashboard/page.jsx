@@ -7,51 +7,35 @@ import ProjectsSection from './(components)/ProjectsSection';
 import MembersSection from './(components)/MembersSection';
 import ResourcesSection from './(components)/ResourcesSection';
 import PastEventsSection from './(components)/PastEventsSection';
-import {Footer} from '../(components)/Footer';
-import { useState } from 'react';
-import { formatDate } from '../../utils/dateFormatter'
-
-
-//Making route protected
-// import withProtectedRoute from '../ProtectedRoute'; 
-// remove this if you want to make route un protected
-
+import { Footer } from '../(components)/Footer';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function Page() {
-  const [activeSection, setActiveSection] = useState('Overview');
+  const [events, setEvents] = useState([]);
+  const [pastEvents, setPastEvents] = useState([]);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
 
-  const stats = { events: 15, members: 250, projects: 8 };
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await axios.get('/api/events');
+        if (response.data.success) {
+          const currentDate = new Date();
+          const upcomingEvents = response.data.data.filter(event => new Date(event.date) >= currentDate);
+          const pastEvents = response.data.data.filter(event => new Date(event.date) < currentDate);
+          setEvents(upcomingEvents);
+          setPastEvents(pastEvents);
+        }
+      } catch (error) {
+        console.error('Error fetching events:', error);
+      }
+    };
 
-  const events = [
-    {
-      name: 'Web Development Workshop',
-      date: '2024-10-15',
-      time: '14:00',
-      venue: 'Computer Lab 1',
-      capacity: 50,
-      description: 'Join us for an intensive workshop on modern web development. Learn about React, Next.js, and building responsive web applications. Bring your laptop and come ready to code!',
-      registrationLink: 'https://forms.google.com/webdev-workshop'
-    },
-    {
-      name: 'Machine Learning Seminar',
-      date: '2024-10-20',
-      time: '16:00',
-      venue: 'Seminar Hall',
-      capacity: 100,
-      description: 'Explore the fundamentals of Machine Learning with industry experts. Topics include neural networks, deep learning, and practical applications in today\'s tech landscape.',
-      registrationLink: 'https://forms.google.com/ml-seminar'
-    },
-    {
-      name: 'Hackathon 2024',
-      date: '2024-11-01',
-      time: '09:00',
-      venue: 'Main Auditorium',
-      capacity: 200,
-      description: '24-hour coding competition focused on building innovative solutions for real-world problems. Form teams of up to 4 members and compete for exciting prizes!',
-      registrationLink: 'https://forms.google.com/hackathon-2024'
-    },
-  ];
+    fetchEvents();
+  }, []);
+
+  const stats = { events: events.length, members: 250, projects: 8 };
 
   const projects = [
     {
@@ -102,30 +86,6 @@ function Page() {
     { name: 'Diana Ross', role: 'Event Coordinator' },
   ];
 
-  const pastEvents = [
-    {
-      name: 'Introduction to Open Source',
-      date: '2023-09-15',
-      time: '15:00',
-      attendees: 75,
-      summary: 'A successful workshop introducing students to open source contributions and Git basics.'
-    },
-    {
-      name: 'AI/ML Bootcamp',
-      date: '2023-10-20',
-      time: '14:00',
-      attendees: 120,
-      summary: 'Three-day intensive bootcamp covering machine learning fundamentals and practical applications.'
-    },
-    {
-      name: 'Hackathon 2023',
-      date: '2023-11-05',
-      time: '09:00',
-      attendees: 200,
-      summary: '24-hour coding competition with projects focusing on sustainable technology solutions.'
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
       <Navbar />
@@ -144,5 +104,3 @@ function Page() {
 }
 
 export default Page;
-
-// export default withProtectedRoute(Page); 
