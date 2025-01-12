@@ -15,15 +15,21 @@ function Page() {
   const [events, setEvents] = useState([]);
   const [pastEvents, setPastEvents] = useState([]);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+  const [eventsLength, Seteventslength] = useState(10)
+  const [projectsLength, Setprojectslength] = useState(5)
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         const response = await axios.get('/api/events');
+        // console.log("response ",response);
         if (response.data.success) {
+          Seteventslength(response.data.data.length)
           const currentDate = new Date();
           const upcomingEvents = response.data.data.filter(event => new Date(event.date) >= currentDate);
           const pastEvents = response.data.data.filter(event => new Date(event.date) < currentDate);
+          // console.log("upcomingEvents", upcomingEvents)
+          // console.log("pastEvents", pastEvents)
           setEvents(upcomingEvents);
           setPastEvents(pastEvents);
         }
@@ -35,56 +41,33 @@ function Page() {
     fetchEvents();
   }, []);
 
-  const stats = { events: events.length, members: 250, projects: 8 };
-
-  const projects = [
-    {
-      title: "Project Alpha",
-      teamLeader: "John Doe",
-      description: "A cutting-edge web application for managing team workflows and improving productivity. This project aims to streamline communication and task management across various departments.",
-      members: ["John Doe", "Jane Smith", "Mike Johnson"],
-      status: "active",
-      startDate: "2023-01-15",
-      githubLink: "https://github.com/example/project-alpha",
-      driveLink: "https://drive.google.com/example-alpha"
-    },
-    {
-      title: "Project Beta",
-      teamLeader: "Sarah Williams",
-      description: "An innovative mobile app for tracking personal fitness goals and connecting with trainers. This app uses AI to provide personalized workout and nutrition plans.",
-      members: ["Sarah Williams", "Mike Johnson", "Jane Smith"],
-      status: "completed",
-      startDate: "2022-09-01",
-      githubLink: "https://github.com/example/project-beta"
-    },
-    {
-      title: "Project Gamma",
-      teamLeader: "Jane Smith",
-      description: "A machine learning platform for analyzing and predicting market trends in real-time. This project leverages big data and advanced algorithms to provide actionable insights for businesses.",
-      members: ["Jane Smith", "John Doe", "Sarah Williams"],
-      status: "on-hold",
-      startDate: "2023-03-10",
-      driveLink: "https://drive.google.com/example-gamma"
-    },
-    {
-      title: "Project Delta",
-      teamLeader: "Mike Johnson",
-      description: "An e-learning platform that adapts to individual learning styles and paces. This project uses advanced analytics to personalize the educational experience for each user.",
-      members: ["Mike Johnson", "John Doe", "Sarah Williams"],
-      status: "active",
-      startDate: "2023-05-01",
-      githubLink: "https://github.com/example/project-delta",
-      driveLink: "https://drive.google.com/example-delta"
-    }
-  ]
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch("/api/projects");
+        const result = await response.json();
+        
+        if (result.success) {
+          // console.log("Projects fetched successfully",result.data)
+          Setprojectslength(result.data.length);
+          // console.log('LENGTH',result.data.length)
+        } else {
+          setError("Failed to fetch projects");
+          toast.error("Failed to fetch projects");
+        }
+      } catch (err) {
+        console.error("Error fetching projects:", err);
+        setError("Error fetching projects");
+        toast.error("Error fetching projects");
+      } 
+    };
   
+    fetchProjects();
+  }, []);
 
-  const members = [
-    { name: 'Alice Johnson', role: 'President' },
-    { name: 'Bob Smith', role: 'Vice President' },
-    { name: 'Charlie Brown', role: 'Tech Lead' },
-    { name: 'Diana Ross', role: 'Event Coordinator' },
-  ];
+  const stats = { events: eventsLength, members: 90, projects: projectsLength };
+
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
@@ -94,7 +77,7 @@ function Page() {
         <StatsSection stats={stats} />
         <EventsSection events={events} />
         <PastEventsSection pastEvents={pastEvents} />
-        <ProjectsSection projects={projects} />
+        <ProjectsSection />
         {/* <MembersSection members={members} /> */}
         <ResourcesSection isResourcesOpen={isResourcesOpen} setIsResourcesOpen={setIsResourcesOpen} />
       </div>

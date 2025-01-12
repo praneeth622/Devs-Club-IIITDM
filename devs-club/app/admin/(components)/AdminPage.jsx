@@ -853,7 +853,7 @@ function EventManager() {
               <Label htmlFor="event-date">Date</Label>
               <Input 
                 id="event-date" 
-                type="date" 
+                type="datetime-local" 
                 value={newEvent.date} 
                 onChange={(e) => setNewEvent({...newEvent, date: e.target.value})}
                 required
