@@ -1,6 +1,7 @@
+"use client"
 import { motion } from 'framer-motion'
 
-const HeroSection = () => {
+export default function HeroSection () {
     return (
         <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
             {/* Adjusted Gradient Orb */}
@@ -24,9 +25,9 @@ const HeroSection = () => {
                         className="relative mb-8"
                     >
                         <h1 className="text-4xl md:text-7xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">
-                            
+                            Team
                             <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-blue-300 to-purple-200 animate-gradient font-extrabold pb-4">
-                            Our Team
+                                Developers Club
                             </span>
                         </h1>
                         <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
@@ -39,8 +40,7 @@ const HeroSection = () => {
                         transition={{ delay: 0.2 }}
                         className="text-lg md:text-xl text-gray-100 mb-12 leading-relaxed max-w-3xl mx-auto drop-shadow-lg"
                     >
-                        We are a community of passionate developers, innovators, and problem solvers.
-                        Learn about our mission, values, and the team that makes it all possible.
+                        A team of passionate programmers and tech experts, united by a shared mission to build smart solutions and groundbreaking applications. We write the code that drives change.
                     </motion.p>
 
                     {/* Status Indicator */}
@@ -52,7 +52,7 @@ const HeroSection = () => {
                     >
                         <div className="flex items-center gap-2 text-gray-100 backdrop-blur-md bg-white/10 px-8 py-4 rounded-full border border-white/20 shadow-lg">
                             <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-lg shadow-emerald-500/20" />
-                            <span className="font-small">Building tomorrow&apos;s tech leaders</span>
+                            <span className="font-medium">Innovating through code, shaping the future.</span>
                         </div>
                     </motion.div>
                 </motion.div>
@@ -70,5 +70,3 @@ const HeroSection = () => {
         </section>
     );
 };
-
-export default HeroSection; 
