@@ -30,14 +30,14 @@ export const Header = () => {
         animate={{ y: 0 }}
         className="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-lg border-b border-purple-500/20"
       >
-        <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between" id="Header">
+        <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="text-lg sm:text-xl font-bold text-white pixel-font"
           >
             Vashisht Hackathon 2.0
           </motion.div>
-          <Navigation  />
+          <Navigation />
         </div>
       </motion.div>
 
@@ -67,19 +67,19 @@ export const Header = () => {
               animate={{ opacity: 1, y: 0 }}
               className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 pixel-font leading-tight"
             >
-              <div className="block sm:inline">Vashisht</div>{" "}
-              <div className="block sm:inline">Hackathon 2.0</div>
+              <span className="block sm:inline">Vashisht</span>{" "}
+              <span className="block sm:inline">Hackathon 2.0</span>
             </motion.h1>
 
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               className="text-base sm:text-lg text-cyan-100 max-w-md sm:max-w-2xl mx-auto leading-relaxed"
             >
-              <div>Level up your coding skills in this</div>
-              <div>retro-futuristic hackathon experience</div>
-            </motion.p>
+              <span className="block">Level up your coding skills in this</span>
+              <span className="block">retro-futuristic hackathon experience</span>
+            </motion.div>
           </div>
 
           <div>
@@ -99,7 +99,11 @@ export const Header = () => {
         {/* Dialog */}
         {isDialogOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-md z-50">
-            <div className="bg-gray-900 border border-purple-500 rounded-lg p-6 max-w-sm mx-auto text-center">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="bg-gray-900 border border-purple-500 rounded-lg p-6 max-w-sm mx-auto text-center"
+            >
               <h2 className="text-xl font-bold text-white pixel-font mb-4">
                 Registrations are opening soon!
               </h2>
@@ -109,7 +113,7 @@ export const Header = () => {
               >
                 Close
               </button>
-            </div>
+            </motion.div>
           </div>
         )}
 
