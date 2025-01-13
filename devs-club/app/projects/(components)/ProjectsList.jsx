@@ -1,43 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import React, { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import ProjectCard from './ProjectCard';
 import ProjectDetails from './ProjectDetails';
-import { motion } from 'framer-motion';
 
-const ProjectsList = () => {
+const ProjectsList = ({ projects }) => {
   const [selectedProject, setSelectedProject] = useState(null);
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const response = await fetch('/api/projects');
-        const result = await response.json();
-        if (result.success) {
-          console.log("Projects are : ", result.data)
-          setProjects(result.data);
-        } else {
-          setError('Failed to fetch projects');
-        }
-        setLoading(false);
-      } catch (err) {
-        setError('Error fetching projects');
-        setLoading(false);
-      }
-    };
-
-    fetchProjects();
-  }, []);
-
-  if (loading) {
-    return <div>Loading projects...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
 
   return (
     <div className="space-y-16">
