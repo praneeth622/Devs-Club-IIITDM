@@ -13,6 +13,7 @@ import FeaturedProjects from './(components)/FeaturedProjects'
   export default function Page() {
     const [loading, setLoading] = useState(true);
     const [projects, setProjects] = useState([]);
+    const [error, setError] = useState(null);
 
 
     useEffect(() => {
@@ -25,10 +26,12 @@ import FeaturedProjects from './(components)/FeaturedProjects'
             setProjects(result.data);
           } else {
             setError('Failed to fetch projects');
+            console.log("Error :",error)
           }
           setLoading(false);
         } catch (err) {
           setError('Error fetching projects');
+          console.log("Error :",err)
           setLoading(false);
         }
       };
