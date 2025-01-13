@@ -328,7 +328,8 @@ function ProjectManager() {
     teamLead: { name: '', linkedin: '', github: '' },
     teamMembers: [{ name: '', linkedin: '', github: '' }], 
     fullDescription: '',
-    status: 'active', 
+    status: 'active',
+    featured: false,
     key:process.env.NEXT_PUBLIC_KEY
   });
 
@@ -499,6 +500,16 @@ function ProjectManager() {
                 <option value="on-hold">On-Hold</option>
               </select>
             </div>
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="featured-project"
+              checked={newProject.featured}
+              onCheckedChange={(checked) => 
+                setNewProject({ ...newProject, featured: checked })
+              }
+            />
+            <Label htmlFor="featured-project">Feature this project</Label>
+          </div>
           <div className="space-y-2">
             <Label>Team Lead</Label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

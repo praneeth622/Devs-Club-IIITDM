@@ -45,6 +45,7 @@ const EventCard = ({ event, isPastEvent, onViewDetails }) => (
             alt={event.Event_name} 
             className="w-full h-full object-cover rounded-t-3xl" // Ensure full image covers the space
           />
+
         ) : (
           <div className="w-full h-full bg-gradient-to-r from-blue-500 to-indigo-600 
                          flex items-center justify-center rounded-t-3xl">

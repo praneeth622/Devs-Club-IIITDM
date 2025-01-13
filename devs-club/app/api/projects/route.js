@@ -40,7 +40,7 @@ export async function GET(req) {
       );
     }
       const data = await req.json();
-      const { name, description, teamLead, fullDescription, teamMembers, status,key } = data;
+      const { name, description, teamLead, fullDescription, teamMembers, status,key, featured } = data;
       
       if(!(key == process.env.NEXT_PUBLIC_KEY)){
         return new Response(
@@ -56,11 +56,12 @@ export async function GET(req) {
       const projectStatus = validStatus.includes(status) ? status : "completed";
       console.log("status: " + status);
 
-      // Create new project with validated status
+      // Create new project with validated status and featured field
       const newProject = new Project({
         name,
         description,
         status ,
+        featured: featured ? 1 : 0,  // Convert boolean to 0/1
         teamLead, 
         fullDescription,
         teamMembers,

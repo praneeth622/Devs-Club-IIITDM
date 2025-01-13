@@ -310,7 +310,7 @@ export default function Team() {
       <h1 className="text-5xl font-bold mb-16 text-center"></h1>
       
       {/* PIC Section */}
-      <TeamSection title="PIC" members={pics} />
+      <TeamSection title="Faculty Advisor" members={pics} />
       <TeamSection title="Head Core" members={[headCore]} />
       <TeamSection title="Core Team" members={cores} />
       <TeamSection title="Coordinators" members={coordinators} />

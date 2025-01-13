@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import logo from "../../public/assets/image.png";
 import { Button } from "../../components/ui/button";
 
-// Updated order of navigation items
 const navItems = [
   { name: "About", icon: "🎯" },
   { name: "Achievements", icon: "🏆" },
@@ -15,7 +14,7 @@ const navItems = [
   { name: "Projects", icon: "💻" },
   { name: "Team", icon: "👩‍💻" },
   { name: "Open-Source", icon: "🌟" },
-  { name: "Contact", icon: "📧" },
+  { name: "Contact", icon: "📧" }
 ];
 
 const Navbar = () => {
@@ -36,7 +35,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white border-b border-gray-200 shadow-md sticky z-50 top-0">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px:10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-3">
             <div className="relative w-8 h-8">
@@ -53,8 +52,8 @@ const Navbar = () => {
             </span>
           </Link>
 
-          {/* Desktop Navigation Items */}
-          <div className="hidden md:flex items-center space-x-2">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-4">
             {navItems.map((item) => (
               <motion.div
                 key={item.name}
@@ -69,8 +68,10 @@ const Navbar = () => {
                 </Link>
               </motion.div>
             ))}
+            
+            {/* Desktop Auth Section */}
             {isSignedIn ? (
-              <>
+              <div className="flex items-center space-x-4">
                 <Link href="/dashboard">
                   <Button 
                     className="px-6 py-2 rounded-full text-base font-medium text-gray-900 transition-all duration-300 ease-in-out hover:bg-blue-200 hover:text-blue-600"
@@ -82,102 +83,97 @@ const Navbar = () => {
                   afterSignOutUrl="/"
                   appearance={{
                     elements: {
-                      avatarBox: "w-8 h-8",
-                      userButtonPopoverCard: "right-0"
+                      avatarBox: "h-9 w-9",
+                      userButtonAvatarBox: "w-9 h-9",
+                      userButtonTrigger: "focus:shadow-none",
+                      userButtonPopoverCard: "right-0 mt-2 shadow-lg"
                     }
                   }}
                 />
-              </>
+              </div>
             ) : (
               <Link href="/dashboard">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button 
-                    className="bg-gradient-to-r from-blue-600 to-blue-800 text-white 
-                              px-6 py-2 rounded-lg font-medium
-                              transition-all duration-300
-                              hover:from-blue-700 hover:to-blue-900
-                              shadow-md hover:shadow-xl
-                              border border-blue-400/20
-                              flex items-center gap-2"
-                  >
-                    <motion.span
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      Login
-                    </motion.span>
-                  </Button>
-                </motion.div>
+                <Button 
+                  className="bg-gradient-to-r from-blue-600 to-blue-800 text-white 
+                            px-6 py-2 rounded-lg font-medium
+                            transition-all duration-300
+                            hover:from-blue-700 hover:to-blue-900
+                            shadow-md hover:shadow-xl
+                            border border-blue-400/20">
+                  Login
+                </Button>
               </Link>
             )}
           </div>
 
-          {/* Mobile Dropdown Menu */}
-          <div className="md:hidden">
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center space-x-4">
+            {isSignedIn && (
+              <UserButton 
+                afterSignOutUrl="/"
+                appearance={{
+                  elements: {
+                    avatarBox: "h-8 w-8",
+                    userButtonAvatarBox: "w-8 h-8",
+                    userButtonTrigger: "focus:shadow-none",
+                    userButtonPopoverCard: "right-0 mt-2 shadow-lg"
+                  }
+                }}
+              />
+            )}
             <button 
-              className="dropdown-toggle group rounded-xl border border-gray-300 p-2 flex items-center"
+              className="rounded-xl border border-gray-300 p-2"
               onClick={handleMenuToggle}
               aria-label="Menu"
             >
-              {isMenuOpen ? <X className="h-6 w-6 text-blue-600" /> : <Menu className="h-6 w-6 text-blue-600" />}
+              {isMenuOpen ? 
+                <X className="h-6 w-6 text-blue-600" /> : 
+                <Menu className="h-6 w-6 text-blue-600" />
+              }
             </button>
-            
-            <AnimatePresence>
-              {isMenuOpen && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95, y: -10 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-2xl shadow-lg z-50"
-                >
-                  {navItems.map((item) => (
-                    <Link 
-                      key={item.name} 
-                      href={`/${item.name.toLowerCase()}`}
-                      onClick={handleMenuToggle}
-                    >
-                      <div className="flex items-center p-2 hover:bg-blue-100 transition duration-200 rounded-2xl">
-                        <span className="mr-2 text-xl">{item.icon}</span>
-                        {item.name}
-                      </div>
-                    </Link>
-                  ))}
-                  {isSignedIn ? (
-                    <>
-                      <Link href="/dashboard" onClick={handleMenuToggle}>
-                        <div className="flex items-center p-2 hover:bg-blue-100 transition duration-200 rounded-2xl">
-                          <span className="mr-2 text-xl">📂</span>
-                          Dashboard
-                        </div>
-                      </Link>
-                      <button
-                        onClick={() => {
-                          handleMenuToggle();
-                          window.location.href = "/"; // Redirect after logout
-                        }}
-                        className="flex items-center w-full text-left p-2 hover:bg-red-100 text-red-600 font-medium transition duration-200 rounded-2xl"
-                      >
-                        <span className="mr-2 text-xl">🚪</span>
-                        Logout
-                      </button>
-                    </>
-                  ) : (
-                    <Link href="/dashboard" onClick={handleMenuToggle}>
-                      <div className="flex items-center p-2 hover:bg-blue-100 transition duration-200 rounded-2xl">
-                        <span className="mr-2 text-xl">🔑</span>
-                        Login
-                      </div>
-                    </Link>
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
+
+          {/* Mobile Dropdown Menu */}
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="absolute right-0 top-16 mt-2 w-48 bg-white border border-gray-200 rounded-2xl shadow-lg z-50"
+              >
+                {navItems.map((item) => (
+                  <Link 
+                    key={item.name} 
+                    href={`/${item.name.toLowerCase()}`}
+                    onClick={handleMenuToggle}
+                  >
+                    <div className="flex items-center p-3 hover:bg-blue-100 transition duration-200 rounded-lg">
+                      <span className="mr-2 text-xl">{item.icon}</span>
+                      {item.name}
+                    </div>
+                  </Link>
+                ))}
+                {!isSignedIn && (
+                  <Link href="/sign-in" onClick={handleMenuToggle}>
+                    <div className="flex items-center p-3 hover:bg-blue-100 transition duration-200 rounded-lg">
+                      <span className="mr-2 text-xl">🔑</span>
+                      Login
+                    </div>
+                  </Link>
+                )}
+                {isSignedIn && (
+                  <Link href="/dashboard" onClick={handleMenuToggle}>
+                    <div className="flex items-center p-3 hover:bg-blue-100 transition duration-200 rounded-lg">
+                      <span className="mr-2 text-xl">📂</span>
+                      Dashboard
+                    </div>
+                  </Link>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </nav>
