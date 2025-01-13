@@ -139,7 +139,7 @@ function OpenSourcePage() {
           {/* Contribution Guide */}
           <Card className="mb-16 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
             <CardHeader className="border-b border-gray-100">
-              <CardTitle className="text-3xl font-bold text-gray-900">
+              <CardTitle className="text-3xl font-bold text-blue-900">
                 How to Contribute
               </CardTitle>
             </CardHeader>
@@ -159,8 +159,7 @@ function OpenSourcePage() {
                     variants={itemVariants}
                     className="flex items-center space-x-2 text-lg"
                   >
-                    {/* <span className="text-blue-600 font-semibold">{step}</span> */}
-                    <span className="text-blue-600 font-semibold inline-flex justify-center">
+                    <span className="text-gray-900 font-semibold inline-flex justify-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5 text-blue-600"
