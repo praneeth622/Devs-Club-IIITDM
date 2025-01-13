@@ -36,7 +36,7 @@ const EventCard = ({ event, isPastEvent, onViewDetails }) => (
     {isPastEvent && (
       <div className="relative h-48">
         {event.Photos && event.Photos[0] && event.Photos[0][0] ? (
-          <Image src={event.Photos[0][0]} alt={event.Event_name} className="w-full h-full object-cover" />
+          <img src={event.Photos[0][0]} alt={event.Event_name} className="w-full h-full object-cover" />
         ) : (
           <div className="w-full h-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
             <span className="text-white text-lg font-semibold">No Image Available</span>

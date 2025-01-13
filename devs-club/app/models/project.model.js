@@ -7,6 +7,7 @@ const ProjectSchema = new mongoose.Schema({
     name: { type: String, required: true },
     description: { type: String, required: true },
     status: {type: String},
+    featured: { type: Number, default: 0 },
     teamLead: {
         name: { type: String, required: true },
         linkedin: { type: String },
