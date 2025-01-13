@@ -8,6 +8,8 @@ import axios from 'axios'
 import { CalendarDays, MapPin, Clock, ExternalLink } from 'lucide-react'
 import LoadingSpinner from '../components/LoadingSpinner'
 import HeroSection from './(components)/HeroSection'
+import Link from "next/link";
+
 
 const separateEvents = (events) => {
   const currentDate = new Date()
@@ -30,18 +32,26 @@ const EventCard = ({ event, isPastEvent, onViewDetails }) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
-    className="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 flex flex-col h-full border border-gray-100"
+    className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg overflow-hidden 
+              transform transition duration-300 hover:scale-105 
+              flex flex-col h-[350px] border-0"
   >
     {isPastEvent && (
-      <div className="relative h-48">
+      <div className="relative h-48"> {/* Increased height from h-32 to h-48 */}
         {event.Photos && event.Photos[0] && event.Photos[0][0] ? (
-          <img src={event.Photos[0][0]} alt={event.Event_name} className="w-full h-full object-cover" />
+          <img 
+            src={event.Photos[0][0]} 
+            alt={event.Event_name} 
+            className="w-full h-full object-cover rounded-t-3xl" // Ensure full image covers the space
+          />
         ) : (
-          <div className="w-full h-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
-            <span className="text-white text-lg font-semibold">No Image Available</span>
+          <div className="w-full h-full bg-gradient-to-r from-blue-500 to-indigo-600 
+                         flex items-center justify-center rounded-t-3xl">
+            <span className="text-white text-sm font-semibold">No Image Available</span>
           </div>
         )}
-        <div className="absolute top-0 right-0 m-4 px-3 py-1 bg-black bg-opacity-50 text-white text-sm rounded-full">
+        <div className="absolute top-0 right-0 m-2 px-2 py-0.5 bg-black bg-opacity-50 
+                      text-white text-xs rounded-full">
           Past Event
         </div>
       </div>
@@ -49,7 +59,6 @@ const EventCard = ({ event, isPastEvent, onViewDetails }) => (
     <div className="p-6 flex flex-col flex-grow">
       <div className="mb-3 flex justify-between items-start">
         <h3 className="text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors">{event.Event_name}</h3>
-        
       </div>
       <p className="text-gray-600 mb-4 flex-grow line-clamp-3">{event.Event_details}</p>
       <div className="space-y-2 border-t border-gray-100 pt-4">
@@ -72,6 +81,7 @@ const EventCard = ({ event, isPastEvent, onViewDetails }) => (
     </div>
   </motion.div>
 )
+
 
 const EventDetailsDialog = ({ event, onClose }) => (
   <motion.div 
@@ -223,6 +233,7 @@ const EventsPage = () => {
             </button>
           </div>
         </div>
+        
 
         {/* Events Grid */}
         {isLoading ? (
@@ -266,14 +277,63 @@ const EventsPage = () => {
           </motion.div>
         )}
       </motion.div>
+
+      <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+            className="mt-20 text-center relative overflow-hidden px-4 sm:px-0"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-700 via-blue-800 to-blue-900 opacity-90 rounded-2xl" />
+            <div className="relative z-10 p-6 sm:p-16 backdrop-blur-sm">
+            <motion.h2
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.8 }}
+                className="text-2xl sm:text-4xl font-bold mb-4 sm:mb-6 text-white tracking-tight"
+              >
+                Vashisht Hackathon 2.0
+              </motion.h2>
+              <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.9 }}
+                className="text-base sm:text-xl mb-8 sm:mb-10 text-blue-50 max-w-2xl mx-auto leading-relaxed px-4"
+              >
+                A 48-hour mega tech hackathon bringing innovators together to solve real-world challenges with cutting-edge technology and limitless creativity.
+              </motion.p>
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 1 }}
+                className="flex justify-center"
+              >
+                <Link
+                  href="/vashishthackathon"
+                  className="inline-flex items-center justify-center px-6 sm:px-10 py-3 sm:py-4 bg-white text-blue-800 rounded-full font-semibold hover:bg-blue-50 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 text-sm sm:text-lg gap-2"
+                >
+                  Join Now
+                </Link>
+              </motion.div>
+              
+              {/* Background Decorations */}
+              <div className="absolute top-0 right-0 w-32 h-32 sm:w-64 sm:h-64 bg-white opacity-5 rounded-full transform translate-x-1/2 -translate-y-1/2"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 sm:w-48 sm:h-48 bg-white opacity-5 rounded-full transform -translate-x-1/2 translate-y-1/2"></div>
+            </div>
+          </motion.div>
       <Footer />
 
       {/* Dialog for Event Details */}
       <AnimatePresence>
         {selectedEvent && <EventDetailsDialog event={selectedEvent} onClose={closeDialog} />}
       </AnimatePresence>
+
+
+      
     </div>
-  )
+  
+        
+)
 }
 
 export default EventsPage
