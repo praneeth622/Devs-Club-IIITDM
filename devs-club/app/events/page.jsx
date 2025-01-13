@@ -310,6 +310,7 @@ const EventsPage = () => {
                 className="flex justify-center"
               >
                 <Link
+                  target='_blank'
                   href="/vashishthackathon"
                   className="inline-flex items-center justify-center px-6 sm:px-10 py-3 sm:py-4 bg-white text-blue-800 rounded-full font-semibold hover:bg-blue-50 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 text-sm sm:text-lg gap-2"
                 >
