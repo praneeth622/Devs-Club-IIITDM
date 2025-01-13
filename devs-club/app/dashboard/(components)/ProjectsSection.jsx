@@ -9,6 +9,7 @@ import { Calendar, Github, ChevronLeft, ChevronRight, ExternalLink } from "lucid
 import { Card, CardContent } from "../../../components/ui/card";
 import useEmblaCarousel from "embla-carousel-react";
 import { toast } from "react-hot-toast";
+import  Loader  from "../../(components)/Loader.jsx";
 
 const statusColors = {
   active: "bg-green-500",
@@ -16,21 +17,21 @@ const statusColors = {
   "on-hold": "bg-yellow-500",
 };
 
-export const Loader = () => (
-  <div className="flex justify-center items-center h-64">
-    <motion.div
-      className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full"
-      animate={{ rotate: 360 }}
-      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-    >
-      <motion.div
-        className="w-12 h-12 border-t-4 border-pink-500 border-solid rounded-full"
-        animate={{ rotate: -360 }}
-        transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-      />
-    </motion.div>
-  </div>
-);
+// export const Loader = () => (
+//   <div className="flex justify-center items-center h-64">
+//     <motion.div
+//       className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full"
+//       animate={{ rotate: 360 }}
+//       transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+//     >
+//       <motion.div
+//         className="w-12 h-12 border-t-4 border-pink-500 border-solid rounded-full"
+//         animate={{ rotate: -360 }}
+//         transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+//       />
+//     </motion.div>
+//   </div>
+// );
 
 
 
@@ -89,8 +90,8 @@ export default function ProjectsSection() {
           </span>
         </h2>
         <div className="relative">
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex -mx-4 mb-20">
+          <div className="overflow-hidden items-center" ref={emblaRef}>
+            <div className="flex px-2 mb-5">
               {projects.map((project, index) => (
                 <div key={project.id} className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] lg:flex-[0_0_33.33%] px-4">
                   <motion.div
@@ -128,22 +129,22 @@ export default function ProjectsSection() {
               ))}
             </div>
           </div>
-          <Button
+          <div
             variant="outline"
             size="icon"
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white shadow-md rounded-full h-12 w-12 z-10"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 p-2  rounded-full bg-blue-500 text-white hover:bg-blue-600  transition-colors z-10"
             onClick={scrollPrev}
           >
             <ChevronLeft className="h-6 w-6" />
-          </Button>
-          <Button
+          </div>
+          <div
             variant="outline"
             size="icon"
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2 bg-white shadow-md rounded-full h-12 w-12 z-10"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors z-10"
             onClick={scrollNext}
           >
             <ChevronRight className="h-6 w-6" />
-          </Button>
+          </div>
         </div>
       </div>
 

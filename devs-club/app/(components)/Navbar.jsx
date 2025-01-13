@@ -15,7 +15,7 @@ const navItems = [
   { name: "Projects", icon: "💻" },
   { name: "Team", icon: "👩‍💻" },
   { name: "Open-Source", icon: "🌟" },
-  { name: "Contact", icon: "📧" }
+  { name: "Contact", icon: "📧" },
 ];
 
 const Navbar = () => {
@@ -90,15 +90,28 @@ const Navbar = () => {
               </>
             ) : (
               <Link href="/dashboard">
-                <Button 
-                  className="bg-gradient-to-r from-blue-600 to-blue-800 text-white 
-                            px-6 py-2 rounded-lg font-medium
-                            transition-all duration-300
-                            hover:from-blue-700 hover:to-blue-900
-                            shadow-md hover:shadow-xl
-                            border border-blue-400/20">
-                  Login
-                </Button>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button 
+                    className="bg-gradient-to-r from-blue-600 to-blue-800 text-white 
+                              px-6 py-2 rounded-lg font-medium
+                              transition-all duration-300
+                              hover:from-blue-700 hover:to-blue-900
+                              shadow-md hover:shadow-xl
+                              border border-blue-400/20
+                              flex items-center gap-2"
+                  >
+                    <motion.span
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      Login
+                    </motion.span>
+                  </Button>
+                </motion.div>
               </Link>
             )}
           </div>

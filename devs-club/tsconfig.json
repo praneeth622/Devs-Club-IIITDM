@@ -31,7 +31,7 @@
     "**/*.ts",
     "**/*.tsx",
     "app/(components)/Achivements.jsx"
-, "app/api/getProjects/route.js"  ],
+, "app/api/getProjects/route.js", "app/vashishthackathon/layout.jsx"  ],
   "exclude": [
     "node_modules"
   ]

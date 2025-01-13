@@ -15,7 +15,8 @@ const isPublicRoute = createRouteMatcher([
   '/api/webhooks(.*)',
   '/privacy-policy',
   '/terms-conditions',
-  '/events'
+  '/events',
+  '/vashishthackathon'
 ]);
 export default clerkMiddleware((auth, request) => {
   

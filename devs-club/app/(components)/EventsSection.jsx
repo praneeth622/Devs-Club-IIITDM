@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 const EventsSection = ({ events }) => {
   return (
@@ -28,7 +29,7 @@ const EventsSection = ({ events }) => {
             <h4 className="font-semibold">Photos:</h4>
             <div className="flex space-x-2">
               {event.Photos[0].map((photo, idx) => (
-                <img key={idx} src={photo} alt={`Event Photo ${idx + 1}`} className="w-16 h-16 object-cover rounded" />
+                <Image key={idx} src={photo} alt={`Event Photo ${idx + 1}`} className="w-16 h-16 object-cover rounded" />
               ))}
             </div>
           </div>

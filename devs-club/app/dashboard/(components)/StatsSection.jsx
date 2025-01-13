@@ -22,6 +22,14 @@ export default function StatsSection({ stats }) {
     },
   };
 
+  const formatMembers = (count) => {
+    if (count >= 70) {
+      return `${count}+`;  // Append '+' to the count if it's 150 or more
+    }
+    return count;  // Return the count as is if it's below 150
+    return `${count}+`
+  };
+
   return (
     <motion.section
       variants={containerVariants}
@@ -40,7 +48,7 @@ export default function StatsSection({ stats }) {
             <CardContent className="p-6 text-center  mt-4">
               <h3 className="text-lg font-semibold text-gray-700 mb-2 capitalize">{key}</h3>
               <p className="text-3xl font-bold text-blue-600">
-                {value}
+              {formatMembers(value)}
               </p>
             </CardContent>
           </Card>

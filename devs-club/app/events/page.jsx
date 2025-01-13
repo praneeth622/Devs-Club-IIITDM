@@ -8,6 +8,7 @@ import axios from 'axios'
 import { CalendarDays, MapPin, Clock, ExternalLink } from 'lucide-react'
 import LoadingSpinner from '../components/LoadingSpinner'
 import HeroSection from './(components)/HeroSection'
+import Image from 'next/image'
 import Link from "next/link";
 
 
