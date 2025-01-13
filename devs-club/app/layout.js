@@ -20,10 +20,6 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-// export const metadata = {
-//   title: "Developer Club | IIITDM Kancheepuram",
-//   description: "Join the Developer Club at IIITDM Kancheepuram: Engage in workshops, hackathons, and networking opportunities to enhance your coding skills and connect with tech enthusiasts in a vibrant community.",
-// };
 export const metadata = {
   title: 'Developer Club | IIITDM Kancheepuram',
   description: 'Developer Club at IIITDM Kancheepuram. Engage in workshops, hackathons, and networking opportunities to enhance your coding skills and connect with tech enthusiasts in a vibrant community.',
