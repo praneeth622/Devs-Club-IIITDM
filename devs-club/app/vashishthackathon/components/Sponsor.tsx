@@ -163,7 +163,7 @@ const previousSponsors = [
               Partner with Vashisht 2.0 to connect with exceptional talent and support the future of technology.
             </p>
             
-            <SponsorUs formLink="https://drive.google.com/file/d/1PHLdbIFTqWqN_5Fm01G8GUCOPK9BZt5B/" />
+            <SponsorUs formLink="https://drive.google.com/file/d/1hCyjw9lAhXQ1goZjaChml92OBfsKkCvS/" />
           </motion.div>
         </div>
       </section>
