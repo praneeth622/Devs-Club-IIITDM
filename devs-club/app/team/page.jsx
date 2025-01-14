@@ -283,7 +283,8 @@ export default function Team() {
     { name: "Y Harith", role: "CS23I1027", bio: "Interested in exploring all the fields of Computer Science specifically in Machine Learning and Web Development.", image: "/assets/cs23i1027.jpg", linkedin: "https://www.linkedin.com/in/harith-yerragolam-617486288/", github: "https://github.com/Harith-Y" },
     { name: "Deetya A M ", role: "CS23I1032", bio: "Driven by a deep interest in machine learning and web development, I continuously strive to expand my expertise in these fields and their practical applications.", image: "/assets/cs23i1032.jpg", linkedin: "https://www.linkedin.com/in/deetya-mehta-046582282", github: "https://github.com/deerobo1" },
     { name: "Vijay S K", role: "EC23B1012", bio: "Interested in artificial intelligence and machine learning, web development. I am willing to expand my knowledge in these fields.", image: "/assets/EC23B1012.png", linkedin: "https://www.linkedin.com/in/vijay-shanmugham-karthikheyen-313ab32ba/", github: "https://github.com/vijaysk06" },
-    { name: "Hamsini Deshmukh", role: "ME23B2016", bio: "Exploring the intersection of hardware and software in the Internet of Things.", image: "/assets/me23b2016.jpg", linkedin: "https://www.linkedin.com/in/hamsini-deshmukh-59a5302a5/", github: "https: //github.com/Hamsinideshmukh" },
+    { name: "Hamsini Deshmukh", role: "ME23B2016", bio: "I am someone who is working on  developing my grip in the field of computer science cause it is quite sought after these days mainly because its meaningful
+I am actually keen in exploring fthe ields Artificial Intelligence and Machine Learning.", image: "/assets/me23b2016.jpg", linkedin: "https://www.linkedin.com/in/hamsini-deshmukh-59a5302a5/", github: "https: //github.com/Hamsinideshmukh" },
   ]
 
   const mentors = [
