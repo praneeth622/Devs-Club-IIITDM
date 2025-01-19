@@ -9,9 +9,12 @@ import { Footer } from '../(components)/Footer';
 import ImpactAchievements from '../(components)/Achivements';
 import PlannedEvents from '../(components)/Planned_events';
 import { useUser } from '@clerk/nextjs';
+import { useTheme } from 'next-themes';
 
 export default function HomePage() {
   const { user, isLoaded } = useUser(); // Get current user and loaded state
+
+  const { theme, setTheme } = useTheme(); // Get current theme and set theme function
 
   useEffect(() => {
     if (isLoaded && user) {
@@ -40,7 +43,7 @@ export default function HomePage() {
     }
   };
   return (
-    <div>
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       <Navbar/>
       <HeroSection/>
       <ImpactAchievements />

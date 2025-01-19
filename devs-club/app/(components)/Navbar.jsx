@@ -6,6 +6,9 @@ import { UserButton, useUser } from "@clerk/clerk-react";
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from "../../public/assets/image.png";
 import { Button } from "../../components/ui/button";
+import { useTheme } from 'next-themes';
+import { Moon, Sun } from 'lucide-react';
+import ThemeToggle from '../../components/ui/ThemeToggle';
 
 const navItems = [
   { name: "About", icon: "🎯" },
@@ -34,7 +37,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-white border-b border-gray-200 shadow-md sticky z-50 top-0">
+    <nav className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-md sticky z-50 top-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-3">
@@ -47,7 +50,7 @@ const Navbar = () => {
                 className="rounded-full"
               />
             </div>
-            <span className="font-semibold text-xl text-gray-800">
+            <span className="font-semibold text-xl text-gray-800 dark:text-white">
               Developers Club
             </span>
           </Link>
@@ -62,13 +65,15 @@ const Navbar = () => {
               >
                 <Link 
                   href={`/${item.name.toLowerCase()}`}
-                  className="px-3 py-2 rounded-full text-base font-medium text-gray-900 transition-all duration-300 ease-in-out hover:bg-blue-200 hover:text-blue-600"
+                  className="px-3 py-2 rounded-full text-base font-medium text-gray-900 dark:text-gray-100 transition-all duration-300 ease-in-out hover:bg-blue-200 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400"
                 >
                   {item.name}
                 </Link>
               </motion.div>
             ))}
             
+            <ThemeToggle />
+
             {/* Desktop Auth Section */}
             {isSignedIn ? (
               <div className="flex items-center space-x-4">
@@ -122,13 +127,13 @@ const Navbar = () => {
               />
             )}
             <button 
-              className="rounded-xl border border-gray-300 p-2"
+              className="rounded-xl border border-gray-300 p-2 dark:bg-gray-800"
               onClick={handleMenuToggle}
               aria-label="Menu"
             >
               {isMenuOpen ? 
-                <X className="h-6 w-6 text-blue-600" /> : 
-                <Menu className="h-6 w-6 text-blue-600" />
+                <X className="h-6 w-6 text-blue-600 dark:text-blue-400" /> : 
+                <Menu className="h-6 w-6 text-blue-600 dark:text-blue-400" />
               }
             </button>
           </div>
@@ -141,7 +146,7 @@ const Navbar = () => {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="absolute right-0 top-16 mt-2 w-48 bg-white border border-gray-200 rounded-2xl shadow-lg z-50"
+                className="absolute right-0 top-16 mt-2 w-48 bg-white border border-gray-200 rounded-2xl shadow-lg z-50 dark:border-gray-700 rounded-2xl shadow-lg z-50"
               >
                 {navItems.map((item) => (
                   <Link 
@@ -149,15 +154,21 @@ const Navbar = () => {
                     href={`/${item.name.toLowerCase()}`}
                     onClick={handleMenuToggle}
                   >
-                    <div className="flex items-center p-3 hover:bg-blue-100 transition duration-200 rounded-lg">
+                    <div className="flex items-center p-3 hover:bg-blue-100 transition duration-200 rounded-lg dark:hover:bg-gray-800 transition duration-200 rounded-lg dark:text-gray-100">
                       <span className="mr-2 text-xl">{item.icon}</span>
                       {item.name}
                     </div>
                   </Link>
                 ))}
+
+                <div className="flex items-center p-3 hover:bg-blue-100 dark:hover:bg-gray-800 transition duration-200 rounded-lg">
+                  <span className="mr-2 text-xl">🎨</span>
+                  <ThemeToggle />
+                </div>
+
                 {!isSignedIn && (
                   <Link href="/sign-in" onClick={handleMenuToggle}>
-                    <div className="flex items-center p-3 hover:bg-blue-100 transition duration-200 rounded-lg">
+                    <div className="flex items-center p-3 hover:bg-blue-100 transition duration-200 rounded-lg dark:hover:bg-gray-800 transition duration-200 rounded-lg dark:text-gray-100">
                       <span className="mr-2 text-xl">🔑</span>
                       Login
                     </div>
@@ -165,7 +176,7 @@ const Navbar = () => {
                 )}
                 {isSignedIn && (
                   <Link href="/dashboard" onClick={handleMenuToggle}>
-                    <div className="flex items-center p-3 hover:bg-blue-100 transition duration-200 rounded-lg">
+                    <div className="flex items-center p-3 hover:bg-blue-100 transition duration-200 rounded-lg dark:hover:bg-gray-800 transition duration-200 rounded-lg dark:text-gray-100">
                       <span className="mr-2 text-xl">📂</span>
                       Dashboard
                     </div>
