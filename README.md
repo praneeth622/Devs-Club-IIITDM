@@ -118,15 +118,9 @@ We aim to:
 
 ---
 ## 🧑‍💻 Connect With Us
-- LinkedIn: Developers Club IIITDM
+- LinkedIn: [Developers Club IIITDM] LinkedIn(https://www.linkedin.com/company/developers-club-iiitdm/)
 - Email: devclub@iiitdm.ac.in
-- Made with ❤️ by the Develepoers Club IIITDM team
 
----
-
+Made with ❤️ by the Develepoers Club IIITDM team
 We look forward to your contributions! Together, we can build an inclusive and innovative tech community at IIITDM.
-
-**Stay Connected**:
-- Follow us on [LinkedIn](https://www.linkedin.com/company/developers-club-iiitdm/)
-- Contact us at devclub@iiitdm.ac.in
 
