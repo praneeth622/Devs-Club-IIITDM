@@ -117,16 +117,16 @@ We aim to:
 - Contribute to global open-source communities.
 
 ---
-🧑‍💻 Connect With Us
-LinkedIn: Developers Club IIITDM
-Email: devclub@iiitdm.ac.in
-Made with ❤️ by the Develepoers Club IIITDM team
+## 🧑‍💻 Connect With Us
+- LinkedIn: Developers Club IIITDM
+- Email: devclub@iiitdm.ac.in
+- Made with ❤️ by the Develepoers Club IIITDM team
 
---
+---
 
 We look forward to your contributions! Together, we can build an inclusive and innovative tech community at IIITDM.
 
 **Stay Connected**:
 - Follow us on [LinkedIn](https://www.linkedin.com/company/developers-club-iiitdm/)
-- Contact us at [devclub@iiitdm.ac.in]
+- Contact us at devclub@iiitdm.ac.in
 
