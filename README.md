@@ -1,10 +1,10 @@
-# Devs Club IIITDM Official Website
+# Develepoers Club IIITDM Official Website
 
 Welcome to the official website of **Devs Club IIITDM**! This website serves as the central hub for showcasing the activities, projects, and initiatives of the Developer's Club at IIITDM Kancheepuram. Our club is dedicated to fostering a community of tech enthusiasts who are passionate about learning, building, and contributing to the open-source ecosystem.
 
 ## 🌐 Overview
 
-The **Devs Club IIITDM** website is a platform where students and tech enthusiasts come together to explore, learn, and share knowledge on a wide range of technologies. The website provides information on club events, open-source projects, learning resources, and the club’s mission to inspire and empower the next generation of developers.
+The **Develepoers Club IIITDM** website is a platform where students and tech enthusiasts come together to explore, learn, and share knowledge on a wide range of technologies. The website provides information on club events, open-source projects, learning resources, and the club’s mission to inspire and empower the next generation of developers.
 
 Key Highlights:
 - Stay updated with upcoming events, hackathons, and workshops.
@@ -117,6 +117,12 @@ We aim to:
 - Contribute to global open-source communities.
 
 ---
+🧑‍💻 Connect With Us
+LinkedIn: Developers Club IIITDM
+Email: devclub@iiitdm.ac.in
+Made with ❤️ by the Develepoers Club IIITDM team
+
+--
 
 We look forward to your contributions! Together, we can build an inclusive and innovative tech community at IIITDM.
 
