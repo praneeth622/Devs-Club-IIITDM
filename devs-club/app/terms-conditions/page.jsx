@@ -51,7 +51,7 @@ export default function TermsAndConditions() {
                         <span className="font-semibold">Device</span> means any device that can access the Service such as a computer, a cellphone or a digital tablet.
                       </li>
                       <li className="text-gray-700">
-                        <span className="font-semibold">Service</span>refers to the Website.
+                        <span className="font-semibold">Service</span> refers to the Website.
                       </li>
                       <li className="text-gray-700">
                         <span className="font-semibold">Terms and Conditions</span> (also referred as &quot;Terms&quot;) mean these Terms and Conditions that form the entire agreement between You and the Company regarding the use of the Service. This Terms and Conditions agreement has been created with the help of the Terms and Conditions Generator.
