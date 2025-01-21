@@ -14,17 +14,17 @@ const TimelineEvent = ({ title, date, description }) => {
       <div className="absolute left-0 top-0 h-full w-[2px] bg-gradient-to-b from-primary/60 to-primary/20" />
       
       {/* Timeline dot */}
-      <div className="absolute left-[-5px] top-2 h-3 w-3 rounded-full bg-primary ring-4 ring-white shadow-md" />
+      <div className="absolute left-[-5px] top-2 h-3 w-3 rounded-full bg-primary ring-4 ring-white/1 dark:ring-white/40 shadow-md" />
       
       {/* Content container */}
       <motion.div
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.2 }}
-        className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow "
+        className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow dark:bg-gray-900"
       >
         {/* Header */}
         <div className="flex items-start justify-between mb-4">
-          <h4 className="text-xl font-bold text-gray-900 tracking-tight">
+          <h4 className="text-xl font-bold text-gray-900 tracking-tight dark:text-white/80">
             {title}
           </h4>
           <div className="flex items-center text-primary/80 text-sm font-medium">
@@ -34,7 +34,7 @@ const TimelineEvent = ({ title, date, description }) => {
         </div>
 
         {/* Description */}
-        <p className="text-gray-600 leading-relaxed">
+        <p className="text-gray-600 dark:text-white/30 leading-relaxed">
           {description}
         </p>
 

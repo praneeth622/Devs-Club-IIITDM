@@ -198,7 +198,7 @@ export default function GDSCAboutPage() {
 
 
         {/* Events & Achievements Section */}
-        <div className="bg-sky-50 w-full py-20 pr-6 ">
+        <div className="bg-sky-50 w-full py-20 pr-6 dark:bg-gray-800">
           <AnimatedSection>
             <motion.section variants={fadeInUp}>
               <h2 className="text-4xl font-bold mb-12 text-center">
