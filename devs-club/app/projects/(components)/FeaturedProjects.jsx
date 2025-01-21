@@ -46,7 +46,7 @@ const FeaturedProjects = ({ projects }) => {
 
   return (
     <div className="relative w-full max-w-7xl mx-auto mb-12">
-      <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Featured Projects</h2>
+      <h2 className="text-3xl font-bold text-center text-gray-800 mb-8 dark:text-white/80">Featured Projects</h2>
       
       <div className="relative h-[400px] overflow-hidden">
         {/* Carousel */}
@@ -72,13 +72,13 @@ const FeaturedProjects = ({ projects }) => {
         {/* Navigation Buttons */}
         <button
           onClick={prevSlide}
-          className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all"
+          className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all dark:bg-gray-600"
         >
           <ChevronLeft className="w-6 h-6 text-gray-800" />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all"
+          className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all dark:bg-gray-600"
         >
           <ChevronRight className="w-6 h-6 text-gray-800" />
         </button>
