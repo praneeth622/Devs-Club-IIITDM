@@ -189,7 +189,7 @@ const EventsSection = ({ events }) => {
       transition={{ duration: 0.5 }}
       className="mb-12 relative"
     >
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">
+      <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white/80">
         Upcoming Events
       </h2>
       <div className="relative">

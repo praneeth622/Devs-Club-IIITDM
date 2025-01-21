@@ -45,8 +45,8 @@ export default function StatsSection({ stats }) {
           whileTap={{ scale: 0.95 }}
         >
           <Card>
-            <CardContent className="p-6 text-center  mt-4">
-              <h3 className="text-lg font-semibold text-gray-700 mb-2 capitalize">{key}</h3>
+            <CardContent className="p-6 text-center mt-4">
+              <h3 className="text-lg font-semibold text-gray-700 mb-2 capitalize dark:text-white/80">{key}</h3>
               <p className="text-3xl font-bold text-blue-600">
               {formatMembers(value)}
               </p>
