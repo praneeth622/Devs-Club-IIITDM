@@ -130,21 +130,21 @@ function OpenSourcePage() {
       </section>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-16 dark:bg-gray-800 dark:text-white/80">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="max-w-6xl mx-auto"
         >
           {/* Contribution Guide */}
-          <Card className="mb-16 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+          <Card className="mb-16 shadow-xl border-0 bg-white/80 backdrop-blur-sm dark:bg-gray-900 dark:text-white/80">
             <CardHeader className="border-b border-gray-100">
-              <CardTitle className="text-3xl font-bold text-blue-900">
+              <CardTitle className="text-3xl font-bold text-blue-900 dark:text-white/80">
                 How to Contribute
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-8">
-              <ol className="list-decimal list-inside space-y-4 text-gray-700">
+            <CardContent className="p-8 ">
+              <ol className="list-decimal list-inside space-y-4 text-gray-700 ">
                 {[
                   `Fork the repository : "https://github.com/praneeth622/Devs-Club-IIITDM"`,
                   "Clone your fork to your local machine using: git clone https://github.com/praneeth622/Devs-Club-IIITDM.git.",
@@ -157,9 +157,9 @@ function OpenSourcePage() {
                   <motion.li
                     key={index}
                     variants={itemVariants}
-                    className="flex items-center space-x-2 text-lg"
+                    className="flex items-center space-x-2 text-lg "
                   >
-                    <span className="text-gray-900 font-semibold inline-flex justify-center">
+                    <span className="text-gray-900 inline-flex justify-center dark:text-white/80">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5 text-blue-600"
@@ -189,7 +189,7 @@ function OpenSourcePage() {
             animate="visible"
             className="space-y-8"
           >
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 dark:bg-gray-800">
               <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-blue-900">
                 Featured Projects
               </h2>
@@ -198,7 +198,7 @@ function OpenSourcePage() {
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab.toLowerCase())}
-                    className={`px-4 py-2 rounded-full text-sm transition-all duration-300 ${
+                    className={`px-4 py-2 rounded-full text-sm transition-all duration-300 dark:bg-gray-700 dark:text-white/80 ${
                       activeTab === tab.toLowerCase()
                         ? "bg-gradient-to-r from-blue-700 to-blue-900 text-white shadow-lg"
                         : "bg-white/50 text-gray-600 hover:bg-white"
@@ -297,9 +297,9 @@ function OpenSourcePage() {
                 <Link
                   target="_blank"
                   href="https://github.com/praneeth622/Devs-Club-IIITDM"
-                  className="inline-flex items-center justify-center px-6 sm:px-10 py-3 sm:py-4 bg-white text-blue-800 rounded-full font-semibold hover:bg-blue-50 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 text-sm sm:text-lg gap-2"
+                  className="inline-flex items-center justify-center px-6 sm:px-10 py-3 sm:py-4 bg-white text-blue-800 rounded-full font-semibold hover:bg-blue-50 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 text-sm sm:text-lg gap-2 dark:bg-gray-800 dark:text-white/80"
                 >
-                  <FiGithub className="w-5 h-5" />
+                  <FiGithub className="w-5 h-5 dark:text-white/80" />
                   Start Contributing
                 </Link>
               </motion.div>

@@ -302,7 +302,6 @@ export default function Team() {
         { name: "G Chaithanya Reddy", role: "Frontend Developer", bio: "Chaithanya is a Front-end Developer focused on building responsive, intuitive user interfaces with clean code and modern tech.", image: "/assets/chaitanaya.jpg", linkedin: "https://www.linkedin.com/in/chaitanya-reddy-gavinolla-22166b258/", github: "https://github.com/chaitanya-reddy-13" },
         { name: "T Lakshmi Srinivas", role: "Website Co-ordinator", bio: "Srinivas is a Website Coordinator managing updates, content, and performance for seamless user experiences.", image: "/assets/srinivas.png", linkedin: "https://www.linkedin.com/in/srinivastls/", github: "https://github.com/srinivastls   " },      
         { name: "Y Sainatha Reddy", role: "Backend Developer", bio: "Sainatha is a Back-end Developer focused on building reliable system, managing data, and ensuring smooth connections between servers and users.", image: "/assets/sainatha.jpg", linkedin: "https://www.linkedin.com/in/sainatha-reddy/", github: "https://github.com/sainatha-reddy" },
-
       ]
 
   return (
