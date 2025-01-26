@@ -38,7 +38,7 @@ const slideIn = (direction) => ({
 
 export default function GDSCAboutPage() {
   return (
-    <div className="min-h-screen text-foreground">
+    <div className="min-h-screen text-foreground dark:bg-gray-800">
       <Navbar />
 
       {/* Header Section */}
@@ -128,11 +128,11 @@ export default function GDSCAboutPage() {
                   <Target className="w-12 h-12 text-primary" />
                 </motion.div>
                 <h3 className="text-3xl font-bold">Our Goals</h3>
-                <h4 className="text-xl font-semibold text-gray-700">
+                <h4 className="text-xl font-semibold text-gray-700 dark:text-white/70">
                   What We Planned
                 </h4>
                 <div className="grid grid-cols-1  gap-6 text-gray-600">
-                  <ul className="space-y-3 list-disc pl-6">
+                  <ul className="space-y-3 list-disc pl-6 dark:text-white/60">
                     <li>
                       Develop technical skills through workshops and hands-on sessions.
                     </li>
@@ -168,11 +168,11 @@ export default function GDSCAboutPage() {
                   <Activity className="w-12 h-12 text-primary" />
                 </motion.div>
                 <h3 className="text-3xl font-bold">Core Activities of Developers Club</h3>
-                <h4 className="text-xl font-semibold text-gray-700">
+                <h4 className="text-xl font-semibold text-gray-700 dark:text-white/70">
                   What We Do
                 </h4>
                 <div className="grid grid-cols-1 gap-6 text-gray-600">
-                  <ul className="space-y-3 list-disc pl-6">
+                  <ul className="space-y-3 list-disc pl-6 dark:text-white/60">
                     <li>
                       Workshops: Learn Google Cloud, ML, web dev, and more.
                     </li>
@@ -198,7 +198,7 @@ export default function GDSCAboutPage() {
 
 
         {/* Events & Achievements Section */}
-        <div className="bg-sky-50 w-full py-20 pr-6 dark:bg-gray-800">
+        <div className="bg-sky-50 w-full py-20 pr-6 dark:bg-gray-700">
           <AnimatedSection>
             <motion.section variants={fadeInUp}>
               <h2 className="text-4xl font-bold mb-12 text-center">

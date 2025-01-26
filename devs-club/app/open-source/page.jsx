@@ -67,7 +67,7 @@ function OpenSourcePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50 dark:bg-gradient-to-br dark:from-slate-800 dark:via-gray-800 dark:to-slate-800"> 
       {/* Hero Section */}
       <section className="relative min-h-[60vh] overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur-3xl opacity-10 animate-pulse" />
@@ -123,14 +123,14 @@ function OpenSourcePage() {
           >
             <path
               d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-              className="fill-slate-50"
+              className="fill-blue-950/50"
             ></path>
           </svg>
         </div>
       </section>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-16 dark:bg-gray-800 dark:text-white/80">
+      <div className="container mx-auto px-4 py-16 dark:bg-gray-800 dark:text-white/80 ">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

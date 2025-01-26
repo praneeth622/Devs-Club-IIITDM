@@ -136,7 +136,7 @@ const CoreTeamMember = ({ name, role, bio, image, linkedin, github }) => {
                   rel="noopener noreferrer"
                   className="transform transition-all hover:scale-110 hover:-translate-y-1"
                 >
-                  <Linkedin className="w-5 h-5 text-white/80 hover:text-white" />
+                  <Linkedin className="w-5 h-5 text-white/80 hover:text-white dark:text-gray-800 dark:hover:text-gray-800" />
                 </a>
                 <a 
                   href={github} 
@@ -144,7 +144,7 @@ const CoreTeamMember = ({ name, role, bio, image, linkedin, github }) => {
                   rel="noopener noreferrer"
                   className="transform transition-all hover:scale-110 hover:-translate-y-1"
                 >
-                  <Github className="w-5 h-5 text-white/80 hover:text-white" />
+                  <Github className="w-5 h-5 text-white/80 hover:text-white dark:text-gray-800 dark:hover:text-gray-800" />
                 </a>
               </motion.div>
             </motion.div>

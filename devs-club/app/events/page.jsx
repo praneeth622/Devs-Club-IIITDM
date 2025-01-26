@@ -96,18 +96,18 @@
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
-          className="bg-white rounded-2xl p-8 max-w-lg w-full shadow-2xl"
+          className="bg-white rounded-2xl p-8 max-w-lg w-full shadow-2xl dark:bg-gray-800"
         >
-          <h2 className="text-3xl font-bold mb-4 text-gray-900">{event.Event_name}</h2>
+          <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white/70">{event.Event_name}</h2>
           <div className="space-y-4">
-            <p className="text-gray-800">{event.Event_details}</p>
-            <p className="text-gray-800">{event.Event_description}</p>
-            <div className="flex items-center text-gray-700">
+            <p className="text-gray-800 dark:text-white/60">{event.Event_details}</p>
+            <p className="text-gray-800 dark:text-white/60">{event.Event_description}</p>
+            <div className="flex items-center text-gray-700 dark:text-white/60">
               <CalendarDays className="w-5 h-5 mr-2 text-blue-500" />
               <span>{new Date(event.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', weekday: 'long' })}</span>
             </div>
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <p className="text-gray-800">
+            <div className="bg-gray-50 p-4 rounded-lg dark:bg-gray-800">
+              <p className="text-gray-800 dark:text-white/60">
                 {event.Resources && event.Resources.length > 0 ? (
                   event.Resources.map((resource, index) => (
                     <a 
