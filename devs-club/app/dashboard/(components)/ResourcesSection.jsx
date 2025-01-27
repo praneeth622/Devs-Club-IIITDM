@@ -24,7 +24,7 @@ const resources = [
       { name:'Youtube',link: 'https://www.youtube.com/watch?v=kzKFuHk8ovk&list=PLIivdWyY5sqKh1gDR0WpP9iIOY00IE0xL',icon: Link },
     ],
     community: [
-      { name: 'Join Our Discord Channel', link: 'https://discord.gg/KSNzrNYX', icon: Link },
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/X3C8EZQn', icon: Link },
     ],
   },
   {
@@ -41,7 +41,7 @@ const resources = [
       { name:'Youtube',link: 'https://www.youtube.com/watch?v=lpa8uy4DyMo&list=PL9ooVrP1hQOGPQVeapGsJCktzIO4DtI4_',icon: Link },
     ],
     community: [
-      { name: 'Join Our Discord Channel', link: 'https://discord.gg/QBkxv2JN', icon: Link },
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/mgVQmrR2', icon: Link },
     ],
   },
   {
@@ -60,7 +60,7 @@ const resources = [
     ]
     ,
     community: [
-      { name: 'Join Our Discord Channel', link: 'https://discord.gg/uzKFQZ2M', icon: Link },
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/NdJuW8yb', icon: Link },
     ],
   },
   {
@@ -80,7 +80,7 @@ const resources = [
 
     ],
     community: [
-      { name: 'Join Our Discord Channel', link: 'https://discord.gg/6NgR6XkT', icon: Link },
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/3Ns6GSBw', icon: Link },
     ],
   },
   {
@@ -100,7 +100,7 @@ const resources = [
 
     ],
     community: [
-      { name: 'Join Our Discord Channel', link: 'https://discord.gg/9ayTxkvk', icon: Link },
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/hJPAK6Et', icon: Link },
     ],
   },
   {
@@ -119,7 +119,7 @@ const resources = [
 
     ],
     community: [
-      { name: 'Join Our Discord Channel', link: 'https://discord.gg/XgGwr7FS', icon: Link },
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/XF6rbUtS', icon: Link },
     ],
   },
   {
@@ -140,7 +140,7 @@ const resources = [
 
     ],
     community: [
-      { name: 'Join Our Discord Channel', link: 'https://discord.gg/qA4yWxGh', icon: Link },
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/NKKKjRQF', icon: Link },
     ],
   },
   {
@@ -157,7 +157,7 @@ const resources = [
       { name:'Youtube',link: 'https://www.youtube.com/watch?v=mU6anWqZJcc&list=PLf7L7Kg8_FNzwwSK7c4Dei_h3oqg3dwYc',icon: Link },
     ],
     community: [
-      { name: 'Join Our Discord Channel', link: 'https://discord.gg/7RZrWftb', icon: Link },
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/u8amnfbh', icon: Link },
     ],
   },
   {
@@ -174,7 +174,7 @@ const resources = [
       { name:'Youtube',link: 'https://www.youtube.com/watch?v=yBDHkveJUf4',icon: Link },
     ],
     community: [
-      { name: 'Join Our Discord Channel', link: 'https://discord.gg/3tP2kdGU', icon: Link },
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/YTcGyZfy', icon: Link },
     ],
   },
   {
@@ -191,7 +191,7 @@ const resources = [
       { name:'Youtube',link: 'https://www.youtube.com/watch?v=NhDYbskXRgc',icon: Link },
     ],
     community: [
-      { name: 'Join Our Discord Channel', link: 'https://discord.gg/dgFmaYD4', icon: Link },
+      { name: 'Join Our Discord Channel', link: 'https://discord.gg/HGgMeWaD', icon: Link },
     ],
   },
 ]
