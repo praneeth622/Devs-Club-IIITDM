@@ -58,7 +58,7 @@ export default function HeaderBanner() {
             </motion.p>
             
             <motion.a
-              href="https://discord.gg/XxJNcGTE"
+              href="https://discord.gg/geZHatqD"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-6 py-3 rounded-[8px] bg-blue-600 text-white font-medium

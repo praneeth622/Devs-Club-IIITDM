@@ -1,4 +1,4 @@
-# Develepoers Club IIITDM Official Website
+# Developers Club IIITDM Official Website
 
 Welcome to the official website of **Devs Club IIITDM**! This website serves as the central hub for showcasing the activities, projects, and initiatives of the Developer's Club at IIITDM Kancheepuram. Our club is dedicated to fostering a community of tech enthusiasts who are passionate about learning, building, and contributing to the open-source ecosystem.
 
