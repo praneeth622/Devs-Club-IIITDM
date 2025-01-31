@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import {
+import { 
   FiGithub,
   FiCode,
   FiStar,
@@ -210,7 +210,7 @@ function OpenSourcePage() {
               </div>
             </div>
 
-            <div className="grid gap-4 sm:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 dark:bg-gray-800">
               {projects?.length > 0 ? (
                 projects.map((project) => (
                   <motion.div key={project.id} variants={itemVariants}>
