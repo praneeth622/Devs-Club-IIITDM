@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Navigation } from "./header/Navigation";
 import { GlowingButton } from "./header/GlowingButton";
 import { Timer } from "./Timer";
+import Link from "next/link";
 
 export const Header = () => {
   const { scrollY } = useScroll();
@@ -92,7 +93,8 @@ export const Header = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <GlowingButton onClick={openDialog}>Register Now</GlowingButton>
+            <Link href="https://unstop.com/hackathons/vashisht-hackathon-2o-samgathaxvashisht-indian-institute-of-information-technology-design-and-manufacturing-i-1393183" target="_blank" rel="noopener noreferrer">
+            <GlowingButton onClick={openDialog}>Register Now</GlowingButton></Link>
           </motion.div>
         </motion.div>
 
