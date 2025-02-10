@@ -7,7 +7,6 @@ import { PreviousAchievements } from './components/PreviousAchievements';
 import { Tracks } from './components/Tracks';
 import { EventTimeline } from './components/EventTimeline';
 import { Rules } from './components/Rules';
-import { Prizes } from './components/Prizes';
 import { Footer } from './components/Footer';
 import './styles/globals.css';
 import { Analytics } from '@vercel/analytics/react';
@@ -23,7 +22,6 @@ export default function Vashishthackathon() {
       <Tracks />
       <EventTimeline />
       <Rules />
-      <Prizes />
       <Sponsors />
       <Footer />
       <Analytics/>
