@@ -5,7 +5,7 @@ import { Clock, Code, Trophy, Flag } from 'lucide-react';
 const events = [
   { 
     icon: <Flag />,
-    time: '10:00 AM',
+    time: '9:00 AM',
     day: 'Day 1',
     title: 'Opening Ceremony',
     description: 'Kickoff and team formation'
@@ -26,7 +26,7 @@ const events = [
   },
   {
     icon: <Trophy />,
-    time: '2:00 PM',
+    time: '6:00 PM',
     day: 'Day 2',
     title: 'Winners Announced',
     description: 'Awards ceremony'
@@ -64,7 +64,11 @@ export const EventTimeline = () => {
                   whileHover={{ scale: 1.05 }}
                   className="bg-gradient-to-br from-purple-800/50 to-blue-800/50 p-6 rounded-xl backdrop-blur-sm border border-purple-500/20"
                 >
-                  <div className="text-cyan-400 mb-2">{event.time}</div>
+                  <div className="text-cyan-400 mb-2">
+                    {event.day}
+                    <br />
+                    {event.time}</div>
+
                   <h3 className="text-xl font-bold text-white mb-1">{event.title}</h3>
                   <p className="text-cyan-100/80">{event.description}</p>
                 </motion.div>
