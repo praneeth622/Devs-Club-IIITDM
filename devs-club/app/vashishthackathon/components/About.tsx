@@ -6,7 +6,7 @@ export const About = () => {
   const features = [
     {
       icon: <Trophy className="w-8 h-8" />,
-      title: 'Prize Pool TBA',
+      title: 'Prize Pool ₹26,500',
       description: 'Compete for exciting prizes and recognition'
     },
     {
@@ -16,7 +16,7 @@ export const About = () => {
     },
     {
       icon: <Zap className="w-8 h-8" />,
-      title: '36 Hours',
+      title: '32 Hours',
       description: 'Non-stop coding and creation'
     }
   ];
@@ -31,7 +31,7 @@ export const About = () => {
         >
           <h2 className="text-4xl font-bold text-white mb-6">About The Event</h2>
           <p className="text-cyan-100 text-lg">
-            Join us for an epic 36-hour hackathon where creativity meets technology. 
+            Join us for an epic 32-hour hackathon where creativity meets technology. 
             Build innovative solutions, compete with the best, and push the boundaries 
             of what&apos;s possible.
           </p>
