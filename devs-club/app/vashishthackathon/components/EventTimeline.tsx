@@ -12,25 +12,21 @@ const events = [
   },
   {
     icon: <Code />,
-    time: '12:00 PM',
+    time: '10:00 AM',
     day: 'Day 1',
     title: 'Hacking Begins',
     description: 'Start your engines!'
+
   },
   {
     icon: <Clock />,
-    time: '10:00 AM',
+    time: '05:00 PM',
     day: 'Day 2',
     title: 'Submission',
     description: 'Project submissions due'
+
   },
-  {
-    icon: <Trophy />,
-    time: '6:00 PM',
-    day: 'Day 2',
-    title: 'Winners Announced',
-    description: 'Awards ceremony'
-  }
+ 
 ];
 
 export const EventTimeline = () => {

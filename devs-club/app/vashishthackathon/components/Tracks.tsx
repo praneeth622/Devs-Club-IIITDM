@@ -13,11 +13,7 @@ const tracks = [
     title: 'Web and Mobile Development',
     description: 'Create innovative web applications and services'
   },
-  {
-    icon: <Smartphone className="w-12 h-12" />,
-    title: 'Computer Vision',
-    description: ' Creating innovative solutions using image and video data.'
-  },
+  
   {
     icon: <Code2 className="w-12 h-12" />,
     title: 'Open Innovation',
@@ -37,7 +33,7 @@ export const Tracks = () => {
           Hackathon Tracks
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
           {tracks.map((track, index) => (
             <motion.div
               key={track.title}
@@ -53,6 +49,9 @@ export const Tracks = () => {
             </motion.div>
           ))}
         </div>
+
+
+        
       </div>
     </section>
   );
