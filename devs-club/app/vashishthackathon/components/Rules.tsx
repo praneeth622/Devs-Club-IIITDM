@@ -8,7 +8,7 @@ const ruleCategories = [
     icon: <Users className="w-6 h-6" />,
     rules: [
       "Open to students from all institutes",
-      "Teams of 2-5 members allowed",
+      "Teams of 1-4 members allowed",
       "One team can participate in only one track",
       "Teams can include students from any discipline"
     ]
@@ -17,9 +17,9 @@ const ruleCategories = [
     title: "Event Format",
     icon: <Calendar className="w-6 h-6" />,
     rules: [
-      "24-48 hour hackathon",
-      "Hall available from 9:30 AM to 6:00 PM",
-      "Remote work after 6:00 PM",
+      "32-hour hackathon",
+      "Hall available from 8:00 AM to 5:00 PM",
+      "Remote work after 5:00 PM",
       "Wi-Fi provided throughout the event"
     ]
   },
@@ -27,7 +27,7 @@ const ruleCategories = [
     title: "Submission Guidelines",
     icon: <FileCode className="w-6 h-6" />,
     rules: [
-      "Submit project repository (GitHub/ZIP)",
+      "Submit project repository (GitHub)",
       "Include 2-5 minute demo video",
       "Provide detailed README file",
       "Disclose all used libraries/APIs"

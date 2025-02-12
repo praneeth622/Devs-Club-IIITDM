@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Navigation } from "./header/Navigation";
 import { GlowingButton } from "./header/GlowingButton";
 import { Timer } from "./Timer";
+import Link from "next/link";
 
 export const Header = () => {
   const { scrollY } = useScroll();
@@ -92,31 +93,12 @@ export const Header = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <GlowingButton onClick={openDialog}>Register Now</GlowingButton>
+            <Link href="https://unstop.com/hackathons/vashisht-hackathon-2o-samgathaxvashisht-indian-institute-of-information-technology-design-and-manufacturing-i-1393183" target="_blank" rel="noopener noreferrer">
+            <GlowingButton >Register Now</GlowingButton></Link>
           </motion.div>
         </motion.div>
 
-        {/* Dialog */}
-        {isDialogOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-md z-50">
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="bg-gray-900 border border-purple-500 rounded-lg p-6 max-w-sm mx-auto text-center"
-            >
-              <h2 className="text-xl font-bold text-white pixel-font mb-4">
-                Registrations are opening soon!
-              </h2>
-              <button
-                onClick={closeDialog}
-                className="mt-4 bg-purple-600 hover:bg-purple-500 text-white py-2 px-4 rounded pixel-font"
-              >
-                Close
-              </button>
-            </motion.div>
-          </div>
-        )}
-
+    
         {/* Scroll Indicator */}
         <motion.div
           animate={{ y: [0, 10, 0] }}
