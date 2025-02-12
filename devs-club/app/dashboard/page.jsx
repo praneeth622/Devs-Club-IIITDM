@@ -73,7 +73,7 @@ function Page() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
       <Navbar />
       <HeaderBanner />
-      <div className="container mx-auto px-14 py-8">
+      <div className="container mx-auto px-14 py-8 dark:bg-gray-900">
         <StatsSection stats={stats} />
         <EventsSection events={events} />
         <PastEventsSection pastEvents={pastEvents} />

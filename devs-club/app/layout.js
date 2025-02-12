@@ -1,4 +1,5 @@
 import localFont from "next/font/local";
+import { Providers } from "./providers";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react"
 import {
@@ -83,7 +84,7 @@ export default function RootLayout({ children }) {
   
   return (
     <ClerkProvider>
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
     <head>
           {/* SEO Meta Tags */}
           <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -125,7 +126,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Providers>
         {children}
+        </Providers>
       </body>
       <Analytics/>
     </html>

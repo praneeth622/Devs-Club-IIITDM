@@ -68,7 +68,7 @@ Developers Club        </motion.h1>
 
       {/* Right side - Login form */}
       <motion.div 
-        className="md:w-1/2 bg-white p-8 flex flex-col justify-center items-center"
+        className="md:w-1/2 bg-white p-8 flex flex-col justify-center items-center dark:bg-gray-800"
         initial={{ x: "100%" }}
         animate={{ x: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}

@@ -43,14 +43,14 @@ import FeaturedProjects from './(components)/FeaturedProjects'
     <div>
     <Navbar />
     <HeroSection/>
-    <div className="min-h-screen  bg-sky-50 from-purple-100 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-sky-50 from-purple-100 to-indigo-100 dark:text-white/80 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {loading ? (
           <LoadingSpinner />
         ) : (
           <>
             <FeaturedProjects projects={projects} />
-            <h1 className="text-4xl font-bold text-center text-gray-800 mb-12">Our Projects</h1>
+            <h1 className="text-4xl font-bold text-center text-gray-800 mb-12 dark:text-white/80">Our Projects</h1>
             <ProjectsToggleView projects={projects} />
           </>
         )}

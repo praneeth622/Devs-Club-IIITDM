@@ -16,7 +16,7 @@ export const ProjectsGallery = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl font-bold text-gray-800 mb-4"
+          className="text-4xl font-bold text-gray-800 mb-4 dark:text-white/80 font-bold"
         >
           Our Projects Gallery
         </motion.h2>
@@ -24,7 +24,7 @@ export const ProjectsGallery = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-xl text-gray-600 mb-12"
+          className="text-xl text-gray-600 dark:text-white/30 mb-12"
         >
           Take a look at some of our past projects and events, showcasing our creativity and technical skills.
         </motion.p>
@@ -35,11 +35,11 @@ export const ProjectsGallery = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
+              className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 dark:bg-gray-800"
             >
               <Image src={project.image} alt={project.title} width={300} height={200} className="w-full h-48 object-cover" />
               <div className="p-4">
-                <h3 className="font-semibold text-lg mb-2 text-gray-800">{project.title}</h3>
+                <h3 className="font-semibold text-lg mb-2 text-gray-800 dark:text-white/80">{project.title}</h3>
               </div>
             </motion.div>
           ))}

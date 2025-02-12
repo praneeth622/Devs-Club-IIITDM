@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import {
+import { 
   FiGithub,
   FiCode,
   FiStar,
@@ -67,7 +67,7 @@ function OpenSourcePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50 dark:bg-gradient-to-br dark:from-slate-800 dark:via-gray-800 dark:to-slate-800"> 
       {/* Hero Section */}
       <section className="relative min-h-[60vh] overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur-3xl opacity-10 animate-pulse" />
@@ -123,28 +123,28 @@ function OpenSourcePage() {
           >
             <path
               d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-              className="fill-slate-50"
+              className="fill-blue-950/50"
             ></path>
           </svg>
         </div>
       </section>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-16 dark:bg-gray-800 dark:text-white/80 ">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="max-w-6xl mx-auto"
         >
           {/* Contribution Guide */}
-          <Card className="mb-16 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+          <Card className="mb-16 shadow-xl border-0 bg-white/80 backdrop-blur-sm dark:bg-gray-900 dark:text-white/80">
             <CardHeader className="border-b border-gray-100">
-              <CardTitle className="text-3xl font-bold text-blue-900">
+              <CardTitle className="text-3xl font-bold text-blue-900 dark:text-white/80">
                 How to Contribute
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-8">
-              <ol className="list-decimal list-inside space-y-4 text-gray-700">
+            <CardContent className="p-8 ">
+              <ol className="list-decimal list-inside space-y-4 text-gray-700 ">
                 {[
                   `Fork the repository : "https://github.com/praneeth622/Devs-Club-IIITDM"`,
                   "Clone your fork to your local machine using: git clone https://github.com/praneeth622/Devs-Club-IIITDM.git.",
@@ -157,9 +157,9 @@ function OpenSourcePage() {
                   <motion.li
                     key={index}
                     variants={itemVariants}
-                    className="flex items-center space-x-2 text-lg"
+                    className="flex items-center space-x-2 text-lg "
                   >
-                    <span className="text-gray-900 font-semibold inline-flex justify-center">
+                    <span className="text-gray-900 inline-flex justify-center dark:text-white/80">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5 text-blue-600"
@@ -189,7 +189,7 @@ function OpenSourcePage() {
             animate="visible"
             className="space-y-8"
           >
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 dark:bg-gray-800">
               <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-blue-900">
                 Featured Projects
               </h2>
@@ -198,7 +198,7 @@ function OpenSourcePage() {
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab.toLowerCase())}
-                    className={`px-4 py-2 rounded-full text-sm transition-all duration-300 ${
+                    className={`px-4 py-2 rounded-full text-sm transition-all duration-300 dark:bg-gray-700 dark:text-white/80 ${
                       activeTab === tab.toLowerCase()
                         ? "bg-gradient-to-r from-blue-700 to-blue-900 text-white shadow-lg"
                         : "bg-white/50 text-gray-600 hover:bg-white"
@@ -210,7 +210,7 @@ function OpenSourcePage() {
               </div>
             </div>
 
-            <div className="grid gap-4 sm:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 dark:bg-gray-800">
               {projects?.length > 0 ? (
                 projects.map((project) => (
                   <motion.div key={project.id} variants={itemVariants}>
@@ -297,9 +297,9 @@ function OpenSourcePage() {
                 <Link
                   target="_blank"
                   href="https://github.com/praneeth622/Devs-Club-IIITDM"
-                  className="inline-flex items-center justify-center px-6 sm:px-10 py-3 sm:py-4 bg-white text-blue-800 rounded-full font-semibold hover:bg-blue-50 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 text-sm sm:text-lg gap-2"
+                  className="inline-flex items-center justify-center px-6 sm:px-10 py-3 sm:py-4 bg-white text-blue-800 rounded-full font-semibold hover:bg-blue-50 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 text-sm sm:text-lg gap-2 dark:bg-gray-800 dark:text-white/80"
                 >
-                  <FiGithub className="w-5 h-5" />
+                  <FiGithub className="w-5 h-5 dark:text-white/80" />
                   Start Contributing
                 </Link>
               </motion.div>

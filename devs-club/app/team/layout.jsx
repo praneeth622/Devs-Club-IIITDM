@@ -9,7 +9,7 @@ export default function layout() {
   return (
     <div>
         <Navbar/>
-        <div className ='bg-sky-50 from-purple-100 to-indigo-100'>
+        <div className ='bg-sky-50 from-purple-100 to-indigo-100 dark:bg-gray-900'>
         <HeroSection/>
         <Team/>
         </div>

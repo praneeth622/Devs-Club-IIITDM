@@ -45,11 +45,11 @@ const PastEventCard = ({ event, index }) => {
           transition={{ duration: 0.5, delay: index * 0.1 }}
         >
           <Card className="h-full cursor-pointer bg-white hover:shadow-lg transition-shadow duration-300 relative overflow-hidden group">
-            <CardContent className="p-6 pt-8">
-              <h3 className="text-xl font-semibold text-gray-800 mb-4 pr-20 leading-tight">
+            <CardContent className="p-6 pt-8 dark:bg-gray-800">
+              <h3 className="text-xl font-semibold text-gray-800 mb-4 pr-20 leading-tight dark:text-white/80">
                 {event.Event_name}
               </h3>
-              <div className="space-y-4 text-gray-600">
+              <div className="space-y-4 text-gray-600 dark:text-white/30">
                 <div className="flex items-center">
                   <Calendar className="w-5 h-5 mr-3 text-blue-500 flex-shrink-0" />
                   <span className="text-sm">{formatDate(event.date)}</span>
@@ -73,25 +73,25 @@ const PastEventCard = ({ event, index }) => {
           </Card>
         </motion.div>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[550px] max-h-[700px] bg-white">
+      <DialogContent className="sm:max-w-[550px] max-h-[700px] bg-white dark:text-white/80 dark:bg-gray-800">
         <div className="p-8">
           <div className="flex justify-between items-start mb-8">
             <h2 className="text-2xl font-bold leading-tight pr-4">
               {event.Event_name}
             </h2>
-            <Badge className="bg-gray-500 text-white px-3 py-1">
+            <Badge className="bg-gray-500 text-white px-3 py-1 dark:bg-gray-700">
               Past Event
             </Badge>
           </div>
           <div className="space-y-6">
-            <div className="flex items-start text-gray-600">
+            <div className="flex items-start text-gray-600 dark:text-white/30">
               <Calendar className="w-5 h-5 mr-4 text-blue-500 flex-shrink-0 mt-1" />
               <div>
                 <p className="font-semibold mb-1">Date</p>
                 <p>{formatDate(event.date)}</p>
               </div>
             </div>
-            <div className="flex items-start text-gray-600">
+            <div className="flex items-start text-gray-600 dark:text-white/30">
               <Clock className="w-5 h-5 mr-4 text-blue-500 flex-shrink-0 mt-1" />
               <div>
                 <p className="font-semibold mb-1">Time</p>
@@ -99,7 +99,7 @@ const PastEventCard = ({ event, index }) => {
               </div>
             </div>
             {event.Attendance && (
-              <div className="flex items-start text-gray-600">
+              <div className="flex items-start text-gray-600 dark:text-white/30">
                 <Users className="w-5 h-5 mr-4 text-blue-500 flex-shrink-0 mt-1" />
                 <div>
                   <p className="font-semibold mb-1">Attendance</p>
@@ -107,9 +107,9 @@ const PastEventCard = ({ event, index }) => {
                 </div>
               </div>
             )}
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <p className="font-semibold mb-3">Event Details</p>
-              <p className="text-gray-600 leading-relaxed">
+            <div className="bg-gray-50 p-6 rounded-lg dark:bg-gray-700">
+              <p className="font-semibold mb-3 dark:text-white/80">Event Details</p>
+              <p className="text-gray-600 dark:text-white/40 leading-relaxed">
                 {event.Event_details}
               </p>
             </div>
@@ -147,7 +147,7 @@ const PastEventsSection = ({ pastEvents }) => {
       transition={{ duration: 0.5 }}
       className="mb-12 relative"
     >
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">
+      <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white/80">
         Past Events
       </h2>
       <div className="relative">

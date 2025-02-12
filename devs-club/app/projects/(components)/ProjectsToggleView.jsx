@@ -23,7 +23,7 @@ export default function ProjectsToggleView({ projects }) {
                 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2
                 ${
                   selected
-                    ? 'bg-white shadow'
+                    ? 'bg-white shadow dark:bg-gray-800'
                     : 'text-black-100 hover:bg-black/[0.12] hover:text-white'
                 }`
               }

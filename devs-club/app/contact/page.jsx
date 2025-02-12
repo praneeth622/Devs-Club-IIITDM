@@ -83,7 +83,7 @@ function ContactFormComponent() {
         position="top-right"  
         reverseOrder={false} 
       />
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden dark:text-white/80 dark:bg-gray-900">
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl"
           animate={{
@@ -206,7 +206,7 @@ function ContactFormComponent() {
                       onChange={handleChange}
                       placeholder="Your Message" 
                       required 
-                      className="border-0 bg-white/10 backdrop-blur-md text-white placeholder:text-gray-100 rounded-xl p-6 min-h-[200px] focus:ring-2 focus:ring-blue-500 transition-all group-hover:bg-white/15"
+                      className="border-0 bg-white/15 backdrop-blur-md text-white placeholder:text-gray-100 rounded-xl p-6 min-h-[200px] focus:ring-2 focus:ring-blue-500 transition-all group-hover:bg-white/15 dark:bg-white/10"
                     />
                   </motion.div>
                   

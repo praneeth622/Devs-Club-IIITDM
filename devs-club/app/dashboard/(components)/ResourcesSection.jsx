@@ -206,7 +206,7 @@ export default function ResourcesSection() {
       transition={{ duration: 0.5 }}
       className="px-6 py-12 md:px-8"
     >
-      <h2 className="text-3xl font-bold text-gray-800 mb-8">Resources & Tools</h2>
+      <h2 className="text-3xl font-bold text-gray-800 mb-8 dark:text-white/80">Resources & Tools</h2>
       <Card className="overflow-hidden shadow-lg border-0">
         <CardContent className="p-8 md:p-10">
           <motion.div
@@ -232,7 +232,7 @@ export default function ResourcesSection() {
       </Card>
 
       <Dialog open={!!selectedResource} onOpenChange={() => setSelectedResource(null)}>
-        <DialogContent className="sm:max-w-[600px] max-h-[700px] bg-white rounded-lg m-5 p-10">
+        <DialogContent className="sm:max-w-[600px] max-h-[700px] bg-white rounded-lg m-5 p-10 dark:bg-gray-900">
           <DialogHeader className="mb-6 ">
             <DialogTitle className="flex items-center space-x-3 text-2xl font-bold mb-3">
               {selectedResource && (
@@ -275,7 +275,7 @@ export default function ResourcesSection() {
 function ResourceSection({ title, items }) {
   return (
     <div className="space-y-3">
-      <h3 className="text-lg font-semibold mb-3 text-gray-800">{title}</h3>
+      <h3 className="text-lg font-semibold mb-3 text-gray-800 dark:text-white/80">{title}</h3>
       <ul className="space-y-3">
         {items.map((item, index) => (
           <li key={index}>
@@ -283,11 +283,11 @@ function ResourceSection({ title, items }) {
               href={item.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors duration-200"
+              className="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 transition-colors duration-200"
             >
-              <item.icon className="w-5 h-5 text-gray-600 flex-shrink-0" />
+              <item.icon className="w-5 h-5 text-gray-600 flex-shrink-0 dark:text-white/80" />
               <div className="flex-1">
-                <span className="text-sm font-medium text-gray-700">{item.name}</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-white/80">{item.name}</span>
                 {item.description && (
                   <p className="text-xs text-gray-500 mt-1">{item.description}</p>
                 )}
