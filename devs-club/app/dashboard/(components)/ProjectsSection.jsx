@@ -84,7 +84,7 @@ export default function ProjectsSection() {
       className="px-[-10px] mb-12"
     >
       <div className="max-w-9xl mx-auto mb-10">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white/80">
           <span className="bg-clip-text ">
             Projects
           </span>
@@ -102,16 +102,16 @@ export default function ProjectsSection() {
                     transition={{ delay: index * 0.1 }}
                     onClick={() => setSelectedProject(project)}
                   >
-                    <Card className="cursor-pointer bg-white hover:shadow-xl transition-all duration-300 h-full overflow-hidden group">
+                    <Card className="cursor-pointer bg-white hover:shadow-xl transition-all duration-300 h-full overflow-hidden group dark:bg-gray-800">
                       <CardContent className="p-6 flex flex-col justify-between h-full relative">
                         <div>
                           <div className={`${statusColors[project.status]} text-white mb-3 inline-flex rounded-full px-3 py-1 text-xs font-semibold`}>
                             {project.status}
                           </div>
-                          <h3 className="text-2xl font-semibold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors duration-200">
+                          <h3 className="text-2xl font-semibold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors duration-200 dark:text-white/80">
                             {project.name}
                           </h3>
-                          <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+                          <p className="text-sm text-gray-600 dark:text-white/30 mb-4 line-clamp-3">
                             {project.description}
                           </p>
                         </div>
@@ -132,7 +132,7 @@ export default function ProjectsSection() {
           <div
             variant="outline"
             size="icon"
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 p-2  rounded-full bg-blue-500 text-white hover:bg-blue-600  transition-colors z-10"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors z-10"
             onClick={scrollPrev}
           >
             <ChevronLeft className="h-6 w-6" />
@@ -151,7 +151,7 @@ export default function ProjectsSection() {
       <AnimatePresence>
         {selectedProject && (
           <Dialog open onOpenChange={() => setSelectedProject(null)}>
-            <DialogContent className="sm:max-w-[650px] bg-white rounded-lg overflow-hidden">
+            <DialogContent className="sm:max-w-[650px] bg-white rounded-lg overflow-hidden dark:bg-gray-900">
               <motion.div
                 initial={{ opacity: 0, y: 20, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -160,31 +160,31 @@ export default function ProjectsSection() {
                 className="p-6"
               >
                 <div className="flex justify-between items-start mb-6">
-                  <h2 className="text-3xl font-bold text-gray-800">{selectedProject.name}</h2>
+                  <h2 className="text-3xl font-bold text-gray-800 dark:text-white/80">{selectedProject.name}</h2>
                   <div className={`${statusColors[selectedProject.status]} text-white px-3 py-1 rounded-full text-sm font-semibold`}>
                     {selectedProject.status}
                   </div>
                 </div>
-                <p className="text-gray-600 mb-8 text-lg leading-relaxed">
+                <p className="text-gray-600 dark:text-white/40 mb-8 text-lg leading-relaxed">
                   {selectedProject.fullDescription || selectedProject.description}
                 </p>
                 <div className="grid grid-cols-2 gap-6 mb-8">
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h3 className="font-semibold text-gray-800 mb-2">Team Leader</h3>
-                    <p className="text-gray-600">{selectedProject.teamLead.name}</p>
+                  <div className="bg-gray-50 p-4 rounded-lg dark:bg-gray-700">
+                    <h3 className="font-semibold text-gray-800 dark:text-white/80 mb-2">Team Leader</h3>
+                    <p className="text-gray-600 dark:text-white/40">{selectedProject.teamLead.name}</p>
                   </div>
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h3 className="font-semibold text-gray-800 mb-2">Created At</h3>
-                    <p className="text-gray-600">{new Date(selectedProject.createdAt).toLocaleDateString()}</p>
+                  <div className="bg-gray-50 p-4 rounded-lg dark:bg-gray-700">
+                    <h3 className="font-semibold text-gray-800 mb-2 dark:text-white/80">Created At</h3>
+                    <p className="text-gray-600 dark:text-white/40">{new Date(selectedProject.createdAt).toLocaleDateString()}</p>
                   </div>
                 </div>
-                <div className="mb-8">
-                  <h3 className="font-semibold text-gray-800 mb-4">Team Members</h3>
+                <div className="mb-8 dark:text-white/80">
+                  <h3 className="font-semibold text-gray-800 mb-4 dark:text-white/80">Team Members</h3>
                   <div className="flex flex-wrap gap-2">
                     {selectedProject.teamMembers.map((member, index) => (
                       <Badge
                         key={index}
-                        className="bg-blue-100 text-blue-800 rounded-full px-3 py-1 text-sm font-medium hover:bg-blue-200 transition-colors duration-200"
+                        className="bg-blue-100 dark:bg-gray-700 text-blue-800 rounded-full px-3 py-1 text-sm font-medium hover:bg-blue-200 transition-colors duration-200"
                       >
                         {member.name}
                       </Badge>

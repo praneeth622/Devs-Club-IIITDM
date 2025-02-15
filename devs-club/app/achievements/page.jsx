@@ -115,27 +115,27 @@ function AchievementsSection() {
           initial="hidden"
           animate="visible"
         >
-          <h2 className="text-3xl font-semibold mb-8 text-center">
+          <h2 className="text-3xl font-semibold mb-8 text-center dark:text-blue-300">
             Our Journey of Excellence
           </h2>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 dark:text-white/80">
             {achievements.length > 0 ? (
               achievements.map((achievement, index) => (
                 <motion.div
                   key={index}
-                  className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+                  className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-gray-900"
                   variants={itemVariants}
                   whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
                 >
                   <div className="flex items-center mb-4">
-                    <div className="bg-blue-100 rounded-full p-3 mr-4">
+                    <div className="bg-blue-100 rounded-full p-3 mr-4 dark:bg-gray-700">
                     {achievement.icon}
                     </div>
                     <h3 className="text-xl font-semibold">
                       {achievement.title}
                     </h3>
                   </div>
-                  <p className="text-gray-600">{achievement.description}</p>
+                  <p className="text-gray-600 dark:text-white/30">{achievement.description}</p>
                 </motion.div>
               ))
             ) : (
@@ -147,16 +147,16 @@ function AchievementsSection() {
         </motion.section>
 
         <motion.section
-          className="bg-white rounded-xl p-8 mb-20 shadow-lg mx-4 sm:mx-0"
+          className="bg-white rounded-xl p-8 mb-20 shadow-lg mx-4 sm:mx-0 dark:bg-gray-900"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <h2 className="text-3xl font-semibold mb-8 text-center">
+          <h2 className="text-3xl font-semibold mb-8 text-center dark:text-white/80">
             Why Join Developers Club?
           </h2>
           <motion.div
-            className="grid gap-6 md:grid-cols-2"
+            className="grid gap-6 md:grid-cols-2 dark:text-white/80 dark:bg-gray-900"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -164,18 +164,18 @@ function AchievementsSection() {
             {benefits.map((benefit, index) => (
               <motion.div
                 key={index}
-                className="flex items-start p-4 bg-blue-50 rounded-lg"
+                className="flex items-start p-4 bg-blue-50 rounded-lg dark:text-white/80 dark:bg-gray-800"
                 variants={itemVariants}
                 whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
               >
-                <div className="flex-shrink-0 mr-4 bg-white rounded-full p-3 shadow-md">
+                <div className="flex-shrink-0 mr-4 bg-white rounded-full p-3 shadow-md dark:bg-gray-700">
                   {benefit.icon}
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold mb-2">
                     {benefit.title}
                   </h3>
-                  <p className="text-gray-600">{benefit.description}</p>
+                  <p className="text-gray-600 dark:text-white/30">{benefit.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -188,7 +188,7 @@ function AchievementsSection() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="px-4 sm:px-8"
         >
-          <h2 className="text-3xl font-semibold mb-12 text-center">
+          <h2 className="text-3xl font-semibold mb-12 text-center dark:text-white/80">
             <span className="relative">
               Spotlight Achievement
               <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-blue-500 rounded-full"></span>
@@ -253,7 +253,7 @@ function AchievementsSection() {
         >
           <Link href="/dashboard">
             <motion.button
-              className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold text-lg shadow-lg"
+              className="bg-blue-500 dark:bg-blue-600 text-white px-8 py-3 rounded-full font-semibold text-lg shadow-lg"
               whileHover={{ scale: 1.05, backgroundColor: "#3b82f6" }}
               whileTap={{ scale: 0.95 }}
             >

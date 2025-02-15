@@ -17,22 +17,22 @@ const ProjectDetails = ({ project, onClose }) => {
         exit={{ scale: 0.9, y: 50 }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
-        <div className="p-6">
+        <div className="p-6 dark:bg-gray-900">
           <div className="flex items-center mb-4">
             <div>
-              <h3 className="text-xl font-semibold text-gray-800">{project.teamLead.name}</h3>
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-white/80">{project.teamLead.name}</h3>
               <p className="text-blue-600">Team Lead</p>
             </div>
           </div>
           <div className='flex justify-between'>
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">{project.name}</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2 dark:text-white/80">{project.name}</h2>
             <div className="ml-2 flex space-x-2 items-center">
                   <SocialIcon href={project.teamLead.linkedin} icon={<Linkedin size={16} />} />
                   <SocialIcon href={project.teamLead.github} icon={<Github size={16} />} />
                 </div>
           </div>
-          <p className="text-gray-600 mb-4">{project.fullDescription}</p>
-          <h4 className="text-lg font-semibold text-gray-800 mb-2">Team Members:</h4>
+          <p className="text-gray-600 mb-4 dark:text-white/80">{project.fullDescription}</p>
+          <h4 className="text-lg font-semibold text-gray-800 mb-2 dark:text-white/80">Team Members:</h4>
           <ul className="space-y-2">
             {project.teamMembers.map((member, index) => (
               <motion.li
@@ -42,7 +42,7 @@ const ProjectDetails = ({ project, onClose }) => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 + index * 0.1 }}
               >
-                <span className="text-gray-700">{member.name}</span>
+                <span className="text-gray-700 dark:text-white/80">{member.name}</span>
                 <div className="flex space-x-2">
                   <SocialIcon href={member.linkedin} icon={<Linkedin size={16} />} />
                   <SocialIcon href={member.github} icon={<Github size={16} />} />

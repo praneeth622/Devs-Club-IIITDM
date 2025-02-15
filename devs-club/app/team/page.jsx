@@ -43,7 +43,7 @@ const CoreTeamMember = ({ name, role, bio, image, linkedin, github }) => {
     >
       {/* Base card with shadow and scale */}
       <motion.div
-        className="absolute inset-0 bg-white rounded-xl shadow-lg"
+        className="absolute inset-0 bg-white rounded-xl shadow-lg dark:bg-gray-800 dark:text-white/80"
         variants={{
           rest: { 
             scale: 1,
@@ -109,11 +109,11 @@ const CoreTeamMember = ({ name, role, bio, image, linkedin, github }) => {
                 }
               }}
             >
-              <h3 className="text-black text-xl font-bold tracking-wide mb-2 drop-shadow-md">
+              <h3 className="text-black text-xl font-bold tracking-wide mb-2 drop-shadow-md dark:text-white/80">
                 {name}
               </h3>
               <div className="relative">
-                <p className="text-black/90 text-sm font-medium px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm inline-block">
+                <p className="text-black/90 text-sm font-medium px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm inline-block dark:bg-gray-800 dark:text-white/80">
                   {role}
                 </p>
               </div>
@@ -136,7 +136,7 @@ const CoreTeamMember = ({ name, role, bio, image, linkedin, github }) => {
                   rel="noopener noreferrer"
                   className="transform transition-all hover:scale-110 hover:-translate-y-1"
                 >
-                  <Linkedin className="w-5 h-5 text-white/80 hover:text-white" />
+                  <Linkedin className="w-5 h-5 text-white/80 hover:text-white dark:text-gray-800 dark:hover:text-gray-800" />
                 </a>
                 <a 
                   href={github} 
@@ -144,7 +144,7 @@ const CoreTeamMember = ({ name, role, bio, image, linkedin, github }) => {
                   rel="noopener noreferrer"
                   className="transform transition-all hover:scale-110 hover:-translate-y-1"
                 >
-                  <Github className="w-5 h-5 text-white/80 hover:text-white" />
+                  <Github className="w-5 h-5 text-white/80 hover:text-white dark:text-gray-800 dark:hover:text-gray-800" />
                 </a>
               </motion.div>
             </motion.div>
@@ -156,7 +156,7 @@ const CoreTeamMember = ({ name, role, bio, image, linkedin, github }) => {
       <AnimatePresence mode="wait">
         {isHovered && (
           <motion.div
-            className="absolute inset-0 p-6 rounded-xl bg-white"
+            className="absolute inset-0 p-6 rounded-xl bg-white dark:bg-gray-800 dark:text-white/80"
             initial={{ clipPath: "circle(0% at 50% 50%)" }}
             animate={{ 
               clipPath: "circle(100% at 50% 50%)",
@@ -198,9 +198,9 @@ const CoreTeamMember = ({ name, role, bio, image, linkedin, github }) => {
                   }
                 }}
               >
-                <h3 className="text-gray-900 text-xl font-bold mb-2">{name}</h3>
-                <p className="text-primary font-medium text-sm mb-3">{role}</p>
-                <p className="text-gray-600 text-sm leading-relaxed">{bio}</p>
+                <h3 className="text-gray-900 text-xl font-bold mb-2 dark:text-white/80">{name}</h3>
+                <p className="text-primary font-medium text-sm mb-3 dark:text-white/80">{role}</p>
+                <p className="text-gray-600 text-sm leading-relaxed dark:text-white/80">{bio}</p>
               </motion.div>
               
               <motion.div 
@@ -228,7 +228,7 @@ const CoreTeamMember = ({ name, role, bio, image, linkedin, github }) => {
                   rel="noopener noreferrer"
                   className="transform transition-transform hover:-translate-y-1"
                 >
-                  <Github className="w-6 h-6 text-gray-700" />
+                  <Github className="w-6 h-6 text-gray-700 dark:text-white/80" />
                 </a>
               </motion.div>
             </motion.div>
@@ -302,11 +302,10 @@ export default function Team() {
         { name: "G Chaithanya Reddy", role: "Frontend Developer", bio: "Chaithanya is a Front-end Developer focused on building responsive, intuitive user interfaces with clean code and modern tech.", image: "/assets/chaitanaya.jpg", linkedin: "https://www.linkedin.com/in/chaitanya-reddy-gavinolla-22166b258/", github: "https://github.com/chaitanya-reddy-13" },
         { name: "T Lakshmi Srinivas", role: "Website Co-ordinator", bio: "Srinivas is a Website Coordinator managing updates, content, and performance for seamless user experiences.", image: "/assets/srinivas.png", linkedin: "https://www.linkedin.com/in/srinivastls/", github: "https://github.com/srinivastls   " },      
         { name: "Y Sainatha Reddy", role: "Backend Developer", bio: "Sainatha is a Back-end Developer focused on building reliable system, managing data, and ensuring smooth connections between servers and users.", image: "/assets/sainatha.jpg", linkedin: "https://www.linkedin.com/in/sainatha-reddy/", github: "https://github.com/sainatha-reddy" },
-
       ]
 
   return (
-    <div className="container mx-auto px-4 py-16">
+    <div className="container mx-auto px-4 py-16 dark:bg-gray-900">
       <h1 className="text-5xl font-bold mb-16 text-center"></h1>
       
       {/* PIC Section */}
