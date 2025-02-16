@@ -273,6 +273,7 @@ export default function Team() {
     { name: "K M V R Madhava Krishna", role: "CS22B1005", bio: "Data science student excelling in ML, Python, cloud integration, problem-solving, and impactful solutions.", image: "/assets/cs22b1005.jpg", linkedin: "https://www.linkedin.com/in/k-m-v-r-madhava-krishna-a71533262/", github: "https://github.com/Madhava0412" },
     { name: "Praneeth Devarasetty", role: "CS22B1014", bio: "Full Stack Developer skilled in React, Node.js, databases, APIs, responsive design, and performance optimization", image: "/assets/cs22b1014.jpg", linkedin: "https://www.linkedin.com/in/praneeth-devarasetty/", github: "https://github.com/praneeth622" },
     { name: "G Chaithanya Reddy", role: "CS22B1052", bio: "Focused on web development and Machine Learning, creating innovative, data-driven solutions.", image: "/assets/cs22b1052.jpg", linkedin: "https://www.linkedin.com/in/chaitanya-reddy-gavinolla-22166b258/", github: "https://github.com/chaitanya-reddy-13" },
+    { name: "K Neha", role: "CS22B1081", bio: "Focused on Cyber Security and Machine Learning, creating innovative and Impactful solutions.", image: "/assets/neha.jpg", linkedin: "https://www.linkedin.com/in/neha-kantheti-73226527a/", github: "https://github.com/nehakantheti" },
   ]
 
   const coordinators = [
