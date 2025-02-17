@@ -20,6 +20,7 @@ import { Button } from "../../../components/ui/button";
 import { Badge } from "../../../components/ui/badge";
 import { useCallback, useEffect, useState } from "react";
 import  Loader  from "../../(components)/Loader.jsx";
+import EmptyState from "../../(components)/EmptyState";
 
 const formatDate = (dateString) => {
   const date = new Date(dateString)
@@ -195,9 +196,7 @@ export default function EventsSection({ events }) {
         className="mb-12"
       >
         <h2 className="text-2xl font-bold mb-6 text-gray-800">Upcoming Events</h2>
-        <div className="p-8 bg-white rounded-lg shadow-md text-center">
-          <p className="text-gray-600">No upcoming events found.</p>
-        </div>
+        <EmptyState message="No upcoming events at the moment. Stay tuned!" />
       </motion.section>
     );
   }

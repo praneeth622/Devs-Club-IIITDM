@@ -10,6 +10,7 @@ import { Card, CardContent } from "../../../components/ui/card";
 import useEmblaCarousel from "embla-carousel-react";
 import { toast } from "react-hot-toast";
 import  Loader  from "../../(components)/Loader.jsx";
+import EmptyState from "../../(components)/EmptyState";
 
 const statusColors = {
   active: "bg-green-500",
@@ -85,9 +86,7 @@ export default function ProjectsSection() {
         className="mb-12"
       >
         <h2 className="text-2xl font-bold mb-6 text-gray-800">Projects</h2>
-        <div className="p-8 bg-white rounded-lg shadow-md text-center">
-          <p className="text-gray-600">No projects found.</p>
-        </div>
+        <EmptyState message="No projects available at the moment." />
       </motion.section>
     );
   }
