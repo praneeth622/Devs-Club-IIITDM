@@ -195,7 +195,9 @@ export default function EventsSection({ events }) {
         className="mb-12"
       >
         <h2 className="text-2xl font-bold mb-6 text-gray-800">Upcoming Events</h2>
-        <EmptyState message="No upcoming events at the moment. Stay tuned!" />
+        <div className="p-8 bg-white rounded-lg shadow-md text-center">
+          <p className="text-gray-600">No upcoming events found.</p>
+        </div>
       </motion.section>
     );
   }
