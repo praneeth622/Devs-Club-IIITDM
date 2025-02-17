@@ -62,7 +62,7 @@ const EventCard = ({ event, index }) => {
         >
           <Card className="h-full cursor-pointer bg-white hover:shadow-lg transition-shadow duration-300 relative overflow-hidden group">
             <div className="absolute top-4 right-4">
-              <Badge className={`bg-red-500 text-white px-3 py-1`}>
+              <Badge className={`bg-red-500 text-white px-3 py-1 hover:bg-red-600`}>
                 {status.text}
               </Badge>
             </div>
@@ -100,9 +100,9 @@ const EventCard = ({ event, index }) => {
             <h2 className="text-2xl font-bold leading-tight pr-4">
               {event.Event_name}
             </h2>
-            <Badge className={`${status.color} text-white px-3 py-1`}>
+            <div className={`${status.color} text-white px-3 font-semibold py-1 hover:${status.color}`}>
               {status.text}
-            </Badge>
+            </div>
           </div>
           <div className="space-y-6">
             <div className="flex items-start text-gray-600">
@@ -150,12 +150,14 @@ const EventCard = ({ event, index }) => {
   )
 }
 
-const EventsSection = ({ events }) => {
+export default function EventsSection({ events }) {
+  // Initialize all hooks at the top level
+  const [isLoading, setIsLoading] = useState(true);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, align: 'start' });
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
-  const [loading, setLoading] = useState(true); // Loading state
 
+  // Callbacks
   const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
 
@@ -165,21 +167,37 @@ const EventsSection = ({ events }) => {
     setNextBtnEnabled(emblaApi.canScrollNext());
   }, [emblaApi]);
 
+  // Effects
   useEffect(() => {
     if (!emblaApi) return;
     onSelect();
     emblaApi.on('select', onSelect);
+    return () => emblaApi.off('select', onSelect); // Cleanup
   }, [emblaApi, onSelect]);
 
-  // Simulate data loading
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false); // Simulate loading completion
-    }, 2000); // 2 seconds delay
-  }, []);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [events]);
 
-  if (loading) {
-    return <Loader />; // Show the loader while loading
+  if (isLoading) {
+    return <Loader className="my-8" />;
+  }
+
+  if (!events || events.length === 0) {
+    return (
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="mb-12"
+      >
+        <h2 className="text-2xl font-bold mb-6 text-gray-800">Upcoming Events</h2>
+        <EmptyState message="No upcoming events at the moment. Stay tuned!" />
+      </motion.section>
+    );
   }
 
   return (
@@ -196,32 +214,49 @@ const EventsSection = ({ events }) => {
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex">
             {events.map((event, index) => (
-              <div key={index} className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] lg:flex-[0_0_33.33%] pl-4">
+              <motion.div
+                key={event.id || index}
+                className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] lg:flex-[0_0_33.33%] pl-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
                 <EventCard event={event} index={index} />
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-        <div
+        
+        {/* Navigation Buttons */}
+        <NavigationButton
+          direction="prev"
           onClick={scrollPrev}
           disabled={!prevBtnEnabled}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600  transition-colors z-10"
-          aria-label="Previous slide"
-        >
-          <ChevronLeft className="w-6 h-6 " />
-        </div>
-        <div
+        />
+        <NavigationButton
+          direction="next"
           onClick={scrollNext}
           disabled={!nextBtnEnabled}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors z-10"
-          aria-label="Next slide"
-        >
-          <ChevronRight className="w-6 h-6 " />
-        </div>
+        />
       </div>
     </motion.section>
-  )
+  );
 }
 
-export default EventsSection
+// Separate Navigation Button Component
+const NavigationButton = ({ direction, onClick, disabled }) => (
+  <motion.button
+    onClick={onClick}
+    disabled={disabled}
+    className={`absolute ${direction === 'prev' ? 'left-0' : 'right-0'} 
+               top-1/2 transform -translate-y-1/2 p-2 rounded-full 
+               bg-blue-500 text-white hover:bg-blue-600 
+               transition-colors z-10 disabled:opacity-50`}
+    aria-label={`${direction === 'prev' ? 'Previous' : 'Next'} slide`}
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.9 }}
+  >
+    {direction === 'prev' ? <ChevronLeft className="w-6 h-6" /> : <ChevronRight className="w-6 h-6" />}
+  </motion.button>
+);
 

@@ -232,7 +232,7 @@ export default function ResourcesSection() {
       </Card>
 
       <Dialog open={!!selectedResource} onOpenChange={() => setSelectedResource(null)}>
-        <DialogContent className="sm:max-w-[600px] max-h-[700px] bg-white rounded-lg m-5 p-10">
+        <DialogContent className="max-w-max max-h-[800px]  bg-white rounded-lg m-5 p-10">
           <DialogHeader className="mb-6 ">
             <DialogTitle className="flex items-center space-x-3 text-2xl font-bold mb-3">
               {selectedResource && (
@@ -261,10 +261,10 @@ export default function ResourcesSection() {
               </>
             )}
           </div>
-          <DialogClose asChild>
-            <Button className="w-full mt-6 bg-gray-800 text-white hover:bg-gray-700 transition-colors">
+          <DialogClose asChild className='p-1 '>
+            <div className="w-full mt-6 border-r-4 rounded-full bg-gray-800 text-white hover:bg-gray-700 transition-colors inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
               Close
-            </Button>
+            </div>
           </DialogClose>
         </DialogContent>
       </Dialog>

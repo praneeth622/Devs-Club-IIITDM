@@ -95,6 +95,7 @@ Developers Club        </motion.h1>
                 socialButtonsBlockButton: 'bg-[#2d3030] hover:bg-[#2d3030] transition-colors duration-200',
                 socialButtonsBlockButtonText: 'text-gray-600',
                 formFieldLabel: 'text-[#2d3030]',
+                footer: "none" ,
               },
             }}
           />

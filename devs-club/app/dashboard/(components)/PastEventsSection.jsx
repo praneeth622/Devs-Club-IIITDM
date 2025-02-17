@@ -79,9 +79,9 @@ const PastEventCard = ({ event, index }) => {
             <h2 className="text-2xl font-bold leading-tight pr-4">
               {event.Event_name}
             </h2>
-            <Badge className="bg-gray-500 text-white px-3 py-1">
+            <div className="bg-gray-500 text-white px-3 py-1">
               Past Event
-            </Badge>
+            </div>
           </div>
           <div className="space-y-6">
             <div className="flex items-start text-gray-600">

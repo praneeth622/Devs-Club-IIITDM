@@ -4,7 +4,7 @@ import Navbar from '../(components)/Navbar'
 import {Footer} from '../(components)/Footer'
 import React, { useEffect, useState } from 'react'
 import HeroSection from './(components)/HeroSection'
-import LoadingSpinner from '../components/LoadingSpinner'
+import LoadingSpinner from '../(components)/LoadingSpinner'
 import ProjectsToggleView from './(components)/ProjectsToggleView'
 import FeaturedProjects from './(components)/FeaturedProjects'
 

@@ -76,6 +76,20 @@ export default function ProjectsSection() {
   if (loading) return <Loader />;
   if (error) return <div className="text-center text-red-500 mt-10">Error: {error}</div>;
 
+  if (!projects || projects.length === 0) {
+    return (
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="mb-12"
+      >
+        <h2 className="text-2xl font-bold mb-6 text-gray-800">Projects</h2>
+        <EmptyState message="No projects available at the moment." />
+      </motion.section>
+    );
+  }
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 20 }}
@@ -93,7 +107,7 @@ export default function ProjectsSection() {
           <div className="overflow-hidden items-center" ref={emblaRef}>
             <div className="flex px-2 mb-5">
               {projects.map((project, index) => (
-                <div key={project.id} className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] lg:flex-[0_0_33.33%] px-4">
+                <div key={project.id} className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] lg:flex-[0_0_33.33%] px-4 ">
                   <motion.div
                     whileHover={{ scale: 1.03, rotateY: 5 }}
                     whileTap={{ scale: 0.98 }}
@@ -129,22 +143,26 @@ export default function ProjectsSection() {
               ))}
             </div>
           </div>
-          <div
-            variant="outline"
-            size="icon"
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 p-2  rounded-full bg-blue-500 text-white hover:bg-blue-600  transition-colors z-10"
-            onClick={scrollPrev}
-          >
-            <ChevronLeft className="h-6 w-6" />
-          </div>
-          <div
-            variant="outline"
-            size="icon"
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors z-10"
-            onClick={scrollNext}
-          >
-            <ChevronRight className="h-6 w-6" />
-          </div>
+          {projects.length > 1 && (
+            <>
+              <div
+                variant="outline"
+                size="icon"
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 p-2  rounded-full bg-blue-500 text-white hover:bg-blue-600  transition-colors z-10"
+                onClick={scrollPrev}
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </div>
+              <div
+                variant="outline"
+                size="icon"
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors z-10"
+                onClick={scrollNext}
+              >
+                <ChevronRight className="h-6 w-6" />
+              </div>
+            </>
+          )}
         </div>
       </div>
 
@@ -182,12 +200,12 @@ export default function ProjectsSection() {
                   <h3 className="font-semibold text-gray-800 mb-4">Team Members</h3>
                   <div className="flex flex-wrap gap-2">
                     {selectedProject.teamMembers.map((member, index) => (
-                      <Badge
+                      <div
                         key={index}
                         className="bg-blue-100 text-blue-800 rounded-full px-3 py-1 text-sm font-medium hover:bg-blue-200 transition-colors duration-200"
                       >
                         {member.name}
-                      </Badge>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -197,7 +215,7 @@ export default function ProjectsSection() {
                     <Button
                       variant="outline"
                       onClick={() => window.open(selectedProject.teamLead.github, "_blank")}
-                      className="flex items-center space-x-2 bg-gray-800 text-white hover:bg-gray-700 transition-colors duration-200"
+                      className="flex items-center space-x-2 bg-gray-800 text-white hover:bg-gray-700 hover:text-white transition-colors duration-200"
                     >
                       <Github className="h-5 w-5" />
                       <span>Team Lead GitHub</span>

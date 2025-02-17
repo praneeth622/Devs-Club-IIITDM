@@ -1,87 +1,96 @@
 "use client";
-import Navbar from '../(components)/Navbar';
-import HeaderBanner from './(components)/HeaderBanner';
-import StatsSection from './(components)/StatsSection';
-import EventsSection from './(components)/EventsSection';
-import ProjectsSection from './(components)/ProjectsSection';
-import MembersSection from './(components)/MembersSection';
-import ResourcesSection from './(components)/ResourcesSection';
-import PastEventsSection from './(components)/PastEventsSection';
-import { Footer } from '../(components)/Footer';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import axios from 'axios';
+import Navbar from '../(components)/Navbar';
+import LoadingSpinner from '../(components)/LoadingSpinner';
+
+// Lazy load components
+const HeaderBanner = lazy(() => import('./(components)/HeaderBanner'));
+const StatsSection = lazy(() => import('./(components)/StatsSection'));
+const EventsSection = lazy(() => import('./(components)/EventsSection'));
+const ProjectsSection = lazy(() => import('./(components)/ProjectsSection'));
+const MembersSection = lazy(() => import('./(components)/MembersSection'));
+const ResourcesSection = lazy(() => import('./(components)/ResourcesSection'));
+const PastEventsSection = lazy(() => import('./(components)/PastEventsSection'));
+const Footer = lazy(() => import('../(components)/Footer').then(mod => ({ default: mod.Footer })));
 
 function Page() {
   const [events, setEvents] = useState([]);
   const [pastEvents, setPastEvents] = useState([]);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
-  const [eventsLength, Seteventslength] = useState(10)
-  const [projectsLength, Setprojectslength] = useState(5)
+  const [eventsLength, setEventsLength] = useState(10);
+  const [projectsLength, setProjectsLength] = useState(5);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchEvents = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get('/api/events');
-        // console.log("response ",response);
-        if (response.data.success) {
-          Seteventslength(response.data.data.length)
+        setIsLoading(true);
+        const [eventsResponse, projectsResponse] = await Promise.all([
+          axios.get('/api/events'),
+          fetch('/api/projects').then(res => res.json())
+        ]);
+
+        if (eventsResponse.data.success) {
           const currentDate = new Date();
-          const upcomingEvents = response.data.data.filter(event => new Date(event.date) >= currentDate);
-          const pastEvents = response.data.data.filter(event => new Date(event.date) < currentDate);
-          // console.log("upcomingEvents", upcomingEvents)
-          // console.log("pastEvents", pastEvents)
-          setEvents(upcomingEvents);
-          setPastEvents(pastEvents);
+          const allEvents = eventsResponse.data.data;
+          setEventsLength(allEvents.length);
+          setEvents(allEvents.filter(event => new Date(event.date) >= currentDate));
+          setPastEvents(allEvents.filter(event => new Date(event.date) < currentDate));
+        }
+
+        if (projectsResponse.success) {
+          setProjectsLength(projectsResponse.data.length);
         }
       } catch (error) {
-        console.error('Error fetching events:', error);
+        console.error('Error fetching data:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    fetchEvents();
-  }, []);
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const response = await fetch("/api/projects");
-        const result = await response.json();
-        
-        if (result.success) {
-          // console.log("Projects fetched successfully",result.data)
-          Setprojectslength(result.data.length);
-          // console.log('LENGTH',result.data.length)
-        } else {
-          setError("Failed to fetch projects");
-          toast.error("Failed to fetch projects");
-        }
-      } catch (err) {
-        console.error("Error fetching projects:", err);
-        setError("Error fetching projects");
-        toast.error("Error fetching projects");
-      } 
-    };
-  
-    fetchProjects();
+    fetchData();
   }, []);
 
   const stats = { events: eventsLength, members: 90, projects: projectsLength };
 
-
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingSpinner size="lg" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
       <Navbar />
-      <HeaderBanner />
-      <div className="container mx-auto px-14 py-8">
-        <StatsSection stats={stats} />
-        <EventsSection events={events} />
-        <PastEventsSection pastEvents={pastEvents} />
-        <ProjectsSection />
-        {/* <MembersSection members={members} /> */}
-        <ResourcesSection isResourcesOpen={isResourcesOpen} setIsResourcesOpen={setIsResourcesOpen} />
+      <Suspense fallback={<LoadingSpinner />}>
+        <HeaderBanner />
+      </Suspense>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-14 py-8">
+        <Suspense fallback={<LoadingSpinner />}>
+          <StatsSection stats={stats} />
+        </Suspense>
+        <Suspense fallback={<LoadingSpinner />}>
+          <EventsSection events={events} />
+        </Suspense>
+        <Suspense fallback={<LoadingSpinner />}>
+          <PastEventsSection pastEvents={pastEvents} />
+        </Suspense>
+        <Suspense fallback={<LoadingSpinner />}>
+          <ProjectsSection />
+        </Suspense>
+        <Suspense fallback={<LoadingSpinner />}>
+          <ResourcesSection 
+            isResourcesOpen={isResourcesOpen} 
+            setIsResourcesOpen={setIsResourcesOpen} 
+          />
+        </Suspense>
       </div>
-      <Footer />
+      <Suspense fallback={<LoadingSpinner />}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }
