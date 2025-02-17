@@ -7,7 +7,6 @@ const links = [
   { id: "Tracks", label: "Tracks" },
   { id: "Timeline", label: "Timeline" },
   { id: "Rules", label: "Rules" },
-  { id: "Prizes", label: "Prizes" },
 ];
 
 export const Navigation = () => {
